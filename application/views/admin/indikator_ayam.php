@@ -20,10 +20,10 @@
                           if(type === 'display'){
                               tombol = 
                                 '<div class="links">'+
-                                  '<a class="btn btn-primary btn-sm" href="">'+
+                                  '<a class="btn btn-primary btn-sm" href="<?=base_url()?>admin/indikator_ayam/edit/'+data+'">'+
                                   '<i class="fa fa-fw fa-edit"></i></a>'+
                                   '&nbsp;'+
-                                  '<a class="btn btn-danger btn-sm" href="">'+
+                                  '<a class="btn btn-danger btn-sm" href="<?=base_url()?>admin/delete_indikator_ayam/'+data+'">'+
                                   '<i class="fa fa-fw fa-trash"></i></a>'+
                                 '</div>';                     
                           }
@@ -41,10 +41,13 @@
 
         <div class="container-fluid">
 
+          <!-- message -->
+          <div><?=$this->session->flashdata('message')?></div>
+
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Indikator Ayam</h1>
 
-          <a href="">
+          <a href="<?=base_url('admin/indikator_ayam/tambah')?>">
             <button class="btn btn-success mb-4">+ Indikator</button>
           </a>
 
