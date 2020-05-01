@@ -28,7 +28,7 @@ class Auth extends CI_Controller {
 	{
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
-		
+
 		$user = $this->db->get_where('user', ['email' => $email])->row_array();
 
 		if($user){
@@ -37,6 +37,7 @@ class Auth extends CI_Controller {
 				$data = [
 					'email' => $user['email'],
 					'role_id' => $user['role_id'],
+					'admin_logged_in' => TRUE,
 				];
 				$this->session->set_userdata($data);
 				if($user['role_id'] == 1){
@@ -46,7 +47,7 @@ class Auth extends CI_Controller {
 				}
 			} else{
 				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah</div>');
-			redirect('/login');	
+				redirect('/login');	
 			}
 		}else{
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email belum terdaftar</div>');
