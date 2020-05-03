@@ -15,6 +15,10 @@ $route['admin/indikator_ayam/edit/(:any)'] = 'admin/page_edit_indikator_ayam/$1'
 $route['user/index'] = 'user';
 
 $route['officer/index'] = 'officer';
+$route['officer/input-ahp'] = 'officer/input_ahp_satu';
+$route['officer/input-ahp-2'] = 'officer/input_ahp_dua';
+$route['officer/input-ahp-3'] = 'officer/input_ahp_tiga';
+$route['officer/input-ahp-4'] = 'officer/input_data_ahp';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
