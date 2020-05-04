@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2020 at 06:16 PM
+-- Generation Time: May 04, 2020 at 02:12 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -143,6 +143,78 @@ INSERT INTO `indikator_ayam` (`id_a_i`, `kode_a_i`, `ket_a_i`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `nilai_pengisian_ahp`
+--
+
+CREATE TABLE `nilai_pengisian_ahp` (
+  `id_n_p_a` int(11) NOT NULL,
+  `id_pengisian_ahp` int(11) NOT NULL,
+  `level0` varchar(50) DEFAULT NULL,
+  `level1` varchar(50) DEFAULT NULL,
+  `kriteria1` varchar(50) NOT NULL,
+  `kriteria2` varchar(50) NOT NULL,
+  `responden1` varchar(50) NOT NULL,
+  `responden2` varchar(50) DEFAULT NULL,
+  `responden3` varchar(50) DEFAULT NULL,
+  `responden4` varchar(50) DEFAULT NULL,
+  `responden5` varchar(50) DEFAULT NULL,
+  `manual` varchar(50) DEFAULT NULL,
+  `geomean` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nilai_pengisian_ahp`
+--
+
+INSERT INTO `nilai_pengisian_ahp` (`id_n_p_a`, `id_pengisian_ahp`, `level0`, `level1`, `kriteria1`, `kriteria2`, `responden1`, `responden2`, `responden3`, `responden4`, `responden5`, `manual`, `geomean`) VALUES
+(1, 666, NULL, NULL, 'RPA', 'Peternakan', '0.33', '0.33', '1.00', NULL, NULL, NULL, NULL),
+(2, 666, NULL, 'Peternak', 'Ekonomi', 'Lingkungan', '1.00', '1.00', '1.00', NULL, NULL, NULL, NULL),
+(3, 666, NULL, 'Peternak', 'Ekonomi', 'Sosial', '1.00', '1.00', '1.00', NULL, NULL, NULL, NULL),
+(4, 666, NULL, 'Peternak', 'Lingkungan', 'Sosial', '1.00', '1.00', '1.00', NULL, NULL, NULL, NULL),
+(5, 666, 'Peternak', 'Ekonomi', 'E1', 'E2', '9.00', '9.00', '9.00', NULL, NULL, NULL, NULL),
+(6, 666, 'Peternak', 'Ekonomi', 'E1', 'E3', '9.00', '9.00', '9.00', NULL, NULL, NULL, NULL),
+(7, 666, 'Peternak', 'Ekonomi', 'E1', 'E4', '9.00', '9.00', '9.00', NULL, NULL, NULL, NULL),
+(8, 666, 'Peternak', 'Ekonomi', 'E2', 'E3', '0.50', '1.00', '1.00', NULL, NULL, NULL, NULL),
+(9, 666, 'Peternak', 'Ekonomi', 'E2', 'E4', '0.50', '1.00', '9.00', NULL, NULL, NULL, NULL),
+(10, 666, 'Peternak', 'Ekonomi', 'E3', 'E4', '0.50', '5.00', '7.00', NULL, NULL, NULL, NULL),
+(11, 666, 'Peternak', 'Lingkungan', 'L1', 'L2', '3.00', '2.00', '3.00', NULL, NULL, NULL, NULL),
+(12, 666, 'Peternak', 'Lingkungan', 'L1', 'L3', '5.00', '4.00', '5.00', NULL, NULL, NULL, NULL),
+(13, 666, 'Peternak', 'Lingkungan', 'L2', 'L3', '0.50', '2.00', '0.50', NULL, NULL, NULL, NULL),
+(14, 666, NULL, 'RPA', 'Ekonomi', 'Lingkungan', '0.00', '0.00', NULL, NULL, NULL, NULL, NULL),
+(15, 666, NULL, 'RPA', 'Ekonomi', 'Sosial', '0.00', '0.00', NULL, NULL, NULL, NULL, NULL),
+(16, 666, NULL, 'RPA', 'Lingkungan', 'Sosial', '0.00', '0.00', NULL, NULL, NULL, NULL, NULL),
+(17, 666, 'RPA', 'Lingkungan', 'L1', 'L2', '0.00', '0.00', NULL, NULL, NULL, NULL, NULL),
+(18, 666, 'RPA', 'Lingkungan', 'L1', 'L3', '0.00', '0.00', NULL, NULL, NULL, NULL, NULL),
+(19, 666, 'RPA', 'Lingkungan', 'L2', 'L3', '0.00', NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pengisian_ahp`
+--
+
+CREATE TABLE `pengisian_ahp` (
+  `id_pengisian_ahp` int(11) NOT NULL,
+  `jumlah_responden` int(11) NOT NULL,
+  `responden1` varchar(200) NOT NULL,
+  `responden2` varchar(200) DEFAULT NULL,
+  `responden3` varchar(200) DEFAULT NULL,
+  `responden4` varchar(200) DEFAULT NULL,
+  `responden5` varchar(200) DEFAULT NULL,
+  `nama_pengisi` varchar(200) NOT NULL,
+  `tgl_pengisian` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pengisian_ahp`
+--
+
+INSERT INTO `pengisian_ahp` (`id_pengisian_ahp`, `jumlah_responden`, `responden1`, `responden2`, `responden3`, `responden4`, `responden5`, `nama_pengisi`, `tgl_pengisian`) VALUES
+(666, 3, 'Trevor', 'Michael', 'Franklin', NULL, NULL, 'Sarah Smith', '2020-05-04 07:26:15');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -222,6 +294,18 @@ ALTER TABLE `indikator_ayam`
   ADD PRIMARY KEY (`id_a_i`);
 
 --
+-- Indexes for table `nilai_pengisian_ahp`
+--
+ALTER TABLE `nilai_pengisian_ahp`
+  ADD PRIMARY KEY (`id_n_p_a`);
+
+--
+-- Indexes for table `pengisian_ahp`
+--
+ALTER TABLE `pengisian_ahp`
+  ADD PRIMARY KEY (`id_pengisian_ahp`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -262,6 +346,16 @@ ALTER TABLE `entitas_sapi`
 --
 ALTER TABLE `indikator_ayam`
   MODIFY `id_a_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT for table `nilai_pengisian_ahp`
+--
+ALTER TABLE `nilai_pengisian_ahp`
+  MODIFY `id_n_p_a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `pengisian_ahp`
+--
+ALTER TABLE `pengisian_ahp`
+  MODIFY `id_pengisian_ahp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=667;
 --
 -- AUTO_INCREMENT for table `user`
 --
