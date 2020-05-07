@@ -98,8 +98,6 @@
 			// Level Hirarki
 			$level['level0'] = NULL;
 			$level['level1'] = NULL;
-			$level['kriteria1'] = 'AHP';
-			$level['kriteria2'] = 'Peternak';
 
 			// Section Id
 			$section_id = $this->Section_model->get_section_by_level($level);
@@ -124,8 +122,8 @@
 					$nilai = [
 						'nama_responden' => $_SESSION['pengisian_ahp']['nama'.$i],
 						'nilai_responden' => $this->input->post('nilai-ahp'.$i),
-						'kriteria_1' => $level['kriteria1'],
-						'kriteria_2' => $level['kriteria2'],
+						'kriteria_1' => 'AHP',
+						'kriteria_2' => 'Peternak',
 						'id_pengisi' => $_SESSION['role_id'],
 						'id_section' => $section_id,
 					];
