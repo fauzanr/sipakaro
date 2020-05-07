@@ -13,18 +13,8 @@
 
         // Deskripsi    : Nambah Nilai AHP ke database
         public function add_ahp($input){
-            for ($i=0; $i < $_SESSION['pengisian_ahp']['responden'] ; $i++) { 
-                $data = array(
-                    'nama_responden' => $input[$i][0],
-                    'nilai_responden' => $input[$i][1],
-                    'kriteria_1' => $_SESSION['pengisian_ahp']['kriteria1'],
-                    'kriteria_2' => $_SESSION['pengisian_ahp']['kriteria2'],
-                    'id_section' => $_SESSION['pengisian_ahp']['id_section'],
-                    'id_pengisian_ahp' => $_SESSION['pengisian_ahp']['id_pengisian_ahp']
-                );
-
-                // Insert ke db ahp
-                $this->db->insert('responden', $data);
+            for ($i=0 ; $i<sizeof($input) ; $i++) { 
+                $this->db->insert('responden', $input[$i]);
             };
             // Update Nilai Normalisasi
             $this->Ahp_model->normalisasi_rpa_peternak();
@@ -57,8 +47,12 @@
             $bobot_peternak += ['bobot' => (((1/$geoman)/$total_rpa) + (1/$total_peternak))/2];
 
             // Memasukkan id_section ke dalam array
-            $bobot_rpa += ['id_section' => $_SESSION['pengisian_ahp']['id_section']];
-            $bobot_peternak += ['id_section' => $_SESSION['pengisian_ahp']['id_section']];
+			$level['level0'] = NULL;
+			$level['level1'] = NULL;
+			$section_id = $this->Section_model->get_section_by_level($level);
+			$section_id = $section_id[0]['id'];
+            $bobot_rpa += ['id_section' => $section_id];
+            $bobot_peternak += ['id_section' => $section_id];
 
             // Cek apakah nilai bobot sudah ada / tidak
             // Ambil semua data bobot
