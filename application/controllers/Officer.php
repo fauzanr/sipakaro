@@ -33,11 +33,14 @@
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-			$input_form = [
-				'responden' => $this->input->post('options')
-			];
+			// $input_form = [
+			// 	'responden' => $this->input->post('options')
+			// ];
 			// Mengambil jumlah inputan kedalam session
-			$this->session->set_userdata($input_form);
+			$sess = ['pengisian_ahp' => []];
+			$this->session->set_userdata($sess);
+
+			$_SESSION['pengisian_ahp']['responden'] = $this->input->post('options');
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -53,7 +56,7 @@
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
 			// Validasi
-			for($i=1; $i <= $_SESSION['responden']; $i++){
+			for($i=1; $i <= $_SESSION['pengisian_ahp']['responden']; $i++){
 				$this->form_validation->set_rules('nama'.$i,'Nama','required');
 			}
 
@@ -65,12 +68,10 @@
 				$this->load->view('templates/footer');
 			}else{
 				
-				$input = [];
-				for($i=1; $i <= $_SESSION['responden'];$i++){
-					$input += ['nama'.$i =>  $this->input->post('nama'.$i)];
+				// Input nama ke session
+				for($i=1; $i <= $_SESSION['pengisian_ahp']['responden'];$i++){
+					$_SESSION['pengisian_ahp'] += ['nama'.$i =>  $this->input->post('nama'.$i)];
 				}
-				// Masukin Nama ke session
-				$this->session->set_userdata($input);
 
 				$this->load->view('templates/header', $data);
 				$this->load->view('templates/sidebar', $data);
@@ -84,9 +85,13 @@
 		public function input_data_ahp(){
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+			
+			$data['section'] = '1';
+			$data['level0'] = NULL;
+			$data['level1'] = NULL;
 
 			// Validasi
-			for($i=1; $i <= $_SESSION['responden']; $i++){
+			for($i=1; $i <= $_SESSION['pengisian_ahp']['responden']; $i++){
 				$this->form_validation->set_rules('nilai-ahp'.$i,'Nilai-Ahp Ke-'.$i,'required');
 			}
 
@@ -99,17 +104,33 @@
 			} else {
 				// Masukin nilai ke array
 				$input = [];
-				for($i=1; $i <= $_SESSION['responden'];$i++){
+				for($i=1; $i <= $_SESSION['pengisian_ahp']['responden'];$i++){
 					array_push($input, array($this->input->post('responden'.$i), $this->input->post('nilai-ahp'.$i) ));
 				}
+
+				// Update pengisian ahp
+				$this->Pengisian_ahp_model->add_pengisian_ahp($data['user']);
+				// Masukkan id pengisian ahp
+				$section = $this->Pengisian_ahp_model->get_last_row();
+				$_SESSION['pengisian_ahp']['id_pengisian_ahp'] = $section[0]['id'];
+				
+				// Update nilai dalam session
+				$_SESSION['pengisian_ahp']['kriteria1'] = NULL;
+				$_SESSION['pengisian_ahp']['kriteria2'] = NULL;
+
+				// Update Section
+				$section = $this->Section_model->get_section_by_level($data);
+				// Masukkan id section
+				$_SESSION['pengisian_ahp']['id_section'] = $section[0]['id'];
+
 				// Masukin nilai ke db
 				$this->Ahp_model->add_ahp($input);
 				
 				// Unset Session
 				unset(
-					$_SESSION['responden'],
-					$_SESSION['nama']
+					$_SESSION['pengisian_ahp']
 				);
+				die('Berhasil ditambah/update');
 				return redirect('officer');
 			}
 			

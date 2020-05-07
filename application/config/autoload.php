@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Ahp_model', 'Bobot_kriteria_ayam_model');
+$autoload['model'] = array('Ahp_model', 'Bobot_indikator_model', 'Pengisian_ahp_model','Section_model');

@@ -7,20 +7,24 @@
 
         // Deskripsi    : Tampil semua data tabel AHP
         public function get_all_ahp(){
-            $query = $this->db->get('ahp');
+            $query = $this->db->get('responden');
             return $query->result_array();
         }
 
         // Deskripsi    : Nambah Nilai AHP ke database
         public function add_ahp($input){
-            for ($i=0; $i < $_SESSION['responden'] ; $i++) { 
+            for ($i=0; $i < $_SESSION['pengisian_ahp']['responden'] ; $i++) { 
                 $data = array(
                     'nama_responden' => $input[$i][0],
-                    'nilai_dipilih' => $input[$i][1]
+                    'nilai_responden' => $input[$i][1],
+                    'kriteria_1' => $_SESSION['pengisian_ahp']['kriteria1'],
+                    'kriteria_2' => $_SESSION['pengisian_ahp']['kriteria2'],
+                    'id_section' => $_SESSION['pengisian_ahp']['id_section'],
+                    'id_pengisian_ahp' => $_SESSION['pengisian_ahp']['id_pengisian_ahp']
                 );
 
                 // Insert ke db ahp
-                $this->db->insert('ahp', $data);
+                $this->db->insert('responden', $data);
             };
             // Update Nilai Normalisasi
             $this->Ahp_model->normalisasi_rpa_peternak();
@@ -35,10 +39,10 @@
             // Menghitung geoman
             $geoman = 1;
             foreach ($data as $dt) {
-                $geoman = $geoman * $dt['nilai_dipilih'];
+                $geoman = $geoman * $dt['nilai_responden'];
             }
             // Rumus Geoman
-            $geoman = pow($geoman, (1/5));
+            $geoman = pow($geoman, (1/count($data)));
             
             // Menghitung Total Kriteria
             $total_peternak = $geoman+1;
@@ -48,25 +52,43 @@
             $bobot_rpa = ['kriteria' => 'RPA'];
             $bobot_peternak = ['kriteria' => 'Peternak'];
             
-            // Menghitung Bobot Normalisasi Kriteria
+            // Menghitung Bobot Normalisasi Kriteria dan memasukkan kedalam array
             $bobot_rpa += ['bobot' => ((1/$total_rpa) + ($geoman/$total_peternak))/2];
             $bobot_peternak += ['bobot' => (((1/$geoman)/$total_rpa) + (1/$total_peternak))/2];
 
+            // Memasukkan id_section ke dalam array
+            $bobot_rpa += ['id_section' => $_SESSION['pengisian_ahp']['id_section']];
+            $bobot_peternak += ['id_section' => $_SESSION['pengisian_ahp']['id_section']];
+
             // Cek apakah nilai bobot sudah ada / tidak
             // Ambil semua data bobot
-            $data = $this->Bobot_kriteria_ayam_model->get_all_bobot();
+            $data = $this->Bobot_indikator_model->get_all_bobot();
             if ($data != NULL) {
                 // Jika ada, update nilai ke db
-                $data = $this->Bobot_kriteria_ayam_model->update_bobot($bobot_rpa, $bobot_peternak);
+                $data = $this->Bobot_indikator_model->update_bobot($bobot_rpa, $bobot_peternak);
                 return true;
             } else {
                 // Jika tidak, insert nilai ke db
-                $this->db->insert('bobot_kriteria_ayam', $bobot_rpa);
-                $this->db->insert('bobot_kriteria_ayam', $bobot_peternak);
+                $this->db->insert('bobot_indikator', $bobot_rpa);
+                $this->db->insert('bobot_indikator', $bobot_peternak);
                 return true;
             }
-            // die(print_r($data).'<br> Gak masok pak eko');
+            // die('Berhasil Masukkin data');
             // die('Geoman = '.$geoman.'<br> Total RPA = '.$total_rpa.'<br> Total Peternak = '.$total_peternak.'<br> Bobot RPA = '.$bobot_rpa.'<br> Bobot peternak = '.$bobot_peternak);
+        }
+
+        // Deskripsi    : Tampil semua data tabel AHP di Testing table
+        public function get_bobot_testing($section){
+            // Get Responden by id
+            $query = $this->db->get_where('bobot_indikator', array('id_section' => $section));
+            return $query->result_array();
+        }
+
+        // Deskripsi    : Tampil semua data tabel AHP di Testing table
+        public function get_responden_testing($section){
+            // Get Responden by id
+            $query = $this->db->get_where('responden', array('id_section' => $section));
+            return $query->result_array();
         }
     }
 ?>

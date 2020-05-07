@@ -14,6 +14,7 @@ $route['admin/indikator_ayam/edit/(:any)'] = 'admin/page_edit_indikator_ayam/$1'
 // USER
 $route['user/index'] = 'user';
 
+// DINAS
 $route['officer/index'] = 'officer';
 $route['officer/input-ahp'] = 'officer/input_ahp_satu';
 $route['officer/input-ahp-2'] = 'officer/input_ahp_dua';
