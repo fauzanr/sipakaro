@@ -6,6 +6,7 @@
 
     <h2 class="h3 mb-4 text-gray-800 d-flex justify-content-center">Perhitungan Bobot Indikator - AHP</h2>
     <br>
+    
     <?php echo validation_errors(); ?>
     <?php echo $this->session->flashdata('success'); ?>
 
@@ -15,6 +16,7 @@
 
     <form action="<?php echo base_url().'officer/input_data_ahp' ?>" method="post">
 
+    <p>Progress: (<?= count($_SESSION['nilai_pengisian_ahp']) ?>/<?= count($section_pagination) ?>)</p>
     <div class="row">
 
         <!-- PAGINATION -->
@@ -200,8 +202,11 @@
     </div>
 
     <input type="hidden" name="counter" value="<?= $counter ?>">
-    <br><br><button type="submit" class="btn btn-primary btn-lg col-md-2" style="float: right;">Simpan</button>
+    <br><br>
+    <button type="submit" class="btn btn-primary btn-lg col-md-2" style="float: right;">Simpan</button>
 
     </form>
+    
+    <a href="<?= base_url('officer/insert_pengisian_ahp') ?>"><button class="btn btn-warning">Selesai "!"</button></a>
     
 </div>
