@@ -136,17 +136,33 @@
 			
 		}
 
-		private function insert_pengisian_ahp() {
+		public function insert_pengisian_ahp() {
 			if(!isset($_SESSION['nilai_pengisian_ahp']) || !isset($_SESSION['pengisian_ahp'])) {
 				echo 'error: empty session';
-			} else {
+				return;
+			}
+
+			$section = $this->Section_model->get_all();
+
+			if (count($_SESSION['nilai_pengisian_ahp']) != count($section)) {
+				echo 'gagal: semua data belum terisi. silahkan selesaikan progress';
+				return;
+			}
+
+			if (count($_SESSION['nilai_pengisian_ahp']) == count($section)) {
 				$data = $_SESSION['nilai_pengisian_ahp'];
-				$this->Ahp_model->add_ahp($data);
+				foreach($data as $k => $v) {
+					$this->Ahp_model->add_ahp($v);
+				}
 				$this->session->unset_userdata('pengisian_ahp');
 				$this->session->unset_userdata('nilai_pengisian_ahp');
+
 				echo 'berhasil input db!<br>';
 				echo("<pre>".print_r($data,true)."</pre>");
+
+				return;
 			}
+
 		}
 
 	}
