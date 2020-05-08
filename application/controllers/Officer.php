@@ -158,9 +158,8 @@
 				$this->session->unset_userdata('nilai_pengisian_ahp');
 
 				echo 'berhasil input db!<br>';
-				echo("<pre>".print_r($data,true)."</pre>");
-
-				return;
+				
+				redirect(base_url('sipakaro/officer'));
 			}
 
 		}
