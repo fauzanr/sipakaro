@@ -11,21 +11,11 @@
             <?php echo validation_errors(); ?>
             <form action="<?php echo base_url().'officer/input-ahp-2' ?>" method="post">
                 <div class="btn-group btn-group-toggle btn-block col-md-8" data-toggle="buttons">
-                    <label class="btn btn-primary btn-lg mr-2">
-                        <input type="radio" name="options" id="option1" autocomplete="off" value='1'>1
-                    </label>
-                    <label class="btn btn-primary btn-lg mr-2">
-                        <input type="radio" name="options" id="option2" autocomplete="off" value='2'>2
-                    </label>
-                    <label class="btn btn-primary btn-lg mr-2">
-                        <input type="radio" name="options" id="option3" autocomplete="off" value='3'>3
-                    </label>
-                    <label class="btn btn-primary btn-lg mr-2">
-                        <input type="radio" name="options" id="option4" autocomplete="off" value='4'>4
-                    </label>
-                    <label class="btn btn-primary btn-lg mr-2">
-                        <input type="radio" name="options" id="option5" autocomplete="off" value='5'>5
-                    </label>
+                    <?php for ($i=1 ; $i <= 5 ; $i++) : ?>
+                        <label class="btn btn-primary btn-lg mr-2 <?= isset($_SESSION['pengisian_ahp']['responden']) && $_SESSION['pengisian_ahp']['responden']==$i ? '' : '' ?>">
+                            <input type="radio" name="options" id="option<?= $i ?>" autocomplete="off" value='<?= $i ?>'><?= $i ?>
+                        </label>
+                    <?php endfor ?>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary btn-lg col-md-2 mt-5" style="float: right;">Next</button>

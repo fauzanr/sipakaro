@@ -27,12 +27,13 @@
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-			// inisialisasi session
-			$sess = [
-				'pengisian_ahp' => [],
-				'nilai_pengisian_ahp' => []
-			];
-			$this->session->set_userdata($sess);
+			// Inisiasi session
+			if (!isset($_SESSION['pengisian_ahp'])) {
+				$_SESSION['pengisian_ahp'] = [];
+			}
+			if (!isset($_SESSION['nilai_pengisian_ahp'])) {
+				$_SESSION['nilai_pengisian_ahp'] = [];
+			}
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -81,57 +82,57 @@
 					$_SESSION['pengisian_ahp'] += ['nama'.$i =>  $this->input->post('nama'.$i)];
 				}
 
-				$this->load->view('templates/header', $data);
-				$this->load->view('templates/sidebar', $data);
-				$this->load->view('templates/topbar', $data);
-				$this->load->view('officer/isi-nilai-ahp', $data);
-				$this->load->view('templates/footer');
+				redirect(base_url().'officer/halaman_input_data_ahp/2');
 			}
 		}
 
-		// Restore data ke database AHP
-		// SECTION pertama
-		public function input_data_ahp(){
+		public function halaman_input_data_ahp($section_id = NULL){
+
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 			
-			// Level Hirarki
-			$level['level0'] = NULL;
-			$level['level1'] = NULL;
+			$data['section_id'] = $section_id;
+			$section = $this->Section_model->get_section_by_id($section_id);
+			$data['section'] = $section;
+			$data['section_pagination'] = $this->Section_model->get_all();
+			$data['opsi'] = $this->db->get('opsi_ahp')->result_array();
 
-			// Section Id
-			$section_id = $this->Section_model->get_section_by_level($level);
-			$section_id = $section_id[0]['id'];
-
-			// Validasi
-			for($i=1; $i <= $_SESSION['pengisian_ahp']['responden']; $i++){
-				$this->form_validation->set_rules('nilai-ahp'.$i,'Nilai-Ahp Ke-'.$i,'required');
+			if ($section['level0'] == NULL && $section['level1'] == NULL) { // LEVEL ENTITAS
+				$data['level'] = 0;
+			} else if ($section['level0'] == NULL && $section['level1'] != NULL) { // LEVEL ENTITAS-KRITERIA
+				$data['level'] = 1;
+				$data['kriteria'] = $this->db->get('kriteria')->result_array();
+			} else if ($section['level0'] != NULL && $section['level1'] != NULL) { // LEVEL ENTITAS-KRITERIA-INDIKATOR
+				$data['level'] = 2;
+				$data['indikator'] = $this->db->get_where('indikator_ayam', ['nama_kriteria' => $section['level1']])->result_array();
 			}
 
-			if ($this->form_validation->run() === false) {
-				$this->load->view('templates/header', $data);
-				$this->load->view('templates/sidebar', $data);
-				$this->load->view('templates/topbar', $data);
-				$this->load->view('officer/isi-nilai-ahp', $data);
-				$this->load->view('templates/footer');
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/isi-nilai-ahp', $data);
+			$this->load->view('templates/footer');
+		}
 
-			} else {
-				$_SESSION['nilai_pengisian_ahp'] = [];
-				// Masukin nilai ke session
-				for($i=1; $i <= $_SESSION['pengisian_ahp']['responden'];$i++){
-					$nilai = [
-						'nama_responden' => $_SESSION['pengisian_ahp']['nama'.$i],
-						'nilai_responden' => $this->input->post('nilai-ahp'.$i),
-						'kriteria_1' => 'AHP',
-						'kriteria_2' => 'Peternak',
-						'id_pengisi' => $_SESSION['role_id'],
-						'id_section' => $section_id,
-					];
-					array_push($_SESSION['nilai_pengisian_ahp'], $nilai);
-				}
+		// INPUT DATA KE SESSION
+		public function input_data_ahp(){
 
-				$this->insert_pengisian_ahp($data);
+			$_SESSION['nilai_pengisian_ahp'][$this->input->post('section_id')] = [];
+
+			for($i=1 ; $i <= $_POST['counter'] ; $i++){
+				$nilai = [
+					'nama_responden' => $this->input->post('responden'.$i),
+					'nilai_responden' => $this->input->post('nilai-ahp'.$i),
+					'kriteria_1' => $this->input->post('kriteria1_'.$i),
+					'kriteria_2' => $this->input->post('kriteria2_'.$i),
+					'id_pengisi' => $_SESSION['role_id'],
+					'id_section' => $this->input->post('section_id'),
+				];
+				array_push($_SESSION['nilai_pengisian_ahp'][$this->input->post('section_id')], $nilai);
 			}
+
+			$this->session->set_flashdata('success', 'berhasil simpan data');
+			redirect(base_url('officer/halaman_input_data_ahp/'.$this->input->post('section_id')));
 			
 		}
 
