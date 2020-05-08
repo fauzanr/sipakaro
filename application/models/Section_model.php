@@ -19,8 +19,14 @@
 
         // Deskripsi    : Tampil data terakhir
         public function get_section_by_level($input){
-            $query = $this->db->get_where('section', array('level0' => $input['level0'], 'level1' => $input['level0']));
+            $query = $this->db->get_where('section', array('level0' => $input['level0'], 'level1' => $input['level1']));
             return $query->result_array();
+        }        
+
+        // Deskripsi    : Tampil data dengan id terterntu
+        public function get_section_by_id($input){
+            $query = $this->db->get_where('section', array('id' => $input));
+            return $query->row_array(0);
         }        
 
         // Deskripsi    : Nambah Data Section ke database

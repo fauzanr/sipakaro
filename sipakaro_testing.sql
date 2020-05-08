@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2020 at 08:08 PM
+-- Generation Time: May 08, 2020 at 02:23 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -89,6 +89,7 @@ INSERT INTO `entitas_sapi` (`id_s_e`, `ket_s_e`) VALUES
 
 CREATE TABLE `indikator_ayam` (
   `id_a_i` int(11) NOT NULL,
+  `nama_kriteria` varchar(100) NOT NULL,
   `kode_a_i` varchar(100) NOT NULL,
   `ket_a_i` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -97,24 +98,78 @@ CREATE TABLE `indikator_ayam` (
 -- Dumping data for table `indikator_ayam`
 --
 
-INSERT INTO `indikator_ayam` (`id_a_i`, `kode_a_i`, `ket_a_i`) VALUES
-(1, 'L1', 'Rata-rata konsumsi air yang dihabiskan untuk 1 ekor ayam'),
-(2, 'L2', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor ayam'),
-(3, 'S1', 'Kualitas DOC yang diberikan perusahaan inti kepada peternak plasma'),
-(4, 'S2', 'Kulitas obat dan vaksin yang diberikan perusahaan inti kepada peternak plasma'),
-(5, 'S3', 'Jadwal pengiriman DOC'),
-(6, 'S4', 'Frekuensi bimbingan teknis yang diberikan perusahaan inti kepada peternak plasma\r\ndalam 1 bulan'),
-(7, 'S5', 'Frekuensi pelayanan dan bimbingan materi yang diberikan perusahaan inti kepada\r\npeternak plasma dalam 1 bulan'),
-(8, 'S6', 'Kesesuaian waktu panen dengan kontrak perjanjian'),
-(9, 'S7', 'Kecepatan respon perusahaan inti terhadap keluhan peternak plasma'),
-(10, 'S8', 'Kesesuaian harga jual dengan kontrak perjanjian'),
-(11, 'S9', 'Kesesuaian pemberian bonus dengan kontrak perjanjian'),
-(12, 'S10', 'Kesesuaian waktu pembayaran panen dengan kontrak perjanjian'),
-(13, 'S11', 'Pertanggungjawaban saat gagal panen'),
-(14, 'E1', 'Rata-rata pendapatan yang diperoleh peternak plasma untuk 1 ekor ayam dalam 1 kali\r\nmasa panen'),
-(15, 'E2', 'Rata-rata harga DOC untuk 1 ekor'),
-(16, 'E3', 'Rata-rata harga pakan untuk 1 ekor ayam dalam 1 kali masa panen'),
-(17, 'E4', 'Rata-rata harga obat & vaksin untuk 1 ekor ayam dalam 1 kali masa panen');
+INSERT INTO `indikator_ayam` (`id_a_i`, `nama_kriteria`, `kode_a_i`, `ket_a_i`) VALUES
+(1, 'Lingkungan', 'L1', 'Rata-rata konsumsi air yang dihabiskan untuk 1 ekor ayam'),
+(2, 'Lingkungan', 'L2', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor ayam'),
+(3, 'Sosial', 'S1', 'Kualitas DOC yang diberikan perusahaan inti kepada peternak plasma'),
+(4, 'Sosial', 'S2', 'Kulitas obat dan vaksin yang diberikan perusahaan inti kepada peternak plasma'),
+(5, 'Sosial', 'S3', 'Jadwal pengiriman DOC'),
+(6, 'Sosial', 'S4', 'Frekuensi bimbingan teknis yang diberikan perusahaan inti kepada peternak plasma\r\ndalam 1 bulan'),
+(7, 'Sosial', 'S5', 'Frekuensi pelayanan dan bimbingan materi yang diberikan perusahaan inti kepada\r\npeternak plasma dalam 1 bulan'),
+(8, 'Sosial', 'S6', 'Kesesuaian waktu panen dengan kontrak perjanjian'),
+(9, 'Sosial', 'S7', 'Kecepatan respon perusahaan inti terhadap keluhan peternak plasma'),
+(10, 'Sosial', 'S8', 'Kesesuaian harga jual dengan kontrak perjanjian'),
+(11, 'Sosial', 'S9', 'Kesesuaian pemberian bonus dengan kontrak perjanjian'),
+(12, 'Sosial', 'S10', 'Kesesuaian waktu pembayaran panen dengan kontrak perjanjian'),
+(13, 'Sosial', 'S11', 'Pertanggungjawaban saat gagal panen'),
+(14, 'Ekonomi', 'E1', 'Rata-rata pendapatan yang diperoleh peternak plasma untuk 1 ekor ayam dalam 1 kali\r\nmasa panen'),
+(15, 'Ekonomi', 'E2', 'Rata-rata harga DOC untuk 1 ekor'),
+(16, 'Ekonomi', 'E3', 'Rata-rata harga pakan untuk 1 ekor ayam dalam 1 kali masa panen'),
+(17, 'Ekonomi', 'E4', 'Rata-rata harga obat & vaksin untuk 1 ekor ayam dalam 1 kali masa panen');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kriteria`
+--
+
+CREATE TABLE `kriteria` (
+  `nama_kriteria` varchar(100) NOT NULL,
+  `ket_kriteria` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kriteria`
+--
+
+INSERT INTO `kriteria` (`nama_kriteria`, `ket_kriteria`) VALUES
+('Ekonomi', NULL),
+('Lingkungan', NULL),
+('Sosial', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `opsi_ahp`
+--
+
+CREATE TABLE `opsi_ahp` (
+  `id_opsi_ahp` int(11) NOT NULL,
+  `opsi` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `opsi_ahp`
+--
+
+INSERT INTO `opsi_ahp` (`id_opsi_ahp`, `opsi`) VALUES
+(1, 0.11),
+(2, 0.13),
+(3, 0.14),
+(4, 0.17),
+(5, 0.2),
+(6, 0.25),
+(7, 0.33),
+(8, 0.55),
+(9, 1),
+(10, 2),
+(11, 3),
+(12, 4),
+(13, 5),
+(14, 6),
+(15, 7),
+(16, 8),
+(17, 9);
 
 -- --------------------------------------------------------
 
@@ -177,11 +232,11 @@ CREATE TABLE `section` (
 --
 
 INSERT INTO `section` (`id`, `level0`, `level1`, `nama_section`) VALUES
-(2, NULL, NULL, NULL),
-(3, 'Peternak', NULL, NULL),
-(4, 'Peternak', 'Ekonomi', NULL),
-(5, 'Peternak', 'Lingkungan', NULL),
-(6, 'Peternak', 'Sosial', NULL);
+(2, NULL, NULL, 'Entitas'),
+(3, NULL, 'Peternak', 'Entitas-Peternak'),
+(4, 'Peternak', 'Ekonomi', 'Entitas-Peternak-Ekonomi'),
+(5, 'Peternak', 'Lingkungan', 'Entitas-Peternak-Lingkungan'),
+(6, 'Peternak', 'Sosial', 'Entitas-Peternak-Sosial');
 
 -- --------------------------------------------------------
 
@@ -206,7 +261,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
 (1, 'Kukuh Ardia', 'kukuhardia@gmail.com', 'default.jpg', '$2y$10$yoYld1kf9tsWx3mZIhs4Eum7E5URfGYQ9QbAaHrRiEiur2ehBIuVW', 3, 1, 1588830449),
-(2, 'sara', 'sa@gmail.com', 'default.jpg', '$2y$10$.fuRvyWUOMkqMa28nMNsK.HujEftBWfqSpy9m8m6uAETXv1tE2H/O', 3, 1, 1588866212);
+(2, 'sara', 'sa@gmail.com', 'default.jpg', '$2y$10$.fuRvyWUOMkqMa28nMNsK.HujEftBWfqSpy9m8m6uAETXv1tE2H/O', 3, 1, 1588866212),
+(3, 'roesfr', 'roesfr@gmail.com', 'default.jpg', '$2y$10$ecEh8kreC/MTryB/V1qVAe5vOpjHtF57jNH7XD254v2MHrQJztjAS', 1, 1, 1588936738);
 
 -- --------------------------------------------------------
 
@@ -236,7 +292,8 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 -- Indexes for table `bobot_indikator`
 --
 ALTER TABLE `bobot_indikator`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_section` (`id_section`);
 
 --
 -- Indexes for table `entitas_ayam`
@@ -254,13 +311,29 @@ ALTER TABLE `entitas_sapi`
 -- Indexes for table `indikator_ayam`
 --
 ALTER TABLE `indikator_ayam`
-  ADD PRIMARY KEY (`id_a_i`);
+  ADD PRIMARY KEY (`id_a_i`),
+  ADD KEY `id_kriteria` (`nama_kriteria`);
+
+--
+-- Indexes for table `kriteria`
+--
+ALTER TABLE `kriteria`
+  ADD PRIMARY KEY (`nama_kriteria`),
+  ADD UNIQUE KEY `nama_kriteria` (`nama_kriteria`);
+
+--
+-- Indexes for table `opsi_ahp`
+--
+ALTER TABLE `opsi_ahp`
+  ADD PRIMARY KEY (`id_opsi_ahp`);
 
 --
 -- Indexes for table `responden`
 --
 ALTER TABLE `responden`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_section` (`id_section`),
+  ADD KEY `id_pengisi` (`id_pengisi`);
 
 --
 -- Indexes for table `section`
@@ -272,7 +345,8 @@ ALTER TABLE `section`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `role_id` (`role_id`);
 
 --
 -- Indexes for table `user_role`
@@ -305,6 +379,11 @@ ALTER TABLE `entitas_sapi`
 ALTER TABLE `indikator_ayam`
   MODIFY `id_a_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
+-- AUTO_INCREMENT for table `opsi_ahp`
+--
+ALTER TABLE `opsi_ahp`
+  MODIFY `id_opsi_ahp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
 -- AUTO_INCREMENT for table `responden`
 --
 ALTER TABLE `responden`
@@ -318,12 +397,41 @@ ALTER TABLE `section`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bobot_indikator`
+--
+ALTER TABLE `bobot_indikator`
+  ADD CONSTRAINT `bobot_indikator_ibfk_1` FOREIGN KEY (`id_section`) REFERENCES `section` (`id`);
+
+--
+-- Constraints for table `indikator_ayam`
+--
+ALTER TABLE `indikator_ayam`
+  ADD CONSTRAINT `indikator_ayam_ibfk_1` FOREIGN KEY (`nama_kriteria`) REFERENCES `kriteria` (`nama_kriteria`);
+
+--
+-- Constraints for table `responden`
+--
+ALTER TABLE `responden`
+  ADD CONSTRAINT `responden_ibfk_1` FOREIGN KEY (`id_section`) REFERENCES `section` (`id`),
+  ADD CONSTRAINT `responden_ibfk_2` FOREIGN KEY (`id_pengisi`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

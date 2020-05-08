@@ -37,8 +37,10 @@ class Auth extends CI_Controller {
 				$data = [
 					'email' => $user['email'],
 					'role_id' => $user['role_id'],
-					'admin_logged_in' => TRUE,
 				];
+				if ($data['role_id'] == 1) {
+					$data['admin_logged_in'] = TRUE;
+				}
 				$this->session->set_userdata($data);
 				if($user['role_id'] == 1){
 					redirect('/admin');
