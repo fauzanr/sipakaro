@@ -22,5 +22,11 @@ class Test extends CI_Controller {
     print("<pre>".print_r($_SESSION,true)."</pre>");
   }
 
+  public function bobot(){
+    $test = $this->Ahp_model->normalisasi_rpa_peternak(2);
+    // section 5 gabisa hitung eigen maksimal karena kurang dari 3 indikator
+    return;
+  }
+
 }
 ?>
