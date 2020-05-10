@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2020 at 02:23 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: May 10, 2020 at 04:57 PM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -30,7 +32,7 @@ CREATE TABLE `bobot_indikator` (
   `id` int(11) NOT NULL,
   `kriteria` varchar(10) NOT NULL,
   `bobot` varchar(10) NOT NULL,
-  `CI` varchar(10) DEFAULT NULL,
+  `C1` varchar(10) DEFAULT NULL,
   `CR` varchar(10) DEFAULT NULL,
   `id_section` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -39,9 +41,16 @@ CREATE TABLE `bobot_indikator` (
 -- Dumping data for table `bobot_indikator`
 --
 
-INSERT INTO `bobot_indikator` (`id`, `kriteria`, `bobot`, `CI`, `CR`, `id_section`) VALUES
+INSERT INTO `bobot_indikator` (`id`, `kriteria`, `bobot`, `C1`, `CR`, `id_section`) VALUES
 (3, 'RPA', '0.39825236', NULL, NULL, 2),
-(4, 'Peternak', '0.60174763', NULL, NULL, 2);
+(4, 'Peternak', '0.60174763', NULL, NULL, 2),
+(6, 'Ekonomi', '0.18449966', NULL, NULL, 3),
+(7, 'Lingkungan', '0.35177838', NULL, NULL, 3),
+(8, 'Sosial', '0.46372194', NULL, NULL, 3),
+(9, 'E1', '0.73632153', '0.02717234', '0.03019149', 4),
+(10, 'E2', '0.08862255', '0.02717234', '0.03019149', 4),
+(11, 'E3', '0.11529966', '0.02717234', '0.03019149', 4),
+(12, 'E4', '0.05975624', '0.02717234', '0.03019149', 4);
 
 -- --------------------------------------------------------
 
@@ -59,8 +68,8 @@ CREATE TABLE `entitas_ayam` (
 --
 
 INSERT INTO `entitas_ayam` (`id_a_e`, `ket_a_e`) VALUES
-(1, 'Peternakan'),
-(2, 'RPA');
+(1, 'RPA'),
+(2, 'Peternak');
 
 -- --------------------------------------------------------
 
@@ -160,7 +169,7 @@ INSERT INTO `opsi_ahp` (`id_opsi_ahp`, `opsi`) VALUES
 (5, 0.2),
 (6, 0.25),
 (7, 0.33),
-(8, 0.55),
+(8, 0.5),
 (9, 1),
 (10, 2),
 (11, 3),
@@ -170,6 +179,33 @@ INSERT INTO `opsi_ahp` (`id_opsi_ahp`, `opsi`) VALUES
 (15, 7),
 (16, 8),
 (17, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rasio`
+--
+
+CREATE TABLE `rasio` (
+  `id` int(11) NOT NULL,
+  `banyak_indikator` varchar(10) NOT NULL,
+  `nilai_rasio` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rasio`
+--
+
+INSERT INTO `rasio` (`id`, `banyak_indikator`, `nilai_rasio`) VALUES
+(1, '2', '0'),
+(2, '3', '0.58'),
+(3, '4', '0.9'),
+(4, '5', '1.12'),
+(5, '6', '1.24'),
+(6, '7', '1.32'),
+(7, '8', '1.41'),
+(8, '9', '1.45'),
+(9, '10', '1.49');
 
 -- --------------------------------------------------------
 
@@ -192,27 +228,204 @@ CREATE TABLE `responden` (
 --
 
 INSERT INTO `responden` (`id`, `id_pengisi`, `nama_responden`, `nilai_responden`, `kriteria_1`, `kriteria_2`, `id_section`) VALUES
-(11, 1, 'Kukuh', '0.11', NULL, NULL, 2),
-(12, 1, 'Dayyan', '0.20', NULL, NULL, 2),
-(13, 1, 'Fauzan', '1', NULL, NULL, 2),
-(15, 1, 'Dimas', '1', NULL, NULL, 2),
-(16, 1, 'Ica', '0.20', NULL, NULL, 2),
-(17, 2, 'will', '0.33', NULL, NULL, 2),
-(18, 2, 'smith', '0.25', NULL, NULL, 2),
-(19, 2, 'nama1', '2', NULL, NULL, 2),
-(20, 2, 'nama2', '0.33', NULL, NULL, 2),
-(21, 2, 'nama3', '2', NULL, NULL, 2),
-(22, 2, 'nama4', '0.20', NULL, NULL, 2),
-(23, 2, 'nama5', '2', NULL, NULL, 2),
-(24, 3, 'satu', '2', 'AHP', 'Peternak', 2),
-(25, 3, 'dua', '2', 'AHP', 'Peternak', 2),
-(26, 3, 'tiga', '2', 'AHP', 'Peternak', 2),
-(27, 3, 'satu', '2', 'AHP', 'Peternak', 2),
-(28, 3, 'dua', '2', 'AHP', 'Peternak', 2),
-(29, 3, 'tiga', '2', 'AHP', 'Peternak', 2),
-(30, 3, 'X AE A-12', '0.25', 'AHP', 'Peternak', 2),
-(31, 3, 'bambang', '0.17', 'AHP', 'Peternak', 2),
-(32, 3, 'heru', '0.33', 'AHP', 'Peternak', 2);
+(33, 3, 'Fauzan', '0.11', 'RPA', 'Peternak', 2),
+(34, 3, 'Dayyan', '0.2', 'RPA', 'Peternak', 2),
+(35, 3, 'Dis', '1', 'RPA', 'Peternak', 2),
+(36, 3, 'Fauzan', '0.33', 'Ekonomi', 'Lingkungan', 3),
+(37, 3, 'Dayyan', '0.33', 'Ekonomi', 'Lingkungan', 3),
+(38, 3, 'Dis', '1', 'Ekonomi', 'Lingkungan', 3),
+(39, 3, 'Fauzan', '0.25', 'Ekonomi', 'Sosial', 3),
+(40, 3, 'Dayyan', '1', 'Ekonomi', 'Sosial', 3),
+(41, 3, 'Dis', '0.33', 'Ekonomi', 'Sosial', 3),
+(42, 3, 'Fauzan', '1', 'Lingkungan', 'Sosial', 3),
+(43, 3, 'Dayyan', '1', 'Lingkungan', 'Sosial', 3),
+(44, 3, 'Dis', '0.33', 'Lingkungan', 'Sosial', 3),
+(45, 3, 'Fauzan', '9', 'E1', 'E2', 4),
+(46, 3, 'Dayyan', '9', 'E1', 'E2', 4),
+(47, 3, 'Dis', '9', 'E1', 'E2', 4),
+(48, 3, 'Fauzan', '9', 'E1', 'E3', 4),
+(49, 3, 'Dayyan', '9', 'E1', 'E3', 4),
+(50, 3, 'Dis', '9', 'E1', 'E3', 4),
+(51, 3, 'Fauzan', '9', 'E1', 'E4', 4),
+(52, 3, 'Dayyan', '9', 'E1', 'E4', 4),
+(53, 3, 'Dis', '9', 'E1', 'E4', 4),
+(54, 3, 'Fauzan', '0.5', 'E2', 'E3', 4),
+(55, 3, 'Dayyan', '1', 'E2', 'E3', 4),
+(56, 3, 'Dis', '1', 'E2', 'E3', 4),
+(57, 3, 'Fauzan', '0.5', 'E2', 'E4', 4),
+(58, 3, 'Dayyan', '1', 'E2', 'E4', 4),
+(59, 3, 'Dis', '9', 'E2', 'E4', 4),
+(60, 3, 'Fauzan', '0.5', 'E3', 'E4', 4),
+(61, 3, 'Dayyan', '5', 'E3', 'E4', 4),
+(62, 3, 'Dis', '7', 'E3', 'E4', 4),
+(63, 3, 'Fauzan', '5', 'L1', 'L2', 5),
+(64, 3, 'Dayyan', '4', 'L1', 'L2', 5),
+(65, 3, 'Dis', '5', 'L1', 'L2', 5),
+(66, 3, 'Fauzan', '1', 'S1', 'S2', 6),
+(67, 3, 'Dayyan', '0.14', 'S1', 'S2', 6),
+(68, 3, 'Dis', '1', 'S1', 'S2', 6),
+(69, 3, 'Fauzan', '0.14', 'S1', 'S3', 6),
+(70, 3, 'Dayyan', '0.14', 'S1', 'S3', 6),
+(71, 3, 'Dis', '0.11', 'S1', 'S3', 6),
+(72, 3, 'Fauzan', '1', 'S1', 'S4', 6),
+(73, 3, 'Dayyan', '7', 'S1', 'S4', 6),
+(74, 3, 'Dis', '0.14', 'S1', 'S4', 6),
+(75, 3, 'Fauzan', '0.5', 'S1', 'S5', 6),
+(76, 3, 'Dayyan', '0.14', 'S1', 'S5', 6),
+(77, 3, 'Dis', '0.13', 'S1', 'S5', 6),
+(78, 3, 'Fauzan', '1', 'S1', 'S6', 6),
+(79, 3, 'Dayyan', '0.13', 'S1', 'S6', 6),
+(80, 3, 'Dis', '0.25', 'S1', 'S6', 6),
+(81, 3, 'Fauzan', '0.5', 'S1', 'S7', 6),
+(82, 3, 'Dayyan', '0.33', 'S1', 'S7', 6),
+(83, 3, 'Dis', '0.25', 'S1', 'S7', 6),
+(84, 3, 'Fauzan', '1', 'S1', 'S8', 6),
+(85, 3, 'Dayyan', '0.2', 'S1', 'S8', 6),
+(86, 3, 'Dis', '0.25', 'S1', 'S8', 6),
+(87, 3, 'Fauzan', '0.5', 'S1', 'S9', 6),
+(88, 3, 'Dayyan', '0.33', 'S1', 'S9', 6),
+(89, 3, 'Dis', '2', 'S1', 'S9', 6),
+(90, 3, 'Fauzan', '0.33', 'S1', 'S10', 6),
+(91, 3, 'Dayyan', '0.2', 'S1', 'S10', 6),
+(92, 3, 'Dis', '0.5', 'S1', 'S10', 6),
+(93, 3, 'Fauzan', '0.2', 'S1', 'S11', 6),
+(94, 3, 'Dayyan', '1', 'S1', 'S11', 6),
+(95, 3, 'Dis', '0.5', 'S1', 'S11', 6),
+(96, 3, 'Fauzan', '1', 'S2', 'S3', 6),
+(97, 3, 'Dayyan', '0.33', 'S2', 'S3', 6),
+(98, 3, 'Dis', '1', 'S2', 'S3', 6),
+(99, 3, 'Fauzan', '0.33', 'S2', 'S4', 6),
+(100, 3, 'Dayyan', '1', 'S2', 'S4', 6),
+(101, 3, 'Dis', '0.5', 'S2', 'S4', 6),
+(102, 3, 'Fauzan', '0.5', 'S2', 'S5', 6),
+(103, 3, 'Dayyan', '3', 'S2', 'S5', 6),
+(104, 3, 'Dis', '1', 'S2', 'S5', 6),
+(105, 3, 'Fauzan', '0.5', 'S2', 'S6', 6),
+(106, 3, 'Dayyan', '0.5', 'S2', 'S6', 6),
+(107, 3, 'Dis', '0.5', 'S2', 'S6', 6),
+(108, 3, 'Fauzan', '1', 'S2', 'S7', 6),
+(109, 3, 'Dayyan', '1', 'S2', 'S7', 6),
+(110, 3, 'Dis', '1', 'S2', 'S7', 6),
+(111, 3, 'Fauzan', '0.5', 'S2', 'S8', 6),
+(112, 3, 'Dayyan', '3', 'S2', 'S8', 6),
+(113, 3, 'Dis', '1', 'S2', 'S8', 6),
+(114, 3, 'Fauzan', '0.5', 'S2', 'S9', 6),
+(115, 3, 'Dayyan', '0.33', 'S2', 'S9', 6),
+(116, 3, 'Dis', '0.5', 'S2', 'S9', 6),
+(117, 3, 'Fauzan', '1', 'S2', 'S10', 6),
+(118, 3, 'Dayyan', '1', 'S2', 'S10', 6),
+(119, 3, 'Dis', '2', 'S2', 'S10', 6),
+(120, 3, 'Fauzan', '0.5', 'S2', 'S11', 6),
+(121, 3, 'Dayyan', '0.2', 'S2', 'S11', 6),
+(122, 3, 'Dis', '0.33', 'S2', 'S11', 6),
+(123, 3, 'Fauzan', '1', 'S3', 'S4', 6),
+(124, 3, 'Dayyan', '0.5', 'S3', 'S4', 6),
+(125, 3, 'Dis', '1', 'S3', 'S4', 6),
+(126, 3, 'Fauzan', '1', 'S3', 'S5', 6),
+(127, 3, 'Dayyan', '1', 'S3', 'S5', 6),
+(128, 3, 'Dis', '0.33', 'S3', 'S5', 6),
+(129, 3, 'Fauzan', '1', 'S3', 'S6', 6),
+(130, 3, 'Dayyan', '0.5', 'S3', 'S6', 6),
+(131, 3, 'Dis', '1', 'S3', 'S6', 6),
+(132, 3, 'Fauzan', '0.5', 'S3', 'S7', 6),
+(133, 3, 'Dayyan', '0.5', 'S3', 'S7', 6),
+(134, 3, 'Dis', '0.5', 'S3', 'S7', 6),
+(135, 3, 'Fauzan', '0.5', 'S3', 'S8', 6),
+(136, 3, 'Dayyan', '0.5', 'S3', 'S8', 6),
+(137, 3, 'Dis', '0.5', 'S3', 'S8', 6),
+(138, 3, 'Fauzan', '0.5', 'S3', 'S9', 6),
+(139, 3, 'Dayyan', '1', 'S3', 'S9', 6),
+(140, 3, 'Dis', '1', 'S3', 'S9', 6),
+(141, 3, 'Fauzan', '0.5', 'S3', 'S10', 6),
+(142, 3, 'Dayyan', '0.33', 'S3', 'S10', 6),
+(143, 3, 'Dis', '0.33', 'S3', 'S10', 6),
+(144, 3, 'Fauzan', '1', 'S3', 'S11', 6),
+(145, 3, 'Dayyan', '0.5', 'S3', 'S11', 6),
+(146, 3, 'Dis', '2', 'S3', 'S11', 6),
+(147, 3, 'Fauzan', '0.5', 'S4', 'S5', 6),
+(148, 3, 'Dayyan', '0.33', 'S4', 'S5', 6),
+(149, 3, 'Dis', '1', 'S4', 'S5', 6),
+(150, 3, 'Fauzan', '1', 'S4', 'S6', 6),
+(151, 3, 'Dayyan', '1', 'S4', 'S6', 6),
+(152, 3, 'Dis', '1', 'S4', 'S6', 6),
+(153, 3, 'Fauzan', '2', 'S4', 'S7', 6),
+(154, 3, 'Dayyan', '1', 'S4', 'S7', 6),
+(155, 3, 'Dis', '1', 'S4', 'S7', 6),
+(156, 3, 'Fauzan', '0.33', 'S4', 'S8', 6),
+(157, 3, 'Dayyan', '0.5', 'S4', 'S8', 6),
+(158, 3, 'Dis', '0.5', 'S4', 'S8', 6),
+(159, 3, 'Fauzan', '0.5', 'S4', 'S9', 6),
+(160, 3, 'Dayyan', '1', 'S4', 'S9', 6),
+(161, 3, 'Dis', '0.5', 'S4', 'S9', 6),
+(162, 3, 'Fauzan', '0.33', 'S4', 'S10', 6),
+(163, 3, 'Dayyan', '1', 'S4', 'S10', 6),
+(164, 3, 'Dis', '0.33', 'S4', 'S10', 6),
+(165, 3, 'Fauzan', '0.33', 'S4', 'S11', 6),
+(166, 3, 'Dayyan', '1', 'S4', 'S11', 6),
+(167, 3, 'Dis', '2', 'S4', 'S11', 6),
+(168, 3, 'Fauzan', '1', 'S5', 'S6', 6),
+(169, 3, 'Dayyan', '1', 'S5', 'S6', 6),
+(170, 3, 'Dis', '1', 'S5', 'S6', 6),
+(171, 3, 'Fauzan', '0.5', 'S5', 'S7', 6),
+(172, 3, 'Dayyan', '0.33', 'S5', 'S7', 6),
+(173, 3, 'Dis', '1', 'S5', 'S7', 6),
+(174, 3, 'Fauzan', '0.5', 'S5', 'S8', 6),
+(175, 3, 'Dayyan', '1', 'S5', 'S8', 6),
+(176, 3, 'Dis', '1', 'S5', 'S8', 6),
+(177, 3, 'Fauzan', '2', 'S5', 'S9', 6),
+(178, 3, 'Dayyan', '0.5', 'S5', 'S9', 6),
+(179, 3, 'Dis', '1', 'S5', 'S9', 6),
+(180, 3, 'Fauzan', '2', 'S5', 'S10', 6),
+(181, 3, 'Dayyan', '1', 'S5', 'S10', 6),
+(182, 3, 'Dis', '1', 'S5', 'S10', 6),
+(183, 3, 'Fauzan', '0.5', 'S5', 'S11', 6),
+(184, 3, 'Dayyan', '0.5', 'S5', 'S11', 6),
+(185, 3, 'Dis', '1', 'S5', 'S11', 6),
+(186, 3, 'Fauzan', '0.5', 'S6', 'S7', 6),
+(187, 3, 'Dayyan', '1', 'S6', 'S7', 6),
+(188, 3, 'Dis', '0.5', 'S6', 'S7', 6),
+(189, 3, 'Fauzan', '1', 'S6', 'S8', 6),
+(190, 3, 'Dayyan', '1', 'S6', 'S8', 6),
+(191, 3, 'Dis', '1', 'S6', 'S8', 6),
+(192, 3, 'Fauzan', '1', 'S6', 'S9', 6),
+(193, 3, 'Dayyan', '1', 'S6', 'S9', 6),
+(194, 3, 'Dis', '1', 'S6', 'S9', 6),
+(195, 3, 'Fauzan', '0.33', 'S6', 'S10', 6),
+(196, 3, 'Dayyan', '0.33', 'S6', 'S10', 6),
+(197, 3, 'Dis', '1', 'S6', 'S10', 6),
+(198, 3, 'Fauzan', '1', 'S6', 'S11', 6),
+(199, 3, 'Dayyan', '1', 'S6', 'S11', 6),
+(200, 3, 'Dis', '0.5', 'S6', 'S11', 6),
+(201, 3, 'Fauzan', '0.5', 'S7', 'S8', 6),
+(202, 3, 'Dayyan', '1', 'S7', 'S8', 6),
+(203, 3, 'Dis', '2', 'S7', 'S8', 6),
+(204, 3, 'Fauzan', '0.5', 'S7', 'S9', 6),
+(205, 3, 'Dayyan', '0.5', 'S7', 'S9', 6),
+(206, 3, 'Dis', '1', 'S7', 'S9', 6),
+(207, 3, 'Fauzan', '0.5', 'S7', 'S10', 6),
+(208, 3, 'Dayyan', '1', 'S7', 'S10', 6),
+(209, 3, 'Dis', '2', 'S7', 'S10', 6),
+(210, 3, 'Fauzan', '0.5', 'S7', 'S11', 6),
+(211, 3, 'Dayyan', '2', 'S7', 'S11', 6),
+(212, 3, 'Dis', '0.5', 'S7', 'S11', 6),
+(213, 3, 'Fauzan', '0.5', 'S8', 'S9', 6),
+(214, 3, 'Dayyan', '0.5', 'S8', 'S9', 6),
+(215, 3, 'Dis', '1', 'S8', 'S9', 6),
+(216, 3, 'Fauzan', '1', 'S8', 'S10', 6),
+(217, 3, 'Dayyan', '3', 'S8', 'S10', 6),
+(218, 3, 'Dis', '1', 'S8', 'S10', 6),
+(219, 3, 'Fauzan', '0.33', 'S8', 'S11', 6),
+(220, 3, 'Dayyan', '1', 'S8', 'S11', 6),
+(221, 3, 'Dis', '2', 'S8', 'S11', 6),
+(222, 3, 'Fauzan', '0.5', 'S9', 'S10', 6),
+(223, 3, 'Dayyan', '0.5', 'S9', 'S10', 6),
+(224, 3, 'Dis', '0.5', 'S9', 'S10', 6),
+(225, 3, 'Fauzan', '1', 'S9', 'S11', 6),
+(226, 3, 'Dayyan', '0.33', 'S9', 'S11', 6),
+(227, 3, 'Dis', '0.5', 'S9', 'S11', 6),
+(228, 3, 'Fauzan', '0.5', 'S10', 'S11', 6),
+(229, 3, 'Dayyan', '1', 'S10', 'S11', 6),
+(230, 3, 'Dis', '0.5', 'S10', 'S11', 6);
 
 -- --------------------------------------------------------
 
@@ -328,6 +541,12 @@ ALTER TABLE `opsi_ahp`
   ADD PRIMARY KEY (`id_opsi_ahp`);
 
 --
+-- Indexes for table `rasio`
+--
+ALTER TABLE `rasio`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `responden`
 --
 ALTER TABLE `responden`
@@ -362,47 +581,62 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `bobot_indikator`
 --
 ALTER TABLE `bobot_indikator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `entitas_ayam`
 --
 ALTER TABLE `entitas_ayam`
   MODIFY `id_a_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `entitas_sapi`
 --
 ALTER TABLE `entitas_sapi`
   MODIFY `id_s_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `indikator_ayam`
 --
 ALTER TABLE `indikator_ayam`
   MODIFY `id_a_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT for table `opsi_ahp`
 --
 ALTER TABLE `opsi_ahp`
   MODIFY `id_opsi_ahp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `rasio`
+--
+ALTER TABLE `rasio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT for table `responden`
 --
 ALTER TABLE `responden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
+
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- Constraints for dumped tables
 --
@@ -431,6 +665,7 @@ ALTER TABLE `responden`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
