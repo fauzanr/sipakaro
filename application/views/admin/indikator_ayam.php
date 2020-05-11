@@ -10,6 +10,7 @@
               },
               order: [[0, "asc"]],
               columns: [
+                  { "data": "nama_kriteria" },
                   { "data": "kode_a_i" },
                   { "data": "ket_a_i" },
                   {
@@ -54,6 +55,7 @@
           <table id="tabel" class="table table-hover" width="100%">
             <thead>
                 <tr>
+                  <th>Kriteria</th>
                   <th>Kode</th>
                   <th>Keterangan Indikator</th>
                   <th>Actions</th>
