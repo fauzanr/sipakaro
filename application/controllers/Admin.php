@@ -37,6 +37,7 @@ class Admin extends CI_Controller {
 	public function page_tambah_indikator_ayam()	{
 		$data['title'] = 'Admin | Tambah Indikator Ayam';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['kriteria'] = $this->db->get('kriteria')->result_array();
 		
 		$this->load->view('admin/templates/header', $data);
 		$this->load->view('admin/templates/sidebar', $data);
@@ -48,6 +49,7 @@ class Admin extends CI_Controller {
 	public function page_edit_indikator_ayam($id)	{
 		$data['title'] = 'Admin | Tambah Indikator Ayam';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['kriteria'] = $this->db->get('kriteria')->result_array();
 		$data['indikator'] = $this->db->get_where('indikator_ayam', ['id_a_i' => $id])->row_array();
 		
 		$this->load->view('admin/templates/header', $data);
@@ -78,47 +80,89 @@ class Admin extends CI_Controller {
 	}
 
 	public function tambah_indikator_ayam()	{
-		if (!isset($_POST['kode_a_i']) || !isset($_POST['ket_a_i'])) {
+		$rules = [
+			[
+				'field' => 'nama_kriteria',
+				'label' => 'Nama Kriteria',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'kode_a_i',
+				'label' => 'Kode Indikator',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'ket_a_i',
+				'label' => 'Keterangan Indikator',
+				'rules' => 'required',
+			],
+		];
+
+		$this->form_validation->set_rules($rules);
+
+		if($this->form_validation->run() == FALSE) {
+			$this->page_tambah_indikator_ayam();
+		} else {
+			$data = [
+				'nama_kriteria' => $_POST['nama_kriteria'],
+				'kode_a_i' => $_POST['kode_a_i'],
+				'ket_a_i' => $_POST['ket_a_i'],
+			];
+	
+			try {
+				$this->db->insert('indikator_ayam', $data);
+				$this->session->set_flashdata('message', 'Berhasil tambah indikator');
+			} catch (\Throwable $th) {
+				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+			}
+	
 			redirect(base_url('admin/indikator_ayam'));
 		}
 
-		$data = [
-			'kode_a_i' => $_POST['kode_a_i'],
-			'ket_a_i' => $_POST['ket_a_i'],
-		];
-
-		try {
-			$this->db->insert('indikator_ayam', $data);
-			$this->session->set_flashdata('message', 'Berhasil tambah indikator');
-		} catch (\Throwable $th) {
-			$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
-		}
-
-		redirect(base_url('admin/indikator_ayam'));
 	}
 
 	public function edit_indikator_ayam()	{
-		if (!isset($_POST['id_a_i'])) {
-			redirect(base_url('admin/indikator_ayam'));
-		}
+		$rules = [
+			[
+				'field' => 'id_a_i',
+				'label' => 'ID indikator',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'nama_kriteria',
+				'label' => 'Nama Kriteria',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'kode_a_i',
+				'label' => 'Kode Indikator',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'ket_a_i',
+				'label' => 'Keterangan Indikator',
+				'rules' => 'required',
+			],
+		];
 
-		$data = [];
+		$this->form_validation->set_rules($rules);
 
-		if (isset($_POST['kode_a_i'])) {
+		if($this->form_validation->run() == FALSE) {
+			$this->page_edit_indikator_ayam();
+		} else {
+			$data['nama_kriteria'] = $_POST['nama_kriteria'];
 			$data['kode_a_i'] = $_POST['kode_a_i'];
-		}
-
-		if (isset($_POST['ket_a_i'])) {
 			$data['ket_a_i'] = $_POST['ket_a_i'];
+			
+			try {
+				$this->db->where('id_a_i', $_POST['id_a_i']);
+				$this->db->update('indikator_ayam', $data);
+				$this->session->set_flashdata('message', 'Berhasil edit indikator');
+			} catch (\Throwable $th) {
+				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+			}
 		}
 
-		try {
-			$this->db->where('id_a_i', $_POST['id_a_i']);
-			$this->db->update('indikator_ayam', $data);
-			$this->session->set_flashdata('message', 'Berhasil edit indikator');
-		} catch (\Throwable $th) {
-			$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
-		}
 
 		redirect(base_url('admin/indikator_ayam'));
 	}

@@ -6,6 +6,13 @@
 
           <form action="<?=base_url('admin/edit_indikator_ayam')?>" method="POST">
             <input type="hidden" name="id_a_i" value="<?= $indikator['id_a_i'] ?>">
+            <label for="nama_kriteria">Kriteria</label>
+            <select name="nama_kriteria" id="nama_kriteria" required>
+              <option value="" selected>Pilih</option>
+              <?php foreach($kriteria as $k) : ?>
+                <option value="<?= $k['nama_kriteria'] ?>" <?= $k['nama_kriteria'] == $indikator['nama_kriteria'] ? 'selected' : '' ?>><?= $k['nama_kriteria'] ?></option>
+              <?php endforeach ?>
+            </select>
             <label for="kode_a_i">Kode Indikator</label>
             <input type="text" id="kode_a_i" name="kode_a_i" value="<?=$indikator['kode_a_i']?>" required>
             <label for="ket_a_i">Keterangan Indikator</label>
