@@ -54,15 +54,15 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('admin/kriteria_ayam') ?>">
+        <a class="nav-link" href="<?= base_url('admin/kriteria') ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Ayam</span></a>
+          <span>Kriteria</span></a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Sapi</span></a>
-      </li>
+      </li> -->
 
       <!-- Divider -->
       <hr class="sidebar-divider">

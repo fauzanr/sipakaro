@@ -23,6 +23,17 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/templates/footer');
 	}
 
+	public function page_kriteria()	{
+		$data['title'] = 'Admin | Kriteria';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/kriteria', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
 	public function page_indikator_ayam()	{
 		$data['title'] = 'Admin | Indikator Ayam';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -60,6 +71,12 @@ class Admin extends CI_Controller {
 	}
 
 	// FUNGSI
+
+	public function get_kriteria() {
+		$data = $this->db->get('kriteria')->result_array();
+		
+		echo json_encode($data);
+	}
 
 	public function get_indikator_ayam() {
 		$data = $this->db->get('indikator_ayam')->result_array();
