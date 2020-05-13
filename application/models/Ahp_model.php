@@ -78,7 +78,7 @@
                 for ($j=$i+1; $j < count($data['kriteria']); $j++) { 
                     $this->db->select('nilai_responden');
                     
-                    $data[ $data['kriteria'][$i][$kriteria].'-'.$data['kriteria'][$j][$kriteria] ] = $this->db->get_where('responden', array('id_section' => $section_id))->result_array();
+                    $data[ $data['kriteria'][$i][$kriteria].'-'.$data['kriteria'][$j][$kriteria] ] = $this->db->get_where('responden', array('id_section' => $section_id, 'kriteria_1' => $data['kriteria'][$i][$kriteria], 'kriteria_2' => $data['kriteria'][$j][$kriteria]))->result_array();
                     
                     // Set counter
                     $counter = count($data[$data['kriteria'][$i][$kriteria].'-'.$data['kriteria'][$j][$kriteria]]);
@@ -193,38 +193,57 @@
             // Cek Section untuk hitung C1 dan CR ---------------------------------------------------------------------//
             $this->db->select('level0');
             $hitung = $this->db->get_where('section', array('id' => $section_id))->result_array();
-            if($hitung[0]['level0'] != NULL) {
+
+            if($hitung[0]['level0'] != NULL) {  
                 // MENGHITUNG KONSISTENSI RASIO 
                 $hitung = $this->Ahp_model->get_rasio_by_idikator($counter);
+
+                if(count($data['kriteria']) > 2){
+                    // Indikator lebih dari 2
+                    for ($i=0; $i < $counter; $i++) { 
+                        // Input nilai C1 dan CR ke array input
+                        $data['input'][$i]['C1'] = ($data['eigen']['nilai_maksimum'] - $counter) / ($counter - 1);
+                        $data['input'][$i]['CR'] = $data['input'][$i]['C1'] / $hitung[0]['nilai_rasio'];
+                    }
+                }else {
+                    // Indikator kurang dari 3
+                    for ($i=0; $i < $counter; $i++) { 
+                        // Input nilai C1 dan CR ke array input
+                        $data['input'][$i]['C1'] = 0;
+                        $data['input'][$i]['CR'] = 0;
+                    }
+                }
                 
+            }else{
                 for ($i=0; $i < $counter; $i++) { 
-                    // Input nilai C1 dan CR ke array input
-                    $data['input'][$i]['C1'] = ($data['eigen']['nilai_maksimum'] - $counter) / ($counter - 1);
-                    $data['input'][$i]['CR'] = $data['input'][$i]['C1'] / $hitung[0]['nilai_rasio'];
+                    // Input nilai C1 dan CR ke array input 0
+                    $data['input'][$i]['C1'] = 0;
+                    $data['input'][$i]['CR'] = 0;
                 }
             }
 
-            die(print("<pre>".print_r($data,true)."</pre>"));
+            // die(print("<pre>".print_r($data,true)."</pre>"));
 
-
-            // // Cek apakah sudah ada nilai Bobot sebelumnya di DB
-            // $hitung = $this->db->get_where('bobot_indikator', array('id' => $section_id))->result_array();
-            // if(count($hitung) > 0){
-            //     // Input
-            //     $this->Ahp_model->input_bobot_normalisasi($data['input']);
-            //     die('berhasil hitung, selesai dan dimasukkan ke db');
-            //     return;
-            // }else{
-            //     //Update
-            //     $this->Ahp_model->update_bobot_normalisasi($data['input']);
-            //     die('berhasil hitung, selesai dan dimasukkan ke db');
-            //     return;
-            // }
+            // Cek apakah sudah ada nilai Bobot sebelumnya di DB
+            $hitung = $this->db->get_where('bobot_indikator', array('id_section' => $section_id))->result_array();
+            // die('hitung = '.count($hitung));
+            if(count($hitung) < 1){
+                // Input
+                $this->Ahp_model->input_bobot_normalisasi($data['input']);
+                die('berhasil hitung, selesai dan dimasukkan ke db');
+                return;
+            }else{
+                //Update
+                $this->Ahp_model->update_bobot_normalisasi($data['input']);
+                die('berhasil hitung, selesai dan dimasukkan ke db');
+                return;
+            }
 
         }
 
         // Deskripsi : Tambah nilai pada tabel bobot
         public function input_bobot_normalisasi($data){
+          // die(print("Input<br><pre>".print_r($data,true)."</pre>"));
             for ($i=0 ; $i<sizeof($data) ; $i++) { 
                 $this->db->insert('bobot_indikator', $data[$i]);
             };
@@ -232,6 +251,7 @@
 
         // Deskripsi : Update nilai pada tabel bobot
         public function update_bobot_normalisasi($data){
+            // die(print("Update<br><pre>".print_r($data,true)."</pre>"));
             for ($i=0 ; $i<sizeof($data) ; $i++) { 
                 $this->db->where(['kriteria' => $data[$i]['kriteria'], 'id_section' => $data[$i]['id_section']] );
                 $this->db->update('bobot_indikator', $data[$i]);

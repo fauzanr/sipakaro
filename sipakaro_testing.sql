@@ -3,6 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+
 -- Generation Time: May 11, 2020 at 04:18 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
@@ -475,6 +476,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
+
 (1, 'Kukuh Ardia', 'kukuhardia@gmail.com', 'default.jpg', '$2y$10$yoYld1kf9tsWx3mZIhs4Eum7E5URfGYQ9QbAaHrRiEiur2ehBIuVW', 3, 1, '0000-00-00 00:00:00'),
 (2, 'sara', 'sa@gmail.com', 'default.jpg', '$2y$10$.fuRvyWUOMkqMa28nMNsK.HujEftBWfqSpy9m8m6uAETXv1tE2H/O', 3, 1, '0000-00-00 00:00:00'),
 (3, 'roesfr', 'roesfr@gmail.com', 'default.jpg', '$2y$10$ecEh8kreC/MTryB/V1qVAe5vOpjHtF57jNH7XD254v2MHrQJztjAS', 1, 1, '0000-00-00 00:00:00');
@@ -529,6 +531,7 @@ ALTER TABLE `indikator_ayam`
   ADD PRIMARY KEY (`id_a_i`),
   ADD KEY `id_kriteria` (`nama_kriteria`);
 
+
 --
 -- Indexes for table `kriteria`
 --
@@ -543,6 +546,7 @@ ALTER TABLE `opsi_ahp`
   ADD PRIMARY KEY (`id_opsi_ahp`);
 
 --
+
 -- Indexes for table `rasio`
 --
 ALTER TABLE `rasio`
@@ -584,6 +588,7 @@ ALTER TABLE `user_role`
 --
 ALTER TABLE `bobot_indikator`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `entitas_ayam`
 --
@@ -604,31 +609,38 @@ ALTER TABLE `indikator_ayam`
 --
 ALTER TABLE `opsi_ahp`
   MODIFY `id_opsi_ahp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT for table `rasio`
 --
 ALTER TABLE `rasio`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT for table `responden`
 --
 ALTER TABLE `responden`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
+
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
+
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- Constraints for dumped tables
 --
@@ -657,6 +669,7 @@ ALTER TABLE `responden`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
