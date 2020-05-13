@@ -17,8 +17,8 @@
                 $this->db->insert('responden', $input[$i]);
             };
             // Update Nilai Normalisasi
-            $this->Ahp_model->normalisasi_rpa_peternak();
-            return true;
+            // $this->Ahp_model->normalisasi_rpa_peternak();
+            // return true;
         }
 
         // Deskripsi    : Tampil semua data tabel bobot indikator berdasarkan id section

@@ -35,7 +35,7 @@
                 <div class="row">
 
                     <div class="col-2">
-                        <h3>AHP</h3>
+                        <h3>RPA</h3>
                     </div>
 
                     <div class="row col-8 d-flex justify-content-center">
@@ -44,7 +44,7 @@
                                 <?php $counter++ ?>
                                 <div class="form-group mr-4">
 
-                                    <input type="hidden" name="section_id" value="<?= $section_id ?>">
+                                    <input type="hidden" name="section_id" value="2">
                                     <input type="hidden" name="responden<?= $i ?>" value="<?= $_SESSION['pengisian_ahp']['nama'.$i] ?>">
                                     <input type="hidden" name="kriteria1_<?= $i ?>" value="AHP">
                                     <input type="hidden" name="kriteria2_<?= $i ?>" value="Peternak">
@@ -172,6 +172,7 @@
                                                     <option value="<?= $o['opsi'] ?>"
                                                         <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
                                                     ><?= $o['opsi'] ?></option>
+                                                    <option value="0.33" selected>test</option>
                                                 <?php endforeach ?>
                                             </select>
 

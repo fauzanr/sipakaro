@@ -9,11 +9,11 @@
         <div style="text-align: center;">
             <h2 class="h4 mb-4 text-gray-800 d-flex justify-content-center">Jumlah Responden</h2>
             <?php echo validation_errors(); ?>
-            <form action="<?php echo base_url().'officer/input-ahp-2' ?>" method="post">
+            <form action="<?php echo base_url().'officer/input_ahp_dua' ?>" method="post">
                 <div class="btn-group btn-group-toggle btn-block col-md-8" data-toggle="buttons">
                     <?php for ($i=1 ; $i <= 5 ; $i++) : ?>
                         <label class="btn btn-primary btn-lg mr-2 <?= isset($_SESSION['pengisian_ahp']['responden']) && $_SESSION['pengisian_ahp']['responden']==$i ? '' : '' ?>">
-                            <input type="radio" name="options" id="option<?= $i ?>" autocomplete="off" value='<?= $i ?>'><?= $i ?>
+                            <input type="radio" name="options" id="option<?= $i ?>" autocomplete="off" value='<?= $i ?>' required><?= $i ?>
                         </label>
                     <?php endfor ?>
                 </div>

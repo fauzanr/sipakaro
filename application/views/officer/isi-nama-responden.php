@@ -16,12 +16,12 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <?php echo validation_errors(); ?>
-                <form action="<?php echo base_url().'officer/input-ahp-3' ?>" class="col-md-8" method="post">
+                <form action="<?php echo base_url().'officer/input_ahp_tiga' ?>" class="col-md-8" method="post">
                     <?php for ($i=1; $i <= $_SESSION['pengisian_ahp']['responden'] ; $i++) {
                         echo '
                         <div class="form-group">
                             <label for="formGroupExampleInput">Nama Responden '.$i.'</label>
-                            <input type="text" class="form-control" placeholder="Nama" name="nama'.$i.'"
+                            <input type="text" class="form-control" placeholder="Nama" name="nama'.$i.'" required
                             />
                         </div>';
                     } ?>
