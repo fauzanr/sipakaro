@@ -48,6 +48,26 @@
       <hr class="sidebar-divider">
 
       <!-- Heading -->
+        <div class="sidebar-heading">
+          Kriteria
+        </div>
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('admin/kriteria') ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Kriteria</span></a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Sapi</span></a>
+      </li> -->
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
       <div class="sidebar-heading">
         User
       </div>

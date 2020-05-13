@@ -88,7 +88,6 @@
 
             // MENGHITUNG GEOMEAN ------------------------------------------------------------------------------//
             $counter2 = count($data['kriteria'])-1;
-            // $counter = 3;
             $hitung = 1;
             for ($i=0; $i < $counter2; $i++) {
                 for ($j=$i+1; $j <= $counter2; $j++) { 
@@ -194,6 +193,7 @@
             // Cek Section untuk hitung C1 dan CR ---------------------------------------------------------------------//
             $this->db->select('level0');
             $hitung = $this->db->get_where('section', array('id' => $section_id))->result_array();
+
             if($hitung[0]['level0'] != NULL) {  
                 // MENGHITUNG KONSISTENSI RASIO 
                 $hitung = $this->Ahp_model->get_rasio_by_idikator($counter);
@@ -243,7 +243,7 @@
 
         // Deskripsi : Tambah nilai pada tabel bobot
         public function input_bobot_normalisasi($data){
-            // die(print("Input<br><pre>".print_r($data,true)."</pre>"));
+          // die(print("Input<br><pre>".print_r($data,true)."</pre>"));
             for ($i=0 ; $i<sizeof($data) ; $i++) { 
                 $this->db->insert('bobot_indikator', $data[$i]);
             };
