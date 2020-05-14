@@ -71,6 +71,12 @@
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
+            if($section_id === 6){
+                $this->db->select('kode_a_i');
+                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Sosial'))->result_array();
+                // Set penamaan dalam array
+                $kriteria = 'kode_a_i';
+            }
 
             // FECTH DATA RESPONDEN SESUAI KRITERIA 1 DAN KRITERIA 2 -------------------------------------------//
             for ($i=0; $i < count($data['kriteria']); $i++) {
@@ -80,7 +86,7 @@
                     
                     $data[ $data['kriteria'][$i][$kriteria].'-'.$data['kriteria'][$j][$kriteria] ] = $this->db->get_where('responden', array('id_section' => $section_id, 'kriteria_1' => $data['kriteria'][$i][$kriteria], 'kriteria_2' => $data['kriteria'][$j][$kriteria]))->result_array();
                     
-                    // Set counter
+                    // Set counter (Jumlah Responden)
                     $counter = count($data[$data['kriteria'][$i][$kriteria].'-'.$data['kriteria'][$j][$kriteria]]);
                 }
                 
@@ -146,14 +152,14 @@
             $total = 0;
             for ($i=0; $i < $counter; $i++) {
                 
-                for ($j=0; $j < $counter; $j++) { 
+                for ($j=1; $j < $counter; $j++) { 
                     
                     if($data['kriteria'][$i][$kriteria] === $data['kriteria'][$j][$kriteria]) {
                         $total = $total + ( ($data['matriks_penilaian'][ $data['kriteria'][$j][$kriteria].'-'.$data['kriteria'][$i][$kriteria] ]) / ( $data['matriks_penilaian']['bobot'][$data['kriteria'][$j][$kriteria]] ) );
                     }else{
                         $total = $total + ( ($data['matriks_penilaian'][ $data['kriteria'][$j][$kriteria].'-'.$data['kriteria'][$i][$kriteria] ]) / ( $data['matriks_penilaian']['bobot'][$data['kriteria'][$j][$kriteria]] ) );
                     }
-                    // die('masok ['.$j.']['.$i.']<br>operasi = '.$data['matriks_penilaian'][ $data['kriteria'][$j][$kriteria].'-'.$data['kriteria'][$i][$kriteria] ].'<br>hasil = '.$total);
+                    // die('haha<br>'.$data['kriteria'][$j][$kriteria].'-'.$data['kriteria'][$i][$kriteria].'<br>masok ['.$j.']['.$i.']<br>operasi = '.$data['matriks_penilaian'][ $data['kriteria'][$j][$kriteria].'-'.$data['kriteria'][$i][$kriteria] ].'<br>hasil = '.$total);
                     
                 }
                 $total = $total / $counter ;
@@ -196,9 +202,8 @@
 
             if($hitung[0]['level0'] != NULL) {  
                 // MENGHITUNG KONSISTENSI RASIO 
-                $hitung = $this->Ahp_model->get_rasio_by_idikator($counter);
-
-                if(count($data['kriteria']) > 2){
+                if($counter > 2 && $counter < 11){
+                    $hitung = $this->Ahp_model->get_rasio_by_idikator($counter);
                     // Indikator lebih dari 2
                     for ($i=0; $i < $counter; $i++) { 
                         // Input nilai C1 dan CR ke array input
