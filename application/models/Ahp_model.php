@@ -47,31 +47,31 @@
             $data = array();
 
             // Masukan indikator / kriteria ke dalam array sesuai section nya
-            if($section_id === 2){
+            if($section_id == 2){
                 $this->db->select('ket_a_e');
                 $data['kriteria'] = $this->db->get('entitas_ayam')->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'ket_a_e';
             }
-            if($section_id === 3 || $section_id === 7){
+            if($section_id == 3 || $section_id == 7){
                 $this->db->select('nama_kriteria');
                 $data['kriteria'] = $this->db->get('kriteria')->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'nama_kriteria';
             }
-            if($section_id === 4 || $section_id === 8){
+            if($section_id == 4 || $section_id == 8){
                 $this->db->select('kode_a_i');
                 $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Ekonomi'))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
-            if($section_id === 5 || $section_id === 9){
+            if($section_id == 5 || $section_id == 9){
                 $this->db->select('kode_a_i');
                 $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Lingkungan'))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
-            if($section_id === 6 || $section_id === 10){
+            if($section_id == 6 || $section_id == 10){
                 $this->db->select('kode_a_i');
                 $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Sosial'))->result_array();
                 // Set penamaan dalam array
@@ -152,7 +152,7 @@
             $total = 0;
             for ($i=0; $i < $counter; $i++) {
                 
-                for ($j=1; $j < $counter; $j++) { 
+                for ($j=0; $j < $counter; $j++) { 
                     
                     if($data['kriteria'][$i][$kriteria] === $data['kriteria'][$j][$kriteria]) {
                         $total = $total + ( ($data['matriks_penilaian'][ $data['kriteria'][$j][$kriteria].'-'.$data['kriteria'][$i][$kriteria] ]) / ( $data['matriks_penilaian']['bobot'][$data['kriteria'][$j][$kriteria]] ) );
@@ -227,20 +227,17 @@
                 }
             }
 
-            // die(print("<pre>".print_r($data,true)."</pre>"));
-
+            // die(print("Update<br><pre>".print_r($data,true)."</pre>"));
             // Cek apakah sudah ada nilai Bobot sebelumnya di DB
             $hitung = $this->db->get_where('bobot_indikator', array('id_section' => $section_id))->result_array();
             // die('hitung = '.count($hitung));
             if(count($hitung) < 1){
                 // Input
                 $this->Ahp_model->input_bobot_normalisasi($data['input']);
-                die('berhasil hitung, selesai dan dimasukkan ke db');
                 return;
             }else{
                 //Update
                 $this->Ahp_model->update_bobot_normalisasi($data['input']);
-                die('berhasil hitung, selesai dan dimasukkan ke db');
                 return;
             }
 

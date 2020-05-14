@@ -27,6 +27,7 @@
                 <?php foreach($bobot as $b) : ?>
                     <?php if($b['id_section'] == 2) : ?>
                         <?php $level0 = $b['kriteria'] ?>
+                        <?php $bobot_lokal_entitas = $b['bobot'] ?>
                         <tr>
                             <th scope="row"><?= $counter ?></th>
                             <td><?= $b['kriteria'] ?></td>
@@ -42,6 +43,7 @@
                         <?php foreach($bobot as $b) : ?>
                             <?php if($b['level1'] == $level0) : ?>
                                 <?php $level1 = $b['kriteria'] ?>
+                                <?php $bobot_lokal_dimensi = $b['bobot'] ?>
                                 <tr>
                                     <th scope="row"><?= $counter ?></th>
                                     <td></td>
@@ -64,8 +66,8 @@
                                             <td>-></td>
                                             <td><?= $b['kriteria'] ?></td>
                                             <td><?= $b['bobot'] ?></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><?= $bobot_lokal_dimensi * $b['bobot'] ?></td>
+                                            <td><?= $bobot_lokal_entitas * $bobot_lokal_entitas * $b['bobot'] ?></td>
                                         </tr>
                                         <?php $counter++ ?>
                                     <?php endif ?>

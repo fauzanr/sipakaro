@@ -46,7 +46,7 @@
 
                                     <input type="hidden" name="section_id" value="2">
                                     <input type="hidden" name="responden<?= $i ?>" value="<?= $_SESSION['pengisian_ahp']['nama'.$i] ?>">
-                                    <input type="hidden" name="kriteria1_<?= $i ?>" value="AHP">
+                                    <input type="hidden" name="kriteria1_<?= $i ?>" value="RPA">
                                     <input type="hidden" name="kriteria2_<?= $i ?>" value="Peternak">
 
                                     <label for="pilihan-ahp<?= $i ?>">
@@ -55,6 +55,7 @@
 
                                     <select class="mr-2 form-control" name="nilai-ahp<?= $i ?>" required>
                                         <option value="" disabled selected>Pilih Nilai</option>
+                                    <option value="0.33" selected>test</option>
                                         <?php foreach($opsi as $o) : ?>
                                             <option value="<?= $o['opsi'] ?>"
                                                 <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
@@ -107,6 +108,7 @@
 
                                             <select class="mr-2 form-control" name="nilai-ahp<?= $counter ?>" required>
                                                 <option value="" disabled selected>Pilih Nilai</option>
+                                                <option value="0.33" selected>test</option>
                                                 <?php foreach($opsi as $o) : ?>
                                                     <option value="<?= $o['opsi'] ?>"
                                                         <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
@@ -172,8 +174,8 @@
                                                     <option value="<?= $o['opsi'] ?>"
                                                         <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
                                                     ><?= $o['opsi'] ?></option>
-                                                    <option value="0.33" selected>test</option>
                                                 <?php endforeach ?>
+                                                <option value="0.33" selected>test</option>
                                             </select>
 
                                         </div>

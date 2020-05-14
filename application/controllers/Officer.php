@@ -189,10 +189,14 @@
 
 				foreach($data as $k => $v) {
 					$this->Ahp_model->add_ahp($v);
-					$this->Ahp_model->normalisasi_rpa_peternak($k);
 					
 					$data_counter += count($v);
 				}
+
+				foreach($data as $k => $v) {
+					$this->Ahp_model->normalisasi_rpa_peternak($k);
+				}
+
 				$this->session->unset_userdata('pengisian_ahp');
 				$this->session->unset_userdata('nilai_pengisian_ahp');
 
