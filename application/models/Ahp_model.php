@@ -53,31 +53,31 @@
                 // Set penamaan dalam array
                 $kriteria = 'ket_a_e';
             }
-            if($section_id === 3){
+            if($section_id === 3 || $section_id === 7){
                 $this->db->select('nama_kriteria');
                 $data['kriteria'] = $this->db->get('kriteria')->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'nama_kriteria';
             }
-            if($section_id === 4){
+            if($section_id === 4 || $section_id === 8){
                 $this->db->select('kode_a_i');
                 $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Ekonomi'))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
-            if($section_id === 5){
+            if($section_id === 5 || $section_id === 9){
                 $this->db->select('kode_a_i');
                 $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Lingkungan'))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
-            if($section_id === 6){
+            if($section_id === 6 || $section_id === 10){
                 $this->db->select('kode_a_i');
                 $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Sosial'))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
-
+            
             // FECTH DATA RESPONDEN SESUAI KRITERIA 1 DAN KRITERIA 2 -------------------------------------------//
             for ($i=0; $i < count($data['kriteria']); $i++) {
                 
