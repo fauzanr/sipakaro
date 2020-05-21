@@ -30,7 +30,7 @@
         <div class="col-md-10">
 
             <?php if ($level == 0) :?> 
-
+                <input type="hidden" name="entitas_id" value="kosong"> <!-- ambil id identitas -->
                 <?php $counter=0 ?>
                 <div class="row">
 
@@ -55,7 +55,7 @@
 
                                     <select class="mr-2 form-control" name="nilai-ahp<?= $i ?>" required>
                                         <option value="" disabled selected>Pilih Nilai</option>
-                                    <option value="0.33" selected>test</option>
+                                        <option value="0.33" selected>test</option>
                                         <?php foreach($opsi as $o) : ?>
                                             <option value="<?= $o['opsi'] ?>"
                                                 <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
@@ -74,6 +74,7 @@
                 </div> 
 
             <?php elseif($level == 1) : ?>
+                <input type="hidden" name="entitas_id" value="kosong"> <!-- ambil id identitas -->
             <!-- looping -->
                 <?php $counter=0 ?>
 
@@ -136,6 +137,7 @@
 
             <!-- looping -->
             <?php elseif($level == 2) : ?>
+                <input type="hidden" name="entitas_id" value="<?= $indikator[0]['entitas'] ?>"> <!-- ambil id identitas -->
             <!-- looping -->
                 <?php $counter=0 ?>
 

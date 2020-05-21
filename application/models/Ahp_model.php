@@ -60,20 +60,22 @@
                 $kriteria = 'nama_kriteria';
             }
             if($section_id == 4 || $section_id == 8){
+                
                 $this->db->select('kode_a_i');
-                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Ekonomi'))->result_array();
+                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Ekonomi', 'entitas' => $_SESSION['indikator'][$section_id][0]['section_id'] ))->result_array();
+
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
             if($section_id == 5 || $section_id == 9){
                 $this->db->select('kode_a_i');
-                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Lingkungan'))->result_array();
+                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Lingkungan', 'entitas' => $_SESSION['indikator'][$section_id][0]['section_id'] ))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
             if($section_id == 6 || $section_id == 10){
                 $this->db->select('kode_a_i');
-                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Sosial'))->result_array();
+                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Sosial', 'entitas' => $_SESSION['indikator'][$section_id][0]['section_id'] ))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }

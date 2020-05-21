@@ -136,8 +136,11 @@
 				$data['level'] = 1;
 				$data['kriteria'] = $this->db->get('kriteria')->result_array();
 			} else if ($section['level0'] != NULL && $section['level1'] != NULL) { // LEVEL ENTITAS-KRITERIA-INDIKATOR
+				// get entitas
+				$data['entitas'] = $this->db->get_where('entitas_ayam', ['ket_a_e' => $section['level0']])->result_array();
+
 				$data['level'] = 2;
-				$data['indikator'] = $this->db->get_where('indikator_ayam', ['nama_kriteria' => $section['level1']])->result_array();
+				$data['indikator'] = $this->db->get_where('indikator_ayam', ['nama_kriteria' => $section['level1'], 'entitas' => $data['entitas'][0]['id_a_e']])->result_array();
 			}
 
 			$this->load->view('templates/header', $data);
@@ -151,6 +154,7 @@
 		public function input_data_ahp(){
 
 			$_SESSION['nilai_pengisian_ahp'][$this->input->post('section_id')] = [];
+			$_SESSION['indikator'][$this->input->post('section_id')] = [];
 
 			for($i=1 ; $i <= $_POST['counter'] ; $i++){
 				$nilai = [
@@ -163,6 +167,7 @@
 				];
 				array_push($_SESSION['nilai_pengisian_ahp'][$this->input->post('section_id')], $nilai);
 			}
+			array_push($_SESSION['indikator'][$this->input->post('section_id')], array('section_id' => $this->input->post('entitas_id')) );
 
 			$this->session->set_flashdata('success', 'berhasil simpan data');
 			redirect(base_url('officer/halaman_input_data_ahp/'.$this->input->post('section_id')));
@@ -199,6 +204,7 @@
 
 				$this->session->unset_userdata('pengisian_ahp');
 				$this->session->unset_userdata('nilai_pengisian_ahp');
+				$this->session->unset_userdata('indikator');
 
 				echo 'berhasil input '.$data_counter.' data 😛<br>';
 				
@@ -207,5 +213,26 @@
 
 		}
 
+		// Bagian Skala
+		public function skalaayam(){
+			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+			// die(base_url(uri_string()));
+			// if(base_url(uri_string()) !== 'anjay'){
+			// 	die('mantap');
+			// }
+			// if(base_url(uri_string()) == base_url()'/officer/skalaayam'){
+			// 	die(base_url());
+			// 	// die('masok');
+			// }
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/skala/skala-sapi-5', $data);
+			$this->load->view('templates/footer');
+		}
+		
 	}
 ?>
