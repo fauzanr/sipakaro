@@ -23,16 +23,16 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/templates/footer');
 	}
 
-	public function page_kriteria()	{
-		$data['title'] = 'Admin | Kriteria';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+	// public function page_kriteria()	{
+	// 	$data['title'] = 'Admin | Kriteria';
+	// 	$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 		
-		$this->load->view('admin/templates/header', $data);
-		$this->load->view('admin/templates/sidebar', $data);
-		$this->load->view('admin/templates/topbar', $data);
-		$this->load->view('admin/kriteria', $data);
-		$this->load->view('admin/templates/footer');
-	}
+	// 	$this->load->view('admin/templates/header', $data);
+	// 	$this->load->view('admin/templates/sidebar', $data);
+	// 	$this->load->view('admin/templates/topbar', $data);
+	// 	$this->load->view('admin/kriteria', $data);
+	// 	$this->load->view('admin/templates/footer');
+	// }
 
 	public function page_indikator_ayam()	{
 		$data['title'] = 'Admin | Indikator Ayam';
@@ -48,6 +48,7 @@ class Admin extends CI_Controller {
 	public function page_tambah_indikator_ayam()	{
 		$data['title'] = 'Admin | Tambah Indikator Ayam';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['entitas'] = $this->db->get('entitas_ayam')->result_array();
 		$data['kriteria'] = $this->db->get('kriteria')->result_array();
 		
 		$this->load->view('admin/templates/header', $data);
@@ -60,6 +61,7 @@ class Admin extends CI_Controller {
 	public function page_edit_indikator_ayam($id)	{
 		$data['title'] = 'Admin | Tambah Indikator Ayam';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['entitas'] = $this->db->get('entitas_ayam')->result_array();
 		$data['kriteria'] = $this->db->get('kriteria')->result_array();
 		$data['indikator'] = $this->db->get_where('indikator_ayam', ['id_a_i' => $id])->row_array();
 		
@@ -70,12 +72,170 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/templates/footer');
 	}
 
+	public function page_indikator_sapi()	{
+		$data['title'] = 'Admin | Indikator Sapi';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/indikator_sapi', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
+	public function page_tambah_indikator_sapi()	{
+		$data['title'] = 'Admin | Tambah Indikator Sapi';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['entitas'] = $this->db->get('entitas_sapi')->result_array();
+		$data['kriteria'] = $this->db->get('kriteria_sapi')->result_array();
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/tambah_indikator_sapi', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
+	public function page_edit_indikator_sapi($id)	{
+		$data['title'] = 'Admin | Tambah Indikator Sapi';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['entitas'] = $this->db->get('entitas_sapi')->result_array();
+		$data['kriteria'] = $this->db->get('kriteria_sapi')->result_array();
+		$data['indikator'] = $this->db->get_where('indikator_sapi', ['id_s_i' => $id])->row_array();
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/edit_indikator_sapi', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
 	// FUNGSI
 
-	public function get_kriteria() {
-		$data = $this->db->get('kriteria')->result_array();
+	// public function get_kriteria() {
+	// 	$data = $this->db->get('kriteria')->result_array();
+		
+	// 	echo json_encode($data);
+	// }
+
+	public function get_indikator_sapi() {
+		$data = $this->db->get('indikator_sapi')->result_array();
 		
 		echo json_encode($data);
+	}
+	
+	public function delete_indikator_sapi($id) {
+		try {
+			$this->db->where('id_s_i', $id);
+			$this->db->delete('indikator_sapi');
+			$this->session->set_flashdata('message', 'Berhasil hapus');
+		} catch (\Throwable $th) {
+			$this->session->set_flashdata('message', 'Terjadi kesalahan: '.$th);
+		}
+
+		redirect(base_url('admin/indikator_sapi'));
+	}
+
+	public function tambah_indikator_sapi()	{
+		$rules = [
+			[
+				'field' => 'id_s_e',
+				'label' => 'Entitas',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'nama_kriteria',
+				'label' => 'Nama Kriteria',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'kode_s_i',
+				'label' => 'Kode Indikator',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'ket_s_i',
+				'label' => 'Keterangan Indikator',
+				'rules' => 'required',
+			],
+		];
+
+		$this->form_validation->set_rules($rules);
+
+		if($this->form_validation->run() == FALSE) {
+			$this->page_tambah_indikator_sapi();
+		} else {
+			$data = [
+				'entitas' => $_POST['id_s_e'],
+				'nama_kriteria' => $_POST['nama_kriteria'],
+				'kode_s_i' => $_POST['kode_s_i'],
+				'ket_s_i' => $_POST['ket_s_i'],
+			];
+
+			// die(print_r($data));
+	
+			try {
+				$this->db->insert('indikator_sapi', $data);
+				$this->session->set_flashdata('message', 'Berhasil tambah indikator');
+			} catch (\Throwable $th) {
+				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+			}
+	
+			redirect(base_url('admin/indikator_sapi'));
+		}
+
+	}
+
+	public function edit_indikator_sapi()	{
+		$rules = [
+			[
+				'field' => 'id_s_e',
+				'label' => 'Entitas',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'id_s_i',
+				'label' => 'ID indikator',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'nama_kriteria',
+				'label' => 'Nama Kriteria',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'kode_s_i',
+				'label' => 'Kode Indikator',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'ket_s_i',
+				'label' => 'Keterangan Indikator',
+				'rules' => 'required',
+			],
+		];
+
+		$this->form_validation->set_rules($rules);
+
+		if($this->form_validation->run() == FALSE) {
+			$this->page_edit_indikator_sapi();
+		} else {
+			$data['entitas'] = $_POST['id_s_e'];
+			$data['nama_kriteria'] = $_POST['nama_kriteria'];
+			$data['kode_s_i'] = $_POST['kode_s_i'];
+			$data['ket_s_i'] = $_POST['ket_s_i'];
+			
+			try {
+				$this->db->where('id_s_i', $_POST['id_s_i']);
+				$this->db->update('indikator_sapi', $data);
+				$this->session->set_flashdata('message', 'Berhasil edit indikator');
+			} catch (\Throwable $th) {
+				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+			}
+		}
+
+
+		redirect(base_url('admin/indikator_sapi'));
 	}
 
 	public function get_indikator_ayam() {
@@ -99,6 +259,11 @@ class Admin extends CI_Controller {
 	public function tambah_indikator_ayam()	{
 		$rules = [
 			[
+				'field' => 'id_a_e',
+				'label' => 'Entitas',
+				'rules' => 'required',
+			],
+			[
 				'field' => 'nama_kriteria',
 				'label' => 'Nama Kriteria',
 				'rules' => 'required',
@@ -121,6 +286,7 @@ class Admin extends CI_Controller {
 			$this->page_tambah_indikator_ayam();
 		} else {
 			$data = [
+				'entitas' => $_POST['id_a_e'],
 				'nama_kriteria' => $_POST['nama_kriteria'],
 				'kode_a_i' => $_POST['kode_a_i'],
 				'ket_a_i' => $_POST['ket_a_i'],
@@ -140,6 +306,11 @@ class Admin extends CI_Controller {
 
 	public function edit_indikator_ayam()	{
 		$rules = [
+			[
+				'field' => 'id_a_e',
+				'label' => 'Entitas',
+				'rules' => 'required',
+			],
 			[
 				'field' => 'id_a_i',
 				'label' => 'ID indikator',
@@ -167,6 +338,7 @@ class Admin extends CI_Controller {
 		if($this->form_validation->run() == FALSE) {
 			$this->page_edit_indikator_ayam();
 		} else {
+			$data['entitas'] = $_POST['id_a_e'];
 			$data['nama_kriteria'] = $_POST['nama_kriteria'];
 			$data['kode_a_i'] = $_POST['kode_a_i'];
 			$data['ket_a_i'] = $_POST['ket_a_i'];

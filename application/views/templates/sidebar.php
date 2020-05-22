@@ -91,25 +91,26 @@
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Ayam:</h6>
               <a class="collapse-item" href="<?php echo base_url(); ?>officer/input-ahp">Hitung Bobot Indikator</a>
-              <a class="collapse-item" href="register.html">Register</a>
-              <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-              <div class="collapse-divider"></div>
-              <h6 class="collapse-header">Other Pages:</h6>
-              <a class="collapse-item" href="404.html">404 Page</a>
-              <a class="collapse-item active" href="blank.html">Blank Page</a>
+              <h6 class="collapse-header">Sapi:</h6>
+              <a class="collapse-item" href="<?php echo base_url(); ?>officer/input-ahp-sapi">Hitung Bobot Indikator</a>
             </div>
           </div>
         </li>
-
+        
         <!-- Nav Item - Charts -->
         <li class="nav-item">
           <a class="nav-link" href="<?= base_url('officer/rekap_ahp') ?>">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Rekap AHP</span></a>
+            <span>Rekap AHP Ayam</span></a>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('officer/rekap_ahp_sapi') ?>">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Rekap AHP Sapi</span></a>
+        </li>
+
       <?php endif ?>
 
       <!-- Sidebar Toggler (Sidebar) -->

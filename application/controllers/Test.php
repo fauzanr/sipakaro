@@ -15,6 +15,11 @@ class Test extends CI_Controller {
   public function end()  {
     $this->session->unset_userdata('pengisian_ahp');
     $this->session->unset_userdata('nilai_pengisian_ahp');
+    $this->session->unset_userdata('indikator');
+    
+    $this->session->unset_userdata('pengisian_ahp_sapi');
+    $this->session->unset_userdata('nilai_pengisian_ahp_sapi');
+    $this->session->unset_userdata('indikator_sapi');
     print("<pre>".print_r($_SESSION,true)."</pre>");
   }
 
