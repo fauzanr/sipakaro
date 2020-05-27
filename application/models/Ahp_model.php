@@ -251,6 +251,7 @@
             for ($i=0 ; $i<sizeof($data) ; $i++) { 
                 $this->db->insert('bobot_indikator', $data[$i]);
             };
+            return;
         }
 
         // Deskripsi : Update nilai pada tabel bobot
@@ -260,6 +261,98 @@
                 $this->db->where(['kriteria' => $data[$i]['kriteria'], 'id_section' => $data[$i]['id_section']] );
                 $this->db->update('bobot_indikator', $data[$i]);
             };
+            return;
+        }
+
+        public function input_nilai_skala($data){
+            // die(print("Add<br><pre>".print_r($data,true)."</pre>"));
+            for ($i=0 ; $i<sizeof($data) ; $i++) { 
+                $this->db->insert('responden_skala_ayam', $data[$i]);
+            };
+            return;
+        }
+
+        public function add_hasil_skala($data){
+            // die(print("Add<br><pre>".print_r($data,true)."</pre>"));
+            for ($i=0 ; $i<sizeof($data) ; $i++) { 
+                $this->db->insert('hasil_skala_ayam', $data[$i]);
+            };
+            return;
+        }
+
+        public function hitung_nilai_skala(){
+
+            // Set variabel untuk array
+            $data = [];
+            $data['input'] = [];
+
+            // Set session untuk perhitungan
+            $_SESSION['hitung_skala'] = [];
+
+
+            // Get all indikator ayam
+            $data['indikator'] = $this->db->get('indikator_ayam')->result_array();
+
+            // Get all entitas ayam
+            $data['entitas'] = $this->db->get('entitas_ayam')->result_array();
+
+            // Fecth Data per entitas
+            for ($i=0; $i < sizeof($data['entitas']) ; $i++) { 
+                // Fetch data per indikator
+                for ($j=0; $j < sizeof($data['indikator']); $j++) { 
+                    
+                    $fecth = $this->db->get_where('responden_skala_ayam', ['entitas' => $data['entitas'][$i]['id_a_e'], 'indikator' => $data['indikator'][$j]['id_a_i'] ])->result_array();
+                    if($fecth == NULL){
+                        continue;
+                    }elseif($fecth != NULL){
+                        $_SESSION['hitung_skala'][$data['entitas'][$i]['ket_a_e']][$data['indikator'][$j]['id_a_i']] = $fecth;
+                    }
+                
+                }
+            }
+
+            $skala = 0; // variabel untuk menjumlah
+            // Loop sebayak jumlah entitas
+            for ($i=0; $i < sizeof($data['entitas']); $i++) { 
+                
+                // Fecth id indikator
+                $this->db->select('id_a_i');
+                $db = $this->db->get_where('indikator_ayam', ['entitas' => $data['entitas'][$i]['id_a_e']]);
+                $data['id_data_indikator'][$data['entitas'][$i]['ket_a_e']] = $db->result_array();
+                
+                // Loop sebanyak jumlah indikator
+                for ($k=0; $k < sizeof( $data['id_data_indikator'][ $data['entitas'][$i]['ket_a_e'] ] ); $k++) { 
+                    
+                    // Loop sebanyak jumlah responden tiap indikator
+                    for ($j=0; $j < sizeof($_SESSION['hitung_skala'][ $data['entitas'][$i]['ket_a_e'] ][ $data['id_data_indikator'][ $data['entitas'][$i]['ket_a_e']][$k]['id_a_i'] ]); $j++) { 
+                        
+                        $skala = $skala + $_SESSION['hitung_skala'][ $data['entitas'][$i]['ket_a_e'] ][ $data['id_data_indikator'][ $data['entitas'][$i]['ket_a_e'] ][$k]['id_a_i'] ][$j]['nilai_skala'];
+                    }
+                    // Hitung rata-rata
+                    $avg = $skala / sizeof($_SESSION['hitung_skala'][ $data['entitas'][$i]['ket_a_e'] ][ $data['id_data_indikator'][ $data['entitas'][$i]['ket_a_e']][$k]['id_a_i'] ]);
+                    // die('Hasil = '.$skala.'<br>Average = '.$avg);
+                    // Hitung nilai konversi
+                    $konversi = $avg * 20;
+
+                    $data_skala = [
+                        'entitas' => $data['entitas'][$i]['ket_a_e'],
+                        'indikator' => $data['indikator'][$k]['kode_a_i'],
+                        'rata_rata' => $avg,
+                        'nilai_konversi' => $konversi,
+                    ];
+
+                    // Input ke session
+    				array_push($data['input'], $data_skala);
+                    $skala = 0;  // Reset variabel
+
+                }
+
+            }
+            // Input ke database
+            $this->Ahp_model->add_hasil_skala($data['input']);
+            return;
+            // print("<pre>".print_r($data,true)."</pre>");
+
         }
     }
 ?>

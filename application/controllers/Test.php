@@ -35,5 +35,22 @@ class Test extends CI_Controller {
     return;
   }
 
+  public function skala(){
+    $this->Ahp_model->hitung_nilai_skala();
+    $this->session->unset_userdata('pengisian_ahp');
+    $this->session->unset_userdata('nilai_pengisian_skala');
+    $this->session->unset_userdata('progress_pengisian_skala');
+    echo 'Sudah masuk ke database';
+  }
+
+  public function unskala(){
+    $this->session->unset_userdata('nilai_pengisian_ahp');
+    $this->session->unset_userdata('pengisian_ahp');
+    $this->session->unset_userdata('progress_pengisian_skala');
+    $this->session->unset_userdata('nilai_pengisian_skala');
+    $this->session->unset_userdata('hitung_skala');
+    print("<pre>".print_r($_SESSION,true)."</pre>");
+  }
+
 }
 ?>
