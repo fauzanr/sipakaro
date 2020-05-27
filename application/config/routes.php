@@ -25,11 +25,9 @@ $route['user/index'] = 'user';
 $route['officer/index'] = 'officer';
 
 $route['officer/input-ahp'] = 'officer/input_ahp_satu';
-$route['officer/input-ahp-responden'] = 'officer/input_ahp_responden';
 $route['officer/rekap_ahp'] = 'officer/page_rekap_ahp';
 
 $route['officer/input-ahp-sapi'] = 'officer/input_ahp_sapi_satu';
-$route['officer/input-ahp-sapi-responden'] = 'officer/input_ahp_sapi_responden';
 $route['officer/rekap_ahp_sapi'] = 'officer/page_rekap_ahp_sapi';
 
 

@@ -44,7 +44,7 @@
 		// Berisi Input banyak responden
 		public function input_ahp_satu(){
 			if(isset($_SESSION['pengisian_ahp']['responden'])) { // jika sudah ada sesi input AHP
-				redirect(base_url().'officer/input-ahp-responden');
+				redirect(base_url().'officer/input_ahp_responden');
 			}
 
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
@@ -61,7 +61,7 @@
 		// Berisi Input nama responden
 		public function input_ahp_dua(){
 			if(isset($_SESSION['pengisian_ahp']['responden'])) { //jika sudah input jumlah responden
-				redirect(base_url().'officer/input-ahp-responden');
+				redirect(base_url().'officer/input_ahp_responden');
 			}
 			
 			if (!isset($_POST['options'])) { //jika masuk dari url tanpa input
@@ -70,7 +70,7 @@
 
 			$_SESSION['pengisian_ahp']['responden'] = $this->input->post('options');
 
-			redirect(base_url().'officer/input-ahp-responden');
+			redirect(base_url().'officer/input_ahp_responden');
 		}
 
 		public function input_ahp_responden()
@@ -96,7 +96,7 @@
 		// Berisi Input nilai AHP
 		public function input_ahp_tiga(){
 			if (!isset($_POST['nama1'])) { //jika masuk dari url tanpa input
-				redirect(base_url().'officer/input-ahp-responden');
+				redirect(base_url().'officer/input_ahp_responden');
 			}
 
 			// Validasi
@@ -105,7 +105,7 @@
 			}
 
 			if($this->form_validation->run() === false){
-				redirect(base_url().'officer/input-ahp-responden');
+				redirect(base_url().'officer/input_ahp_responden');
 			}else{
 				
 				// Input nama ke session
@@ -120,7 +120,7 @@
 
 		public function halaman_input_data_ahp($section_id = 2){
 			if(!isset($_SESSION['pengisian_ahp']['nama1'])) {// jika belum ada responden
-				redirect(base_url().'officer/input-ahp-responden');
+				redirect(base_url().'officer/input_ahp_responden');
 			}
 
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
@@ -196,13 +196,13 @@
 				$data_counter = 0;
 
 				foreach($data as $k => $v) {
-					// $this->Ahp_model->add_ahp($v);
+					$this->Ahp_model->add_ahp($v);
 					
 					$data_counter += count($v);
 				}
 
 				foreach($data as $k => $v) {
-					// $this->Ahp_model->normalisasi_rpa_peternak($k);
+					$this->Ahp_model->normalisasi_rpa_peternak($k);
 				}
 
 				$this->session->unset_userdata('nilai_pengisian_ahp');
@@ -212,8 +212,6 @@
 
 				// Ke halaman Skala Ayam
 				redirect(base_url('officer/halaman_input_skala_ayam'));
-
-				redirect(base_url('officer/rekap_ahp'));
 			}
 
 		}
@@ -225,8 +223,8 @@
 			$data['title'] = 'Dashboard Officer';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 			
-			// $this->db->join('bobot_indikator', 'section.id = bobot_indikator.id_section');
-			// $data['bobot'] = $this->db->get('section_sapi')->result_array();
+			$this->db->join('bobot_indikator_sapi', 'section_sapi.id = bobot_indikator_sapi.id_section');
+			$data['bobot'] = $this->db->get('section_sapi')->result_array();
 
 			// die(print("<pre>".print_r($data['bobot'],true)."</pre>"));
 			
@@ -241,7 +239,7 @@
 		// Berisi Input banyak responden
 		public function input_ahp_sapi_satu(){
 			if(isset($_SESSION['pengisian_ahp_sapi']['responden'])) { // jika sudah ada sesi input AHP
-				redirect(base_url().'officer/input-ahp-sapi-responden');
+				redirect(base_url().'officer/input_ahp_sapi_responden');
 			}
 
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
@@ -267,7 +265,7 @@
 
 			$_SESSION['pengisian_ahp_sapi']['responden'] = $this->input->post('options');
 
-			redirect(base_url().'officer/input-ahp-sapi-responden');
+			redirect(base_url().'officer/input_ahp_sapi_responden');
 		}
 
 		public function input_ahp_sapi_responden()
@@ -293,7 +291,7 @@
 		// Berisi Input nilai AHP
 		public function input_ahp_sapi_tiga(){
 			if (!isset($_POST['nama1'])) { //jika masuk dari url tanpa input
-				redirect(base_url().'officer/input-ahp-sapi-responden');
+				redirect(base_url().'officer/input_ahp_sapi_responden');
 			}
 
 			// Validasi
@@ -302,7 +300,7 @@
 			}
 
 			if($this->form_validation->run() === false){
-				redirect(base_url().'officer/input-ahp-sapi-responden');
+				redirect(base_url().'officer/input_ahp_sapi_responden');
 			}else{
 				
 				// Input nama ke session
@@ -317,7 +315,7 @@
 
 		public function halaman_input_data_ahp_sapi($section_id = 2){
 			if(!isset($_SESSION['pengisian_ahp_sapi']['nama1'])) {// jika belum ada responden
-				redirect(base_url().'officer/input-ahp-sapi-responden');
+				redirect(base_url().'officer/input_ahp_sapi_responden');
 			}
 
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
@@ -393,23 +391,23 @@
 				$data = $_SESSION['nilai_pengisian_ahp_sapi'];
 				$data_counter = 0;
 
+				$this->load->model('Ahp_sapi_model');
+
 				foreach($data as $k => $v) {
-					// $this->Ahp_sapi_model->add_ahp($v);
+					$this->Ahp_sapi_model->add_ahp($v);
 					
 					$data_counter += count($v);
 				}
 
 				foreach($data as $k => $v) {
-					// $this->Ahp_sapi_model->normalisasi_rpa_peternak($k);
+					$this->Ahp_sapi_model->normalisasi_rpa_peternak($k);
 				}
 
 				// $this->session->unset_userdata('pengisian_ahp_sapi');
-				// $this->session->unset_userdata('nilai_pengisian_ahp_sapi');
-				// $this->session->unset_userdata('indikator_sapi');
+				$this->session->unset_userdata('nilai_pengisian_ahp_sapi');
+				$this->session->unset_userdata('indikator_sapi');
 
 				echo 'berhasil input '.$data_counter.' data 😛<br>';
-				
-				redirect(base_url('officer/rekap_ahp_sapi'));
 			}
 
 		}
@@ -417,7 +415,7 @@
 		// -------- SKALA AYAM ----------------------------------------------------------------------//
 		public function halaman_input_skala_ayam($entitas = 'Peternak', $indikator = NULL){
 			if(!isset($_SESSION['pengisian_ahp']['nama1'])) {// jika belum ada responden
-				redirect(base_url().'officer/input-ahp-responden');
+				redirect(base_url().'officer/input_ahp_responden');
 			}
 			
 			$data['title'] = 'Perhitungan Skala Ayam - '.$entitas;

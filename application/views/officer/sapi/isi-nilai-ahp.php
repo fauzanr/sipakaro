@@ -16,7 +16,9 @@
 
     <form action="<?php echo base_url().'officer/input_data_ahp_sapi' ?>" method="post">
 
-    <p>Progress: (<?= count($_SESSION['nilai_pengisian_ahp_sapi']) ?>/<?= count($section_pagination) ?>)</p>
+    <?php if(isset($_SESSION['nilai_pengisian_ahp_sapi'])) :?>
+        <p>Progress: (<?= count($_SESSION['nilai_pengisian_ahp_sapi']) ?>/<?= count($section_pagination) ?>)</p>
+    <?php endif ?>
     <div class="row">
 
         <!-- PAGINATION -->
@@ -35,7 +37,7 @@
                 <div class="row">
 
                     <div class="col-2">
-                        <h3>RPH</h3>
+                        <h3>Peternak</h3>
                     </div>
 
                     <div class="row col-8 d-flex justify-content-center">
@@ -46,8 +48,8 @@
 
                                     <input type="hidden" name="section_id" value="2">
                                     <input type="hidden" name="responden<?= $i ?>" value="<?= $_SESSION['pengisian_ahp_sapi']['nama'.$i] ?>">
-                                    <input type="hidden" name="kriteria1_<?= $i ?>" value="RPH">
-                                    <input type="hidden" name="kriteria2_<?= $i ?>" value="Peternak">
+                                    <input type="hidden" name="kriteria1_<?= $i ?>" value="Peternak">
+                                    <input type="hidden" name="kriteria2_<?= $i ?>" value="RPH">
 
                                     <label for="pilihan-ahp<?= $i ?>">
                                         <?= $_SESSION['pengisian_ahp_sapi']['nama'.$i] ?>
@@ -68,7 +70,7 @@
                     </div>
                     
                     <div class="col-2">
-                        <h3>Peternak</h3>
+                        <h3>RPH</h3>
                     </div>
                     
                 </div> 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2020 at 07:11 PM
+-- Generation Time: May 27, 2020 at 03:40 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -35,46 +35,20 @@ CREATE TABLE `bobot_indikator` (
   `id_section` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `bobot_indikator`
+-- Table structure for table `bobot_indikator_sapi`
 --
 
-INSERT INTO `bobot_indikator` (`id`, `kriteria`, `bobot`, `C1`, `CR`, `id_section`) VALUES
-(1, 'RPA', '0.24812030', '0', '0', 2),
-(2, 'Peternak', '0.75187969', '0', '0', 2),
-(3, 'Ekonomi', '0.13870296', '0', '0', 3),
-(4, 'Lingkungan', '0.28577386', '0', '0', 3),
-(5, 'Sosial', '0.57552317', '0', '0', 3),
-(6, 'Ekonomi', '0.13870296', '0', '0', 7),
-(7, 'Lingkungan', '0.28577386', '0', '0', 7),
-(8, 'Sosial', '0.57552317', '0', '0', 7),
-(9, 'RE1', '0.09498436', '0.10711435', '0.11901595', 4),
-(10, 'RE2', '0.16794856', '0.10711435', '0.11901595', 4),
-(11, 'RE3', '0.27233904', '0.10711435', '0.11901595', 4),
-(12, 'RE4', '0.46472801', '0.10711435', '0.11901595', 4),
-(13, 'RL1', '0.13870296', '0.06992657', '0.12056305', 5),
-(14, 'RL2', '0.28577386', '0.06992657', '0.12056305', 5),
-(15, 'RL3', '0.57552317', '0.06992657', '0.12056305', 5),
-(16, 'RS1', '0.24812030', '0', '0', 6),
-(17, 'RS2', '0.75187969', '0', '0', 6),
-(18, 'E1', '0.09498436', '0.10711435', '0.11901595', 8),
-(19, 'E2', '0.16794856', '0.10711435', '0.11901595', 8),
-(20, 'E3', '0.27233904', '0.10711435', '0.11901595', 8),
-(21, 'E4', '0.46472801', '0.10711435', '0.11901595', 8),
-(22, 'L1', '0.13870296', '0.06992657', '0.12056305', 9),
-(23, 'L2', '0.28577386', '0.06992657', '0.12056305', 9),
-(24, 'L3', '0.57552317', '0.06992657', '0.12056305', 9),
-(25, 'S1', '0.02831336', '0', '0', 10),
-(26, 'S2', '0.03633917', '0', '0', 10),
-(27, 'S3', '0.04514364', '0', '0', 10),
-(28, 'S4', '0.05489450', '0', '0', 10),
-(29, 'S5', '0.06582041', '0', '0', 10),
-(30, 'S6', '0.07824474', '0', '0', 10),
-(31, 'S7', '0.09264652', '0', '0', 10),
-(32, 'S8', '0.10978058', '0', '0', 10),
-(33, 'S9', '0.13094331', '0', '0', 10),
-(34, 'S10', '0.15867118', '0', '0', 10),
-(35, 'S11', '0.19920252', '0', '0', 10);
+CREATE TABLE `bobot_indikator_sapi` (
+  `id` int(11) NOT NULL,
+  `kriteria` varchar(10) NOT NULL,
+  `bobot` varchar(10) NOT NULL,
+  `C1` varchar(10) DEFAULT NULL,
+  `CR` varchar(10) DEFAULT NULL,
+  `id_section` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -113,6 +87,78 @@ CREATE TABLE `entitas_sapi` (
 INSERT INTO `entitas_sapi` (`id_s_e`, `ket_s_e`) VALUES
 (1, 'Peternak'),
 (2, 'RPH');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hasil_skala_ayam`
+--
+
+CREATE TABLE `hasil_skala_ayam` (
+  `id` int(11) NOT NULL,
+  `entitas` varchar(10) NOT NULL,
+  `indikator` varchar(10) NOT NULL,
+  `rata_rata` varchar(5) NOT NULL,
+  `nilai_konversi` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `hasil_skala_ayam`
+--
+
+INSERT INTO `hasil_skala_ayam` (`id`, `entitas`, `indikator`, `rata_rata`, `nilai_konversi`) VALUES
+(1, 'RPA', 'RL1', '4', '80'),
+(2, 'RPA', 'RL2', '4', '80'),
+(3, 'RPA', 'RS1', '3', '60'),
+(4, 'RPA', 'RS2', '4', '80'),
+(5, 'RPA', 'RS3', '2', '40'),
+(6, 'RPA', 'RS4', '2', '40'),
+(7, 'RPA', 'RS5', '3', '60'),
+(8, 'RPA', 'RS6', '1', '20'),
+(9, 'RPA', 'RS7', '3', '60'),
+(10, 'RPA', 'RS8', '4', '80'),
+(11, 'RPA', 'RS9', '2', '40'),
+(12, 'RPA', 'RS10', '3', '60'),
+(13, 'RPA', 'RS11', '1', '20'),
+(14, 'RPA', 'RE1', '2', '40'),
+(15, 'RPA', 'RE2', '3', '60'),
+(16, 'RPA', 'RE3', '2', '40'),
+(17, 'RPA', 'RE4', '3', '60'),
+(18, 'Peternak', 'RL1', '4', '80'),
+(19, 'Peternak', 'RL2', '4', '80'),
+(20, 'Peternak', 'RS1', '4', '80'),
+(21, 'Peternak', 'RS2', '3', '60'),
+(22, 'Peternak', 'RS3', '3', '60'),
+(23, 'Peternak', 'RS4', '4', '80'),
+(24, 'Peternak', 'RS5', '2.666', '53.33'),
+(25, 'Peternak', 'RS6', '3', '60'),
+(26, 'Peternak', 'RS7', '3.333', '66.66'),
+(27, 'RPA', 'RL1', '3.2', '64'),
+(28, 'RPA', 'RL2', '3.2', '64'),
+(29, 'RPA', 'RS1', '2.2', '44'),
+(30, 'RPA', 'RS2', '3.4', '68'),
+(31, 'RPA', 'RS3', '2.8', '56'),
+(32, 'RPA', 'RS4', '1.6', '32'),
+(33, 'RPA', 'RS5', '2.8', '56'),
+(34, 'RPA', 'RS6', '2.6', '52'),
+(35, 'RPA', 'RS7', '2.2', '44'),
+(36, 'RPA', 'RS8', '2.8', '56'),
+(37, 'RPA', 'RS9', '1.6', '32'),
+(38, 'RPA', 'RS10', '2.2', '44'),
+(39, 'RPA', 'RS11', '1.4', '28'),
+(40, 'RPA', 'RE1', '2.4', '48'),
+(41, 'RPA', 'RE2', '3', '60'),
+(42, 'RPA', 'RE3', '2', '40'),
+(43, 'RPA', 'RE4', '2.4', '48'),
+(44, 'Peternak', 'RL1', '3.2', '64'),
+(45, 'Peternak', 'RL2', '3.2', '64'),
+(46, 'Peternak', 'RS1', '3.6', '72'),
+(47, 'Peternak', 'RS2', '2.6', '52'),
+(48, 'Peternak', 'RS3', '2.6', '52'),
+(49, 'Peternak', 'RS4', '3', '60'),
+(50, 'Peternak', 'RS5', '2.6', '52'),
+(51, 'Peternak', 'RS6', '3.2', '64'),
+(52, 'Peternak', 'RS7', '2.6', '52');
 
 -- --------------------------------------------------------
 
@@ -277,6 +323,31 @@ INSERT INTO `opsi_ahp` (`id_opsi_ahp`, `opsi`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `opsi_skala_ayam`
+--
+
+CREATE TABLE `opsi_skala_ayam` (
+  `id` int(11) NOT NULL,
+  `keterangan` varchar(50) NOT NULL,
+  `nilai_skala` varchar(1) NOT NULL,
+  `deskripsi_skala` varchar(100) NOT NULL,
+  `id_indikator` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `opsi_skala_ayam`
+--
+
+INSERT INTO `opsi_skala_ayam` (`id`, `keterangan`, `nilai_skala`, `deskripsi_skala`, `id_indikator`) VALUES
+(1, 'Sangat Buruk', '1', 'X > Rp. 526.30', 20),
+(2, 'Buruk', '2', 'Rp.355.63 < X &le; Rp.526.30 ', 20),
+(3, 'Cukup', '3', 'Rp.184.96 < X &le; Rp.355.83', 20),
+(4, 'Baik', '4', 'Rp.14.29 < X &le; Rp.184.96', 20),
+(5, 'Sangat Baik', '5', 'X &le; Rp.14.29', 20);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rasio`
 --
 
@@ -304,6 +375,33 @@ INSERT INTO `rasio` (`id`, `banyak_indikator`, `nilai_rasio`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rasio_sapi`
+--
+
+CREATE TABLE `rasio_sapi` (
+  `id` int(11) NOT NULL,
+  `banyak_indikator` varchar(10) NOT NULL,
+  `nilai_rasio` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rasio_sapi`
+--
+
+INSERT INTO `rasio_sapi` (`id`, `banyak_indikator`, `nilai_rasio`) VALUES
+(1, '2', '0'),
+(2, '3', '0.58'),
+(3, '4', '0.9'),
+(4, '5', '1.12'),
+(5, '6', '1.24'),
+(6, '7', '1.32'),
+(7, '8', '1.41'),
+(8, '9', '1.45'),
+(9, '10', '1.49');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `responden`
 --
 
@@ -316,255 +414,6 @@ CREATE TABLE `responden` (
   `kriteria_2` varchar(20) DEFAULT NULL,
   `id_section` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
---
--- Dumping data for table `responden`
---
-
-INSERT INTO `responden` (`id`, `id_pengisi`, `nama_responden`, `nilai_responden`, `kriteria_1`, `kriteria_2`, `id_section`) VALUES
-(1, 3, 'Kukuh', '0.33', 'RPA', 'Peternak', 2),
-(2, 3, 'Dayyan', '0.33', 'RPA', 'Peternak', 2),
-(3, 3, 'Fauzan', '0.33', 'RPA', 'Peternak', 2),
-(4, 3, 'Kukuh', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(5, 3, 'Dayyan', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(6, 3, 'Fauzan', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(7, 3, 'Kukuh', '0.33', 'Ekonomi', 'Sosial', 3),
-(8, 3, 'Dayyan', '0.33', 'Ekonomi', 'Sosial', 3),
-(9, 3, 'Fauzan', '0.33', 'Ekonomi', 'Sosial', 3),
-(10, 3, 'Kukuh', '0.33', 'Lingkungan', 'Sosial', 3),
-(11, 3, 'Dayyan', '0.33', 'Lingkungan', 'Sosial', 3),
-(12, 3, 'Fauzan', '0.33', 'Lingkungan', 'Sosial', 3),
-(13, 3, 'Kukuh', '0.33', 'RE1', 'RE2', 4),
-(14, 3, 'Dayyan', '0.33', 'RE1', 'RE2', 4),
-(15, 3, 'Fauzan', '0.33', 'RE1', 'RE2', 4),
-(16, 3, 'Kukuh', '0.33', 'RE1', 'RE3', 4),
-(17, 3, 'Dayyan', '0.33', 'RE1', 'RE3', 4),
-(18, 3, 'Fauzan', '0.33', 'RE1', 'RE3', 4),
-(19, 3, 'Kukuh', '0.33', 'RE1', 'RE4', 4),
-(20, 3, 'Dayyan', '0.33', 'RE1', 'RE4', 4),
-(21, 3, 'Fauzan', '0.33', 'RE1', 'RE4', 4),
-(22, 3, 'Kukuh', '0.33', 'RE2', 'RE3', 4),
-(23, 3, 'Dayyan', '0.33', 'RE2', 'RE3', 4),
-(24, 3, 'Fauzan', '0.33', 'RE2', 'RE3', 4),
-(25, 3, 'Kukuh', '0.33', 'RE2', 'RE4', 4),
-(26, 3, 'Dayyan', '0.33', 'RE2', 'RE4', 4),
-(27, 3, 'Fauzan', '0.33', 'RE2', 'RE4', 4),
-(28, 3, 'Kukuh', '0.33', 'RE3', 'RE4', 4),
-(29, 3, 'Dayyan', '0.33', 'RE3', 'RE4', 4),
-(30, 3, 'Fauzan', '0.33', 'RE3', 'RE4', 4),
-(31, 3, 'Kukuh', '0.33', 'RL1', 'RL2', 5),
-(32, 3, 'Dayyan', '0.33', 'RL1', 'RL2', 5),
-(33, 3, 'Fauzan', '0.33', 'RL1', 'RL2', 5),
-(34, 3, 'Kukuh', '0.33', 'RL1', 'RL3', 5),
-(35, 3, 'Dayyan', '0.33', 'RL1', 'RL3', 5),
-(36, 3, 'Fauzan', '0.33', 'RL1', 'RL3', 5),
-(37, 3, 'Kukuh', '0.33', 'RL2', 'RL3', 5),
-(38, 3, 'Dayyan', '0.33', 'RL2', 'RL3', 5),
-(39, 3, 'Fauzan', '0.33', 'RL2', 'RL3', 5),
-(40, 3, 'Kukuh', '0.33', 'RS1', 'RS2', 6),
-(41, 3, 'Dayyan', '0.33', 'RS1', 'RS2', 6),
-(42, 3, 'Fauzan', '0.33', 'RS1', 'RS2', 6),
-(43, 3, 'Kukuh', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(44, 3, 'Dayyan', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(45, 3, 'Fauzan', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(46, 3, 'Kukuh', '0.33', 'Ekonomi', 'Sosial', 7),
-(47, 3, 'Dayyan', '0.33', 'Ekonomi', 'Sosial', 7),
-(48, 3, 'Fauzan', '0.33', 'Ekonomi', 'Sosial', 7),
-(49, 3, 'Kukuh', '0.33', 'Lingkungan', 'Sosial', 7),
-(50, 3, 'Dayyan', '0.33', 'Lingkungan', 'Sosial', 7),
-(51, 3, 'Fauzan', '0.33', 'Lingkungan', 'Sosial', 7),
-(52, 3, 'Kukuh', '0.33', 'E1', 'E2', 8),
-(53, 3, 'Dayyan', '0.33', 'E1', 'E2', 8),
-(54, 3, 'Fauzan', '0.33', 'E1', 'E2', 8),
-(55, 3, 'Kukuh', '0.33', 'E1', 'E3', 8),
-(56, 3, 'Dayyan', '0.33', 'E1', 'E3', 8),
-(57, 3, 'Fauzan', '0.33', 'E1', 'E3', 8),
-(58, 3, 'Kukuh', '0.33', 'E1', 'E4', 8),
-(59, 3, 'Dayyan', '0.33', 'E1', 'E4', 8),
-(60, 3, 'Fauzan', '0.33', 'E1', 'E4', 8),
-(61, 3, 'Kukuh', '0.33', 'E2', 'E3', 8),
-(62, 3, 'Dayyan', '0.33', 'E2', 'E3', 8),
-(63, 3, 'Fauzan', '0.33', 'E2', 'E3', 8),
-(64, 3, 'Kukuh', '0.33', 'E2', 'E4', 8),
-(65, 3, 'Dayyan', '0.33', 'E2', 'E4', 8),
-(66, 3, 'Fauzan', '0.33', 'E2', 'E4', 8),
-(67, 3, 'Kukuh', '0.33', 'E3', 'E4', 8),
-(68, 3, 'Dayyan', '0.33', 'E3', 'E4', 8),
-(69, 3, 'Fauzan', '0.33', 'E3', 'E4', 8),
-(70, 3, 'Kukuh', '0.33', 'L1', 'L2', 9),
-(71, 3, 'Dayyan', '0.33', 'L1', 'L2', 9),
-(72, 3, 'Fauzan', '0.33', 'L1', 'L2', 9),
-(73, 3, 'Kukuh', '0.33', 'L1', 'L3', 9),
-(74, 3, 'Dayyan', '0.33', 'L1', 'L3', 9),
-(75, 3, 'Fauzan', '0.33', 'L1', 'L3', 9),
-(76, 3, 'Kukuh', '0.33', 'L2', 'L3', 9),
-(77, 3, 'Dayyan', '0.33', 'L2', 'L3', 9),
-(78, 3, 'Fauzan', '0.33', 'L2', 'L3', 9),
-(79, 3, 'Kukuh', '0.33', 'S1', 'S2', 10),
-(80, 3, 'Dayyan', '0.33', 'S1', 'S2', 10),
-(81, 3, 'Fauzan', '0.33', 'S1', 'S2', 10),
-(82, 3, 'Kukuh', '0.33', 'S1', 'S3', 10),
-(83, 3, 'Dayyan', '0.33', 'S1', 'S3', 10),
-(84, 3, 'Fauzan', '0.33', 'S1', 'S3', 10),
-(85, 3, 'Kukuh', '0.33', 'S1', 'S4', 10),
-(86, 3, 'Dayyan', '0.33', 'S1', 'S4', 10),
-(87, 3, 'Fauzan', '0.33', 'S1', 'S4', 10),
-(88, 3, 'Kukuh', '0.33', 'S1', 'S5', 10),
-(89, 3, 'Dayyan', '0.33', 'S1', 'S5', 10),
-(90, 3, 'Fauzan', '0.33', 'S1', 'S5', 10),
-(91, 3, 'Kukuh', '0.33', 'S1', 'S6', 10),
-(92, 3, 'Dayyan', '0.33', 'S1', 'S6', 10),
-(93, 3, 'Fauzan', '0.33', 'S1', 'S6', 10),
-(94, 3, 'Kukuh', '0.33', 'S1', 'S7', 10),
-(95, 3, 'Dayyan', '0.33', 'S1', 'S7', 10),
-(96, 3, 'Fauzan', '0.33', 'S1', 'S7', 10),
-(97, 3, 'Kukuh', '0.33', 'S1', 'S8', 10),
-(98, 3, 'Dayyan', '0.33', 'S1', 'S8', 10),
-(99, 3, 'Fauzan', '0.33', 'S1', 'S8', 10),
-(100, 3, 'Kukuh', '0.33', 'S1', 'S9', 10),
-(101, 3, 'Dayyan', '0.33', 'S1', 'S9', 10),
-(102, 3, 'Fauzan', '0.33', 'S1', 'S9', 10),
-(103, 3, 'Kukuh', '0.33', 'S1', 'S10', 10),
-(104, 3, 'Dayyan', '0.33', 'S1', 'S10', 10),
-(105, 3, 'Fauzan', '0.33', 'S1', 'S10', 10),
-(106, 3, 'Kukuh', '0.33', 'S1', 'S11', 10),
-(107, 3, 'Dayyan', '0.33', 'S1', 'S11', 10),
-(108, 3, 'Fauzan', '0.33', 'S1', 'S11', 10),
-(109, 3, 'Kukuh', '0.33', 'S2', 'S3', 10),
-(110, 3, 'Dayyan', '0.33', 'S2', 'S3', 10),
-(111, 3, 'Fauzan', '0.33', 'S2', 'S3', 10),
-(112, 3, 'Kukuh', '0.33', 'S2', 'S4', 10),
-(113, 3, 'Dayyan', '0.33', 'S2', 'S4', 10),
-(114, 3, 'Fauzan', '0.33', 'S2', 'S4', 10),
-(115, 3, 'Kukuh', '0.33', 'S2', 'S5', 10),
-(116, 3, 'Dayyan', '0.33', 'S2', 'S5', 10),
-(117, 3, 'Fauzan', '0.33', 'S2', 'S5', 10),
-(118, 3, 'Kukuh', '0.33', 'S2', 'S6', 10),
-(119, 3, 'Dayyan', '0.33', 'S2', 'S6', 10),
-(120, 3, 'Fauzan', '0.33', 'S2', 'S6', 10),
-(121, 3, 'Kukuh', '0.33', 'S2', 'S7', 10),
-(122, 3, 'Dayyan', '0.33', 'S2', 'S7', 10),
-(123, 3, 'Fauzan', '0.33', 'S2', 'S7', 10),
-(124, 3, 'Kukuh', '0.33', 'S2', 'S8', 10),
-(125, 3, 'Dayyan', '0.33', 'S2', 'S8', 10),
-(126, 3, 'Fauzan', '0.33', 'S2', 'S8', 10),
-(127, 3, 'Kukuh', '0.33', 'S2', 'S9', 10),
-(128, 3, 'Dayyan', '0.33', 'S2', 'S9', 10),
-(129, 3, 'Fauzan', '0.33', 'S2', 'S9', 10),
-(130, 3, 'Kukuh', '0.33', 'S2', 'S10', 10),
-(131, 3, 'Dayyan', '0.33', 'S2', 'S10', 10),
-(132, 3, 'Fauzan', '0.33', 'S2', 'S10', 10),
-(133, 3, 'Kukuh', '0.33', 'S2', 'S11', 10),
-(134, 3, 'Dayyan', '0.33', 'S2', 'S11', 10),
-(135, 3, 'Fauzan', '0.33', 'S2', 'S11', 10),
-(136, 3, 'Kukuh', '0.33', 'S3', 'S4', 10),
-(137, 3, 'Dayyan', '0.33', 'S3', 'S4', 10),
-(138, 3, 'Fauzan', '0.33', 'S3', 'S4', 10),
-(139, 3, 'Kukuh', '0.33', 'S3', 'S5', 10),
-(140, 3, 'Dayyan', '0.33', 'S3', 'S5', 10),
-(141, 3, 'Fauzan', '0.33', 'S3', 'S5', 10),
-(142, 3, 'Kukuh', '0.33', 'S3', 'S6', 10),
-(143, 3, 'Dayyan', '0.33', 'S3', 'S6', 10),
-(144, 3, 'Fauzan', '0.33', 'S3', 'S6', 10),
-(145, 3, 'Kukuh', '0.33', 'S3', 'S7', 10),
-(146, 3, 'Dayyan', '0.33', 'S3', 'S7', 10),
-(147, 3, 'Fauzan', '0.33', 'S3', 'S7', 10),
-(148, 3, 'Kukuh', '0.33', 'S3', 'S8', 10),
-(149, 3, 'Dayyan', '0.33', 'S3', 'S8', 10),
-(150, 3, 'Fauzan', '0.33', 'S3', 'S8', 10),
-(151, 3, 'Kukuh', '0.33', 'S3', 'S9', 10),
-(152, 3, 'Dayyan', '0.33', 'S3', 'S9', 10),
-(153, 3, 'Fauzan', '0.33', 'S3', 'S9', 10),
-(154, 3, 'Kukuh', '0.33', 'S3', 'S10', 10),
-(155, 3, 'Dayyan', '0.33', 'S3', 'S10', 10),
-(156, 3, 'Fauzan', '0.33', 'S3', 'S10', 10),
-(157, 3, 'Kukuh', '0.33', 'S3', 'S11', 10),
-(158, 3, 'Dayyan', '0.33', 'S3', 'S11', 10),
-(159, 3, 'Fauzan', '0.33', 'S3', 'S11', 10),
-(160, 3, 'Kukuh', '0.33', 'S4', 'S5', 10),
-(161, 3, 'Dayyan', '0.33', 'S4', 'S5', 10),
-(162, 3, 'Fauzan', '0.33', 'S4', 'S5', 10),
-(163, 3, 'Kukuh', '0.33', 'S4', 'S6', 10),
-(164, 3, 'Dayyan', '0.33', 'S4', 'S6', 10),
-(165, 3, 'Fauzan', '0.33', 'S4', 'S6', 10),
-(166, 3, 'Kukuh', '0.33', 'S4', 'S7', 10),
-(167, 3, 'Dayyan', '0.33', 'S4', 'S7', 10),
-(168, 3, 'Fauzan', '0.33', 'S4', 'S7', 10),
-(169, 3, 'Kukuh', '0.33', 'S4', 'S8', 10),
-(170, 3, 'Dayyan', '0.33', 'S4', 'S8', 10),
-(171, 3, 'Fauzan', '0.33', 'S4', 'S8', 10),
-(172, 3, 'Kukuh', '0.33', 'S4', 'S9', 10),
-(173, 3, 'Dayyan', '0.33', 'S4', 'S9', 10),
-(174, 3, 'Fauzan', '0.33', 'S4', 'S9', 10),
-(175, 3, 'Kukuh', '0.33', 'S4', 'S10', 10),
-(176, 3, 'Dayyan', '0.33', 'S4', 'S10', 10),
-(177, 3, 'Fauzan', '0.33', 'S4', 'S10', 10),
-(178, 3, 'Kukuh', '0.33', 'S4', 'S11', 10),
-(179, 3, 'Dayyan', '0.33', 'S4', 'S11', 10),
-(180, 3, 'Fauzan', '0.33', 'S4', 'S11', 10),
-(181, 3, 'Kukuh', '0.33', 'S5', 'S6', 10),
-(182, 3, 'Dayyan', '0.33', 'S5', 'S6', 10),
-(183, 3, 'Fauzan', '0.33', 'S5', 'S6', 10),
-(184, 3, 'Kukuh', '0.33', 'S5', 'S7', 10),
-(185, 3, 'Dayyan', '0.33', 'S5', 'S7', 10),
-(186, 3, 'Fauzan', '0.33', 'S5', 'S7', 10),
-(187, 3, 'Kukuh', '0.33', 'S5', 'S8', 10),
-(188, 3, 'Dayyan', '0.33', 'S5', 'S8', 10),
-(189, 3, 'Fauzan', '0.33', 'S5', 'S8', 10),
-(190, 3, 'Kukuh', '0.33', 'S5', 'S9', 10),
-(191, 3, 'Dayyan', '0.33', 'S5', 'S9', 10),
-(192, 3, 'Fauzan', '0.33', 'S5', 'S9', 10),
-(193, 3, 'Kukuh', '0.33', 'S5', 'S10', 10),
-(194, 3, 'Dayyan', '0.33', 'S5', 'S10', 10),
-(195, 3, 'Fauzan', '0.33', 'S5', 'S10', 10),
-(196, 3, 'Kukuh', '0.33', 'S5', 'S11', 10),
-(197, 3, 'Dayyan', '0.33', 'S5', 'S11', 10),
-(198, 3, 'Fauzan', '0.33', 'S5', 'S11', 10),
-(199, 3, 'Kukuh', '0.33', 'S6', 'S7', 10),
-(200, 3, 'Dayyan', '0.33', 'S6', 'S7', 10),
-(201, 3, 'Fauzan', '0.33', 'S6', 'S7', 10),
-(202, 3, 'Kukuh', '0.33', 'S6', 'S8', 10),
-(203, 3, 'Dayyan', '0.33', 'S6', 'S8', 10),
-(204, 3, 'Fauzan', '0.33', 'S6', 'S8', 10),
-(205, 3, 'Kukuh', '0.33', 'S6', 'S9', 10),
-(206, 3, 'Dayyan', '0.33', 'S6', 'S9', 10),
-(207, 3, 'Fauzan', '0.33', 'S6', 'S9', 10),
-(208, 3, 'Kukuh', '0.33', 'S6', 'S10', 10),
-(209, 3, 'Dayyan', '0.33', 'S6', 'S10', 10),
-(210, 3, 'Fauzan', '0.33', 'S6', 'S10', 10),
-(211, 3, 'Kukuh', '0.33', 'S6', 'S11', 10),
-(212, 3, 'Dayyan', '0.33', 'S6', 'S11', 10),
-(213, 3, 'Fauzan', '0.33', 'S6', 'S11', 10),
-(214, 3, 'Kukuh', '0.33', 'S7', 'S8', 10),
-(215, 3, 'Dayyan', '0.33', 'S7', 'S8', 10),
-(216, 3, 'Fauzan', '0.33', 'S7', 'S8', 10),
-(217, 3, 'Kukuh', '0.33', 'S7', 'S9', 10),
-(218, 3, 'Dayyan', '0.33', 'S7', 'S9', 10),
-(219, 3, 'Fauzan', '0.33', 'S7', 'S9', 10),
-(220, 3, 'Kukuh', '0.33', 'S7', 'S10', 10),
-(221, 3, 'Dayyan', '0.33', 'S7', 'S10', 10),
-(222, 3, 'Fauzan', '0.33', 'S7', 'S10', 10),
-(223, 3, 'Kukuh', '0.33', 'S7', 'S11', 10),
-(224, 3, 'Dayyan', '0.33', 'S7', 'S11', 10),
-(225, 3, 'Fauzan', '0.33', 'S7', 'S11', 10),
-(226, 3, 'Kukuh', '0.33', 'S8', 'S9', 10),
-(227, 3, 'Dayyan', '0.33', 'S8', 'S9', 10),
-(228, 3, 'Fauzan', '0.33', 'S8', 'S9', 10),
-(229, 3, 'Kukuh', '0.33', 'S8', 'S10', 10),
-(230, 3, 'Dayyan', '0.33', 'S8', 'S10', 10),
-(231, 3, 'Fauzan', '0.33', 'S8', 'S10', 10),
-(232, 3, 'Kukuh', '0.33', 'S8', 'S11', 10),
-(233, 3, 'Dayyan', '0.33', 'S8', 'S11', 10),
-(234, 3, 'Fauzan', '0.33', 'S8', 'S11', 10),
-(235, 3, 'Kukuh', '0.33', 'S9', 'S10', 10),
-(236, 3, 'Dayyan', '0.33', 'S9', 'S10', 10),
-(237, 3, 'Fauzan', '0.33', 'S9', 'S10', 10),
-(238, 3, 'Kukuh', '0.33', 'S9', 'S11', 10),
-(239, 3, 'Dayyan', '0.33', 'S9', 'S11', 10),
-(240, 3, 'Fauzan', '0.33', 'S9', 'S11', 10),
-(241, 3, 'Kukuh', '0.33', 'S10', 'S11', 10),
-(242, 3, 'Dayyan', '0.33', 'S10', 'S11', 10),
-(243, 3, 'Fauzan', '0.33', 'S10', 'S11', 10);
 
 -- --------------------------------------------------------
 
@@ -581,6 +430,157 @@ CREATE TABLE `responden_sapi` (
   `kriteria_2` varchar(20) DEFAULT NULL,
   `id_section` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `responden_skala_ayam`
+--
+
+CREATE TABLE `responden_skala_ayam` (
+  `id` int(11) NOT NULL,
+  `id_pengisi` int(11) NOT NULL,
+  `nama_responden` varchar(50) NOT NULL,
+  `nilai_skala` varchar(2) NOT NULL,
+  `indikator` varchar(100) NOT NULL,
+  `entitas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `responden_skala_ayam`
+--
+
+INSERT INTO `responden_skala_ayam` (`id`, `id_pengisi`, `nama_responden`, `nilai_skala`, `indikator`, `entitas`) VALUES
+(1, 1, 'Kukuh', '3', '19', 2),
+(2, 1, 'Dayyan', '4', '19', 2),
+(3, 1, 'Fauzan', '5', '19', 2),
+(4, 1, 'Kukuh', '4', '20', 2),
+(5, 1, 'Dayyan', '4', '20', 2),
+(6, 1, 'Fauzan', '4', '20', 2),
+(7, 1, 'Kukuh', '4', '21', 2),
+(8, 1, 'Dayyan', '4', '21', 2),
+(9, 1, 'Fauzan', '4', '21', 2),
+(10, 1, 'Kukuh', '3', '22', 2),
+(11, 1, 'Dayyan', '3', '22', 2),
+(12, 1, 'Fauzan', '3', '22', 2),
+(13, 1, 'Kukuh', '3', '25', 2),
+(14, 1, 'Dayyan', '3', '25', 2),
+(15, 1, 'Fauzan', '2', '25', 2),
+(16, 1, 'Kukuh', '2', '26', 2),
+(17, 1, 'Dayyan', '3', '26', 2),
+(18, 1, 'Fauzan', '4', '26', 2),
+(19, 1, 'Kukuh', '3', '27', 2),
+(20, 1, 'Dayyan', '3', '27', 2),
+(21, 1, 'Fauzan', '4', '27', 2),
+(22, 1, 'Kukuh', '3', '23', 2),
+(23, 1, 'Dayyan', '3', '23', 2),
+(24, 1, 'Fauzan', '3', '23', 2),
+(25, 1, 'Kukuh', '4', '24', 2),
+(26, 1, 'Dayyan', '4', '24', 2),
+(27, 1, 'Fauzan', '4', '24', 2),
+(28, 1, 'Kukuh', '3', '1', 1),
+(29, 1, 'Dayyan', '4', '1', 1),
+(30, 1, 'Fauzan', '5', '1', 1),
+(31, 1, 'Kukuh', '4', '2', 1),
+(32, 1, 'Dayyan', '4', '2', 1),
+(33, 1, 'Fauzan', '4', '2', 1),
+(34, 1, 'Kukuh', '3', '3', 1),
+(35, 1, 'Dayyan', '3', '3', 1),
+(36, 1, 'Fauzan', '3', '3', 1),
+(37, 1, 'Kukuh', '4', '4', 1),
+(38, 1, 'Dayyan', '4', '4', 1),
+(39, 1, 'Fauzan', '4', '4', 1),
+(40, 1, 'Kukuh', '2', '5', 1),
+(41, 1, 'Dayyan', '2', '5', 1),
+(42, 1, 'Fauzan', '2', '5', 1),
+(43, 1, 'Kukuh', '2', '6', 1),
+(44, 1, 'Dayyan', '2', '6', 1),
+(45, 1, 'Fauzan', '2', '6', 1),
+(46, 1, 'Kukuh', '3', '7', 1),
+(47, 1, 'Dayyan', '3', '7', 1),
+(48, 1, 'Fauzan', '3', '7', 1),
+(49, 1, 'Kukuh', '1', '8', 1),
+(50, 1, 'Dayyan', '1', '8', 1),
+(51, 1, 'Fauzan', '1', '8', 1),
+(52, 1, 'Kukuh', '3', '9', 1),
+(53, 1, 'Dayyan', '3', '9', 1),
+(54, 1, 'Fauzan', '3', '9', 1),
+(55, 1, 'Kukuh', '4', '10', 1),
+(56, 1, 'Dayyan', '4', '10', 1),
+(57, 1, 'Fauzan', '4', '10', 1),
+(58, 1, 'Kukuh', '2', '11', 1),
+(59, 1, 'Dayyan', '2', '11', 1),
+(60, 1, 'Fauzan', '2', '11', 1),
+(61, 1, 'Kukuh', '3', '12', 1),
+(62, 1, 'Dayyan', '3', '12', 1),
+(63, 1, 'Fauzan', '3', '12', 1),
+(64, 1, 'Kukuh', '1', '13', 1),
+(65, 1, 'Dayyan', '1', '13', 1),
+(66, 1, 'Fauzan', '1', '13', 1),
+(67, 1, 'Kukuh', '2', '14', 1),
+(68, 1, 'Dayyan', '2', '14', 1),
+(69, 1, 'Fauzan', '2', '14', 1),
+(70, 1, 'Kukuh', '3', '15', 1),
+(71, 1, 'Dayyan', '3', '15', 1),
+(72, 1, 'Fauzan', '3', '15', 1),
+(73, 1, 'Kukuh', '2', '16', 1),
+(74, 1, 'Dayyan', '2', '16', 1),
+(75, 1, 'Fauzan', '2', '16', 1),
+(76, 1, 'Kukuh', '3', '17', 1),
+(77, 1, 'Dayyan', '3', '17', 1),
+(78, 1, 'Fauzan', '3', '17', 1),
+(79, 2, 'A', '1', '19', 2),
+(80, 2, 'B', '3', '19', 2),
+(81, 2, 'A', '4', '21', 2),
+(82, 2, 'B', '2', '21', 2),
+(83, 2, 'A', '2', '20', 2),
+(84, 2, 'B', '2', '20', 2),
+(85, 2, 'A', '1', '22', 2),
+(86, 2, 'B', '3', '22', 2),
+(87, 2, 'A', '2', '23', 2),
+(88, 2, 'B', '2', '23', 2),
+(89, 2, 'A', '1', '24', 2),
+(90, 2, 'B', '2', '24', 2),
+(91, 2, 'A', '3', '25', 2),
+(92, 2, 'B', '2', '25', 2),
+(93, 2, 'A', '4', '26', 2),
+(94, 2, 'B', '3', '26', 2),
+(95, 2, 'A', '1', '27', 2),
+(96, 2, 'B', '2', '27', 2),
+(97, 2, 'A', '2', '1', 1),
+(98, 2, 'B', '2', '1', 1),
+(99, 2, 'A', '2', '2', 1),
+(100, 2, 'B', '2', '2', 1),
+(101, 2, 'A', '1', '3', 1),
+(102, 2, 'B', '1', '3', 1),
+(103, 2, 'A', '3', '4', 1),
+(104, 2, 'B', '2', '4', 1),
+(105, 2, 'A', '4', '5', 1),
+(106, 2, 'B', '4', '5', 1),
+(107, 2, 'A', '1', '6', 1),
+(108, 2, 'B', '1', '6', 1),
+(109, 2, 'A', '2', '7', 1),
+(110, 2, 'B', '3', '7', 1),
+(111, 2, 'A', '5', '8', 1),
+(112, 2, 'B', '5', '8', 1),
+(113, 2, 'A', '1', '9', 1),
+(114, 2, 'B', '1', '9', 1),
+(115, 2, 'A', '1', '10', 1),
+(116, 2, 'B', '1', '10', 1),
+(117, 2, 'A', '1', '11', 1),
+(118, 2, 'B', '1', '11', 1),
+(119, 2, 'A', '1', '12', 1),
+(120, 2, 'B', '1', '12', 1),
+(121, 2, 'A', '2', '13', 1),
+(122, 2, 'B', '2', '13', 1),
+(123, 2, 'A', '3', '14', 1),
+(124, 2, 'B', '3', '14', 1),
+(125, 2, 'A', '3', '15', 1),
+(126, 2, 'B', '3', '15', 1),
+(127, 2, 'A', '2', '16', 1),
+(128, 2, 'B', '2', '16', 1),
+(129, 2, 'A', '2', '17', 1),
+(130, 2, 'B', '1', '17', 1);
 
 -- --------------------------------------------------------
 
@@ -696,6 +696,13 @@ ALTER TABLE `bobot_indikator`
   ADD KEY `id_section` (`id_section`);
 
 --
+-- Indexes for table `bobot_indikator_sapi`
+--
+ALTER TABLE `bobot_indikator_sapi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_section` (`id_section`);
+
+--
 -- Indexes for table `entitas_ayam`
 --
 ALTER TABLE `entitas_ayam`
@@ -706,6 +713,12 @@ ALTER TABLE `entitas_ayam`
 --
 ALTER TABLE `entitas_sapi`
   ADD PRIMARY KEY (`id_s_e`);
+
+--
+-- Indexes for table `hasil_skala_ayam`
+--
+ALTER TABLE `hasil_skala_ayam`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `indikator_ayam`
@@ -744,9 +757,21 @@ ALTER TABLE `opsi_ahp`
   ADD PRIMARY KEY (`id_opsi_ahp`);
 
 --
+-- Indexes for table `opsi_skala_ayam`
+--
+ALTER TABLE `opsi_skala_ayam`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `rasio`
 --
 ALTER TABLE `rasio`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rasio_sapi`
+--
+ALTER TABLE `rasio_sapi`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -764,6 +789,12 @@ ALTER TABLE `responden_sapi`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_section` (`id_section`),
   ADD KEY `id_pengisi` (`id_pengisi`);
+
+--
+-- Indexes for table `responden_skala_ayam`
+--
+ALTER TABLE `responden_skala_ayam`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `section`
@@ -798,7 +829,12 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `bobot_indikator`
 --
 ALTER TABLE `bobot_indikator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `bobot_indikator_sapi`
+--
+ALTER TABLE `bobot_indikator_sapi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `entitas_ayam`
 --
@@ -809,6 +845,11 @@ ALTER TABLE `entitas_ayam`
 --
 ALTER TABLE `entitas_sapi`
   MODIFY `id_s_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `hasil_skala_ayam`
+--
+ALTER TABLE `hasil_skala_ayam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `indikator_ayam`
 --
@@ -825,20 +866,35 @@ ALTER TABLE `indikator_sapi`
 ALTER TABLE `opsi_ahp`
   MODIFY `id_opsi_ahp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
+-- AUTO_INCREMENT for table `opsi_skala_ayam`
+--
+ALTER TABLE `opsi_skala_ayam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `rasio`
 --
 ALTER TABLE `rasio`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
+-- AUTO_INCREMENT for table `rasio_sapi`
+--
+ALTER TABLE `rasio_sapi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
 -- AUTO_INCREMENT for table `responden`
 --
 ALTER TABLE `responden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `responden_sapi`
 --
 ALTER TABLE `responden_sapi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `responden_skala_ayam`
+--
+ALTER TABLE `responden_skala_ayam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 --
 -- AUTO_INCREMENT for table `section`
 --
@@ -868,6 +924,12 @@ ALTER TABLE `user_role`
 --
 ALTER TABLE `bobot_indikator`
   ADD CONSTRAINT `bobot_indikator_ibfk_1` FOREIGN KEY (`id_section`) REFERENCES `section` (`id`);
+
+--
+-- Constraints for table `bobot_indikator_sapi`
+--
+ALTER TABLE `bobot_indikator_sapi`
+  ADD CONSTRAINT `bobot_indikator_sapi_ibfk_1` FOREIGN KEY (`id_section`) REFERENCES `section_sapi` (`id`);
 
 --
 -- Constraints for table `indikator_ayam`

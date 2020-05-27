@@ -4,11 +4,13 @@
     <!-- Page Heading -->
     <h2 class="h5 mb-4 text-gray-800">Ayam</h2>
 
-    <?php if ($entitas['ket_a_e'] == 'RPA') : ?>
-        <p>Progress: (<?= count($_SESSION['nilai_pengisian_skala'])-$jumlah_entitas_peternak ?>/<?= count($pagination) ?>)</p>
-    <?php endif ?>
-    <?php if ($entitas['ket_a_e'] == 'Peternak') : ?>
-        <p>Progress: (<?= count($_SESSION['nilai_pengisian_skala']) ?>/<?= count($pagination) ?>)</p>
+    <?php if (isset($_SESSION['nilai_pengisian_skala'])) : ?>
+        <?php if ($entitas['ket_a_e'] == 'RPA') : ?>
+            <p>Progress: (<?= count($_SESSION['nilai_pengisian_skala'])-$jumlah_entitas_peternak ?>/<?= count($pagination) ?>)</p>
+        <?php endif ?>
+        <?php if ($entitas['ket_a_e'] == 'Peternak') : ?>
+            <p>Progress: (<?= count($_SESSION['nilai_pengisian_skala']) ?>/<?= count($pagination) ?>)</p>
+        <?php endif ?>
     <?php endif ?>
 
     <h2 class="h3 mbcol-sm-2 text-gray-800"><?= $title; ?></h2>
@@ -82,11 +84,11 @@
                     <input type="hidden" name="responden<?= $i ?>" value="<?= $_SESSION['pengisian_ahp']['nama'.$i]; ?>">
                     <tr>
                         <td><?= $_SESSION['pengisian_ahp']['nama'.$i]; ?></td>
-                        <td><input type="radio" name="nilai-skala<?= $i ?>" id="pilihan-skala" value="1" <?= isset($_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']]) && $_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']][$counter-1]['nilai_skala'] == '1' ? 'checked' : '' ?>></td>
-                        <td><input type="radio" name="nilai-skala<?= $i ?>" id="pilihan-skala" value="2" <?= isset($_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']]) && $_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']][$counter-1]['nilai_skala'] == '2' ? 'checked' : '' ?>></td>
-                        <td><input type="radio" name="nilai-skala<?= $i ?>" id="pilihan-skala" value="3" <?= isset($_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']]) && $_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']][$counter-1]['nilai_skala'] == '3' ? 'checked' : '' ?>></td>
-                        <td><input type="radio" name="nilai-skala<?= $i ?>" id="pilihan-skala" value="4" <?= isset($_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']]) && $_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']][$counter-1]['nilai_skala'] == '4' ? 'checked' : '' ?>></td>
-                        <td><input type="radio" name="nilai-skala<?= $i ?>" id="pilihan-skala" value="5" <?= isset($_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']]) && $_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']][$counter-1]['nilai_skala'] == '5' ? 'checked' : '' ?>></td>
+                        <td><input required type="radio" name="nilai-skala<?= $i ?>" id="pilihan-skala" value="1" <?= isset($_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']]) && $_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']][$counter-1]['nilai_skala'] == '1' ? 'checked' : '' ?>></td>
+                        <td><input required type="radio" name="nilai-skala<?= $i ?>" id="pilihan-skala" value="2" <?= isset($_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']]) && $_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']][$counter-1]['nilai_skala'] == '2' ? 'checked' : '' ?>></td>
+                        <td><input required type="radio" name="nilai-skala<?= $i ?>" id="pilihan-skala" value="3" <?= isset($_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']]) && $_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']][$counter-1]['nilai_skala'] == '3' ? 'checked' : '' ?>></td>
+                        <td><input required type="radio" name="nilai-skala<?= $i ?>" id="pilihan-skala" value="4" <?= isset($_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']]) && $_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']][$counter-1]['nilai_skala'] == '4' ? 'checked' : '' ?>></td>
+                        <td><input required type="radio" name="nilai-skala<?= $i ?>" id="pilihan-skala" value="5" <?= isset($_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']]) && $_SESSION['nilai_pengisian_skala'][$indikator['id_a_i']][$counter-1]['nilai_skala'] == '5' ? 'checked' : '' ?>></td>
                     </tr>
                 <?php endfor; ?>
             </tbody>

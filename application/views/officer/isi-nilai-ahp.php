@@ -16,7 +16,9 @@
 
     <form action="<?php echo base_url().'officer/input_data_ahp' ?>" method="post">
 
-    <p>Progress: (<?= count($_SESSION['nilai_pengisian_ahp']) ?>/<?= count($section_pagination) ?>)</p>
+    <?php if(isset($_SESSION['nilai_pengisian_ahp'])) :?>
+        <p>Progress: (<?= count($_SESSION['nilai_pengisian_ahp']) ?>/<?= count($section_pagination) ?>)</p>
+    <?php endif ?>
     <div class="row">
 
         <!-- PAGINATION -->
