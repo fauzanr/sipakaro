@@ -20,16 +20,9 @@
         <p>Progress: (<?= count($_SESSION['nilai_pengisian_ahp']) ?>/<?= count($section_pagination) ?>)</p>
     <?php endif ?>
     <div class="row">
-
-        <!-- PAGINATION -->
-        <div class="col-md-2">
-            <?php foreach ($section_pagination as $s) : ?>
-                <a href="<?= base_url().'officer/halaman_input_data_ahp/'.$s['id'] ?>"><?= $s['nama_section'] ?></a><br>
-            <?php endforeach ?>
-        </div>
         
         <!-- FORM -->
-        <div class="col-md-10">
+        <div class="col-md-12">
 
             <?php if ($level == 0) :?> 
                 <input type="hidden" name="entitas_id" value="kosong"> <!-- ambil id identitas -->
