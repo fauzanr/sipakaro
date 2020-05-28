@@ -125,6 +125,13 @@
             <span>Rekap AHP Sapi</span></a>
         </li>
 
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('officer/rekap_skala_sapi') ?>">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Rekap Skala Sapi</span></a>
+        </li>
+
       <?php endif ?>
 
       <!-- Sidebar Toggler (Sidebar) -->

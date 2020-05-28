@@ -247,5 +247,9 @@
             return;
         }
 
+        public function insert_skala_sapi ($data) {
+            $this->db->insert('rekap_skala_sapi', $data);
+		}
+
     }
 ?>

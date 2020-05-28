@@ -4,7 +4,7 @@
 		function __construct(){
 			parent::__construct();
 			if(!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
-				redirect(base_url('login'));;
+				redirect(base_url('login'));
 			}
 		}
 
@@ -407,7 +407,7 @@
 				$this->session->unset_userdata('nilai_pengisian_ahp_sapi');
 				$this->session->unset_userdata('indikator_sapi');
 
-				echo 'berhasil input '.$data_counter.' data 😛<br>';
+				redirect(base_url('officer/skala_sapi'));
 			}
 
 		}
@@ -537,5 +537,206 @@
 
 		}
 		
+		// ===================================== SKALA 🐄🐮 =========================================
+
+		// halaman input skala nominal
+		public function skala_sapi($entitas = 1){
+			// $this->start_sess();
+
+			if ($entitas != 1 && $entitas != 2) {
+				echo '404';return;
+			}
+
+			if(!isset($_SESSION['pengisian_ahp_sapi']['nama1'])) {
+				redirect(base_url('officer/input-ahp-sapi'));
+			}
+
+			$data['title'] = 'Perhitungan Skala Sapi';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+			$data['entitas'] = $entitas;
+			$data['pertanyaan'] = $this->db->get_where('opsi_skala_sapi', ['entitas' => $entitas])->result_array();
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/skala/skala-sapi-1', $data);
+			$this->load->view('templates/footer');
+		}
+
+		// input skala nominal ke $_SESSION
+		public function input_skala_sapi() {
+			$entitas = array_pop($_POST);
+			foreach ($_POST as $p => $v) {
+				$_SESSION['nilai_skala_sapi'][$p] = $v;
+			}
+
+			redirect('officer/skala_sapi_2/'.$entitas);
+		}
+
+		// halaman input skala 2
+		public function skala_sapi_2($entitas = 1) {
+			// $this->start_sess();
+
+			if ($entitas != 1 && $entitas != 2) {
+				echo '404';return;
+			}
+
+			if(!isset($_SESSION['pengisian_ahp_sapi']['nama1'])) {
+				// redirect(base_url('officer/input-ahp-sapi'));
+			}
+
+			$data['title'] = 'Perhitungan Skala Sapi';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+			$data['entitas'] = $entitas;
+
+			$this->db->order_by('kode_s_i', 'ASC');
+			$data['indikator'] = $this->db->get_where('indikator_sapi', ['entitas' => $entitas])->result_array();
+
+			$s = $_SESSION['nilai_skala_sapi'];
+
+			foreach($data['indikator'] as $i) {
+
+				switch ($i['kode_s_i']) {
+
+					// PETERNAK
+					case $i['kode_s_i'] === 'PE1':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B6'] * $s['B7'] / $s['B8'];
+							break;
+					case $i['kode_s_i'] === 'PE2':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = ($s['B9'] / $s['B8']) * 1/100;
+							break;
+					case $i['kode_s_i'] === 'PE3':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = (12 * $s['B10'] * $s['B13']) / ($s['B11'] * $s['B12']);
+							break;
+					case $i['kode_s_i'] === 'PE4':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B14'] / $s['B6'] * 1/100;
+							break;
+					case $i['kode_s_i'] === 'PS1':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B15'] / $s['B8'];
+							break;
+					case $i['kode_s_i'] === 'PS2':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B16'] / $s['B15'];
+							break;
+					case $i['kode_s_i'] === 'PS3':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B17'] / $s['B15'];
+							break;
+					case $i['kode_s_i'] === 'PS4':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B18'] / $s['B6'];
+							break;
+					case $i['kode_s_i'] === 'PL1':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B19'] * $s['B6'] * 12;
+							break;
+					case $i['kode_s_i'] === 'PL2':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B20'] * $s['B6'];
+							break;
+					case $i['kode_s_i'] === 'PL3':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = ($s['B21'] / $s['B22']) * $s['B23'];
+							break;
+					
+					// RPH
+					case $i['kode_s_i'] === 'RE1':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = ((($s['B31'] * $s['B29']) - $s['B30']) * $s['B28']) / $s['B32'];
+							break;
+					case $i['kode_s_i'] === 'RE2':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = ($s['B28'] * 12 * $s['B29']) / ($s['B33'] * $s['B34']);
+							break;
+					case $i['kode_s_i'] === 'RS1':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B32'] / $s['B35'];
+							break;
+					case $i['kode_s_i'] === 'RS2':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B36'] / $s['B32'];
+							break;
+					case $i['kode_s_i'] === 'RS3':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = ($s['B37'] / $s['B32']) * 1/100;
+							break;
+					case $i['kode_s_i'] === 'RS4':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B39'] / ($s['B28'] * 12);
+							break;
+					case $i['kode_s_i'] === 'RL1':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B40'] * 30 * 12;
+							break;
+					case $i['kode_s_i'] === 'RL2':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = $s['B41'] * 30 * 12;
+							break;
+					case $i['kode_s_i'] === 'RL3':
+							$_SESSION['output_skala_sapi'][$i['kode_s_i']]['performansi_lapangan'] = ($s['B42'] * $s['B43']) * $s['B44'];
+							break;
+
+				}
+
+			}
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/skala/skala-sapi-2', $data);
+			$this->load->view('templates/footer');
+		}
+
+		// input skala hasil ke $_SESSION
+		public function input_skala_sapi_2() {
+			$entitas = array_pop($_POST);
+			foreach ($_POST as $p => $v) {
+				$_SESSION['output_skala_sapi'][$p]['skor_indikator'] = $v;
+				$_SESSION['output_skala_sapi'][$p]['entitas'] = $entitas;
+				$_SESSION['output_skala_sapi'][$p]['kode_indikator'] = $p;
+			}
+
+			if($entitas == 1) { // kalau peternak lanjut ke rph
+
+				redirect('officer/skala_sapi/2');
+
+			} else if ($entitas == 2) {
+
+				if(!isset($_SESSION['pengisian_ahp_sapi']) || !isset($_SESSION['output_skala_sapi'])) {
+					echo 'error: empty session';
+					return;
+				}
+
+				$counter = 0;
+				$data = $_SESSION['output_skala_sapi'];
+
+				$this->load->model('Ahp_sapi_model');
+				$this->db->empty_table('rekap_skala_sapi');
+
+				foreach ($data as $k => $v) {
+					$this->Ahp_sapi_model->insert_skala_sapi($v);
+					$counter++;
+				}
+
+				$this->session->unset_userdata('pengisian_ahp_sapi');
+				$this->session->unset_userdata('nilai_skala_sapi');
+				$this->session->unset_userdata('output_skala_sapi');
+
+				echo 'berhasil insert '.$counter.' data';
+				redirect(base_url('officer'));
+	
+			}
+
+			echo '🐔 🐮';
+		}
+		
+		public function page_rekap_skala_sapi(){
+			$data['title'] = 'Perhitungan Skala Sapi';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+			$data['rekap'] = $this->db->get('rekap_skala_sapi')->result_array();
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/skala/rekap-skala-sapi', $data);
+			$this->load->view('templates/footer');
+		}
+
+		private function start_sess() {
+			$_SESSION['pengisian_ahp_sapi']['responden'] = 3;
+			$_SESSION['pengisian_ahp_sapi']['nama1'] = 'A';
+			$_SESSION['pengisian_ahp_sapi']['nama2'] = 'B';
+			$_SESSION['pengisian_ahp_sapi']['nama3'] = 'C';
+		}
+
 	}
 ?>

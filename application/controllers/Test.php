@@ -20,6 +20,8 @@ class Test extends CI_Controller {
     $this->session->unset_userdata('pengisian_ahp_sapi');
     $this->session->unset_userdata('nilai_pengisian_ahp_sapi');
     $this->session->unset_userdata('indikator_sapi');
+    $this->session->unset_userdata('nilai_skala_sapi');
+    $this->session->unset_userdata('output_skala_sapi');
     print("<pre>".print_r($_SESSION,true)."</pre>");
   }
 
