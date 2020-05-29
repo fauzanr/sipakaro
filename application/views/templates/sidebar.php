@@ -132,6 +132,13 @@
             <span>Rekap Skala Sapi</span></a>
         </li>
 
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('officer/skala_keberlanjutan_sapi') ?>">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Skala Keberlanjutan Sapi</span></a>
+        </li>
+
       <?php endif ?>
 
       <!-- Sidebar Toggler (Sidebar) -->

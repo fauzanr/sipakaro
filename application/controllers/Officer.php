@@ -679,16 +679,17 @@
 		public function input_skala_sapi_2() {
 			$entitas = array_pop($_POST);
 			foreach ($_POST as $p => $v) {
-				$_SESSION['output_skala_sapi'][$p]['skor_indikator'] = $v;
-				$_SESSION['output_skala_sapi'][$p]['entitas'] = $entitas;
 				$_SESSION['output_skala_sapi'][$p]['kode_indikator'] = $p;
+				$_SESSION['output_skala_sapi'][$p]['skor_indikator'] = $v;
+				$_SESSION['output_skala_sapi'][$p]['nilai_skala'] = 100 / 6 * $v;
+				$_SESSION['output_skala_sapi'][$p]['entitas'] = $entitas;
 			}
 
 			if($entitas == 1) { // kalau peternak lanjut ke rph
 
 				redirect('officer/skala_sapi/2');
 
-			} else if ($entitas == 2) {
+			} else if ($entitas == 2) { // Masukin DB
 
 				if(!isset($_SESSION['pengisian_ahp_sapi']) || !isset($_SESSION['output_skala_sapi'])) {
 					echo 'error: empty session';
@@ -722,12 +723,31 @@
 			$data['title'] = 'Perhitungan Skala Sapi';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-			$data['rekap'] = $this->db->get('rekap_skala_sapi')->result_array();
+			$data['rekap_peternak'] = $this->db->get_where('rekap_skala_sapi', ['entitas' => 1])->result_array();
+			$data['rekap_rph'] = $this->db->get_where('rekap_skala_sapi', ['entitas' => 2])->result_array();
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
 			$this->load->view('templates/topbar', $data);
-			$this->load->view('officer/skala/rekap-skala-sapi', $data);
+			$this->load->view('officer/skala/skala-sapi-5', $data);
+			$this->load->view('templates/footer');
+		}
+
+		public function skala_keberlanjutan_sapi()
+		{
+			$data['title'] = 'Skala Keberlanjutan Sapi';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+			
+			$this->db->join('bobot_indikator_sapi', 'section_sapi.id = bobot_indikator_sapi.id_section');
+			$this->db->join('rekap_skala_sapi', 'rekap_skala_sapi.kode_indikator = bobot_indikator_sapi.kriteria', 'left');
+			$data['bobot_indikator'] = $this->db->get('section_sapi')->result_array();
+
+			// die(print("<pre>".print_r($data['bobot_indikator'],true)."</pre>"));
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/sapi/skala_keberlanjutan', $data);
 			$this->load->view('templates/footer');
 		}
 

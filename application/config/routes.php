@@ -30,6 +30,7 @@ $route['officer/rekap_ahp'] = 'officer/page_rekap_ahp';
 $route['officer/input-ahp-sapi'] = 'officer/input_ahp_sapi_satu';
 $route['officer/rekap_ahp_sapi'] = 'officer/page_rekap_ahp_sapi';
 $route['officer/rekap_skala_sapi'] = 'officer/page_rekap_skala_sapi';
+$route['officer/skala_keberlanjutan_sapi'] = 'officer/skala_keberlanjutan_sapi';
 
 
 $route['404_override'] = '';
