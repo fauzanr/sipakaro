@@ -44,11 +44,19 @@
           <span>Sapi</span></a>
       </li>
 
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="">
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Skala
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('admin/skala_sapi') ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Sapi</span></a>
-      </li> -->
+      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
