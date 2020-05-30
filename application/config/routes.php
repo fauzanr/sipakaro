@@ -26,6 +26,8 @@ $route['officer/index'] = 'officer';
 
 $route['officer/input-ahp'] = 'officer/input_ahp_satu';
 $route['officer/rekap_ahp'] = 'officer/page_rekap_ahp';
+$route['officer/rekap_skala_ayam'] = 'officer/page_rekap_skala_ayam';
+$route['officer/skala_keberlanjutan_ayam'] = 'officer/skala_keberlanjutan';
 
 $route['officer/input-ahp-sapi'] = 'officer/input_ahp_sapi_satu';
 $route['officer/rekap_ahp_sapi'] = 'officer/page_rekap_ahp_sapi';

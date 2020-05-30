@@ -208,7 +208,7 @@
 				$this->session->unset_userdata('nilai_pengisian_ahp');
 				$this->session->unset_userdata('indikator');
 
-				// echo 'berhasil input '.$data_counter.' data 😛<br>';
+				// die('berhasil input '.$data_counter.' data 😛<br>');
 
 				// Ke halaman Skala Ayam
 				redirect(base_url('officer/halaman_input_skala_ayam'));
@@ -536,6 +536,23 @@
 			}
 
 		}
+
+		// Rekap Skala ayam
+		public function page_rekap_skala_ayam(){
+			$data['title'] = 'Hasil Rekapan Skala Ayam';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+			$data['rekap_peternak'] = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'Peternak'])->result_array();
+			$data['rekap_rpa'] = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'RPA'])->result_array();
+
+			// die(print('<pre>'.print_r($data,true).'</pre>'));
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/skala/skala-ayam-5', $data);
+			$this->load->view('templates/footer');
+		}
 		
 		// ===================================== SKALA 🐄🐮 =========================================
 
@@ -758,5 +775,27 @@
 			$_SESSION['pengisian_ahp_sapi']['nama3'] = 'C';
 		}
 
+		// HITUNG OUTPUT SKALA KEBERLANJUTAN ------------------------------------------------------//
+		public function skala_keberlanjutan(){
+			$data['title'] = 'Output skala keberlanjutan Ayam';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+			$data['input'] = [];
+
+			// JOIN
+			$this->db->join('bobot_indikator', 'section.id = bobot_indikator.id_section');
+			$this->db->join('hasil_skala_ayam', 'bobot_indikator.kriteria = hasil_skala_ayam.indikator', 'left');
+			// Get skala ayam
+			$data['skala_ayam'] = $this->db->get('section')->result_array();
+
+			// die(print('<pre>'.print_r($data['skala_ayam'],true).'</pre>'));
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/skala_keberlanjutan_ayam', $data);
+			$this->load->view('templates/footer');
+
+		}
 	}
 ?>
