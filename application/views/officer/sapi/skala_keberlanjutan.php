@@ -76,42 +76,7 @@
     <div class="col-sm-2">
 
     </div>
-    <div class="col-sm-8">
-        <div>
-            <div class="table-responsive">
-                <table class="table table-hover table-sm">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Domain</th>
-                            <th scope="col">CI</th>
-                            <th scope="col">CR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">PETERNAKAN</th>
-                            <th scope="row">Ekonomi</th>
-                            <td>0,027</td>
-                            <td>0,030</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">RPH</th>
-                            <td>Sosial</td>
-                            <td>0,148</td>
-                            <td>0,099</td>
-                        </tr>
-                            <tr>
-                            <th scope="row">RPH</th>
-                            <td> Lingkungan</td>
-                            <td>0,549</td>
-                            <td>0,946</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    
 
     <br>
     

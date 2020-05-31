@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h2 class="h5 mb-4 text-gray-800">Ayam</h2>
+    <h2 class="h5 mb-4 text-gray-800">Sapi</h2>
 
     <h2 class="h3 mb-4 text-gray-800 d-flex justify-content-center">Hasil Rekapan AHP</h2>
     <br>

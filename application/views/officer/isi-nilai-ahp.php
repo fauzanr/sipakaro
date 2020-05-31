@@ -202,11 +202,13 @@
     </div>
 
     <input type="hidden" name="counter" value="<?= $counter ?>">
-    <br><br>
+    <br>
+    <br>
     <button type="submit" class="btn btn-primary btn-lg col-md-2" style="float: right;">Simpan</button>
 
     </form>
     
-    <a href="<?= base_url('officer/insert_pengisian_ahp') ?>"><button class="btn btn-warning">Selesai "!"</button></a>
+    <a href="<?= base_url('officer/insert_pengisian_ahp') ?>"><button class="btn btn-warning" style="float: left;">Selesai "!"</button></a>
     
+</div>
 </div>

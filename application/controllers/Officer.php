@@ -171,7 +171,7 @@
 			}
 			array_push($_SESSION['indikator'][$this->input->post('section_id')], array('section_id' => $this->input->post('entitas_id')) );
 
-			$this->session->set_flashdata('success', 'berhasil simpan data');
+			$this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Berhasil Simpan Data!</div>');
 			redirect(base_url('officer/halaman_input_data_ahp/'.$this->input->post('section_id')));
 			
 		}
@@ -368,7 +368,7 @@
 			}
 			array_push($_SESSION['indikator_sapi'][$this->input->post('section_id')], array('section_id' => $this->input->post('entitas_id')) );
 
-			$this->session->set_flashdata('success', 'berhasil simpan data');
+			$this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Berhasil Simpan Data!</div>');
 			redirect(base_url('officer/halaman_input_data_ahp_sapi/'.$this->input->post('section_id')));
 			
 		}
@@ -481,7 +481,7 @@
 			}
 			$_SESSION['progress_pengisian_skala'] = ['entitas' => $this->input->post('entitas')];
 
-			$this->session->set_flashdata('success', 'berhasil simpan data');
+			$this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Berhasil Simpan Data!</div>');
 			
 			redirect(base_url('officer/halaman_input_skala_ayam/'.$this->input->post('entitas').'/'.$this->input->post('indikator')));
 			

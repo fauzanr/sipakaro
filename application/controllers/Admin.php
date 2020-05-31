@@ -158,9 +158,9 @@ class Admin extends CI_Controller {
 		try {
 			$this->db->where('id_s_i', $id);
 			$this->db->delete('indikator_sapi');
-			$this->session->set_flashdata('message', 'Berhasil hapus');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Hapus Indikator!</div>');
 		} catch (\Throwable $th) {
-			$this->session->set_flashdata('message', 'Terjadi kesalahan: '.$th);
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 		}
 
 		redirect(base_url('admin/indikator_sapi'));
@@ -206,9 +206,9 @@ class Admin extends CI_Controller {
 	
 			try {
 				$this->db->insert('indikator_sapi', $data);
-				$this->session->set_flashdata('message', 'Berhasil tambah indikator');
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Tambah Indikator!</div>');
 			} catch (\Throwable $th) {
-				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 			}
 	
 			redirect(base_url('admin/indikator_sapi'));
@@ -258,9 +258,9 @@ class Admin extends CI_Controller {
 			try {
 				$this->db->where('id_s_i', $_POST['id_s_i']);
 				$this->db->update('indikator_sapi', $data);
-				$this->session->set_flashdata('message', 'Berhasil edit indikator');
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Edit Indikator!</div>');
 			} catch (\Throwable $th) {
-				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 			}
 		}
 
@@ -278,9 +278,9 @@ class Admin extends CI_Controller {
 		try {
 			$this->db->where('id_a_i', $id);
 			$this->db->delete('indikator_ayam');
-			$this->session->set_flashdata('message', 'Berhasil hapus');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Hapus Indikator!</div>');
 		} catch (\Throwable $th) {
-			$this->session->set_flashdata('message', 'Terjadi kesalahan: '.$th);
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 		}
 
 		redirect(base_url('admin/indikator_ayam'));
@@ -324,9 +324,9 @@ class Admin extends CI_Controller {
 	
 			try {
 				$this->db->insert('indikator_ayam', $data);
-				$this->session->set_flashdata('message', 'Berhasil tambah indikator');
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Tambah Indikator!</div>');
 			} catch (\Throwable $th) {
-				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 			}
 	
 			redirect(base_url('admin/indikator_ayam'));
@@ -376,9 +376,9 @@ class Admin extends CI_Controller {
 			try {
 				$this->db->where('id_a_i', $_POST['id_a_i']);
 				$this->db->update('indikator_ayam', $data);
-				$this->session->set_flashdata('message', 'Berhasil edit indikator');
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Edit Indikator!</div>');
 			} catch (\Throwable $th) {
-				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 			}
 		}
 
