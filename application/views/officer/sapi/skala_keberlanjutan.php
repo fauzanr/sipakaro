@@ -21,6 +21,7 @@
             </thead>
             <tbody>
                 <?php $counter = 1 ?>
+                <?php $total_nilai = 0 ?>
                 <?php foreach($bobot_indikator as $b) : ?>
                     <?php if($b['id_section'] == 2) : ?>
                         <?php $level0 = $b['kriteria'] ?>
@@ -56,12 +57,17 @@
                                             <td><?= $b['nilai_skala'] * $b['bobot'] ?></td>
                                         </tr>
                                         <?php $counter++ ?>
+                                        <?php $total_nilai = $total_nilai + ($b['nilai_skala'] * $b['bobot']) ?>
                                     <?php endif ?>
                                 <?php endforeach ?>
                             <?php endif ?>
                         <?php endforeach ?>
                     <?php endif ?>
                 <?php endforeach ?>
+                <tr>
+                    <td colspan="5">Total Nilai Keberlanjutan Akhir</td>
+                    <td><?= $total_nilai ?></td>
+                </tr>
             </tbody>
         </table>
     </div>
