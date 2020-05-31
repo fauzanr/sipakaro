@@ -16,9 +16,6 @@ $route['admin/indikator_sapi'] = 'admin/page_indikator_sapi';
 $route['admin/indikator_sapi/tambah'] = 'admin/page_tambah_indikator_sapi';
 $route['admin/indikator_sapi/edit/(:any)'] = 'admin/page_edit_indikator_sapi/$1';
 
-$route['admin/skala_sapi'] = 'admin/page_skala_sapi/$1';
-$route['admin/skala_sapi/edit/(:any)'] = 'admin/page_edit_skala_sapi/$1';
-
 $route['admin/kriteria'] = 'admin/page_kriteria';
 
 // USER

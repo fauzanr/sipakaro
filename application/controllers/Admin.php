@@ -110,30 +110,6 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/templates/footer');
 	}
 
-	public function page_skala_sapi()	{
-		$data['title'] = 'Admin | Skala Sapi';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-		
-		$this->load->view('admin/templates/header', $data);
-		$this->load->view('admin/templates/sidebar', $data);
-		$this->load->view('admin/templates/topbar', $data);
-		$this->load->view('admin/skala_sapi', $data);
-		$this->load->view('admin/templates/footer');
-	}
-
-	public function page_edit_skala_sapi($id)	{
-		$data['title'] = 'Admin | Edit Skala Sapi';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-		$data['skala'] = $this->db->get_where('opsi_skala_sapi', ['id' => $id])->row_array();
-		
-		$this->load->view('admin/templates/header', $data);
-		$this->load->view('admin/templates/sidebar', $data);
-		$this->load->view('admin/templates/topbar', $data);
-		$this->load->view('admin/edit_skala_sapi', $data);
-		$this->load->view('admin/templates/footer');
-	}
-
 	// FUNGSI
 
 	// public function get_kriteria() {
@@ -141,12 +117,6 @@ class Admin extends CI_Controller {
 		
 	// 	echo json_encode($data);
 	// }
-
-	public function get_skala_sapi() {
-		$data = $this->db->get('opsi_skala_sapi')->result_array();
-		
-		echo json_encode($data);
-	}
 
 	public function get_indikator_sapi() {
 		$data = $this->db->get('indikator_sapi')->result_array();
@@ -158,9 +128,9 @@ class Admin extends CI_Controller {
 		try {
 			$this->db->where('id_s_i', $id);
 			$this->db->delete('indikator_sapi');
-			$this->session->set_flashdata('message', 'Berhasil hapus');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Hapus Indikator!</div>');
 		} catch (\Throwable $th) {
-			$this->session->set_flashdata('message', 'Terjadi kesalahan: '.$th);
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 		}
 
 		redirect(base_url('admin/indikator_sapi'));
@@ -206,9 +176,9 @@ class Admin extends CI_Controller {
 	
 			try {
 				$this->db->insert('indikator_sapi', $data);
-				$this->session->set_flashdata('message', 'Berhasil tambah indikator');
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Tambah Indikator!</div>');
 			} catch (\Throwable $th) {
-				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 			}
 	
 			redirect(base_url('admin/indikator_sapi'));
@@ -258,9 +228,9 @@ class Admin extends CI_Controller {
 			try {
 				$this->db->where('id_s_i', $_POST['id_s_i']);
 				$this->db->update('indikator_sapi', $data);
-				$this->session->set_flashdata('message', 'Berhasil edit indikator');
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Edit Indikator!</div>');
 			} catch (\Throwable $th) {
-				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 			}
 		}
 
@@ -278,7 +248,7 @@ class Admin extends CI_Controller {
 		try {
 			$this->db->where('id_a_i', $id);
 			$this->db->delete('indikator_ayam');
-			$this->session->set_flashdata('message', 'Berhasil hapus');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Hapus Indikator!</div>');
 		} catch (\Throwable $th) {
 			$this->session->set_flashdata('message', 'Terjadi kesalahan: '.$th);
 		}
@@ -324,7 +294,7 @@ class Admin extends CI_Controller {
 	
 			try {
 				$this->db->insert('indikator_ayam', $data);
-				$this->session->set_flashdata('message', 'Berhasil tambah indikator');
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Tambah Indikator!</div>');
 			} catch (\Throwable $th) {
 				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
 			}
