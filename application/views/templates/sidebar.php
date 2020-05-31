@@ -5,7 +5,7 @@
       <a class="sidebar-brand d-flex align-items-center justify-content-center" 
         href="<?php echo base_url(); ?><?php echo($_SESSION['role_id'] === '1' ? 'admin' : NULL) ?><?php echo($_SESSION['role_id'] === '2' ? 'member' : NULL) ?><?php echo($_SESSION['role_id'] === '3' ? 'officer' : NULL) ?>">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+          <i class="fab fa-stripe-s"></i>
         </div>
         <div class="sidebar-brand-text mx-3">SIPAKARO</div>
       </a>
@@ -84,8 +84,8 @@
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/input_ahp_responden') ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/input-ahp') ? 'active' : '' || isset($_SESSION['pengisian_ahp']) ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/input-ahp-sapi') ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/input_ahp_sapi_responden') ? 'active' : '' || isset($_SESSION['pengisian_ahp_sapi']) ? 'active' : '' ?>">
           <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Perhitungan AHP</span>
+          <i class="fas fa-fw fa-calculator"></i>
+            <span>Hitung AHP & Skala</span>
           </a>
           <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -110,47 +110,63 @@
             </div>
           </div>
         </li>
-        
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading Hasil Ayam -->
+        <div class="sidebar-heading">
+          Hasil Ayam
+        </div>
+
         <!-- Nav Item - Charts -->
         <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/rekap_ahp') ? 'active' : '' ?>">
           <a class="nav-link" href="<?= base_url('officer/rekap_ahp') ?>">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Rekap AHP Ayam</span></a>
+          <i class="fab fa-fw fa-cloudscale"></i>
+            <span>Rekap AHP</span></a>
         </li>
 
         <!-- Nav Item - Charts -->
         <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/rekap_skala_ayam') ? 'active' : '' ?>">
           <a class="nav-link" href="<?= base_url('officer/rekap_skala_ayam') ?>">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Rekap Skala Ayam</span></a>
+            <i class="fas fa-fw fa-balance-scale"></i>
+            <span>Rekap Skala</span></a>
         </li>
 
         <!-- Nav Item - Charts -->
         <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/skala_keberlanjutan_ayam') ? 'active' : '' ?>">
           <a class="nav-link" href="<?= base_url('officer/skala_keberlanjutan_ayam') ?>">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Skala Keberlanjutan Ayam</span></a>
+            <span>Hasil Skala Keberlanjutan</span></a>
         </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading Hasil Sapi -->
+        <div class="sidebar-heading">
+          Hasil Sapi
+        </div>
 
         <!-- Nav Item - Charts -->
         <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/rekap_ahp_sapi') ? 'active' : '' ?>">
           <a class="nav-link" href="<?= base_url('officer/rekap_ahp_sapi') ?>">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Rekap AHP Sapi</span></a>
+          <i class="fab fa-fw fa-cloudscale"></i>
+            <span>Rekap AHP</span></a>
         </li>
 
         <!-- Nav Item - Charts -->
         <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/rekap_skala_sapi') ? 'active' : '' ?>">
           <a class="nav-link" href="<?= base_url('officer/rekap_skala_sapi') ?>">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Rekap Skala Sapi</span></a>
+          <i class="fas fa-fw fa-balance-scale"></i>
+            <span>Rekap Skala</span></a>
         </li>
 
         <!-- Nav Item - Charts -->
         <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/skala_keberlanjutan_sapi') ? 'active' : '' ?>">
           <a class="nav-link" href="<?= base_url('officer/skala_keberlanjutan_sapi') ?>">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Skala Keberlanjutan Sapi</span></a>
+            <span>Hasil Skala Keberlanjutan</span></a>
         </li>
 
       <?php endif ?>
