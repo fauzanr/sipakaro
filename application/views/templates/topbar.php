@@ -46,7 +46,7 @@
                 </form>
               </div>
             </li>
-            
+
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->

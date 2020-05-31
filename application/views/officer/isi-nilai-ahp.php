@@ -15,14 +15,17 @@
     <br>
 
     <form action="<?php echo base_url().'officer/input_data_ahp' ?>" method="post">
-    
+
+    <?php if(isset($_SESSION['nilai_pengisian_ahp'])) :?>
+        <p>Progress: (<?= count($_SESSION['nilai_pengisian_ahp']) ?>/<?= count($section_pagination) ?>)</p>
+    <?php endif ?>
     <div class="row">
         
         <!-- FORM -->
-        <div class="col-md-10">
+        <div class="col-md-12">
 
             <?php if ($level == 0) :?> 
-
+                <input type="hidden" name="entitas_id" value="kosong"> <!-- ambil id identitas -->
                 <?php $counter=0 ?>
                 <div class="row">
 
@@ -47,6 +50,7 @@
 
                                     <select class="mr-2 form-control" name="nilai-ahp<?= $i ?>" required>
                                         <option value="" disabled selected>Pilih Nilai</option>
+                                        <option value="0.33" selected>test</option>
                                         <?php foreach($opsi as $o) : ?>
                                             <option value="<?= $o['opsi'] ?>"
                                                 <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
@@ -65,6 +69,7 @@
                 </div> 
 
             <?php elseif($level == 1) : ?>
+                <input type="hidden" name="entitas_id" value="kosong"> <!-- ambil id identitas -->
             <!-- looping -->
                 <?php $counter=0 ?>
 
@@ -99,6 +104,7 @@
 
                                             <select class="mr-2 form-control" name="nilai-ahp<?= $counter ?>" required>
                                                 <option value="" disabled selected>Pilih Nilai</option>
+                                                <option value="0.33" selected>test</option>
                                                 <?php foreach($opsi as $o) : ?>
                                                     <option value="<?= $o['opsi'] ?>"
                                                         <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
@@ -126,6 +132,7 @@
 
             <!-- looping -->
             <?php elseif($level == 2) : ?>
+                <input type="hidden" name="entitas_id" value="<?= $indikator[0]['entitas'] ?>"> <!-- ambil id identitas -->
             <!-- looping -->
                 <?php $counter=0 ?>
 
@@ -165,6 +172,7 @@
                                                         <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
                                                     ><?= $o['opsi'] ?></option>
                                                 <?php endforeach ?>
+                                                <option value="0.33" selected>test</option>
                                             </select>
 
                                         </div>
@@ -194,11 +202,13 @@
     </div>
 
     <input type="hidden" name="counter" value="<?= $counter ?>">
-    <br><br>
+    <br>
+    <br>
     <button type="submit" class="btn btn-primary btn-lg col-md-2" style="float: right;">Simpan</button>
 
     </form>
     
-    <!-- <a href="<?= base_url('officer/insert_pengisian_ahp') ?>"><button class="btn btn-warning">Selesai "!"</button></a> -->
+    <a href="<?= base_url('officer/insert_pengisian_ahp') ?>"><button class="btn btn-warning" style="float: left;">Selesai "!"</button></a>
     
+</div>
 </div>
