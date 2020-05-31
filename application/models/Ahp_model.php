@@ -60,20 +60,22 @@
                 $kriteria = 'nama_kriteria';
             }
             if($section_id == 4 || $section_id == 8){
+                
                 $this->db->select('kode_a_i');
-                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Ekonomi'))->result_array();
+                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Ekonomi', 'entitas' => $_SESSION['indikator'][$section_id][0]['section_id'] ))->result_array();
+
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
             if($section_id == 5 || $section_id == 9){
                 $this->db->select('kode_a_i');
-                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Lingkungan'))->result_array();
+                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Lingkungan', 'entitas' => $_SESSION['indikator'][$section_id][0]['section_id'] ))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
             if($section_id == 6 || $section_id == 10){
                 $this->db->select('kode_a_i');
-                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Sosial'))->result_array();
+                $data['kriteria'] = $this->db->get_where('indikator_ayam', array('nama_kriteria' => 'Sosial', 'entitas' => $_SESSION['indikator'][$section_id][0]['section_id'] ))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_a_i';
             }
@@ -227,7 +229,33 @@
                 }
             }
 
-            // die(print("Update<br><pre>".print_r($data,true)."</pre>"));
+            // HITUNG BOBOT GLOBAL INDIKATOR TERHADAP DIMENSI ----------------------------------//
+            // Hanya untuk sub indikator
+            $this->db->select(['level0','level1']);
+            $hitung = $this->db->get_where('section', array('id' => $section_id))->row_array();
+
+            if ($hitung['level0'] != NULL) {
+                // Ambil bobot indikator Peternak / RPA
+                $this->db->select(['kriteria','bobot','id_section']);
+                $bobot_entitas = $this->db->get_where('bobot_indikator', ['kriteria' => $hitung['level0']])->row_array();
+                $this->db->select(['kriteria','bobot','id_section']);
+                $bobot_dimensi = $this->db->get_where('bobot_indikator', ['kriteria' => $hitung['level1']])->row_array();
+
+                for ($i=0; $i < $counter; $i++) { 
+                    // Input nilai bobot global indikator dimensi dan entitas
+                    $data['input'][$i]['bobot_global_indikator_dimensi'] = $data['input'][$i]['bobot'] * $bobot_dimensi['bobot'];
+                    $data['input'][$i]['bobot_global_indikator_dimensi_entitas'] = $data['input'][$i]['bobot_global_indikator_dimensi'] * $bobot_entitas['bobot'];
+                }
+            } else {
+                // Bukan sub indikator
+                for ($i=0; $i < $counter; $i++) { 
+                    // Input nilai C1 dan CR ke array input 0
+                    $data['input'][$i]['bobot_global_indikator_dimensi'] = 0;
+                    $data['input'][$i]['bobot_global_indikator_dimensi_entitas'] = 0;
+                }
+            }
+            
+            // die(print("Input<br><pre>".print_r($data['input'],true)."</pre>"));
             // Cek apakah sudah ada nilai Bobot sebelumnya di DB
             $hitung = $this->db->get_where('bobot_indikator', array('id_section' => $section_id))->result_array();
             // die('hitung = '.count($hitung));
@@ -249,6 +277,7 @@
             for ($i=0 ; $i<sizeof($data) ; $i++) { 
                 $this->db->insert('bobot_indikator', $data[$i]);
             };
+            return;
         }
 
         // Deskripsi : Update nilai pada tabel bobot
@@ -258,6 +287,104 @@
                 $this->db->where(['kriteria' => $data[$i]['kriteria'], 'id_section' => $data[$i]['id_section']] );
                 $this->db->update('bobot_indikator', $data[$i]);
             };
+            return;
+        }
+
+        public function input_nilai_skala($data){
+            // die(print("Add<br><pre>".print_r($data,true)."</pre>"));
+            for ($i=0 ; $i<sizeof($data) ; $i++) { 
+                $this->db->insert('responden_skala_ayam', $data[$i]);
+            };
+            return;
+        }
+
+        public function add_hasil_skala($data){
+            // die(print("Add<br><pre>".print_r($data,true)."</pre>"));
+            for ($i=0 ; $i<sizeof($data) ; $i++) { 
+                $this->db->insert('hasil_skala_ayam', $data[$i]);
+            };
+            return;
+        }
+
+        public function update_hasil_skala($data){
+            for ($i=0 ; $i<sizeof($data) ; $i++) { 
+                $this->db->where(['entitas' => $data[$i]['entitas'], 'indikator' => $data[$i]['indikator']] );
+                $this->db->update('hasil_skala_ayam', $data[$i]);
+            };
+            return;
+        }
+
+        public function hitung_nilai_skala(){
+
+            // Set variabel untuk array
+            $data = [];
+            $data['input'] = [];
+
+            // Set session untuk perhitungan
+            $_SESSION['hitung_skala'] = [];
+
+
+            // Get all indikator ayam
+            $data['indikator'] = $this->db->get('indikator_ayam')->result_array();
+            // Get all entitas ayam
+            $data['entitas'] = $this->db->get('entitas_ayam')->result_array();
+
+            // Fetch Data per entitas
+            for ($i=0; $i < sizeof($data['entitas']) ; $i++) { 
+                // Fetch data per indikator
+                for ($j=0; $j < sizeof($data['indikator']); $j++) { 
+                    
+                    $this->db->join('indikator_ayam', 'responden_skala_ayam.indikator = indikator_ayam.id_a_i');
+                    $fetch = $this->db->get_where('responden_skala_ayam', ['responden_skala_ayam.entitas' => $data['entitas'][$i]['id_a_e'], 'responden_skala_ayam.indikator' => $data['indikator'][$j]['id_a_i'] ])->result_array();
+                    if($fetch == NULL){
+                        continue;
+                    }elseif($fetch != NULL){
+                        $_SESSION['hitung_skala'][ $data['entitas'][$i]['ket_a_e'] ][ $data['indikator'][$j]['id_a_i'] ] = $fetch;
+                    }
+                
+                }
+            }
+
+            $skala = 0; // variabel untuk menjumlah
+            // Loop sebayak jumlah entitas
+            foreach ($data['entitas'] as $entitas) {
+                // Loop sebanayak indikator
+                foreach ($_SESSION['hitung_skala'][ $entitas['ket_a_e'] ] as $id => $dt) {
+                    // Loop sebanyak responden
+                    foreach ($_SESSION['hitung_skala'][ $entitas['ket_a_e'] ][ $id ] as $responden) {
+                        $skala = $skala + $responden['nilai_skala'];
+                    }
+
+                    // Hitung rata-rata
+                    $avg = $skala / sizeof($_SESSION['hitung_skala'][ $entitas['ket_a_e'] ][ $id ]);
+                    
+                    // Hitung nilai konversi
+                    $konversi = $avg * 20;
+                    
+                    $data_skala = [
+                        'entitas' => $entitas['ket_a_e'],
+                        'indikator' => $responden['kode_a_i'],
+                        'rata_rata' => $avg,
+                        'nilai_konversi' => $konversi,
+                    ];
+                    
+                    // Input ke session
+    				array_push($data['input'], $data_skala);
+                    $skala = 0;  // Reset variabel
+                }
+            }
+
+            // die(print('<pre>'.print_r($data,true).'</pre>'));
+
+            $skala_ayam = $this->db->get('hasil_skala_ayam')->result_array();
+            if (count($skala_ayam) > 0) {
+                $this->Ahp_model->update_hasil_skala($data['input']);
+                return;
+            } elseif(count($skala_ayam) < 1) {
+                $this->Ahp_model->add_hasil_skala($data['input']);
+                return;
+            }
+
         }
     }
 ?>

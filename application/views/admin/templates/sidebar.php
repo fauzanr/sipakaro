@@ -35,75 +35,15 @@
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('admin/indikator_ayam') ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fas fa-fw fa-drumstick-bite"></i>
           <span>Ayam</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+        <a class="nav-link" href="<?= base_url('admin/indikator_sapi') ?>">
+        <i class="fas fa-fw fa-hippo"></i>
           <span>Sapi</span></a>
       </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-        <div class="sidebar-heading">
-          Kriteria
-        </div>
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('admin/kriteria') ?>">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Kriteria</span></a>
-      </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Sapi</span></a>
-      </li> -->
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        User
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="">Buttons</a>
-            <a class="collapse-item" href="">Cards</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="">Colors</a>
-            <a class="collapse-item" href="">Borders</a>
-            <a class="collapse-item" href="">Animations</a>
-            <a class="collapse-item" href="">Other</a>
-          </div>
-        </div>
-      </li>
-
+      
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 

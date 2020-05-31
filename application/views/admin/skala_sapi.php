@@ -5,39 +5,25 @@
               processing: true,
               serverside: true,
               ajax: {
-                  'url': '<?= base_url() ?>/admin/get_indikator_ayam',
+                  'url': '<?= base_url() ?>/admin/get_skala_sapi',
                   'dataSrc': ''
               },
-              order: [[0, "desc"], [1, "asc"]],
+              order: [[0, "asc"]],
               pageLength: 50,
               columns: [
-                  { 
-                    "data": "entitas",
-                    render: function(data, type, full, meta) {
-                      if(data == 1) {
-                        return 'RPA';
-                      }
-                      if(data == 2) {
-                        return 'Peternak';
-                      }
-                    }
-                  },
-                  { "data": "nama_kriteria" },
-                  { "data": "kode_a_i" },
-                  { "data": "ket_a_i" },
+                  { "data": "id" },
+                  { "data": "pertanyaan" },
+                  { "data": "kode" },
                   {
                       searchable: false,
                       orderable: false,
-                      data: 'id_a_i',
+                      data: 'id',
                       render: function(data, type, full, meta){
                           if(type === 'display'){
                               tombol = 
                                 '<div class="links">'+
-                                  '<a class="btn btn-primary btn-sm" href="<?=base_url()?>admin/indikator_ayam/edit/'+data+'">'+
+                                  '<a class="btn btn-primary btn-sm" href="<?=base_url()?>admin/skala_sapi/edit/'+data+'">'+
                                   '<i class="fa fa-fw fa-edit"></i></a>'+
-                                  '&nbsp;'+
-                                  '<a class="btn btn-danger btn-sm" href="<?=base_url()?>admin/delete_indikator_ayam/'+data+'">'+
-                                  '<i class="fa fa-fw fa-trash"></i></a>'+
                                 '</div>';                     
                           }
                           return tombol;
@@ -58,19 +44,14 @@
           <div><?=$this->session->flashdata('message')?></div>
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Indikator Ayam</h1>
-
-          <a href="<?=base_url('admin/indikator_ayam/tambah')?>">
-            <button class="btn btn-success mb-4">+ Indikator</button>
-          </a>
+          <h1 class="h3 mb-4 text-gray-800">Pertanyaan Skala Sapi</h1>
 
           <table id="tabel" class="table table-hover" width="100%">
             <thead>
                 <tr>
-                  <th>Entitas</th>
-                  <th>Kriteria</th>
-                  <th>Kode</th>
-                  <th>Keterangan Indikator</th>
+                  <th>ID</th>
+                  <th>Pertanyaan</th>
+                  <th>Kode (excel)</th>
                   <th>Actions</th>
                 </tr>
             </thead>

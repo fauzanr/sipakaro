@@ -1,0 +1,86 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h2 class="h5 mb-4 text-gray-800">Ayam</h2>
+
+    <h2 class="h3 mb-4 text-gray-800 d-flex justify-content-center"><?= $title; ?></h2>
+    <br>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-dark ">
+                <tr>
+                    <th scope="col">Entitas</th>
+                    <th scope="col">Dimensi</th>
+                    <th scope="col">Indikator</th>
+                    <th scope="col">Bobot Indikator</th>
+                    <th scope="col">Nilai Skala</th>
+                    <th scope="col">Bobot Global * Nilai Skala</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $hitung = 0; ?>
+                <?php $counter = 1 ?>
+                <?php foreach($skala_ayam as $s) : ?>
+                    <?php if($s['id_section'] == 2) : ?>
+                        <?php $level0 = $s['kriteria'] ?>
+                        <tr>
+                            <td><?= $s['kriteria'] ?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <?php $counter++ ?>
+                        <?php foreach($skala_ayam as $s) : ?>
+                            <?php if($s['level1'] == $level0) : ?>
+                                <?php $level1 = $s['kriteria'] ?>
+                                <tr>
+                                    <td></td>
+                                    <td><?= $s['kriteria'] ?></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <?php $counter++ ?>
+                                <?php foreach($skala_ayam as $s) : ?>
+                                    <?php if($s['level0'] == $level0 && $s['level1'] == $level1) : ?>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td><?= $s['kriteria'] ?></td>
+                                            <td><?= $s['bobot_global_indikator_dimensi_entitas'] ?></td>
+                                            <td><?= $s['nilai_konversi'] ?></td>
+                                            <td><?= $s['nilai_konversi'] * $s['bobot_global_indikator_dimensi_entitas'] ?></td>
+                                        </tr>
+                                        <?php $counter++ ?>
+                                        <?php $hitung = $hitung + $s['nilai_konversi'] * $s['bobot_global_indikator_dimensi_entitas']; ?>
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                            <?php endif ?>
+                        <?php endforeach ?>
+                    <?php endif ?>
+                <?php endforeach ?>
+                <tr>
+                    <td colspan="5">Total Nilai Keberlanjutan Akhir</td>
+                    <td><?= $hitung ?></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <div class="col-sm-2">
+
+    </div>
+
+    <br>
+    
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
