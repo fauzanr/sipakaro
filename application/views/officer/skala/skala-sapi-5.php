@@ -58,9 +58,120 @@
     </table>
 </div>
 
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body" style="height: 600px">
+                <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                    </div>
+                </div> <canvas id="chart-sapi-peternak" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body" style="height: 600px">
+                <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                    </div>
+                </div> <canvas id="chart-sapi-rph" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 
 <!-- /.container-fluid -->
 
 </div>
 <!-- End of Main Content -->
+
+<!-- Grafik Dashboard -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+<script>
+    $(document).ready(function() {
+
+        // Peternak
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '<?= base_url(); ?>/ajax-sapi-peternak', true);
+        xhr.onload = function() {
+            if(this.status == 200){
+                let ahp = JSON.parse(this.responseText);
+                buatGrafik(ahp, 'Grafik Skala Sapi (Peternak)', '#chart-sapi-peternak');
+            }
+            if(this.status == 403){
+                console.log('Forbiden Status');
+            }
+            if(this.status == 404){
+                console.log('Data Not Found');
+            }
+        }
+        xhr.send();
+
+        // RPA
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open('GET', '<?= base_url(); ?>/ajax-sapi-rph', true);
+        xhr2.onload = function() {
+            if(this.status == 200){
+                let ahp = JSON.parse(this.responseText);
+                buatGrafik(ahp, 'Grafik Skala Sapi (RPH)', '#chart-sapi-rph');
+            }
+            if(this.status == 403){
+                console.log('Forbiden Status');
+            }
+            if(this.status == 404){
+                console.log('Data Not Found');
+            }
+        }
+        xhr2.send();
+
+        function buatGrafik(ahp, judul, id){
+            var ctx = $(id);
+            let indikatorGrafik = {
+                type: 'radar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        data: [],
+                        label: "Nilai Skala",
+                        borderColor: "#458af7",
+                        backgroundColor: '#458af7',
+                        fill: true
+                    }, {
+                        data: [],
+                        label: "Batas",
+                        borderColor: "#3cba9f",
+                        fill: true,
+                        backgroundColor: '#3cba9f'
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: judul
+                    }
+                }
+            };
+            
+            // Push data kedalam indikator grafik yang akan digunakan
+            for (let i = 0; i < ahp.length; i++) {
+                indikatorGrafik.data.labels.push(ahp[i]['indikator']);
+                indikatorGrafik.data.datasets[0].data.push(ahp[i]['nilai_skala']); // Nilai Skala
+                indikatorGrafik.data.datasets[1].data.push('20'); // Batas
+            }
+            // Membuat Grafik
+            var myLineChart = new Chart(ctx, indikatorGrafik);
+        }
+    });
+</script>

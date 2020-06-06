@@ -37,6 +37,12 @@ $route['officer/rekap_ahp_sapi'] = 'officer/page_rekap_ahp_sapi';
 $route['officer/rekap_skala_sapi'] = 'officer/page_rekap_skala_sapi';
 $route['officer/skala_keberlanjutan_sapi'] = 'officer/skala_keberlanjutan_sapi';
 
+// AJAX
+$route['ajax-ayam-peternak'] = 'officer/ajax_ayam_peternak';
+$route['ajax-ayam-rpa'] = 'officer/ajax_ayam_rpa';
+
+$route['ajax-sapi-peternak'] = 'officer/ajax_sapi_peternak';
+$route['ajax-sapi-rph'] = 'officer/ajax_sapi_rph';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -797,5 +797,28 @@
 			$this->load->view('templates/footer');
 
 		}
+
+		// AJAX REQ UNTUK GRAFIK
+		// SKALA AYAM
+		public function ajax_ayam_peternak(){
+			$peternak = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'Peternak'])->result_array();
+    		echo json_encode($peternak);
+		}
+
+		public function ajax_ayam_rpa(){
+			$rpa = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'RPA'])->result_array();
+    		echo json_encode($rpa);
+		}
+
+		// SKALA SAPI
+		public function ajax_sapi_peternak(){
+			$peternak = $this->db->get_where('rekap_skala_sapi', ['entitas' => 1])->result_array();
+    		echo json_encode($peternak);
+		}
+
+		public function ajax_sapi_rph(){
+			$rph = $this->db->get_where('rekap_skala_sapi', ['entitas' => 2])->result_array();
+    		echo json_encode($rph);
+		}
 	}
 ?>
