@@ -8,6 +8,8 @@ $route['login'] = 'auth';
 // ADMIN
 $route['admin/index'] = 'admin';
 
+$route['admin/users'] = 'admin/page_users';
+
 $route['admin/indikator_ayam'] = 'admin/page_indikator_ayam';
 $route['admin/indikator_ayam/tambah'] = 'admin/page_tambah_indikator_ayam';
 $route['admin/indikator_ayam/edit/(:any)'] = 'admin/page_edit_indikator_ayam/$1';
@@ -19,7 +21,7 @@ $route['admin/indikator_sapi/edit/(:any)'] = 'admin/page_edit_indikator_sapi/$1'
 $route['admin/skala_sapi'] = 'admin/page_skala_sapi/$1';
 $route['admin/skala_sapi/edit/(:any)'] = 'admin/page_edit_skala_sapi/$1';
 
-$route['admin/kriteria'] = 'admin/page_kriteria';
+// $route['admin/kriteria'] = 'admin/page_kriteria';
 
 // USER
 $route['user/index'] = 'user';
@@ -40,9 +42,11 @@ $route['officer/skala_keberlanjutan_sapi'] = 'officer/skala_keberlanjutan_sapi';
 // AJAX
 $route['ajax-ayam-peternak'] = 'officer/ajax_ayam_peternak';
 $route['ajax-ayam-rpa'] = 'officer/ajax_ayam_rpa';
+$route['ajax-ayam-total'] = 'officer/ajax_ayam_total';
 
 $route['ajax-sapi-peternak'] = 'officer/ajax_sapi_peternak';
 $route['ajax-sapi-rph'] = 'officer/ajax_sapi_rph';
+$route['ajax-sapi-total'] = 'officer/ajax_sapi_total';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
