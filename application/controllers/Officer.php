@@ -810,6 +810,11 @@
     		echo json_encode($rpa);
 		}
 
+		public function ajax_ayam_total(){
+			$rpa = $this->db->get('hasil_skala_ayam')->result_array();
+    		echo json_encode($rpa);
+		}
+
 		// SKALA SAPI
 		public function ajax_sapi_peternak(){
 			$peternak = $this->db->get_where('rekap_skala_sapi', ['entitas' => 1])->result_array();
@@ -818,6 +823,11 @@
 
 		public function ajax_sapi_rph(){
 			$rph = $this->db->get_where('rekap_skala_sapi', ['entitas' => 2])->result_array();
+    		echo json_encode($rph);
+		}
+
+		public function ajax_sapi_total(){
+			$rph = $this->db->get('rekap_skala_sapi')->result_array();
     		echo json_encode($rph);
 		}
 	}

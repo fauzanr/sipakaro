@@ -54,9 +54,9 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-xl-4">
         <div class="card">
-            <div class="card-body" style="height: 600px">
+            <div class="card-body">
                 <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                     <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                         <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
@@ -69,9 +69,9 @@
         </div>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-xl-4">
         <div class="card">
-            <div class="card-body" style="height: 600px">
+            <div class="card-body">
                 <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                     <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                         <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
@@ -80,6 +80,21 @@
                         <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                     </div>
                 </div> <canvas id="chart-ayam-rpa" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                    </div>
+                </div> <canvas id="chart-ayam-total" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
             </div>
         </div>
     </div>
@@ -130,6 +145,23 @@
             }
         }
         xhr2.send();
+
+        // TOTAL
+        var xhr3 = new XMLHttpRequest();
+        xhr3.open('GET', '<?= base_url(); ?>/ajax-ayam-total', true);
+        xhr3.onload = function() {
+            if(this.status == 200){
+                let ahp = JSON.parse(this.responseText);
+                buatGrafik(ahp, 'Grafik Skala Ayam Keseluruhan', '#chart-ayam-total');
+            }
+            if(this.status == 403){
+                console.log('Forbiden Status');
+            }
+            if(this.status == 404){
+                console.log('Data Not Found');
+            }
+        }
+        xhr3.send();
 
         function buatGrafik(ahp, judul, id){
             var ctx = $(id);

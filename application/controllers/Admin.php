@@ -34,6 +34,17 @@ class Admin extends CI_Controller {
 	// 	$this->load->view('admin/templates/footer');
 	// }
 
+	public function page_users()	{
+		$data['title'] = 'Admin | Users';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/list_user', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
 	public function page_indikator_ayam()	{
 		$data['title'] = 'Admin | Indikator Ayam';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -123,7 +134,44 @@ class Admin extends CI_Controller {
 		
 		echo json_encode($data);
 	}
+
+	public function get_users() {
+		$data = $this->db->get('user')->result_array();
+		
+		echo json_encode($data);
+	}
 	
+	public function set_user_role($val, $id)
+	{
+		if(!$id) return redirect(base_url('admin'));
+		if($val == 3) {
+			$data['role_id'] = 3;
+			$this->db->where('id', $id);
+			$this->db->update('user', $data);
+		} else if($val == 1) {
+			$data['role_id'] = 1;
+			$this->db->where('id', $id);
+			$this->db->update('user', $data);
+		}
+
+		redirect(base_url('admin/page_users'));
+	}
+	
+	public function set_active($val, $id)
+	{
+		if(!$id) return redirect(base_url('admin'));
+		if($val == 1) {
+			$data['is_active'] = 1;
+			$this->db->where('id', $id);
+			$this->db->update('user', $data);
+		} else if($val == 0) {
+			$data['is_active'] = 0;
+			$this->db->where('id', $id);
+			$this->db->update('user', $data);
+		}
+		redirect(base_url('admin/page_users'));
+	}
+
 	public function delete_indikator_sapi($id) {
 		try {
 			$this->db->where('id_s_i', $id);
