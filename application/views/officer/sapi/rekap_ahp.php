@@ -58,6 +58,12 @@
                                 <?php $counter++ ?>
                                 <?php foreach($bobot as $b) : ?>
                                     <?php if($b['level0'] == $level0 && $b['level1'] == $level1) : ?>
+                                        <?php // inisiasi C1 CR
+                                            $c1cr[$b['level0'].'-'.$b['level1']]['level0'] = $b['level0'];
+                                            $c1cr[$b['level0'].'-'.$b['level1']]['level1'] = $b['level1'];
+                                            $c1cr[$b['level0'].'-'.$b['level1']]['C1'] = $b['C1'];
+                                            $c1cr[$b['level0'].'-'.$b['level1']]['CR'] = $b['CR'];
+                                        ?>
                                         <tr>
                                             <th scope="row"><?= $counter ?></th>
                                             <td></td>
@@ -81,9 +87,9 @@
     </div>
 
     <br>
-    <div class="col-sm-2">
-
-    </div>
+    <?php
+        // print("<pre>".print_r($c1cr,true)."</pre>");
+    ?>
     <div class="col-sm-8">
         <div>
             <div class="table-responsive">
@@ -97,24 +103,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">PETERNAKAN</th>
-                            <th scope="row">Ekonomi</th>
-                            <td>0,027</td>
-                            <td>0,030</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">RPH</th>
-                            <td>Sosial</td>
-                            <td>0,148</td>
-                            <td>0,099</td>
-                        </tr>
+                        <?php foreach($c1cr as $k) :?>
                             <tr>
-                            <th scope="row">RPH</th>
-                            <td> Lingkungan</td>
-                            <td>0,549</td>
-                            <td>0,946</td>
-                        </tr>
+                                <th scope="row"><?= $k['level0'] ?></th>
+                                <td><?= $k['level1'] ?></td>
+                                <td><?= $k['C1'] ?></td>
+                                <td><?= $k['CR'] ?></td>
+                            </tr>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
