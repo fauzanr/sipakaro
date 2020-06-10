@@ -34,6 +34,17 @@ class Admin extends CI_Controller {
 	// 	$this->load->view('admin/templates/footer');
 	// }
 
+	public function page_users()	{
+		$data['title'] = 'Admin | Users';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/list_user', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
 	public function page_indikator_ayam()	{
 		$data['title'] = 'Admin | Indikator Ayam';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -110,6 +121,30 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/templates/footer');
 	}
 
+	public function page_skala_sapi()	{
+		$data['title'] = 'Admin | Skala Sapi';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/skala_sapi', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
+	public function page_edit_skala_sapi($id)	{
+		$data['title'] = 'Admin | Edit Skala Sapi';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+		$data['skala'] = $this->db->get_where('opsi_skala_sapi', ['id' => $id])->row_array();
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/edit_skala_sapi', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
 	// FUNGSI
 
 	// public function get_kriteria() {
@@ -118,12 +153,55 @@ class Admin extends CI_Controller {
 	// 	echo json_encode($data);
 	// }
 
+	public function get_skala_sapi() {
+		$data = $this->db->get('opsi_skala_sapi')->result_array();
+		
+		echo json_encode($data);
+	}
+
 	public function get_indikator_sapi() {
 		$data = $this->db->get('indikator_sapi')->result_array();
 		
 		echo json_encode($data);
 	}
+
+	public function get_users() {
+		$data = $this->db->get('user')->result_array();
+		
+		echo json_encode($data);
+	}
 	
+	public function set_user_role($val, $id)
+	{
+		if(!$id) return redirect(base_url('admin'));
+		if($val == 3) {
+			$data['role_id'] = 3;
+			$this->db->where('id', $id);
+			$this->db->update('user', $data);
+		} else if($val == 1) {
+			$data['role_id'] = 1;
+			$this->db->where('id', $id);
+			$this->db->update('user', $data);
+		}
+
+		redirect(base_url('admin/page_users'));
+	}
+	
+	public function set_active($val, $id)
+	{
+		if(!$id) return redirect(base_url('admin'));
+		if($val == 1) {
+			$data['is_active'] = 1;
+			$this->db->where('id', $id);
+			$this->db->update('user', $data);
+		} else if($val == 0) {
+			$data['is_active'] = 0;
+			$this->db->where('id', $id);
+			$this->db->update('user', $data);
+		}
+		redirect(base_url('admin/page_users'));
+	}
+
 	public function delete_indikator_sapi($id) {
 		try {
 			$this->db->where('id_s_i', $id);
@@ -354,6 +432,40 @@ class Admin extends CI_Controller {
 
 
 		redirect(base_url('admin/indikator_ayam'));
+	}
+
+	public function edit_skala_sapi()	{
+		$rules = [
+			[
+				'field' => 'id',
+				'label' => 'ID',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'pertanyaan',
+				'label' => 'Pertanyaan Skala',
+				'rules' => 'required',
+			],
+		];
+
+		$this->form_validation->set_rules($rules);
+
+		if($this->form_validation->run() == FALSE) {
+			$this->page_edit_skala_sapi();
+		} else {
+			$data['pertanyaan'] = $_POST['pertanyaan'];
+			
+			try {
+				$this->db->where('id', $_POST['id']);
+				$this->db->update('opsi_skala_sapi', $data);
+				$this->session->set_flashdata('message', 'Berhasil edit skala');
+			} catch (\Throwable $th) {
+				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+			}
+		}
+
+
+		redirect(base_url('admin/skala_sapi'));
 	}
 
 }

@@ -38,18 +38,25 @@ class Auth extends CI_Controller {
 					'email' => $user['email'],
 					'role_id' => $user['role_id'],
 				];
-				if ($data['role_id'] == 1) {
-					$data['admin_logged_in'] = TRUE;
+
+				if($user['is_active'] == 0) {
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun ini belum dikonfirmasi Admin</div>');
+					return redirect('/login');
 				}
-				$this->session->set_userdata($data);
+
 				if($user['role_id'] == 1){
+					$data['admin_logged_in'] = TRUE;
+					$this->session->set_userdata($data);
 					redirect('/admin');
+					
 				} elseif($user['role_id'] == 3){
+					$this->session->set_userdata($data);
 					redirect('/officer');
-				}
-				else{
+
+				} else {
 					redirect('/user');
 				}
+
 			} else{
 				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah</div>');
 				redirect('/login');	
@@ -78,13 +85,13 @@ class Auth extends CI_Controller {
 				'email' => htmlspecialchars($this->input->post('email', true)),
 				'image' => 'default.jpg',
 				'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-				'role_id' => 2,
-				'is_active' => 1,
+				'role_id' => 3, // officer / dinas
+				'is_active' => 0,
 				'date_created' => time()
 			];
 
 			$this->db->insert('user', $data);
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"	>Sukses! Akunmu sudah dibikin. Tolong login</div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"	>Sukses! Akunmu sudah dibikin. Menunggu konfirmasi admin untuk bisa login</div>');
 			redirect('/login');
 		}
 	}

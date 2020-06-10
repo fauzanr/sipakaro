@@ -24,6 +24,13 @@
           <span>Dashboard</span></a>
       </li>
 
+      <!-- Nav Item - Users -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('admin/users') ?>">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Users</span></a>
+      </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -41,6 +48,20 @@
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url('admin/indikator_sapi') ?>">
         <i class="fas fa-fw fa-hippo"></i>
+          <span>Sapi</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Skala
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('admin/skala_sapi') ?>">
+          <i class="fas fa-fw fa-hippo"></i>
           <span>Sapi</span></a>
       </li>
       

@@ -21,6 +21,18 @@
 			$this->load->view('templates/footer');
 		}
 
+		public function panduan()
+		{
+			$data['title'] = 'Dashboard Officer';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/panduan', $data);
+			$this->load->view('templates/footer');
+		}
+
 // --------------------------------- AHP - AYAM ---------------------------------
 
 		public function page_rekap_ahp()
@@ -796,6 +808,39 @@
 			$this->load->view('officer/skala_keberlanjutan_ayam', $data);
 			$this->load->view('templates/footer');
 
+		}
+
+		// AJAX REQ UNTUK GRAFIK
+		// SKALA AYAM
+		public function ajax_ayam_peternak(){
+			$peternak = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'Peternak'])->result_array();
+    		echo json_encode($peternak);
+		}
+
+		public function ajax_ayam_rpa(){
+			$rpa = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'RPA'])->result_array();
+    		echo json_encode($rpa);
+		}
+
+		public function ajax_ayam_total(){
+			$rpa = $this->db->get('hasil_skala_ayam')->result_array();
+    		echo json_encode($rpa);
+		}
+
+		// SKALA SAPI
+		public function ajax_sapi_peternak(){
+			$peternak = $this->db->get_where('rekap_skala_sapi', ['entitas' => 1])->result_array();
+    		echo json_encode($peternak);
+		}
+
+		public function ajax_sapi_rph(){
+			$rph = $this->db->get_where('rekap_skala_sapi', ['entitas' => 2])->result_array();
+    		echo json_encode($rph);
+		}
+
+		public function ajax_sapi_total(){
+			$rph = $this->db->get('rekap_skala_sapi')->result_array();
+    		echo json_encode($rph);
 		}
 	}
 ?>
