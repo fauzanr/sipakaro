@@ -415,11 +415,11 @@
 					$this->Ahp_sapi_model->normalisasi_rpa_peternak($k);
 				}
 
-				// $this->session->unset_userdata('pengisian_ahp_sapi');
+				$this->session->unset_userdata('pengisian_ahp_sapi');
 				$this->session->unset_userdata('nilai_pengisian_ahp_sapi');
 				$this->session->unset_userdata('indikator_sapi');
 
-				redirect(base_url('officer/skala_sapi'));
+				redirect(base_url('officer'));
 			}
 
 		}
@@ -570,14 +570,9 @@
 
 		// halaman input skala nominal
 		public function skala_sapi($entitas = 1){
-			// $this->start_sess();
 
 			if ($entitas != 1 && $entitas != 2) {
 				echo '404';return;
-			}
-
-			if(!isset($_SESSION['pengisian_ahp_sapi']['nama1'])) {
-				redirect(base_url('officer/input-ahp-sapi'));
 			}
 
 			$data['title'] = 'Perhitungan Skala Sapi';
@@ -605,14 +600,9 @@
 
 		// halaman input skala 2
 		public function skala_sapi_2($entitas = 1) {
-			// $this->start_sess();
 
 			if ($entitas != 1 && $entitas != 2) {
 				echo '404';return;
-			}
-
-			if(!isset($_SESSION['pengisian_ahp_sapi']['nama1'])) {
-				// redirect(base_url('officer/input-ahp-sapi'));
 			}
 
 			$data['title'] = 'Perhitungan Skala Sapi';
@@ -720,7 +710,7 @@
 
 			} else if ($entitas == 2) { // Masukin DB
 
-				if(!isset($_SESSION['pengisian_ahp_sapi']) || !isset($_SESSION['output_skala_sapi'])) {
+				if(!isset($_SESSION['output_skala_sapi'])) {
 					echo 'error: empty session';
 					return;
 				}
@@ -736,7 +726,6 @@
 					$counter++;
 				}
 
-				$this->session->unset_userdata('pengisian_ahp_sapi');
 				$this->session->unset_userdata('nilai_skala_sapi');
 				$this->session->unset_userdata('output_skala_sapi');
 
@@ -780,12 +769,6 @@
 			$this->load->view('templates/footer');
 		}
 
-		private function start_sess() {
-			$_SESSION['pengisian_ahp_sapi']['responden'] = 3;
-			$_SESSION['pengisian_ahp_sapi']['nama1'] = 'A';
-			$_SESSION['pengisian_ahp_sapi']['nama2'] = 'B';
-			$_SESSION['pengisian_ahp_sapi']['nama3'] = 'C';
-		}
 
 		// HITUNG OUTPUT SKALA KEBERLANJUTAN ------------------------------------------------------//
 		public function skala_keberlanjutan(){

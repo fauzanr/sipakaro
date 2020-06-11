@@ -63,7 +63,7 @@
                             <td>Rp 46.870.033,72 - Rp 56.772.306,59</td>
                             <td>Rp 56.772.306,59 - Rp 66.674.579,46</td>
                             <td>≥ Rp 66.674.579,46</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
                     case $i['kode_s_i'] === 'PE2':
@@ -75,7 +75,7 @@
                             <td>40% - 59%</td>
                             <td>20% - 39%</td>
                             <td>0 - 19%</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
                     case $i['kode_s_i'] === 'PE3':
@@ -87,7 +87,7 @@
                             <td>60% - 79%</td>
                             <td>80% - 99%</td>
                             <td>100%</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
                     case $i['kode_s_i'] === 'PE4':
@@ -99,7 +99,7 @@
                             <td>60% - 79%</td>
                             <td>80% - 99%</td>
                             <td>100%</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
                     case $i['kode_s_i'] === 'PS1':
@@ -111,7 +111,7 @@
                             <td>1,09 - 1,15</td>
                             <td>1,16 - 1,22</td>
                             <td>≥ 1,23</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
                     case $i['kode_s_i'] === 'PS2':
@@ -123,7 +123,7 @@
                             <td>60% - 79%</td>
                             <td>80% - 99%</td>
                             <td>100%</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
                     case $i['kode_s_i'] === 'PS3':
@@ -135,7 +135,7 @@
                             <td>30% - 39%</td>
                             <td>40% - 49%</td>
                             <td>50%</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
 					break;
                     case $i['kode_s_i'] === 'PS4':
@@ -147,7 +147,7 @@
                             <td>40% - 59%</td>
                             <td>20% - 39%</td>
                             <td>0 - 19%</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
 					break;
                     case $i['kode_s_i'] === 'PL1':
@@ -159,7 +159,7 @@
                             <td>Rp 39.850.556,22 - Rp 59.775.834,32 </td>
                             <td>Rp 19.925.278,11 - Rp 39.850.556,21 </td>
                             <td>0 - Rp 19.925.278,1</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
 					break;
                     case $i['kode_s_i'] === 'PL2':
@@ -171,7 +171,7 @@
                             <td>Rp 11.216.458.368 - Rp 16.824.687.551,99</td>
                             <td>Rp 5.608.229.184 - Rp 11.216.458.367,99</td>
                             <td>0 - Rp 5.608.229.183,99</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
 					break;
                     case $i['kode_s_i'] === 'PL3':
@@ -183,7 +183,7 @@
                             <td>Rp 26.603.693,08 - Rp 39.905.539,61</td>
                             <td>Rp 13.301.846,54 - Rp 26.603.693,07</td>
                             <td>0 - Rp 13.301.846,53</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
 					break;
 					
@@ -197,7 +197,7 @@
                             <td> Rp 600.426.344,84 - Rp 795.913.876,22</td>
                             <td> Rp 795.913.876,23 - Rp 991.401.407,61</td>
                             <td>≥ Rp 991.401.407,62</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
 					case $i['kode_s_i'] === 'RE2':
@@ -209,7 +209,7 @@
                             <td>60% - 79%</td>
                             <td>80% - 99%</td>
                             <td>100%</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
 					case $i['kode_s_i'] === 'RS1':
@@ -221,7 +221,7 @@
                             <td>20,16 - 26,87</td>
                             <td>26,88 - 33,59</td>
                             <td>≥ 33,6</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
 					case $i['kode_s_i'] === 'RS2':
@@ -233,7 +233,7 @@
                             <td>60% - 79%</td>
                             <td>80% - 99%</td>
                             <td>100%</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
 					case $i['kode_s_i'] === 'RS3':
@@ -245,7 +245,7 @@
                             <td>30% - 39%</td>
                             <td>40% - 49%</td>
                             <td>50%</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
 					case $i['kode_s_i'] === 'RS4':
@@ -257,7 +257,7 @@
                             <td>40% - 59%</td>
                             <td>20% - 39%</td>
                             <td>0 - 19%</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
 					case $i['kode_s_i'] === 'RL1':
@@ -269,7 +269,7 @@
                             <td> Rp 1.575.844 - Rp 2.363.765</td>
                             <td> Rp 787.922 - Rp 1.575.843</td>
                             <td> Rp 0 - Rp 787.921</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
 					case $i['kode_s_i'] === 'RL2':
@@ -281,7 +281,7 @@
                             <td> Rp 1.557.245 - Rp 2.335.867</td>
                             <td> Rp 778.623 - Rp 1.557.244</td>
                             <td> Rp 0 - Rp 778.662</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;
 					case $i['kode_s_i'] === 'RL3':
@@ -293,7 +293,7 @@
                             <td> Rp 2.603.693 - Rp 3.905.539 </td>
                             <td> Rp 1,301.846 - Rp 2.603.692</td>
                             <td> Rp 0 - Rp 1.301.845</td>
-                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="2"></td>
+                            <td><input required type="number" class="form-control" min="1" max="6" name="'.$i['kode_s_i'].'" value="1"></td>
                         </tr>';
                     break;							
                 } ?>
