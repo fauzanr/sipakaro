@@ -13,7 +13,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label"><?= $p['pertanyaan'] ?></label>
             <div class="col-sm-5">
-                <input required type="number" step="0.01" class="form-control" name="<?= $p['kode'] ?>" value="1">
+                <input required type="number" step="0.01" class="form-control" name="<?= $p['kode'] ?>" value="<?= isset($_SESSION['nilai_skala_sapi'][$p['kode']]) ? $_SESSION['nilai_skala_sapi'][$p['kode']] : '1' ?>">
             </div>
         </div>
     <?php endforeach ?>
