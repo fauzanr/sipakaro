@@ -35,6 +35,9 @@
               <div class="text-center">
                 <a class="small" href="<?= base_url(); ?>auth">Sudah punya akun? Login!</a>
               </div>
+              <div class="text-center">
+                <a class="small" href="<?= base_url(); ?>welcome">Kembali ke halaman awal</a>
+              </div>
             </div>
           </div>
         </div>

@@ -21,6 +21,18 @@
 			$this->load->view('templates/footer');
 		}
 
+		public function panduan()
+		{
+			$data['title'] = 'Dashboard Officer';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/panduan', $data);
+			$this->load->view('templates/footer');
+		}
+
 // --------------------------------- AHP - AYAM ---------------------------------
 
 		public function page_rekap_ahp()
