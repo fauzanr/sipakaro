@@ -18,6 +18,7 @@
                 <th scope="col">Performansi Lapangan</th>
                 <th scope="col">Skor Indikator</th>
                 <th scope="col">Nilai Skala</th>
+                <th scope="col">Status Skala</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,20 @@
                 <td><?= $r['performansi_lapangan'] ?></td>
                 <td><?= $r['skor_indikator'] ?></td>
                 <td><?= $r['nilai_skala'] ?></td>
+                <td><?php
+                    if ($r['nilai_skala'] < 25) {
+                        echo 'Buruk';
+                    }
+                    if ($r['nilai_skala'] >= 25 && $r['nilai_skala'] < 49.99) {
+                        echo 'Kurang';
+                    }
+                    if ($r['nilai_skala'] >= 50 && $r['nilai_skala'] < 74.99) {
+                        echo 'Baik';
+                    }
+                    if ($r['nilai_skala'] >= 75) {
+                        echo 'Sangat Baik';
+                    }                  
+                 ?></td>
             </tr>
         <?php endforeach ?>
         </tbody>
@@ -43,6 +58,7 @@
                 <th scope="col">Performansi Lapangan</th>
                 <th scope="col">Skor Indikator</th>
                 <th scope="col">Nilai Skala</th>
+                <th scope="col">Status Skala</th>
             </tr>
         </thead>
         <tbody>
@@ -52,6 +68,20 @@
                 <td><?= $r['performansi_lapangan'] ?></td>
                 <td><?= $r['skor_indikator'] ?></td>
                 <td><?= $r['nilai_skala'] ?></td>
+                <td><?php
+                    if ($r['nilai_skala'] < 25) {
+                        echo 'Buruk';
+                    }
+                    if ($r['nilai_skala'] >= 25 && $r['nilai_skala'] < 49.99) {
+                        echo 'Kurang';
+                    }
+                    if ($r['nilai_skala'] >= 50 && $r['nilai_skala'] < 74.99) {
+                        echo 'Baik';
+                    }
+                    if ($r['nilai_skala'] >= 75) {
+                        echo 'Sangat Baik';
+                    }                  
+                 ?></td>
             </tr>
         <?php endforeach ?>
         </tbody>

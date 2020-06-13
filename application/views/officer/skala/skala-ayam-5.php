@@ -16,6 +16,7 @@
                 <th scope="col">Indikator</th>
                 <th scope="col">Rata-Rata</th>
                 <th scope="col">Nilai Konversi</th>
+                <th scope="col">Status Skala</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,20 @@
                 <td><label for=""></label><?= $r['indikator'] ?></td>
                 <td><?= $r['rata_rata'] ?></td>
                 <td><?= $r['nilai_konversi'] ?></td>
+                <td><?php
+                    if ($r['nilai_konversi'] < 25) {
+                        echo 'Buruk';
+                    }
+                    if ($r['nilai_konversi'] >= 25 && $r['nilai_konversi'] < 49.99) {
+                        echo 'Kurang';
+                    }
+                    if ($r['nilai_konversi'] >= 50 && $r['nilai_konversi'] < 74.99) {
+                        echo 'Baik';
+                    }
+                    if ($r['nilai_konversi'] >= 75) {
+                        echo 'Sangat Baik';
+                    }                  
+                 ?></td>
             </tr>
         <?php endforeach ?>
         </tbody>
@@ -39,6 +54,7 @@
                 <th scope="col">Indikator</th>
                 <th scope="col">Rata-Rata</th>
                 <th scope="col">Nilai Konversi</th>
+                <th scope="col">Status Skala</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +63,20 @@
                 <td><label for=""></label><?= $r['indikator'] ?></td>
                 <td><?= $r['rata_rata'] ?></td>
                 <td><?= $r['nilai_konversi'] ?></td>
+                <td><?php
+                if ($r['nilai_konversi'] < 25) {
+                    echo 'Buruk';
+                }
+                if ($r['nilai_konversi'] >= 25 && $r['nilai_konversi'] < 49.99) {
+                    echo 'Kurang';
+                }
+                if ($r['nilai_konversi'] >= 50 && $r['nilai_konversi'] < 74.99) {
+                    echo 'Baik';
+                }
+                if ($r['nilai_konversi'] >= 75) {
+                    echo 'Sangat Baik';
+                }                  
+                 ?></td>
             </tr>
         <?php endforeach ?>
         </tbody>
