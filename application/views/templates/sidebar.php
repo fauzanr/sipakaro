@@ -38,6 +38,29 @@
         <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Heading -->
+
+        <div class="sidebar-heading">
+          Dashboard
+        </div>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/index') ? 'active' : '' ?>">
+          <a class="nav-link" href="<?= base_url('officer/index') ?>">
+          <i class="fa fa-fw fa-archive"></i>
+            <span>Deskripsi</span></a>
+        </li>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/panduan') ? 'active' : '' ?>">
+          <a class="nav-link" href="<?= base_url('officer/panduan') ?>">
+          <i class="fa fa-fw fa-info"></i>
+            <span>Panduan</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Heading -->
         <div class="sidebar-heading">
           Dinas
         </div>
