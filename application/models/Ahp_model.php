@@ -204,7 +204,7 @@
 
             if($hitung[0]['level0'] != NULL) {  
                 // MENGHITUNG KONSISTENSI RASIO 
-                if($counter > 2 && $counter < 11){
+                if($counter > 2 && $counter < 16){
                     $hitung = $this->Ahp_model->get_rasio_by_idikator($counter);
                     // Indikator lebih dari 2
                     for ($i=0; $i < $counter; $i++) { 
