@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2020 at 09:59 AM
+-- Generation Time: Jun 28, 2020 at 03:16 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -231,7 +231,7 @@ CREATE TABLE `indikator_ayam` (
 --
 
 INSERT INTO `indikator_ayam` (`id_a_i`, `nama_kriteria`, `kode_a_i`, `ket_a_i`, `entitas`) VALUES
-(1, 'Lingkungan', 'PL1', 'Rata-rata konsumsi air yang dihabiskan untuk 1 ekor ayam', 2),
+(1, 'Lingkungan', 'PL1', 'Rata-rata konsumsi air yang dihabiskan untuk 1 ekor Ayam', 2),
 (2, 'Lingkungan', 'PL2', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor ayam', 2),
 (3, 'Sosial', 'PS1', 'Kualitas DOC yang diberikan perusahaan inti kepada peternak plasma', 2),
 (4, 'Sosial', 'PS2', 'Kulitas obat dan vaksin yang diberikan perusahaan inti kepada peternak plasma', 2),
@@ -249,7 +249,7 @@ INSERT INTO `indikator_ayam` (`id_a_i`, `nama_kriteria`, `kode_a_i`, `ket_a_i`, 
 (16, 'Ekonomi', 'PE3', 'Rata-rata harga pakan untuk 1 ekor ayam dalam 1 kali masa panen', 2),
 (17, 'Ekonomi', 'PE4', 'Rata-rata harga obat & vaksin untuk 1 ekor ayam dalam 1 kali masa panen', 2),
 (19, 'Lingkungan', 'RL1', 'Konsumsi Air', 1),
-(20, 'Lingkungan', 'RL2', 'Konsumsi Listrik', 1),
+(20, 'Lingkungan', 'RL2', 'Konsumsi Listrik Per Bulan', 1),
 (21, 'Lingkungan', 'RL3', 'Manajemen Limbah', 1),
 (22, 'Sosial', 'RS1', 'Perbandingan pekerja pria dan wanita', 1),
 (23, 'Sosial', 'RS2', 'Sertifikasi Halal', 1),
@@ -392,10 +392,15 @@ CREATE TABLE `opsi_skala_ayam` (
 
 INSERT INTO `opsi_skala_ayam` (`id`, `keterangan`, `nilai_skala`, `deskripsi_skala`, `id_indikator`) VALUES
 (1, 'Sangat Buruk', '1', 'X > Rp. 526.30', 20),
-(2, 'Buruk', '2', 'Rp.355.63 < X &le; Rp.526.30 ', 20),
-(3, 'Cukup', '3', 'Rp.184.96 < X &le; Rp.355.83', 20),
-(4, 'Baik', '4', 'Rp.14.29 < X &le; Rp.184.96', 20),
-(5, 'Sangat Baik', '5', 'X &le; Rp.14.29', 20);
+(2, 'Buruk', '2', 'Rp.355.63 < X < Rp.526.30', 20),
+(3, 'Cukup', '3', 'Rp.184.96 < X < Rp.355.83', 20),
+(4, 'Baik', '4', 'Rp.14.29 < X < Rp.184.96', 20),
+(5, 'Sangat Baik', '5', 'X > Rp.14.29', 20),
+(6, 'Sangat Tinggi', '1', '> 157.7905 m3', 1),
+(7, 'Tinggi', '2', '154.6990 m3 < X < 157.7905 m3', 1),
+(8, 'Cukup', '3', '151.6015 m3 < X < 154.6960 m3', 1),
+(9, 'Rendah', '4', '148.5070 m3 < X < 151.6015 m3', 1),
+(10, 'Sangat Rendah', '5', 'X &lt; 148.5070 m3', 1);
 
 -- --------------------------------------------------------
 
@@ -476,7 +481,12 @@ INSERT INTO `rasio` (`id`, `banyak_indikator`, `nilai_rasio`) VALUES
 (6, '7', '1.32'),
 (7, '8', '1.41'),
 (8, '9', '1.45'),
-(9, '10', '1.49');
+(9, '10', '1.49'),
+(10, '11', '1.51'),
+(11, '12', '1.48'),
+(12, '13', '1.56'),
+(13, '14', '1.47'),
+(14, '15', '1.59');
 
 -- --------------------------------------------------------
 
@@ -1567,7 +1577,7 @@ ALTER TABLE `opsi_ahp`
 -- AUTO_INCREMENT for table `opsi_skala_ayam`
 --
 ALTER TABLE `opsi_skala_ayam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `opsi_skala_sapi`
@@ -1579,7 +1589,7 @@ ALTER TABLE `opsi_skala_sapi`
 -- AUTO_INCREMENT for table `rasio`
 --
 ALTER TABLE `rasio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `rasio_sapi`
