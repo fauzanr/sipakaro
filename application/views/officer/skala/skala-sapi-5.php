@@ -228,9 +228,9 @@
             
             // Push data kedalam indikator grafik yang akan digunakan
             for (let i = 0; i < ahp.length; i++) {
-                indikatorGrafik.data.labels.push(ahp[i]['indikator']);
+                indikatorGrafik.data.labels.push(ahp[i]['kode_indikator']);
                 indikatorGrafik.data.datasets[0].data.push(ahp[i]['nilai_skala']); // Nilai Skala
-                indikatorGrafik.data.datasets[1].data.push('20'); // Batas
+                indikatorGrafik.data.datasets[1].data.push('50'); // Batas
             }
             // Membuat Grafik
             var myLineChart = new Chart(ctx, indikatorGrafik);

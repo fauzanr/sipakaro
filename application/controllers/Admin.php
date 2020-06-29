@@ -515,6 +515,25 @@ class Admin extends CI_Controller {
 		redirect(base_url('admin/skala_sapi'));
 	}
 
+	public function edit_pilihan_skala_sapi() {
+		if(!isset($_POST['kode_s_i'])) die(400);
+
+		for($i=1; $i<=6; $i++) {
+			$data['pilihan_skala_'.$i] = $_POST['pilihan_skala_'.$i];
+		}
+
+		try {
+			$this->db->where('kode_s_i', $_POST['kode_s_i']);
+			$this->db->update('indikator_sapi', $data);
+			$this->session->set_flashdata('message', 'Berhasil edit pilihan skala '.$_POST['kode_s_i']);
+		} catch (\Throwable $th) {
+			$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+		}
+
+		redirect(base_url('admin/skala_sapi'));
+
+	}
+
 	public function edit_skala_ayam(){
 
 		$rules = [];
