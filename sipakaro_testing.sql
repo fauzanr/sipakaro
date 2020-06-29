@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2020 at 03:16 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Jun 29, 2020 at 02:29 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -269,34 +267,40 @@ CREATE TABLE `indikator_sapi` (
   `nama_kriteria` varchar(100) NOT NULL,
   `kode_s_i` varchar(100) NOT NULL,
   `ket_s_i` varchar(255) NOT NULL,
-  `entitas` int(11) NOT NULL
+  `entitas` int(11) NOT NULL,
+  `pilihan_skala_1` varchar(300) DEFAULT NULL,
+  `pilihan_skala_2` varchar(300) DEFAULT NULL,
+  `pilihan_skala_3` varchar(300) DEFAULT NULL,
+  `pilihan_skala_4` varchar(300) DEFAULT NULL,
+  `pilihan_skala_5` varchar(300) DEFAULT NULL,
+  `pilihan_skala_6` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `indikator_sapi`
 --
 
-INSERT INTO `indikator_sapi` (`id_s_i`, `nama_kriteria`, `kode_s_i`, `ket_s_i`, `entitas`) VALUES
-(1, 'Lingkungan', 'RL1', 'Rata-rata konsumsi air yang dihabiskan untuk 1 ekor ayam', 2),
-(2, 'Lingkungan', 'RL2', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor ayam', 2),
-(3, 'Lingkungan', 'RL3', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor sapi', 2),
-(4, 'Sosial', 'RS1', 'Kualitas DOC yang diberikan perusahaan inti kepada peternak plasma', 2),
-(5, 'Sosial', 'RS2', 'Kulitas obat dan vaksin yang diberikan perusahaan inti kepada peternak plasma', 2),
-(6, 'Sosial', 'RS3', 'Jadwal pengiriman DOC', 2),
-(7, 'Sosial', 'RS4', 'Frekuensi bimbingan teknis yang diberikan perusahaan inti kepada peternak plasma\r\ndalam 1 bulan', 2),
-(8, 'Ekonomi', 'RE1', 'Rata-rata pendapatan yang diperoleh peternak plasma untuk 1 ekor ayam dalam 1 kali\r\nmasa panen', 2),
-(9, 'Ekonomi', 'RE2', 'Rata-rata harga DOC untuk 1 ekor', 2),
-(10, 'Lingkungan', 'PL1', 'Konsumsi Air', 1),
-(11, 'Lingkungan', 'PL2', 'Konsumsi Listrik', 1),
-(12, 'Lingkungan', 'PL3', 'Manajemen Limbah', 1),
-(13, 'Sosial', 'PS1', 'Perbandingan pekerja pria dan wanita', 1),
-(14, 'Sosial', 'PS2', 'Sertifikasi Halal', 1),
-(15, 'Sosial', 'PS3', 'Perbandingan pekerja pria dan wanita', 1),
-(16, 'Sosial', 'PS4', 'Sertifikasi Halal', 1),
-(17, 'Ekonomi', 'PE1', 'Laba', 1),
-(18, 'Ekonomi', 'PE2', 'Biaya tenaga kerja', 1),
-(19, 'Ekonomi', 'PE3', 'Biaya administrasi/pajak', 1),
-(20, 'Ekonomi', 'PE4', 'Biaya pengiriman', 1);
+INSERT INTO `indikator_sapi` (`id_s_i`, `nama_kriteria`, `kode_s_i`, `ket_s_i`, `entitas`, `pilihan_skala_1`, `pilihan_skala_2`, `pilihan_skala_3`, `pilihan_skala_4`, `pilihan_skala_5`, `pilihan_skala_6`) VALUES
+(1, 'Lingkungan', 'RL1', 'Rata-rata konsumsi air yang dihabiskan untuk 1 ekor ayam', 2, '', '', '', '', '', ''),
+(2, 'Lingkungan', 'RL2', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor ayam', 2, '', 'tes2', '', '', 'tesss', ''),
+(3, 'Lingkungan', 'RL3', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor sapi', 2, '', '', '', '', '', ''),
+(4, 'Sosial', 'RS1', 'Kualitas DOC yang diberikan perusahaan inti kepada peternak plasma', 2, '', '', '', '', '', ''),
+(5, 'Sosial', 'RS2', 'Kulitas obat dan vaksin yang diberikan perusahaan inti kepada peternak plasma', 2, '', '', '', '', '', ''),
+(6, 'Sosial', 'RS3', 'Jadwal pengiriman DOC', 2, '', '', '', '', '', ''),
+(7, 'Sosial', 'RS4', 'Frekuensi bimbingan teknis yang diberikan perusahaan inti kepada peternak plasma\r\ndalam 1 bulan', 2, '', '', '', '', '', ''),
+(8, 'Ekonomi', 'RE1', 'Rata-rata pendapatan yang diperoleh peternak plasma untuk 1 ekor ayam dalam 1 kali\r\nmasa panen', 2, '', '', '', '', '', ''),
+(9, 'Ekonomi', 'RE2', 'Rata-rata harga DOC untuk 1 ekor', 2, '', '', '', '', '', ''),
+(10, 'Lingkungan', 'PL1', 'Konsumsi Air', 1, '', '', '', '', '', ''),
+(11, 'Lingkungan', 'PL2', 'Konsumsi Listrik', 1, '', '', '', '', '', ''),
+(12, 'Lingkungan', 'PL3', 'Manajemen Limbah', 1, '', '', '', '', '', ''),
+(13, 'Sosial', 'PS1', 'Perbandingan pekerja pria dan wanita', 1, '', '', '', '', '', ''),
+(14, 'Sosial', 'PS2', 'Sertifikasi Halal', 1, '', '', '', '', '', ''),
+(15, 'Sosial', 'PS3', 'Perbandingan pekerja pria dan wanita', 1, '', '', '', '', '', ''),
+(16, 'Sosial', 'PS4', 'Sertifikasi Halal', 1, '', '', '', '', '', ''),
+(17, 'Ekonomi', 'PE1', 'Laba', 1, 'Rp 17.163.215,1 - Rp 27.065.497,96', 'Rp 27.065.487,97 - Rp 36.967.760,84', 'Rp 36.967.760,85 - Rp 46.870.033,71', 'Rp 46.870.033,72 - Rp 56.772.306,59', 'Rp 56.772.306,6 - Rp 66.674579,46', '> Rp 66.674.579,47'),
+(18, 'Ekonomi', 'PE2', 'Biaya tenaga kerja', 1, '100%', '80% - 99%', '60% - 79%', '40% - 59%', '20% - 39%', '0 - 19%'),
+(19, 'Ekonomi', 'PE3', 'Biaya administrasi/pajak', 1, '', '', '', '', '', ''),
+(20, 'Ekonomi', 'PE4', 'Biaya pengiriman', 1, '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -420,7 +424,7 @@ CREATE TABLE `opsi_skala_sapi` (
 --
 
 INSERT INTO `opsi_skala_sapi` (`id`, `pertanyaan`, `entitas`, `kode`) VALUES
-(1, 'Populasi Sapi Potong\r\n', 1, 'B6'),
+(1, 'Populasi Sapi Potong', 1, 'B6'),
 (2, 'Rata-rata harga jual sapi', 1, 'B7'),
 (3, 'Jumlah RTP', 1, 'B8'),
 (4, 'Jumlah peternakan sapi potong besar', 1, 'B9'),
@@ -535,26 +539,26 @@ CREATE TABLE `rekap_skala_sapi` (
 --
 
 INSERT INTO `rekap_skala_sapi` (`id`, `kode_indikator`, `performansi_lapangan`, `skor_indikator`, `nilai_skala`, `entitas`) VALUES
-(21, 'PE1', '1', '2', '33.333333333333', 1),
-(22, 'PE2', '0.01', '2', '33.333333333333', 1),
-(23, 'PE3', '12', '2', '33.333333333333', 1),
-(24, 'PE4', '0.01', '2', '33.333333333333', 1),
-(25, 'PL1', '12', '2', '33.333333333333', 1),
-(26, 'PL2', '1', '2', '33.333333333333', 1),
-(27, 'PL3', '1', '2', '33.333333333333', 1),
-(28, 'PS1', '1', '2', '33.333333333333', 1),
-(29, 'PS2', '1', '2', '33.333333333333', 1),
-(30, 'PS3', '1', '2', '33.333333333333', 1),
-(31, 'PS4', '1', '2', '33.333333333333', 1),
-(32, 'RE1', '0', '2', '33.333333333333', 2),
-(33, 'RE2', '12', '2', '33.333333333333', 2),
-(34, 'RL1', '360', '2', '33.333333333333', 2),
-(35, 'RL2', '360', '2', '33.333333333333', 2),
-(36, 'RL3', '1', '2', '33.333333333333', 2),
-(37, 'RS1', '1', '2', '33.333333333333', 2),
-(38, 'RS2', '1', '2', '33.333333333333', 2),
-(39, 'RS3', '0.01', '2', '33.333333333333', 2),
-(40, 'RS4', '0.083333333333333', '2', '33.333333333333', 2);
+(41, 'PE1', '1', '1', '16.666666666667', 1),
+(42, 'PE2', '0.01', '6', '100', 1),
+(43, 'PE3', '12', '4', '66.666666666667', 1),
+(44, 'PE4', '0.01', '1', '16.666666666667', 1),
+(45, 'PL1', '12', '2', '33.333333333333', 1),
+(46, 'PL2', '1', '1', '16.666666666667', 1),
+(47, 'PL3', '1', '1', '16.666666666667', 1),
+(48, 'PS1', '1', '2', '33.333333333333', 1),
+(49, 'PS2', '1', '4', '66.666666666667', 1),
+(50, 'PS3', '1', '1', '16.666666666667', 1),
+(51, 'PS4', '1', '3', '50', 1),
+(52, 'RE1', '0', '1', '16.666666666667', 2),
+(53, 'RE2', '12', '3', '50', 2),
+(54, 'RL1', '360', '5', '83.333333333333', 2),
+(55, 'RL2', '360', '1', '16.666666666667', 2),
+(56, 'RL3', '1', '6', '100', 2),
+(57, 'RS1', '1', '1', '16.666666666667', 2),
+(58, 'RS2', '1', '2', '33.333333333333', 2),
+(59, 'RS3', '0.01', '1', '16.666666666667', 2),
+(60, 'RS4', '0.083333333333333', '3', '50', 2);
 
 -- --------------------------------------------------------
 
@@ -1530,121 +1534,101 @@ ALTER TABLE `user_role`
 --
 ALTER TABLE `bobot_indikator`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
 --
 -- AUTO_INCREMENT for table `bobot_indikator_sapi`
 --
 ALTER TABLE `bobot_indikator_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
 --
 -- AUTO_INCREMENT for table `entitas_ayam`
 --
 ALTER TABLE `entitas_ayam`
   MODIFY `id_a_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `entitas_sapi`
 --
 ALTER TABLE `entitas_sapi`
   MODIFY `id_s_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `hasil_skala_ayam`
 --
 ALTER TABLE `hasil_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
 --
 -- AUTO_INCREMENT for table `indikator_ayam`
 --
 ALTER TABLE `indikator_ayam`
   MODIFY `id_a_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
 --
 -- AUTO_INCREMENT for table `indikator_sapi`
 --
 ALTER TABLE `indikator_sapi`
   MODIFY `id_s_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- AUTO_INCREMENT for table `opsi_ahp`
 --
 ALTER TABLE `opsi_ahp`
   MODIFY `id_opsi_ahp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
 --
 -- AUTO_INCREMENT for table `opsi_skala_ayam`
 --
 ALTER TABLE `opsi_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `opsi_skala_sapi`
 --
 ALTER TABLE `opsi_skala_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
 --
 -- AUTO_INCREMENT for table `rasio`
 --
 ALTER TABLE `rasio`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- AUTO_INCREMENT for table `rasio_sapi`
 --
 ALTER TABLE `rasio_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT for table `rekap_skala_sapi`
 --
 ALTER TABLE `rekap_skala_sapi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT for table `responden`
 --
 ALTER TABLE `responden`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=317;
-
 --
 -- AUTO_INCREMENT for table `responden_sapi`
 --
 ALTER TABLE `responden_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
-
 --
 -- AUTO_INCREMENT for table `responden_skala_ayam`
 --
 ALTER TABLE `responden_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
-
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `section_sapi`
 --
 ALTER TABLE `section_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- Constraints for dumped tables
 --
@@ -1707,7 +1691,6 @@ ALTER TABLE `responden_sapi`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
