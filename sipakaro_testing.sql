@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2020 at 08:39 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Jun 29, 2020 at 02:29 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -486,6 +484,32 @@ CREATE TABLE `rekap_skala_sapi` (
   `entitas` int(11) NOT NULL,
   `id_pengisi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rekap_skala_sapi`
+--
+
+INSERT INTO `rekap_skala_sapi` (`id`, `kode_indikator`, `performansi_lapangan`, `skor_indikator`, `nilai_skala`, `entitas`) VALUES
+(41, 'PE1', '1', '1', '16.666666666667', 1),
+(42, 'PE2', '0.01', '6', '100', 1),
+(43, 'PE3', '12', '4', '66.666666666667', 1),
+(44, 'PE4', '0.01', '1', '16.666666666667', 1),
+(45, 'PL1', '12', '2', '33.333333333333', 1),
+(46, 'PL2', '1', '1', '16.666666666667', 1),
+(47, 'PL3', '1', '1', '16.666666666667', 1),
+(48, 'PS1', '1', '2', '33.333333333333', 1),
+(49, 'PS2', '1', '4', '66.666666666667', 1),
+(50, 'PS3', '1', '1', '16.666666666667', 1),
+(51, 'PS4', '1', '3', '50', 1),
+(52, 'RE1', '0', '1', '16.666666666667', 2),
+(53, 'RE2', '12', '3', '50', 2),
+(54, 'RL1', '360', '5', '83.333333333333', 2),
+(55, 'RL2', '360', '1', '16.666666666667', 2),
+(56, 'RL3', '1', '6', '100', 2),
+(57, 'RS1', '1', '1', '16.666666666667', 2),
+(58, 'RS2', '1', '2', '33.333333333333', 2),
+(59, 'RS3', '0.01', '1', '16.666666666667', 2),
+(60, 'RS4', '0.083333333333333', '3', '50', 2);
 
 -- --------------------------------------------------------
 
@@ -1282,115 +1306,101 @@ ALTER TABLE `user_role`
 --
 ALTER TABLE `bobot_indikator`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
+--
+-- AUTO_INCREMENT for table `bobot_indikator_sapi`
+--
+ALTER TABLE `bobot_indikator_sapi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `entitas_ayam`
 --
 ALTER TABLE `entitas_ayam`
   MODIFY `id_a_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `entitas_sapi`
 --
 ALTER TABLE `entitas_sapi`
   MODIFY `id_s_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `hasil_skala_ayam`
 --
 ALTER TABLE `hasil_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
 --
 -- AUTO_INCREMENT for table `indikator_ayam`
 --
 ALTER TABLE `indikator_ayam`
   MODIFY `id_a_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
 --
 -- AUTO_INCREMENT for table `indikator_sapi`
 --
 ALTER TABLE `indikator_sapi`
   MODIFY `id_s_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- AUTO_INCREMENT for table `opsi_ahp`
 --
 ALTER TABLE `opsi_ahp`
   MODIFY `id_opsi_ahp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
 --
 -- AUTO_INCREMENT for table `opsi_skala_ayam`
 --
 ALTER TABLE `opsi_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `opsi_skala_sapi`
 --
 ALTER TABLE `opsi_skala_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
 --
 -- AUTO_INCREMENT for table `rasio`
 --
 ALTER TABLE `rasio`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- AUTO_INCREMENT for table `rasio_sapi`
 --
 ALTER TABLE `rasio_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT for table `rekap_skala_sapi`
 --
 ALTER TABLE `rekap_skala_sapi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT for table `responden`
 --
 ALTER TABLE `responden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=317;
 --
 -- AUTO_INCREMENT for table `responden_sapi`
 --
 ALTER TABLE `responden_sapi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
 --
 -- AUTO_INCREMENT for table `responden_skala_ayam`
 --
 ALTER TABLE `responden_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
-
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `section_sapi`
 --
 ALTER TABLE `section_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- Constraints for dumped tables
 --
@@ -1448,7 +1458,6 @@ ALTER TABLE `responden_sapi`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
