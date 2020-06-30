@@ -6,9 +6,19 @@
 <h1 class="h3 mb-4 text-gray-800" style="float: right;">Pengisian Kuesioner Skala</h1>
 <h1 class="h3 mb-4 text-gray-800">Skala</h1>
 
+    <script>
+    function konfirmasi() {
+        let result = confirm('hapus data skala?');
+        if (result) {
+            window.location = '<?= base_url('officer/hapus_skala_sapi/'.$_SESSION['id_user']) ?>'
+        }
+    }
+    </script>
+    <a onclick="konfirmasi()"><button class="btn btn-danger">Hapus data skala</button></a>
 <br>
 
 <h2 class="h4 mb-4 text-gray-800 d-flex justify-content-center">PETERNAK</h2>
+
 
 <div class="table-responsive">
     <table class="table table-hover">

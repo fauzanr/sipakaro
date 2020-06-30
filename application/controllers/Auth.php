@@ -37,6 +37,7 @@ class Auth extends CI_Controller {
 				$data = [
 					'email' => $user['email'],
 					'role_id' => $user['role_id'],
+					'id_user' => $user['id'],
 				];
 
 				if($user['is_active'] == 0) {
