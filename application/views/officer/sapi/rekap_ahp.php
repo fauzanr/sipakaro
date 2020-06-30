@@ -6,7 +6,11 @@
 
     <script>
     function konfirmasi() {
+<<<<<<< HEAD
         let result = confirm('hapus data AHP sapi?');
+=======
+        let result = confirm('hapus data AHP?');
+>>>>>>> 63bc0fb... Major update
         if (result) {
             window.location = '<?= base_url('officer/hapus_ahp_sapi/'.$_SESSION['id_user']) ?>'
         }
