@@ -206,14 +206,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $counters = 1 ?>
+                        <?php $counter2 = 1 ?>
                         <?php foreach($indikator as $j) :?>
                         <tr>
-                            <th scope="row"><?= $counters ?></th>
-                                <td><?= $j['kode_a_i'] ?></td>
-                                <td><?= $j['ket_a_i'] ?></td>
-                            </tr>
-                        <?php $counters++ ?>
+                        <th scope="row"><?= $counter2 ?></th>
+                        <td><?= $j['kode_a_i'] ?></td>
+                        <td><?= $j['ket_a_i'] ?></td>
+                        </tr>
+                        <?php $counter2++ ?>
                         <?php endforeach ?>
                     </tbody>
                 </table>                                        
