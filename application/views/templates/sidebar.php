@@ -16,24 +16,7 @@
       <?php if($_SESSION['role_id'] === '3') : ?>
         <!-- Heading -->
 
-        <div class="sidebar-heading">
-          Dashboard
-        </div>
-
-        <!-- Nav Item - Charts -->
-        <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/index') ? 'active' : '' ?>">
-          <a class="nav-link" href="<?= base_url('officer/index') ?>">
-          <i class="fa fa-fw fa-archive"></i>
-            <span>Deskripsi</span></a>
-        </li>
-
-        <!-- Nav Item - Charts -->
-        <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/panduan') ? 'active' : '' ?>">
-          <a class="nav-link" href="<?= base_url('officer/panduan') ?>">
-          <i class="fa fa-fw fa-info"></i>
-            <span>Panduan</span></a>
-        </li>
-
+       
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
@@ -80,7 +63,6 @@
                     <?php foreach ($section_pagination as $s) : ?>
                       <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp/'.$s['id']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_data_ahp/'.$s['id'] ?>"><?= $s['nama_section'] ?> <?= isset($_SESSION['nilai_pengisian_ahp'][$s['id']]) ? '<i class="fa fa-check"></i>' : '' ?></a>
                     <?php endforeach ?>
-                    <a class="ml-4" href="<?= base_url('officer/insert_pengisian_ahp') ?>"><button class="btn btn-warning py-2">Selesai !</button></a>
                   <?php endif; ?>
               <h6 class="collapse-header">Sapi:</h6>
                 <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp_sapi') ? 'active' : '' || (isset($_SESSION['pengisian_ahp_sapi']) && isset($_SESSION['nilai_pengisian_ahp_sapi'])) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/input-ahp-sapi">Hitung Bobot Indikator</a>
