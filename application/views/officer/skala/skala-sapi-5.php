@@ -6,9 +6,19 @@
 <h1 class="h3 mb-4 text-gray-800" style="float: right;">Pengisian Kuesioner Skala</h1>
 <h1 class="h3 mb-4 text-gray-800">Skala</h1>
 
+    <script>
+    function konfirmasi() {
+        let result = confirm('hapus data skala?');
+        if (result) {
+            window.location = '<?= base_url('officer/hapus_skala_sapi/'.$_SESSION['id_user']) ?>'
+        }
+    }
+    </script>
+    <a onclick="konfirmasi()"><button class="btn btn-danger">Hapus data skala</button></a>
 <br>
 
 <h2 class="h4 mb-4 text-gray-800 d-flex justify-content-center">PETERNAK</h2>
+
 
 <div class="table-responsive">
     <table class="table table-hover">
@@ -228,9 +238,9 @@
             
             // Push data kedalam indikator grafik yang akan digunakan
             for (let i = 0; i < ahp.length; i++) {
-                indikatorGrafik.data.labels.push(ahp[i]['indikator']);
+                indikatorGrafik.data.labels.push(ahp[i]['kode_indikator']);
                 indikatorGrafik.data.datasets[0].data.push(ahp[i]['nilai_skala']); // Nilai Skala
-                indikatorGrafik.data.datasets[1].data.push('20'); // Batas
+                indikatorGrafik.data.datasets[1].data.push('50'); // Batas
             }
             // Membuat Grafik
             var myLineChart = new Chart(ctx, indikatorGrafik);

@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2020 at 03:16 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Jun 30, 2020 at 08:56 AM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -78,55 +76,6 @@ INSERT INTO `bobot_indikator` (`id`, `kriteria`, `bobot`, `C1`, `CR`, `id_sectio
 (32, 'RL3', '0.57552317', '0.06992657', '0.12056305', 9, '0.18233260', '0.03894918'),
 (33, 'RS1', '0.24812030', '0', '0', 10, '0.11276701', '0.02408885'),
 (34, 'RS2', '0.75187969', '0', '0', 10, '0.34171823', '0.07299652');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bobot_indikator_sapi`
---
-
-CREATE TABLE `bobot_indikator_sapi` (
-  `id` int(11) NOT NULL,
-  `kriteria` varchar(10) NOT NULL,
-  `bobot` varchar(10) NOT NULL,
-  `C1` varchar(10) DEFAULT NULL,
-  `CR` varchar(10) DEFAULT NULL,
-  `id_section` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
---
--- Dumping data for table `bobot_indikator_sapi`
---
-
-INSERT INTO `bobot_indikator_sapi` (`id`, `kriteria`, `bobot`, `C1`, `CR`, `id_section`) VALUES
-(1, 'Peternak', '0.24812030', '0', '0', 2),
-(2, 'RPH', '0.75187969', '0', '0', 2),
-(3, 'Ekonomi', '0.13870296', '0', '0', 3),
-(4, 'Lingkungan', '0.28577386', '0', '0', 3),
-(5, 'Sosial', '0.57552317', '0', '0', 3),
-(6, 'PE1', '0.09498436', '0.10711435', '0.11901595', 4),
-(7, 'PE2', '0.16794856', '0.10711435', '0.11901595', 4),
-(8, 'PE3', '0.27233904', '0.10711435', '0.11901595', 4),
-(9, 'PE4', '0.46472801', '0.10711435', '0.11901595', 4),
-(10, 'PL1', '0.13870296', '0.06992657', '0.12056305', 5),
-(11, 'PL2', '0.28577386', '0.06992657', '0.12056305', 5),
-(12, 'PL3', '0.57552317', '0.06992657', '0.12056305', 5),
-(13, 'PS1', '0.09498436', '0.10711435', '0.11901595', 6),
-(14, 'PS2', '0.16794856', '0.10711435', '0.11901595', 6),
-(15, 'PS3', '0.27233904', '0.10711435', '0.11901595', 6),
-(16, 'PS4', '0.46472801', '0.10711435', '0.11901595', 6),
-(17, 'Ekonomi', '0.13870296', '0', '0', 7),
-(18, 'Lingkungan', '0.28577386', '0', '0', 7),
-(19, 'Sosial', '0.57552317', '0', '0', 7),
-(20, 'RE1', '0.24812030', '0', '0', 8),
-(21, 'RE2', '0.75187969', '0', '0', 8),
-(22, 'RL1', '0.13870296', '0.06992657', '0.12056305', 9),
-(23, 'RL2', '0.28577386', '0.06992657', '0.12056305', 9),
-(24, 'RL3', '0.57552317', '0.06992657', '0.12056305', 9),
-(25, 'RS1', '0.09498436', '0.10711435', '0.11901595', 10),
-(26, 'RS2', '0.16794856', '0.10711435', '0.11901595', 10),
-(27, 'RS3', '0.27233904', '0.10711435', '0.11901595', 10),
-(28, 'RS4', '0.46472801', '0.10711435', '0.11901595', 10);
 
 -- --------------------------------------------------------
 
@@ -269,34 +218,40 @@ CREATE TABLE `indikator_sapi` (
   `nama_kriteria` varchar(100) NOT NULL,
   `kode_s_i` varchar(100) NOT NULL,
   `ket_s_i` varchar(255) NOT NULL,
-  `entitas` int(11) NOT NULL
+  `entitas` int(11) NOT NULL,
+  `pilihan_skala_1` varchar(300) DEFAULT NULL,
+  `pilihan_skala_2` varchar(300) DEFAULT NULL,
+  `pilihan_skala_3` varchar(300) DEFAULT NULL,
+  `pilihan_skala_4` varchar(300) DEFAULT NULL,
+  `pilihan_skala_5` varchar(300) DEFAULT NULL,
+  `pilihan_skala_6` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `indikator_sapi`
 --
 
-INSERT INTO `indikator_sapi` (`id_s_i`, `nama_kriteria`, `kode_s_i`, `ket_s_i`, `entitas`) VALUES
-(1, 'Lingkungan', 'RL1', 'Rata-rata konsumsi air yang dihabiskan untuk 1 ekor ayam', 2),
-(2, 'Lingkungan', 'RL2', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor ayam', 2),
-(3, 'Lingkungan', 'RL3', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor sapi', 2),
-(4, 'Sosial', 'RS1', 'Kualitas DOC yang diberikan perusahaan inti kepada peternak plasma', 2),
-(5, 'Sosial', 'RS2', 'Kulitas obat dan vaksin yang diberikan perusahaan inti kepada peternak plasma', 2),
-(6, 'Sosial', 'RS3', 'Jadwal pengiriman DOC', 2),
-(7, 'Sosial', 'RS4', 'Frekuensi bimbingan teknis yang diberikan perusahaan inti kepada peternak plasma\r\ndalam 1 bulan', 2),
-(8, 'Ekonomi', 'RE1', 'Rata-rata pendapatan yang diperoleh peternak plasma untuk 1 ekor ayam dalam 1 kali\r\nmasa panen', 2),
-(9, 'Ekonomi', 'RE2', 'Rata-rata harga DOC untuk 1 ekor', 2),
-(10, 'Lingkungan', 'PL1', 'Konsumsi Air', 1),
-(11, 'Lingkungan', 'PL2', 'Konsumsi Listrik', 1),
-(12, 'Lingkungan', 'PL3', 'Manajemen Limbah', 1),
-(13, 'Sosial', 'PS1', 'Perbandingan pekerja pria dan wanita', 1),
-(14, 'Sosial', 'PS2', 'Sertifikasi Halal', 1),
-(15, 'Sosial', 'PS3', 'Perbandingan pekerja pria dan wanita', 1),
-(16, 'Sosial', 'PS4', 'Sertifikasi Halal', 1),
-(17, 'Ekonomi', 'PE1', 'Laba', 1),
-(18, 'Ekonomi', 'PE2', 'Biaya tenaga kerja', 1),
-(19, 'Ekonomi', 'PE3', 'Biaya administrasi/pajak', 1),
-(20, 'Ekonomi', 'PE4', 'Biaya pengiriman', 1);
+INSERT INTO `indikator_sapi` (`id_s_i`, `nama_kriteria`, `kode_s_i`, `ket_s_i`, `entitas`, `pilihan_skala_1`, `pilihan_skala_2`, `pilihan_skala_3`, `pilihan_skala_4`, `pilihan_skala_5`, `pilihan_skala_6`) VALUES
+(1, 'Lingkungan', 'RL1', 'Rata-rata konsumsi air yang dihabiskan untuk 1 ekor ayam', 2, '', '', '', '', '', ''),
+(2, 'Lingkungan', 'RL2', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor ayam', 2, '', 'tes2', '', '', 'tesss', ''),
+(3, 'Lingkungan', 'RL3', 'Rata-rata konsumsi listrik yang dihabiskan untuk 1 ekor sapi', 2, '', '', '', '', '', ''),
+(4, 'Sosial', 'RS1', 'Kualitas DOC yang diberikan perusahaan inti kepada peternak plasma', 2, '', '', '', '', '', ''),
+(5, 'Sosial', 'RS2', 'Kulitas obat dan vaksin yang diberikan perusahaan inti kepada peternak plasma', 2, '', '', '', '', '', ''),
+(6, 'Sosial', 'RS3', 'Jadwal pengiriman DOC', 2, '', '', '', '', '', ''),
+(7, 'Sosial', 'RS4', 'Frekuensi bimbingan teknis yang diberikan perusahaan inti kepada peternak plasma\r\ndalam 1 bulan', 2, '', '', '', '', '', ''),
+(8, 'Ekonomi', 'RE1', 'Rata-rata pendapatan yang diperoleh peternak plasma untuk 1 ekor ayam dalam 1 kali\r\nmasa panen', 2, '', '', '', '', '', ''),
+(9, 'Ekonomi', 'RE2', 'Rata-rata harga DOC untuk 1 ekor', 2, '', '', '', '', '', ''),
+(10, 'Lingkungan', 'PL1', 'Konsumsi Air', 1, '', '', '', '', '', ''),
+(11, 'Lingkungan', 'PL2', 'Konsumsi Listrik', 1, '', '', '', '', '', ''),
+(12, 'Lingkungan', 'PL3', 'Manajemen Limbah', 1, '', '', '', '', '', ''),
+(13, 'Sosial', 'PS1', 'Perbandingan pekerja pria dan wanita', 1, '', '', '', '', '', ''),
+(14, 'Sosial', 'PS2', 'Sertifikasi Halal', 1, '', '', '', '', '', ''),
+(15, 'Sosial', 'PS3', 'Perbandingan pekerja pria dan wanita', 1, '', '', '', '', '', ''),
+(16, 'Sosial', 'PS4', 'Sertifikasi Halal', 1, '', '', '', '', '', ''),
+(17, 'Ekonomi', 'PE1', 'Laba', 1, 'Rp 17.163.215,1 - Rp 27.065.497,96', 'Rp 27.065.487,97 - Rp 36.967.760,84', 'Rp 36.967.760,85 - Rp 46.870.033,71', 'Rp 46.870.033,72 - Rp 56.772.306,59', 'Rp 56.772.306,6 - Rp 66.674579,46', '> Rp 66.674.579,47'),
+(18, 'Ekonomi', 'PE2', 'Biaya tenaga kerja', 1, '100%', '80% - 99%', '60% - 79%', '40% - 59%', '20% - 39%', '0 - 19%'),
+(19, 'Ekonomi', 'PE3', 'Biaya administrasi/pajak', 1, '', '', '', '', '', ''),
+(20, 'Ekonomi', 'PE4', 'Biaya pengiriman', 1, '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -420,7 +375,7 @@ CREATE TABLE `opsi_skala_sapi` (
 --
 
 INSERT INTO `opsi_skala_sapi` (`id`, `pertanyaan`, `entitas`, `kode`) VALUES
-(1, 'Populasi Sapi Potong\r\n', 1, 'B6'),
+(1, 'Populasi Sapi Potong', 1, 'B6'),
 (2, 'Rata-rata harga jual sapi', 1, 'B7'),
 (3, 'Jumlah RTP', 1, 'B8'),
 (4, 'Jumlah peternakan sapi potong besar', 1, 'B9'),
@@ -527,34 +482,9 @@ CREATE TABLE `rekap_skala_sapi` (
   `performansi_lapangan` varchar(200) NOT NULL,
   `skor_indikator` varchar(200) NOT NULL,
   `nilai_skala` varchar(200) NOT NULL,
-  `entitas` int(11) NOT NULL
+  `entitas` int(11) NOT NULL,
+  `id_pengisi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rekap_skala_sapi`
---
-
-INSERT INTO `rekap_skala_sapi` (`id`, `kode_indikator`, `performansi_lapangan`, `skor_indikator`, `nilai_skala`, `entitas`) VALUES
-(21, 'PE1', '1', '2', '33.333333333333', 1),
-(22, 'PE2', '0.01', '2', '33.333333333333', 1),
-(23, 'PE3', '12', '2', '33.333333333333', 1),
-(24, 'PE4', '0.01', '2', '33.333333333333', 1),
-(25, 'PL1', '12', '2', '33.333333333333', 1),
-(26, 'PL2', '1', '2', '33.333333333333', 1),
-(27, 'PL3', '1', '2', '33.333333333333', 1),
-(28, 'PS1', '1', '2', '33.333333333333', 1),
-(29, 'PS2', '1', '2', '33.333333333333', 1),
-(30, 'PS3', '1', '2', '33.333333333333', 1),
-(31, 'PS4', '1', '2', '33.333333333333', 1),
-(32, 'RE1', '0', '2', '33.333333333333', 2),
-(33, 'RE2', '12', '2', '33.333333333333', 2),
-(34, 'RL1', '360', '2', '33.333333333333', 2),
-(35, 'RL2', '360', '2', '33.333333333333', 2),
-(36, 'RL3', '1', '2', '33.333333333333', 2),
-(37, 'RS1', '1', '2', '33.333333333333', 2),
-(38, 'RS2', '1', '2', '33.333333333333', 2),
-(39, 'RS3', '0.01', '2', '33.333333333333', 2),
-(40, 'RS4', '0.083333333333333', '2', '33.333333333333', 2);
 
 -- --------------------------------------------------------
 
@@ -892,7 +822,17 @@ INSERT INTO `responden` (`id`, `id_pengisi`, `nama_responden`, `nilai_responden`
 (313, 3, 'BB', '0.33', 'RL1', 'RL2', 9),
 (314, 3, 'BB', '0.33', 'RL1', 'RL3', 9),
 (315, 3, 'BB', '0.33', 'RL2', 'RL3', 9),
-(316, 3, 'BB', '0.33', 'RS1', 'RS2', 10);
+(316, 3, 'BB', '0.33', 'RS1', 'RS2', 10),
+(317, 3, 'tess', '0.33', 'RPA', 'Peternak', 2),
+(318, 3, 'tess', '0.33', 'Ekonomi', 'Lingkungan', 3),
+(319, 3, 'tess', '0.33', 'Ekonomi', 'Sosial', 3),
+(320, 3, 'tess', '0.33', 'Lingkungan', 'Sosial', 3),
+(321, 3, 'tess', '0.33', 'PE1', 'PE2', 4),
+(322, 3, 'tess', '0.33', 'PE1', 'PE3', 4),
+(323, 3, 'tess', '0.33', 'PE1', 'PE4', 4),
+(324, 3, 'tess', '0.33', 'PE2', 'PE3', 4),
+(325, 3, 'tess', '0.33', 'PE2', 'PE4', 4),
+(326, 3, 'tess', '0.33', 'PL1', 'PL2', 5);
 
 -- --------------------------------------------------------
 
@@ -909,236 +849,6 @@ CREATE TABLE `responden_sapi` (
   `kriteria_2` varchar(20) DEFAULT NULL,
   `id_section` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
---
--- Dumping data for table `responden_sapi`
---
-
-INSERT INTO `responden_sapi` (`id`, `id_pengisi`, `nama_responden`, `nilai_responden`, `kriteria_1`, `kriteria_2`, `id_section`) VALUES
-(1, 3, 'AA', '0.33', 'Peternak', 'RPH', 2),
-(2, 3, 'CC', '0.33', 'Peternak', 'RPH', 2),
-(3, 3, 'AA', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(4, 3, 'CC', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(5, 3, 'AA', '0.33', 'Ekonomi', 'Sosial', 3),
-(6, 3, 'CC', '0.33', 'Ekonomi', 'Sosial', 3),
-(7, 3, 'AA', '0.33', 'Lingkungan', 'Sosial', 3),
-(8, 3, 'CC', '0.33', 'Lingkungan', 'Sosial', 3),
-(9, 3, 'AA', '0.33', 'PE1', 'PE2', 4),
-(10, 3, 'CC', '0.33', 'PE1', 'PE2', 4),
-(11, 3, 'AA', '0.33', 'PE1', 'PE3', 4),
-(12, 3, 'CC', '0.33', 'PE1', 'PE3', 4),
-(13, 3, 'AA', '0.33', 'PE1', 'PE4', 4),
-(14, 3, 'CC', '0.33', 'PE1', 'PE4', 4),
-(15, 3, 'AA', '0.33', 'PE2', 'PE3', 4),
-(16, 3, 'CC', '0.33', 'PE2', 'PE3', 4),
-(17, 3, 'AA', '0.33', 'PE2', 'PE4', 4),
-(18, 3, 'CC', '0.33', 'PE2', 'PE4', 4),
-(19, 3, 'AA', '0.33', 'PE3', 'PE4', 4),
-(20, 3, 'CC', '0.33', 'PE3', 'PE4', 4),
-(21, 3, 'AA', '0.33', 'PL1', 'PL2', 5),
-(22, 3, 'CC', '0.33', 'PL1', 'PL2', 5),
-(23, 3, 'AA', '0.33', 'PL1', 'PL3', 5),
-(24, 3, 'CC', '0.33', 'PL1', 'PL3', 5),
-(25, 3, 'AA', '0.33', 'PL2', 'PL3', 5),
-(26, 3, 'CC', '0.33', 'PL2', 'PL3', 5),
-(27, 3, 'AA', '0.33', 'PS1', 'PS2', 6),
-(28, 3, 'CC', '0.33', 'PS1', 'PS2', 6),
-(29, 3, 'AA', '0.33', 'PS1', 'PS3', 6),
-(30, 3, 'CC', '0.33', 'PS1', 'PS3', 6),
-(31, 3, 'AA', '0.33', 'PS1', 'PS4', 6),
-(32, 3, 'CC', '0.33', 'PS1', 'PS4', 6),
-(33, 3, 'AA', '0.33', 'PS2', 'PS3', 6),
-(34, 3, 'CC', '0.33', 'PS2', 'PS3', 6),
-(35, 3, 'AA', '0.33', 'PS2', 'PS4', 6),
-(36, 3, 'CC', '0.33', 'PS2', 'PS4', 6),
-(37, 3, 'AA', '0.33', 'PS3', 'PS4', 6),
-(38, 3, 'CC', '0.33', 'PS3', 'PS4', 6),
-(39, 3, 'AA', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(40, 3, 'CC', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(41, 3, 'AA', '0.33', 'Ekonomi', 'Sosial', 7),
-(42, 3, 'CC', '0.33', 'Ekonomi', 'Sosial', 7),
-(43, 3, 'AA', '0.33', 'Lingkungan', 'Sosial', 7),
-(44, 3, 'CC', '0.33', 'Lingkungan', 'Sosial', 7),
-(45, 3, 'AA', '0.33', 'RE1', 'RE2', 8),
-(46, 3, 'CC', '0.33', 'RE1', 'RE2', 8),
-(47, 3, 'AA', '0.33', 'RL1', 'RL2', 9),
-(48, 3, 'CC', '0.33', 'RL1', 'RL2', 9),
-(49, 3, 'AA', '0.33', 'RL1', 'RL3', 9),
-(50, 3, 'CC', '0.33', 'RL1', 'RL3', 9),
-(51, 3, 'AA', '0.33', 'RL2', 'RL3', 9),
-(52, 3, 'CC', '0.33', 'RL2', 'RL3', 9),
-(53, 3, 'AA', '0.33', 'RS1', 'RS2', 10),
-(54, 3, 'CC', '0.33', 'RS1', 'RS2', 10),
-(55, 3, 'AA', '0.33', 'RS1', 'RS3', 10),
-(56, 3, 'CC', '0.33', 'RS1', 'RS3', 10),
-(57, 3, 'AA', '0.33', 'RS1', 'RS4', 10),
-(58, 3, 'CC', '0.33', 'RS1', 'RS4', 10),
-(59, 3, 'AA', '0.33', 'RS2', 'RS3', 10),
-(60, 3, 'CC', '0.33', 'RS2', 'RS3', 10),
-(61, 3, 'AA', '0.33', 'RS2', 'RS4', 10),
-(62, 3, 'CC', '0.33', 'RS2', 'RS4', 10),
-(63, 3, 'AA', '0.33', 'RS3', 'RS4', 10),
-(64, 3, 'CC', '0.33', 'RS3', 'RS4', 10),
-(65, 3, '1', '0.33', 'Peternak', 'RPH', 2),
-(66, 3, '2', '0.33', 'Peternak', 'RPH', 2),
-(67, 3, '3', '0.33', 'Peternak', 'RPH', 2),
-(68, 3, '4', '0.33', 'Peternak', 'RPH', 2),
-(69, 3, '5', '0.33', 'Peternak', 'RPH', 2),
-(70, 3, '1', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(71, 3, '2', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(72, 3, '3', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(73, 3, '4', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(74, 3, '5', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(75, 3, '1', '0.33', 'Ekonomi', 'Sosial', 3),
-(76, 3, '2', '0.33', 'Ekonomi', 'Sosial', 3),
-(77, 3, '3', '0.33', 'Ekonomi', 'Sosial', 3),
-(78, 3, '4', '0.33', 'Ekonomi', 'Sosial', 3),
-(79, 3, '5', '0.33', 'Ekonomi', 'Sosial', 3),
-(80, 3, '1', '0.33', 'Lingkungan', 'Sosial', 3),
-(81, 3, '2', '0.33', 'Lingkungan', 'Sosial', 3),
-(82, 3, '3', '0.33', 'Lingkungan', 'Sosial', 3),
-(83, 3, '4', '0.33', 'Lingkungan', 'Sosial', 3),
-(84, 3, '5', '0.33', 'Lingkungan', 'Sosial', 3),
-(85, 3, '1', '0.33', 'PE1', 'PE2', 4),
-(86, 3, '2', '0.33', 'PE1', 'PE2', 4),
-(87, 3, '3', '0.33', 'PE1', 'PE2', 4),
-(88, 3, '4', '0.33', 'PE1', 'PE2', 4),
-(89, 3, '5', '0.33', 'PE1', 'PE2', 4),
-(90, 3, '1', '0.33', 'PE1', 'PE3', 4),
-(91, 3, '2', '0.33', 'PE1', 'PE3', 4),
-(92, 3, '3', '0.33', 'PE1', 'PE3', 4),
-(93, 3, '4', '0.33', 'PE1', 'PE3', 4),
-(94, 3, '5', '0.33', 'PE1', 'PE3', 4),
-(95, 3, '1', '0.33', 'PE1', 'PE4', 4),
-(96, 3, '2', '0.33', 'PE1', 'PE4', 4),
-(97, 3, '3', '0.33', 'PE1', 'PE4', 4),
-(98, 3, '4', '0.33', 'PE1', 'PE4', 4),
-(99, 3, '5', '0.33', 'PE1', 'PE4', 4),
-(100, 3, '1', '0.33', 'PE2', 'PE3', 4),
-(101, 3, '2', '0.33', 'PE2', 'PE3', 4),
-(102, 3, '3', '0.33', 'PE2', 'PE3', 4),
-(103, 3, '4', '0.33', 'PE2', 'PE3', 4),
-(104, 3, '5', '0.33', 'PE2', 'PE3', 4),
-(105, 3, '1', '0.33', 'PE2', 'PE4', 4),
-(106, 3, '2', '0.33', 'PE2', 'PE4', 4),
-(107, 3, '3', '0.33', 'PE2', 'PE4', 4),
-(108, 3, '4', '0.33', 'PE2', 'PE4', 4),
-(109, 3, '5', '0.33', 'PE2', 'PE4', 4),
-(110, 3, '1', '0.33', 'PE3', 'PE4', 4),
-(111, 3, '2', '0.33', 'PE3', 'PE4', 4),
-(112, 3, '3', '0.33', 'PE3', 'PE4', 4),
-(113, 3, '4', '0.33', 'PE3', 'PE4', 4),
-(114, 3, '5', '0.33', 'PE3', 'PE4', 4),
-(115, 3, '1', '0.33', 'PL1', 'PL2', 5),
-(116, 3, '2', '0.33', 'PL1', 'PL2', 5),
-(117, 3, '3', '0.33', 'PL1', 'PL2', 5),
-(118, 3, '4', '0.33', 'PL1', 'PL2', 5),
-(119, 3, '5', '0.33', 'PL1', 'PL2', 5),
-(120, 3, '1', '0.33', 'PL1', 'PL3', 5),
-(121, 3, '2', '0.33', 'PL1', 'PL3', 5),
-(122, 3, '3', '0.33', 'PL1', 'PL3', 5),
-(123, 3, '4', '0.33', 'PL1', 'PL3', 5),
-(124, 3, '5', '0.33', 'PL1', 'PL3', 5),
-(125, 3, '1', '0.33', 'PL2', 'PL3', 5),
-(126, 3, '2', '0.33', 'PL2', 'PL3', 5),
-(127, 3, '3', '0.33', 'PL2', 'PL3', 5),
-(128, 3, '4', '0.33', 'PL2', 'PL3', 5),
-(129, 3, '5', '0.33', 'PL2', 'PL3', 5),
-(130, 3, '1', '0.33', 'PS1', 'PS2', 6),
-(131, 3, '2', '0.33', 'PS1', 'PS2', 6),
-(132, 3, '3', '0.33', 'PS1', 'PS2', 6),
-(133, 3, '4', '0.33', 'PS1', 'PS2', 6),
-(134, 3, '5', '0.33', 'PS1', 'PS2', 6),
-(135, 3, '1', '0.33', 'PS1', 'PS3', 6),
-(136, 3, '2', '0.33', 'PS1', 'PS3', 6),
-(137, 3, '3', '0.33', 'PS1', 'PS3', 6),
-(138, 3, '4', '0.33', 'PS1', 'PS3', 6),
-(139, 3, '5', '0.33', 'PS1', 'PS3', 6),
-(140, 3, '1', '0.33', 'PS1', 'PS4', 6),
-(141, 3, '2', '0.33', 'PS1', 'PS4', 6),
-(142, 3, '3', '0.33', 'PS1', 'PS4', 6),
-(143, 3, '4', '0.33', 'PS1', 'PS4', 6),
-(144, 3, '5', '0.33', 'PS1', 'PS4', 6),
-(145, 3, '1', '0.33', 'PS2', 'PS3', 6),
-(146, 3, '2', '0.33', 'PS2', 'PS3', 6),
-(147, 3, '3', '0.33', 'PS2', 'PS3', 6),
-(148, 3, '4', '0.33', 'PS2', 'PS3', 6),
-(149, 3, '5', '0.33', 'PS2', 'PS3', 6),
-(150, 3, '1', '0.33', 'PS2', 'PS4', 6),
-(151, 3, '2', '0.33', 'PS2', 'PS4', 6),
-(152, 3, '3', '0.33', 'PS2', 'PS4', 6),
-(153, 3, '4', '0.33', 'PS2', 'PS4', 6),
-(154, 3, '5', '0.33', 'PS2', 'PS4', 6),
-(155, 3, '1', '0.33', 'PS3', 'PS4', 6),
-(156, 3, '2', '0.33', 'PS3', 'PS4', 6),
-(157, 3, '3', '0.33', 'PS3', 'PS4', 6),
-(158, 3, '4', '0.33', 'PS3', 'PS4', 6),
-(159, 3, '5', '0.33', 'PS3', 'PS4', 6),
-(160, 3, '1', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(161, 3, '2', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(162, 3, '3', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(163, 3, '4', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(164, 3, '5', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(165, 3, '1', '0.33', 'Ekonomi', 'Sosial', 7),
-(166, 3, '2', '0.33', 'Ekonomi', 'Sosial', 7),
-(167, 3, '3', '0.33', 'Ekonomi', 'Sosial', 7),
-(168, 3, '4', '0.33', 'Ekonomi', 'Sosial', 7),
-(169, 3, '5', '0.33', 'Ekonomi', 'Sosial', 7),
-(170, 3, '1', '0.33', 'Lingkungan', 'Sosial', 7),
-(171, 3, '2', '0.33', 'Lingkungan', 'Sosial', 7),
-(172, 3, '3', '0.33', 'Lingkungan', 'Sosial', 7),
-(173, 3, '4', '0.33', 'Lingkungan', 'Sosial', 7),
-(174, 3, '5', '0.33', 'Lingkungan', 'Sosial', 7),
-(175, 3, '1', '0.33', 'RE1', 'RE2', 8),
-(176, 3, '2', '0.33', 'RE1', 'RE2', 8),
-(177, 3, '3', '0.33', 'RE1', 'RE2', 8),
-(178, 3, '4', '0.33', 'RE1', 'RE2', 8),
-(179, 3, '5', '0.33', 'RE1', 'RE2', 8),
-(180, 3, '1', '0.33', 'RL1', 'RL2', 9),
-(181, 3, '2', '0.33', 'RL1', 'RL2', 9),
-(182, 3, '3', '0.33', 'RL1', 'RL2', 9),
-(183, 3, '4', '0.33', 'RL1', 'RL2', 9),
-(184, 3, '5', '0.33', 'RL1', 'RL2', 9),
-(185, 3, '1', '0.33', 'RL1', 'RL3', 9),
-(186, 3, '2', '0.33', 'RL1', 'RL3', 9),
-(187, 3, '3', '0.33', 'RL1', 'RL3', 9),
-(188, 3, '4', '0.33', 'RL1', 'RL3', 9),
-(189, 3, '5', '0.33', 'RL1', 'RL3', 9),
-(190, 3, '1', '0.33', 'RL2', 'RL3', 9),
-(191, 3, '2', '0.33', 'RL2', 'RL3', 9),
-(192, 3, '3', '0.33', 'RL2', 'RL3', 9),
-(193, 3, '4', '0.33', 'RL2', 'RL3', 9),
-(194, 3, '5', '0.33', 'RL2', 'RL3', 9),
-(195, 3, '1', '0.33', 'RS1', 'RS2', 10),
-(196, 3, '2', '0.33', 'RS1', 'RS2', 10),
-(197, 3, '3', '0.33', 'RS1', 'RS2', 10),
-(198, 3, '4', '0.33', 'RS1', 'RS2', 10),
-(199, 3, '5', '0.33', 'RS1', 'RS2', 10),
-(200, 3, '1', '0.33', 'RS1', 'RS3', 10),
-(201, 3, '2', '0.33', 'RS1', 'RS3', 10),
-(202, 3, '3', '0.33', 'RS1', 'RS3', 10),
-(203, 3, '4', '0.33', 'RS1', 'RS3', 10),
-(204, 3, '5', '0.33', 'RS1', 'RS3', 10),
-(205, 3, '1', '0.33', 'RS1', 'RS4', 10),
-(206, 3, '2', '0.33', 'RS1', 'RS4', 10),
-(207, 3, '3', '0.33', 'RS1', 'RS4', 10),
-(208, 3, '4', '0.33', 'RS1', 'RS4', 10),
-(209, 3, '5', '0.33', 'RS1', 'RS4', 10),
-(210, 3, '1', '0.33', 'RS2', 'RS3', 10),
-(211, 3, '2', '0.33', 'RS2', 'RS3', 10),
-(212, 3, '3', '0.33', 'RS2', 'RS3', 10),
-(213, 3, '4', '0.33', 'RS2', 'RS3', 10),
-(214, 3, '5', '0.33', 'RS2', 'RS3', 10),
-(215, 3, '1', '0.33', 'RS2', 'RS4', 10),
-(216, 3, '2', '0.33', 'RS2', 'RS4', 10),
-(217, 3, '3', '0.33', 'RS2', 'RS4', 10),
-(218, 3, '4', '0.33', 'RS2', 'RS4', 10),
-(219, 3, '5', '0.33', 'RS2', 'RS4', 10),
-(220, 3, '1', '0.33', 'RS3', 'RS4', 10),
-(221, 3, '2', '0.33', 'RS3', 'RS4', 10),
-(222, 3, '3', '0.33', 'RS3', 'RS4', 10),
-(223, 3, '4', '0.33', 'RS3', 'RS4', 10),
-(224, 3, '5', '0.33', 'RS3', 'RS4', 10);
 
 -- --------------------------------------------------------
 
@@ -1379,13 +1089,6 @@ ALTER TABLE `bobot_indikator`
   ADD KEY `id_section` (`id_section`);
 
 --
--- Indexes for table `bobot_indikator_sapi`
---
-ALTER TABLE `bobot_indikator_sapi`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_section` (`id_section`);
-
---
 -- Indexes for table `entitas_ayam`
 --
 ALTER TABLE `entitas_ayam`
@@ -1472,7 +1175,8 @@ ALTER TABLE `rasio_sapi`
 ALTER TABLE `rekap_skala_sapi`
   ADD PRIMARY KEY (`id`),
   ADD KEY `kode_indikator` (`kode_indikator`),
-  ADD KEY `entitas` (`entitas`);
+  ADD KEY `entitas` (`entitas`),
+  ADD KEY `id_pengisi` (`id_pengisi`);
 
 --
 -- Indexes for table `responden`
@@ -1530,121 +1234,96 @@ ALTER TABLE `user_role`
 --
 ALTER TABLE `bobot_indikator`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
---
--- AUTO_INCREMENT for table `bobot_indikator_sapi`
---
-ALTER TABLE `bobot_indikator_sapi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
 --
 -- AUTO_INCREMENT for table `entitas_ayam`
 --
 ALTER TABLE `entitas_ayam`
   MODIFY `id_a_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `entitas_sapi`
 --
 ALTER TABLE `entitas_sapi`
   MODIFY `id_s_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `hasil_skala_ayam`
 --
 ALTER TABLE `hasil_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
 --
 -- AUTO_INCREMENT for table `indikator_ayam`
 --
 ALTER TABLE `indikator_ayam`
   MODIFY `id_a_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
 --
 -- AUTO_INCREMENT for table `indikator_sapi`
 --
 ALTER TABLE `indikator_sapi`
   MODIFY `id_s_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- AUTO_INCREMENT for table `opsi_ahp`
 --
 ALTER TABLE `opsi_ahp`
   MODIFY `id_opsi_ahp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
 --
 -- AUTO_INCREMENT for table `opsi_skala_ayam`
 --
 ALTER TABLE `opsi_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `opsi_skala_sapi`
 --
 ALTER TABLE `opsi_skala_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
 --
 -- AUTO_INCREMENT for table `rasio`
 --
 ALTER TABLE `rasio`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- AUTO_INCREMENT for table `rasio_sapi`
 --
 ALTER TABLE `rasio_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT for table `rekap_skala_sapi`
 --
 ALTER TABLE `rekap_skala_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
 --
 -- AUTO_INCREMENT for table `responden`
 --
 ALTER TABLE `responden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=317;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=327;
 --
 -- AUTO_INCREMENT for table `responden_sapi`
 --
 ALTER TABLE `responden_sapi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=929;
 --
 -- AUTO_INCREMENT for table `responden_skala_ayam`
 --
 ALTER TABLE `responden_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
-
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `section_sapi`
 --
 ALTER TABLE `section_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- Constraints for dumped tables
 --
@@ -1654,12 +1333,6 @@ ALTER TABLE `user_role`
 --
 ALTER TABLE `bobot_indikator`
   ADD CONSTRAINT `bobot_indikator_ibfk_1` FOREIGN KEY (`id_section`) REFERENCES `section` (`id`);
-
---
--- Constraints for table `bobot_indikator_sapi`
---
-ALTER TABLE `bobot_indikator_sapi`
-  ADD CONSTRAINT `bobot_indikator_sapi_ibfk_1` FOREIGN KEY (`id_section`) REFERENCES `section_sapi` (`id`);
 
 --
 -- Constraints for table `indikator_ayam`
@@ -1686,7 +1359,8 @@ ALTER TABLE `opsi_skala_sapi`
 --
 ALTER TABLE `rekap_skala_sapi`
   ADD CONSTRAINT `rekap_skala_sapi_ibfk_1` FOREIGN KEY (`kode_indikator`) REFERENCES `indikator_sapi` (`kode_s_i`),
-  ADD CONSTRAINT `rekap_skala_sapi_ibfk_2` FOREIGN KEY (`entitas`) REFERENCES `entitas_sapi` (`id_s_e`);
+  ADD CONSTRAINT `rekap_skala_sapi_ibfk_2` FOREIGN KEY (`entitas`) REFERENCES `entitas_sapi` (`id_s_e`),
+  ADD CONSTRAINT `rekap_skala_sapi_ibfk_3` FOREIGN KEY (`id_pengisi`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `responden`
@@ -1707,7 +1381,6 @@ ALTER TABLE `responden_sapi`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
