@@ -145,6 +145,47 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/templates/footer');
 	}
 
+	public function page_skala_ayam()	{
+		$data['title'] = 'Admin | Skala Ayam';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/skala_ayam', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
+	public function page_edit_skala_ayam($id)	{
+		$data['title'] = 'Admin | Edit Skala Ayam';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+		$data['skala'] = $this->db->get_where('opsi_skala_ayam', ['id_indikator' => $id])->result_array();
+		$data['indikator'] = $this->db->get_where('indikator_ayam', ['id_a_i' => $id])->row_array();
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/edit_skala_ayam', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
+	public function page_add_skala_ayam($id)	{
+		$data['title'] = 'Admin | Tambah Skala Ayam';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+		// $data['skala'] = $this->db->get_where('opsi_skala_ayam', ['id_indikator' => $id])->result_array();
+		$data['indikator'] = $this->db->get_where('indikator_ayam', ['id_a_i' => $id])->row_array();
+
+		$data['keterangan'] = array('Sangat Buruk', 'Buruk', 'Cukup', 'Baik', 'Sangat Baik');
+		
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/templates/sidebar', $data);
+		$this->load->view('admin/templates/topbar', $data);
+		$this->load->view('admin/tambah_skala_ayam', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
 	// FUNGSI
 
 	// public function get_kriteria() {
@@ -152,6 +193,12 @@ class Admin extends CI_Controller {
 		
 	// 	echo json_encode($data);
 	// }
+
+	public function get_skala_ayam() {
+		$data = $this->db->get('indikator_ayam')->result_array();
+		
+		echo json_encode($data);
+	}
 
 	public function get_skala_sapi() {
 		$data = $this->db->get('opsi_skala_sapi')->result_array();
@@ -466,6 +513,109 @@ class Admin extends CI_Controller {
 
 
 		redirect(base_url('admin/skala_sapi'));
+	}
+
+	public function edit_pilihan_skala_sapi() {
+		if(!isset($_POST['kode_s_i'])) die(400);
+
+		for($i=1; $i<=6; $i++) {
+			$data['pilihan_skala_'.$i] = $_POST['pilihan_skala_'.$i];
+		}
+
+		try {
+			$this->db->where('kode_s_i', $_POST['kode_s_i']);
+			$this->db->update('indikator_sapi', $data);
+			$this->session->set_flashdata('message', 'Berhasil edit pilihan skala '.$_POST['kode_s_i']);
+		} catch (\Throwable $th) {
+			$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+		}
+
+		redirect(base_url('admin/skala_sapi'));
+
+	}
+
+	public function edit_skala_ayam(){
+
+		$rules = [];
+		// Loop index 1 - 5
+		for ($i=1; $i < 6; $i++) { 
+			$input = [
+				'field' => 'id'.$i,
+				'label' => 'ID',
+				'rules' => 'required',
+			];
+			$input2 = [
+				'field' => 'pertanyaan'.$i,
+				'label' => 'Deskripsi Skala',
+				'rules' => 'required',
+			];
+			array_push($rules, $input);
+			array_push($rules, $input2);
+		}
+
+		$this->form_validation->set_rules($rules);
+
+		if($this->form_validation->run() == FALSE) {
+			$this->page_edit_skala_ayam();
+		} else {
+			
+			try {
+				// Loop index 1 - 5
+				for ($i=1; $i < 6; $i++) { 
+					$data['deskripsi_skala'] = $_POST['pertanyaan'.$i];
+					$this->db->where('id', $_POST['id'.$i]);
+					$this->db->update('opsi_skala_ayam', $data);
+				}
+				$this->session->set_flashdata('message', 'Berhasil edit skala');
+			} catch (\Throwable $th) {
+				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+			}
+		}
+
+		redirect(base_url('admin/skala_ayam/edit/'.$_POST['indikator']));
+	}
+
+	public function add_skala_ayam(){
+
+		$rules = [];
+		// Loop index 1 - 5
+		for ($i=1; $i < 6; $i++) { 
+			$input = [
+				'field' => 'deskripsi'.$i,
+				'label' => 'Deskripsi Skala',
+				'rules' => 'required',
+			];
+			$input2 = [
+				'field' => 'keterangan'.$i,
+				'label' => 'Keterangan',
+				'rules' => 'required',
+			];
+			array_push($rules, $input);
+			array_push($rules, $input2);
+		}
+
+		$this->form_validation->set_rules($rules);
+
+		if($this->form_validation->run() == FALSE) {
+			$this->page_add_skala_ayam();
+		} else {
+			
+			try {
+				// Loop index 1 - 5
+				for ($i=1; $i < 6; $i++) { 
+					$data['keterangan'] = $_POST['keterangan'.$i];
+					$data['deskripsi_skala'] = $_POST['deskripsi'.$i];
+					$data['nilai_skala'] = $i;
+					$data['id_indikator'] = $_POST['id_a_i'];
+					$this->db->insert('opsi_skala_ayam', $data);
+				}
+				$this->session->set_flashdata('message', 'Berhasil tambah skala');
+			} catch (\Throwable $th) {
+				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+			}
+		}
+
+		redirect(base_url('admin/skala_ayam/edit/'.$_POST['id_a_i']));
 	}
 
 }

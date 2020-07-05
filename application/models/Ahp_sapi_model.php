@@ -25,7 +25,7 @@
         }
 
         // Deksripsi    : Perhitungan Normalisasi RPA Peternak
-        public function normalisasi_rpa_peternak($section_id){
+        public function normalisasi_rpa_peternak($id_pengisi, $section_id){
             // Inisialisasi array untuk perhitungan
             $data = array();
 
@@ -43,22 +43,24 @@
                 $kriteria = 'nama_kriteria';
             }
             if($section_id == 4 || $section_id == 8){
-                
                 $this->db->select('kode_s_i');
-                $data['kriteria_sapi'] = $this->db->get_where('indikator_sapi', array('nama_kriteria' => 'Ekonomi', 'entitas' => $_SESSION['indikator_sapi'][$section_id][0]['section_id'] ))->result_array();
+                $entitas = $section_id == 4 ? 1 : 2;
+                $data['kriteria_sapi'] = $this->db->get_where('indikator_sapi', array('nama_kriteria' => 'Ekonomi', 'entitas' => $entitas ))->result_array();
 
                 // Set penamaan dalam array
                 $kriteria = 'kode_s_i';
             }
             if($section_id == 5 || $section_id == 9){
                 $this->db->select('kode_s_i');
-                $data['kriteria_sapi'] = $this->db->get_where('indikator_sapi', array('nama_kriteria' => 'Lingkungan', 'entitas' => $_SESSION['indikator_sapi'][$section_id][0]['section_id'] ))->result_array();
+                $entitas = $section_id == 5 ? 1 : 2;
+                $data['kriteria_sapi'] = $this->db->get_where('indikator_sapi', array('nama_kriteria' => 'Lingkungan', 'entitas' => $entitas ))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_s_i';
             }
             if($section_id == 6 || $section_id == 10){
                 $this->db->select('kode_s_i');
-                $data['kriteria_sapi'] = $this->db->get_where('indikator_sapi', array('nama_kriteria' => 'Sosial', 'entitas' => $_SESSION['indikator_sapi'][$section_id][0]['section_id'] ))->result_array();
+                $entitas = $section_id == 6 ? 1 : 2;
+                $data['kriteria_sapi'] = $this->db->get_where('indikator_sapi', array('nama_kriteria' => 'Sosial', 'entitas' => $entitas ))->result_array();
                 // Set penamaan dalam array
                 $kriteria = 'kode_s_i';
             }
@@ -69,7 +71,7 @@
                 for ($j=$i+1; $j < count($data['kriteria_sapi']); $j++) { 
                     $this->db->select('nilai_responden');
                     
-                    $data[ $data['kriteria_sapi'][$i][$kriteria].'-'.$data['kriteria_sapi'][$j][$kriteria] ] = $this->db->get_where('responden_sapi', array('id_section' => $section_id, 'kriteria_1' => $data['kriteria_sapi'][$i][$kriteria], 'kriteria_2' => $data['kriteria_sapi'][$j][$kriteria]))->result_array();
+                    $data[ $data['kriteria_sapi'][$i][$kriteria].'-'.$data['kriteria_sapi'][$j][$kriteria] ] = $this->db->get_where('responden_sapi', array('id_pengisi' => $id_pengisi, 'id_section' => $section_id, 'kriteria_1' => $data['kriteria_sapi'][$i][$kriteria], 'kriteria_2' => $data['kriteria_sapi'][$j][$kriteria]))->result_array();
                     
                     // Set counter (Jumlah Responden)
                     $counter = count($data[$data['kriteria_sapi'][$i][$kriteria].'-'.$data['kriteria_sapi'][$j][$kriteria]]);
@@ -214,37 +216,45 @@
 
             // die(print("Update<br><pre>".print_r($data,true)."</pre>"));
             // Cek apakah sudah ada nilai Bobot sebelumnya di DB
-            $hitung = $this->db->get_where('bobot_indikator_sapi', array('id_section' => $section_id))->result_array();
+            // $hitung = $this->db->get_where('bobot_indikator_sapi', array('id_section' => $section_id))->result_array();
             // die('hitung = '.count($hitung));
-            if(count($hitung) < 1){
-                // Input
-                $this->input_bobot_normalisasi($data['input']);
-                return;
-            }else{
-                //Update
-                $this->update_bobot_normalisasi($data['input']);
-                return;
+
+            // if(count($hitung) < 1){
+            //     // Input
+            //     $this->input_bobot_normalisasi($data['input']);
+            //     return;
+            // }else{
+            //     //Update
+            //     $this->update_bobot_normalisasi($data['input']);
+            //     return;
+            // }
+
+            // print($section_id." 😔 <pre>".print_r($data['input'],true)."</pre><br>");
+
+            return $data['input'];
+
+        }
+
+        public function get_bobot_by_id_pengisi($id_pengisi) {
+            if(!isset($id_pengisi)) return [];
+
+            $dummy = [];
+            $data = $this->db->get_where('responden_sapi', ['id_pengisi' => $id_pengisi])->result_array();
+
+            if(count($data) > 0) { // jika ada data responden
+
+                // buat array berbentuk db bobot_indikator_sapi
+                for($i=2; $i<=10; $i++) {                    
+                    $data_input = $this->normalisasi_rpa_peternak($id_pengisi, $i);
+                    foreach ($data_input as $k => $v) {
+                        array_push($dummy, $v);
+                    }
+                }
+
             }
+            // print("<pre>".print_r($dummy, true)."</pre>");
+            return $dummy;
 
-        }
-
-        // Deskripsi : Tambah nilai pada tabel bobot
-        public function input_bobot_normalisasi($data){
-        // die(print("Input<br><pre>".print_r($data,true)."</pre>"));
-            for ($i=0 ; $i<sizeof($data) ; $i++) { 
-                $this->db->insert('bobot_indikator_sapi', $data[$i]);
-            };
-            return;
-        }
-
-        // Deskripsi : Update nilai pada tabel bobot
-        public function update_bobot_normalisasi($data){
-            // die(print("Update<br><pre>".print_r($data,true)."</pre>"));
-            for ($i=0 ; $i<sizeof($data) ; $i++) { 
-                $this->db->where(['kriteria' => $data[$i]['kriteria'], 'id_section' => $data[$i]['id_section']] );
-                $this->db->update('bobot_indikator_sapi', $data[$i]);
-            };
-            return;
         }
 
         public function insert_skala_sapi ($data) {

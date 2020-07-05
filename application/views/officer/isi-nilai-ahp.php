@@ -197,26 +197,26 @@
                 <?php endfor ?>
 
             <!-- looping -->
-                                        <table class="table">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                <th scope="col"></th>
-                                                <th scope="col">Indikator</th>
-                                                <th scope="col">Keterangan</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $counter = 1 ?>
-                                                <?php foreach($indikator as $j) :?>
-                                                <tr>
-                                                <th scope="row"><?= $counter ?></th>
-                                                <td><?= $j['kode_a_i'] ?></td>
-                                                <td><?= $j['ket_a_i'] ?></td>
-                                                </tr>
-                                                <?php $counter++ ?>
-                                                <?php endforeach ?>
-                                            </tbody>
-                                        </table>                                        
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Indikator</th>
+                        <th scope="col">Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $counter2 = 1 ?>
+                        <?php foreach($indikator as $j) :?>
+                        <tr>
+                        <th scope="row"><?= $counter2 ?></th>
+                        <td><?= $j['kode_a_i'] ?></td>
+                        <td><?= $j['ket_a_i'] ?></td>
+                        </tr>
+                        <?php $counter2++ ?>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>                                        
             <?php endif ?>
             
         </div>
