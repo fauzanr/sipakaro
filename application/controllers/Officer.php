@@ -575,8 +575,8 @@
 					$this->session->unset_userdata('nilai_pengisian_skala');
 					$this->session->unset_userdata('progress_pengisian_skala');
 	
-					echo 'berhasil input '.$data_counter.' data 😛<br>';
-					// redirect(base_url('officer'));
+					// echo 'berhasil input '.$data_counter.' data 😛<br>';
+					redirect(base_url('officer'));
 				}
 			}
 
