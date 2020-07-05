@@ -73,7 +73,7 @@
                                             <td><?= $b['kriteria'] ?></td>
                                             <td><?= $b['bobot'] ?></td>
                                             <td><?= $bobot_lokal_dimensi * $b['bobot'] ?></td>
-                                            <td><?= $bobot_lokal_entitas * $bobot_lokal_entitas * $b['bobot'] ?></td>
+                                            <td><?= $bobot_lokal_entitas * $bobot_lokal_dimensi * $b['bobot'] ?></td>
                                         </tr>
                                         <?php $counter++ ?>
                                     <?php endif ?>
