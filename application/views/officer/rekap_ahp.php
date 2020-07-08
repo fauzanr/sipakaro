@@ -4,9 +4,20 @@
     <!-- Page Heading -->
     <h2 class="h5 mb-4 text-gray-800">Ayam</h2>
 
+    <script>
+    function konfirmasi() {
+        let result = confirm('hapus data AHP ayam?');
+        if (result) {
+            window.location = '<?= base_url('officer/hapus_ahp_ayam/'.$_SESSION['id_user']) ?>'
+        }
+    }
+    </script>
+    <a onclick="konfirmasi()"><button class="btn btn-danger">Hapus data AHP</button></a>
+
     <h2 class="h3 mb-4 text-gray-800 d-flex justify-content-center">Hasil Rekapan AHP</h2>
     <br>
 
+    <h5>Total Responden: <?= $jumlah_responden ?></h5>
     <div class="table-responsive">
         <table class="table table-hover">
             <thead class="thead-dark ">
@@ -104,14 +115,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($c1cr as $k) :?>
-                            <tr>
-                                <th scope="row"><?= $k['level0'] ?></th>
-                                <td><?= $k['level1'] ?></td>
-                                <td><?= $k['C1'] ?></td>
-                                <td><?= $k['CR'] ?></td>
-                            </tr>
-                        <?php endforeach ?>
+                    <?php if(isset($c1cr)) : ?>
+                            <?php foreach($c1cr as $k) :?>
+                                <tr>
+                                    <th scope="row"><?= $k['level0'] ?></th>
+                                    <td><?= $k['level1'] ?></td>
+                                    <td><?= $k['C1'] ?></td>
+                                    <td><?= $k['CR'] ?></td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>
