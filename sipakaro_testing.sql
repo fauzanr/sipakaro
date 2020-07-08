@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2020 at 08:56 AM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: Jul 08, 2020 at 08:39 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -506,542 +508,6 @@ CREATE TABLE `responden` (
 --
 
 INSERT INTO `responden` (`id`, `id_pengisi`, `nama_responden`, `nilai_responden`, `kriteria_1`, `kriteria_2`, `id_section`) VALUES
-<<<<<<< HEAD
-(1, 1, 'Pak Budi', '1', 'RPA', 'Peternak', 2),
-(2, 1, 'Pak Tiyo', '1', 'RPA', 'Peternak', 2),
-(3, 1, 'Pak Samuel', '1', 'RPA', 'Peternak', 2),
-(4, 1, 'Pak Budi', '1', 'Ekonomi', 'Lingkungan', 3),
-(5, 1, 'Pak Tiyo', '1', 'Ekonomi', 'Lingkungan', 3),
-(6, 1, 'Pak Samuel', '1', 'Ekonomi', 'Lingkungan', 3),
-(7, 1, 'Pak Budi', '1', 'Ekonomi', 'Sosial', 3),
-(8, 1, 'Pak Tiyo', '1', 'Ekonomi', 'Sosial', 3),
-(9, 1, 'Pak Samuel', '1', 'Ekonomi', 'Sosial', 3),
-(10, 1, 'Pak Budi', '1', 'Lingkungan', 'Sosial', 3),
-(11, 1, 'Pak Tiyo', '1', 'Lingkungan', 'Sosial', 3),
-(12, 1, 'Pak Samuel', '1', 'Lingkungan', 'Sosial', 3),
-(13, 1, 'Pak Budi', '1', 'PE1', 'PE2', 4),
-(14, 1, 'Pak Tiyo', '1', 'PE1', 'PE2', 4),
-(15, 1, 'Pak Samuel', '1', 'PE1', 'PE2', 4),
-(16, 1, 'Pak Budi', '1', 'PE1', 'PE3', 4),
-(17, 1, 'Pak Tiyo', '1', 'PE1', 'PE3', 4),
-(18, 1, 'Pak Samuel', '1', 'PE1', 'PE3', 4),
-(19, 1, 'Pak Budi', '1', 'PE1', 'PE4', 4),
-(20, 1, 'Pak Tiyo', '1', 'PE1', 'PE4', 4),
-(21, 1, 'Pak Samuel', '1', 'PE1', 'PE4', 4),
-(22, 1, 'Pak Budi', '1', 'PE2', 'PE3', 4),
-(23, 1, 'Pak Tiyo', '1', 'PE2', 'PE3', 4),
-(24, 1, 'Pak Samuel', '1', 'PE2', 'PE3', 4),
-(25, 1, 'Pak Budi', '1', 'PE2', 'PE4', 4),
-(26, 1, 'Pak Tiyo', '1', 'PE2', 'PE4', 4),
-(27, 1, 'Pak Samuel', '1', 'PE2', 'PE4', 4),
-(28, 1, 'Pak Budi', '1', 'PE3', 'PE4', 4),
-(29, 1, 'Pak Tiyo', '1', 'PE3', 'PE4', 4),
-(30, 1, 'Pak Samuel', '1', 'PE3', 'PE4', 4),
-(31, 1, 'Pak Budi', '1', 'PL1', 'PL2', 5),
-(32, 1, 'Pak Tiyo', '1', 'PL1', 'PL2', 5),
-(33, 1, 'Pak Samuel', '1', 'PL1', 'PL2', 5),
-(34, 1, 'Pak Budi', '1', 'PS1', 'PS2', 6),
-(35, 1, 'Pak Tiyo', '1', 'PS1', 'PS2', 6),
-(36, 1, 'Pak Samuel', '1', 'PS1', 'PS2', 6),
-(37, 1, 'Pak Budi', '1', 'PS1', 'PS3', 6),
-(38, 1, 'Pak Tiyo', '1', 'PS1', 'PS3', 6),
-(39, 1, 'Pak Samuel', '1', 'PS1', 'PS3', 6),
-(40, 1, 'Pak Budi', '1', 'PS1', 'PS4', 6),
-(41, 1, 'Pak Tiyo', '1', 'PS1', 'PS4', 6),
-(42, 1, 'Pak Samuel', '1', 'PS1', 'PS4', 6),
-(43, 1, 'Pak Budi', '1', 'PS1', 'PS5', 6),
-(44, 1, 'Pak Tiyo', '1', 'PS1', 'PS5', 6),
-(45, 1, 'Pak Samuel', '1', 'PS1', 'PS5', 6),
-(46, 1, 'Pak Budi', '1', 'PS1', 'PS6', 6),
-(47, 1, 'Pak Tiyo', '1', 'PS1', 'PS6', 6),
-(48, 1, 'Pak Samuel', '1', 'PS1', 'PS6', 6),
-(49, 1, 'Pak Budi', '1', 'PS1', 'PS7', 6),
-(50, 1, 'Pak Tiyo', '1', 'PS1', 'PS7', 6),
-(51, 1, 'Pak Samuel', '1', 'PS1', 'PS7', 6),
-(52, 1, 'Pak Budi', '1', 'PS1', 'PS8', 6),
-(53, 1, 'Pak Tiyo', '1', 'PS1', 'PS8', 6),
-(54, 1, 'Pak Samuel', '1', 'PS1', 'PS8', 6),
-(55, 1, 'Pak Budi', '1', 'PS1', 'PS9', 6),
-(56, 1, 'Pak Tiyo', '1', 'PS1', 'PS9', 6),
-(57, 1, 'Pak Samuel', '1', 'PS1', 'PS9', 6),
-(58, 1, 'Pak Budi', '1', 'PS1', 'PS10', 6),
-(59, 1, 'Pak Tiyo', '1', 'PS1', 'PS10', 6),
-(60, 1, 'Pak Samuel', '1', 'PS1', 'PS10', 6),
-(61, 1, 'Pak Budi', '1', 'PS2', 'PS3', 6),
-(62, 1, 'Pak Tiyo', '1', 'PS2', 'PS3', 6),
-(63, 1, 'Pak Samuel', '1', 'PS2', 'PS3', 6),
-(64, 1, 'Pak Budi', '1', 'PS2', 'PS4', 6),
-(65, 1, 'Pak Tiyo', '1', 'PS2', 'PS4', 6),
-(66, 1, 'Pak Samuel', '1', 'PS2', 'PS4', 6),
-(67, 1, 'Pak Budi', '1', 'PS2', 'PS5', 6),
-(68, 1, 'Pak Tiyo', '1', 'PS2', 'PS5', 6),
-(69, 1, 'Pak Samuel', '1', 'PS2', 'PS5', 6),
-(70, 1, 'Pak Budi', '1', 'PS2', 'PS6', 6),
-(71, 1, 'Pak Tiyo', '1', 'PS2', 'PS6', 6),
-(72, 1, 'Pak Samuel', '1', 'PS2', 'PS6', 6),
-(73, 1, 'Pak Budi', '1', 'PS2', 'PS7', 6),
-(74, 1, 'Pak Tiyo', '1', 'PS2', 'PS7', 6),
-(75, 1, 'Pak Samuel', '1', 'PS2', 'PS7', 6),
-(76, 1, 'Pak Budi', '1', 'PS2', 'PS8', 6),
-(77, 1, 'Pak Tiyo', '1', 'PS2', 'PS8', 6),
-(78, 1, 'Pak Samuel', '1', 'PS2', 'PS8', 6),
-(79, 1, 'Pak Budi', '1', 'PS2', 'PS9', 6),
-(80, 1, 'Pak Tiyo', '1', 'PS2', 'PS9', 6),
-(81, 1, 'Pak Samuel', '1', 'PS2', 'PS9', 6),
-(82, 1, 'Pak Budi', '1', 'PS2', 'PS10', 6),
-(83, 1, 'Pak Tiyo', '1', 'PS2', 'PS10', 6),
-(84, 1, 'Pak Samuel', '1', 'PS2', 'PS10', 6),
-(85, 1, 'Pak Budi', '1', 'PS3', 'PS4', 6),
-(86, 1, 'Pak Tiyo', '1', 'PS3', 'PS4', 6),
-(87, 1, 'Pak Samuel', '1', 'PS3', 'PS4', 6),
-(88, 1, 'Pak Budi', '1', 'PS3', 'PS5', 6),
-(89, 1, 'Pak Tiyo', '1', 'PS3', 'PS5', 6),
-(90, 1, 'Pak Samuel', '1', 'PS3', 'PS5', 6),
-(91, 1, 'Pak Budi', '1', 'PS3', 'PS6', 6),
-(92, 1, 'Pak Tiyo', '1', 'PS3', 'PS6', 6),
-(93, 1, 'Pak Samuel', '1', 'PS3', 'PS6', 6),
-(94, 1, 'Pak Budi', '1', 'PS3', 'PS7', 6),
-(95, 1, 'Pak Tiyo', '1', 'PS3', 'PS7', 6),
-(96, 1, 'Pak Samuel', '1', 'PS3', 'PS7', 6),
-(97, 1, 'Pak Budi', '1', 'PS3', 'PS8', 6),
-(98, 1, 'Pak Tiyo', '1', 'PS3', 'PS8', 6),
-(99, 1, 'Pak Samuel', '1', 'PS3', 'PS8', 6),
-(100, 1, 'Pak Budi', '1', 'PS3', 'PS9', 6),
-(101, 1, 'Pak Tiyo', '1', 'PS3', 'PS9', 6),
-(102, 1, 'Pak Samuel', '1', 'PS3', 'PS9', 6),
-(103, 1, 'Pak Budi', '1', 'PS3', 'PS10', 6),
-(104, 1, 'Pak Tiyo', '1', 'PS3', 'PS10', 6),
-(105, 1, 'Pak Samuel', '1', 'PS3', 'PS10', 6),
-(106, 1, 'Pak Budi', '1', 'PS4', 'PS5', 6),
-(107, 1, 'Pak Tiyo', '1', 'PS4', 'PS5', 6),
-(108, 1, 'Pak Samuel', '1', 'PS4', 'PS5', 6),
-(109, 1, 'Pak Budi', '1', 'PS4', 'PS6', 6),
-(110, 1, 'Pak Tiyo', '1', 'PS4', 'PS6', 6),
-(111, 1, 'Pak Samuel', '1', 'PS4', 'PS6', 6),
-(112, 1, 'Pak Budi', '1', 'PS4', 'PS7', 6),
-(113, 1, 'Pak Tiyo', '1', 'PS4', 'PS7', 6),
-(114, 1, 'Pak Samuel', '1', 'PS4', 'PS7', 6),
-(115, 1, 'Pak Budi', '1', 'PS4', 'PS8', 6),
-(116, 1, 'Pak Tiyo', '1', 'PS4', 'PS8', 6),
-(117, 1, 'Pak Samuel', '1', 'PS4', 'PS8', 6),
-(118, 1, 'Pak Budi', '1', 'PS4', 'PS9', 6),
-(119, 1, 'Pak Tiyo', '1', 'PS4', 'PS9', 6),
-(120, 1, 'Pak Samuel', '1', 'PS4', 'PS9', 6),
-(121, 1, 'Pak Budi', '1', 'PS4', 'PS10', 6),
-(122, 1, 'Pak Tiyo', '1', 'PS4', 'PS10', 6),
-(123, 1, 'Pak Samuel', '1', 'PS4', 'PS10', 6),
-(124, 1, 'Pak Budi', '1', 'PS5', 'PS6', 6),
-(125, 1, 'Pak Tiyo', '1', 'PS5', 'PS6', 6),
-(126, 1, 'Pak Samuel', '1', 'PS5', 'PS6', 6),
-(127, 1, 'Pak Budi', '1', 'PS5', 'PS7', 6),
-(128, 1, 'Pak Tiyo', '1', 'PS5', 'PS7', 6),
-(129, 1, 'Pak Samuel', '1', 'PS5', 'PS7', 6),
-(130, 1, 'Pak Budi', '1', 'PS5', 'PS8', 6),
-(131, 1, 'Pak Tiyo', '1', 'PS5', 'PS8', 6),
-(132, 1, 'Pak Samuel', '1', 'PS5', 'PS8', 6),
-(133, 1, 'Pak Budi', '1', 'PS5', 'PS9', 6),
-(134, 1, 'Pak Tiyo', '1', 'PS5', 'PS9', 6),
-(135, 1, 'Pak Samuel', '1', 'PS5', 'PS9', 6),
-(136, 1, 'Pak Budi', '1', 'PS5', 'PS10', 6),
-(137, 1, 'Pak Tiyo', '1', 'PS5', 'PS10', 6),
-(138, 1, 'Pak Samuel', '1', 'PS5', 'PS10', 6),
-(139, 1, 'Pak Budi', '1', 'PS6', 'PS7', 6),
-(140, 1, 'Pak Tiyo', '1', 'PS6', 'PS7', 6),
-(141, 1, 'Pak Samuel', '1', 'PS6', 'PS7', 6),
-(142, 1, 'Pak Budi', '1', 'PS6', 'PS8', 6),
-(143, 1, 'Pak Tiyo', '1', 'PS6', 'PS8', 6),
-(144, 1, 'Pak Samuel', '1', 'PS6', 'PS8', 6),
-(145, 1, 'Pak Budi', '1', 'PS6', 'PS9', 6),
-(146, 1, 'Pak Tiyo', '1', 'PS6', 'PS9', 6),
-(147, 1, 'Pak Samuel', '1', 'PS6', 'PS9', 6),
-(148, 1, 'Pak Budi', '1', 'PS6', 'PS10', 6),
-(149, 1, 'Pak Tiyo', '1', 'PS6', 'PS10', 6),
-(150, 1, 'Pak Samuel', '1', 'PS6', 'PS10', 6),
-(151, 1, 'Pak Budi', '1', 'PS7', 'PS8', 6),
-(152, 1, 'Pak Tiyo', '1', 'PS7', 'PS8', 6),
-(153, 1, 'Pak Samuel', '1', 'PS7', 'PS8', 6),
-(154, 1, 'Pak Budi', '1', 'PS7', 'PS9', 6),
-(155, 1, 'Pak Tiyo', '1', 'PS7', 'PS9', 6),
-(156, 1, 'Pak Samuel', '1', 'PS7', 'PS9', 6),
-(157, 1, 'Pak Budi', '1', 'PS7', 'PS10', 6),
-(158, 1, 'Pak Tiyo', '1', 'PS7', 'PS10', 6),
-(159, 1, 'Pak Samuel', '1', 'PS7', 'PS10', 6),
-(160, 1, 'Pak Budi', '1', 'PS8', 'PS9', 6),
-(161, 1, 'Pak Tiyo', '1', 'PS8', 'PS9', 6),
-(162, 1, 'Pak Samuel', '1', 'PS8', 'PS9', 6),
-(163, 1, 'Pak Budi', '1', 'PS8', 'PS10', 6),
-(164, 1, 'Pak Tiyo', '1', 'PS8', 'PS10', 6),
-(165, 1, 'Pak Samuel', '1', 'PS8', 'PS10', 6),
-(166, 1, 'Pak Budi', '1', 'PS9', 'PS10', 6),
-(167, 1, 'Pak Tiyo', '1', 'PS9', 'PS10', 6),
-(168, 1, 'Pak Samuel', '1', 'PS9', 'PS10', 6),
-(169, 1, 'Pak Budi', '1', 'Ekonomi', 'Lingkungan', 7),
-(170, 1, 'Pak Tiyo', '1', 'Ekonomi', 'Lingkungan', 7),
-(171, 1, 'Pak Samuel', '1', 'Ekonomi', 'Lingkungan', 7),
-(172, 1, 'Pak Budi', '1', 'Ekonomi', 'Sosial', 7),
-(173, 1, 'Pak Tiyo', '1', 'Ekonomi', 'Sosial', 7),
-(174, 1, 'Pak Samuel', '1', 'Ekonomi', 'Sosial', 7),
-(175, 1, 'Pak Budi', '1', 'Lingkungan', 'Sosial', 7),
-(176, 1, 'Pak Tiyo', '1', 'Lingkungan', 'Sosial', 7),
-(177, 1, 'Pak Samuel', '1', 'Lingkungan', 'Sosial', 7),
-(178, 1, 'Pak Budi', '1', 'RE1', 'RE2', 8),
-(179, 1, 'Pak Tiyo', '1', 'RE1', 'RE2', 8),
-(180, 1, 'Pak Samuel', '1', 'RE1', 'RE2', 8),
-(181, 1, 'Pak Budi', '1', 'RE1', 'RE3', 8),
-(182, 1, 'Pak Tiyo', '1', 'RE1', 'RE3', 8),
-(183, 1, 'Pak Samuel', '1', 'RE1', 'RE3', 8),
-(184, 1, 'Pak Budi', '1', 'RE1', 'RE4', 8),
-(185, 1, 'Pak Tiyo', '1', 'RE1', 'RE4', 8),
-(186, 1, 'Pak Samuel', '1', 'RE1', 'RE4', 8),
-(187, 1, 'Pak Budi', '1', 'RE2', 'RE3', 8),
-(188, 1, 'Pak Tiyo', '1', 'RE2', 'RE3', 8),
-(189, 1, 'Pak Samuel', '1', 'RE2', 'RE3', 8),
-(190, 1, 'Pak Budi', '1', 'RE2', 'RE4', 8),
-(191, 1, 'Pak Tiyo', '1', 'RE2', 'RE4', 8),
-(192, 1, 'Pak Samuel', '1', 'RE2', 'RE4', 8),
-(193, 1, 'Pak Budi', '1', 'RE3', 'RE4', 8),
-(194, 1, 'Pak Tiyo', '1', 'RE3', 'RE4', 8),
-(195, 1, 'Pak Samuel', '1', 'RE3', 'RE4', 8),
-(196, 1, 'Pak Budi', '1', 'RL1', 'RL2', 9),
-(197, 1, 'Pak Tiyo', '1', 'RL1', 'RL2', 9),
-(198, 1, 'Pak Samuel', '1', 'RL1', 'RL2', 9),
-(199, 1, 'Pak Budi', '1', 'RL1', 'RL3', 9),
-(200, 1, 'Pak Tiyo', '1', 'RL1', 'RL3', 9),
-(201, 1, 'Pak Samuel', '1', 'RL1', 'RL3', 9),
-(202, 1, 'Pak Budi', '1', 'RL2', 'RL3', 9),
-(203, 1, 'Pak Tiyo', '1', 'RL2', 'RL3', 9),
-(204, 1, 'Pak Samuel', '1', 'RL2', 'RL3', 9),
-(205, 1, 'Pak Budi', '1', 'RS1', 'RS2', 10),
-(206, 1, 'Pak Tiyo', '1', 'RS1', 'RS2', 10),
-(207, 1, 'Pak Samuel', '1', 'RS1', 'RS2', 10);
-=======
-(1, 3, 'A', '0.33', 'RPA', 'Peternak', 2),
-(2, 3, 'B', '0.2', 'RPA', 'Peternak', 2),
-(3, 3, 'AA', '0.33', 'RPA', 'Peternak', 2),
-(4, 3, 'A', '0.5', 'Ekonomi', 'Lingkungan', 3),
-(5, 3, 'B', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(6, 3, 'AA', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(7, 3, 'A', '0.33', 'Ekonomi', 'Sosial', 3),
-(8, 3, 'B', '0.2', 'Ekonomi', 'Sosial', 3),
-(9, 3, 'AA', '3', 'Ekonomi', 'Sosial', 3),
-(10, 3, 'A', '0.13', 'Lingkungan', 'Sosial', 3),
-(11, 3, 'B', '1', 'Lingkungan', 'Sosial', 3),
-(12, 3, 'AA', '0.33', 'Lingkungan', 'Sosial', 3),
-(13, 3, 'A', '0.33', 'PE1', 'PE2', 4),
-(14, 3, 'B', '0.33', 'PE1', 'PE2', 4),
-(15, 3, 'AA', '0.33', 'PE1', 'PE2', 4),
-(16, 3, 'A', '0.33', 'PE1', 'PE3', 4),
-(17, 3, 'B', '0.33', 'PE1', 'PE3', 4),
-(18, 3, 'AA', '0.33', 'PE1', 'PE3', 4),
-(19, 3, 'A', '0.33', 'PE1', 'PE4', 4),
-(20, 3, 'B', '0.33', 'PE1', 'PE4', 4),
-(21, 3, 'AA', '0.33', 'PE1', 'PE4', 4),
-(22, 3, 'A', '0.33', 'PE2', 'PE3', 4),
-(23, 3, 'B', '0.33', 'PE2', 'PE3', 4),
-(24, 3, 'AA', '0.33', 'PE2', 'PE3', 4),
-(25, 3, 'A', '0.33', 'PE2', 'PE4', 4),
-(26, 3, 'B', '0.33', 'PE2', 'PE4', 4),
-(27, 3, 'AA', '0.33', 'PE2', 'PE4', 4),
-(28, 3, 'A', '0.33', 'PE3', 'PE4', 4),
-(29, 3, 'B', '0.33', 'PE3', 'PE4', 4),
-(30, 3, 'AA', '0.33', 'PE3', 'PE4', 4),
-(31, 3, 'A', '0.33', 'PL1', 'PL2', 5),
-(32, 3, 'B', '0.33', 'PL1', 'PL2', 5),
-(33, 3, 'AA', '0.33', 'PL1', 'PL2', 5),
-(34, 3, 'A', '0.33', 'PS1', 'PS2', 6),
-(35, 3, 'B', '0.33', 'PS1', 'PS2', 6),
-(36, 3, 'AA', '0.33', 'PS1', 'PS2', 6),
-(37, 3, 'A', '0.33', 'PS1', 'PS3', 6),
-(38, 3, 'B', '0.33', 'PS1', 'PS3', 6),
-(39, 3, 'AA', '0.33', 'PS1', 'PS3', 6),
-(40, 3, 'A', '0.33', 'PS1', 'PS4', 6),
-(41, 3, 'B', '0.33', 'PS1', 'PS4', 6),
-(42, 3, 'AA', '0.33', 'PS1', 'PS4', 6),
-(43, 3, 'A', '0.33', 'PS1', 'PS5', 6),
-(44, 3, 'B', '0.33', 'PS1', 'PS5', 6),
-(45, 3, 'AA', '0.33', 'PS1', 'PS5', 6),
-(46, 3, 'A', '0.33', 'PS1', 'PS6', 6),
-(47, 3, 'B', '0.33', 'PS1', 'PS6', 6),
-(48, 3, 'AA', '0.33', 'PS1', 'PS6', 6),
-(49, 3, 'A', '0.33', 'PS1', 'PS7', 6),
-(50, 3, 'B', '0.33', 'PS1', 'PS7', 6),
-(51, 3, 'AA', '0.33', 'PS1', 'PS7', 6),
-(52, 3, 'A', '0.33', 'PS1', 'PS8', 6),
-(53, 3, 'B', '0.33', 'PS1', 'PS8', 6),
-(54, 3, 'AA', '0.33', 'PS1', 'PS8', 6),
-(55, 3, 'A', '0.33', 'PS1', 'PS9', 6),
-(56, 3, 'B', '0.33', 'PS1', 'PS9', 6),
-(57, 3, 'AA', '0.33', 'PS1', 'PS9', 6),
-(58, 3, 'A', '0.33', 'PS1', 'PS10', 6),
-(59, 3, 'B', '0.33', 'PS1', 'PS10', 6),
-(60, 3, 'AA', '0.33', 'PS1', 'PS10', 6),
-(61, 3, 'A', '0.33', 'PS1', 'PS11', 6),
-(62, 3, 'B', '0.33', 'PS1', 'PS11', 6),
-(63, 3, 'AA', '0.33', 'PS1', 'PS11', 6),
-(64, 3, 'A', '0.33', 'PS2', 'PS3', 6),
-(65, 3, 'B', '0.33', 'PS2', 'PS3', 6),
-(66, 3, 'AA', '0.33', 'PS2', 'PS3', 6),
-(67, 3, 'A', '0.33', 'PS2', 'PS4', 6),
-(68, 3, 'B', '0.33', 'PS2', 'PS4', 6),
-(69, 3, 'AA', '0.33', 'PS2', 'PS4', 6),
-(70, 3, 'A', '0.33', 'PS2', 'PS5', 6),
-(71, 3, 'B', '0.33', 'PS2', 'PS5', 6),
-(72, 3, 'AA', '0.33', 'PS2', 'PS5', 6),
-(73, 3, 'A', '0.33', 'PS2', 'PS6', 6),
-(74, 3, 'B', '0.33', 'PS2', 'PS6', 6),
-(75, 3, 'AA', '0.33', 'PS2', 'PS6', 6),
-(76, 3, 'A', '0.33', 'PS2', 'PS7', 6),
-(77, 3, 'B', '0.33', 'PS2', 'PS7', 6),
-(78, 3, 'AA', '0.33', 'PS2', 'PS7', 6),
-(79, 3, 'A', '0.33', 'PS2', 'PS8', 6),
-(80, 3, 'B', '0.33', 'PS2', 'PS8', 6),
-(81, 3, 'AA', '0.33', 'PS2', 'PS8', 6),
-(82, 3, 'A', '0.33', 'PS2', 'PS9', 6),
-(83, 3, 'B', '0.33', 'PS2', 'PS9', 6),
-(84, 3, 'AA', '0.33', 'PS2', 'PS9', 6),
-(85, 3, 'A', '0.33', 'PS2', 'PS10', 6),
-(86, 3, 'B', '0.33', 'PS2', 'PS10', 6),
-(87, 3, 'AA', '0.33', 'PS2', 'PS10', 6),
-(88, 3, 'A', '0.33', 'PS2', 'PS11', 6),
-(89, 3, 'B', '0.33', 'PS2', 'PS11', 6),
-(90, 3, 'AA', '0.33', 'PS2', 'PS11', 6),
-(91, 3, 'A', '0.33', 'PS3', 'PS4', 6),
-(92, 3, 'B', '0.33', 'PS3', 'PS4', 6),
-(93, 3, 'AA', '0.33', 'PS3', 'PS4', 6),
-(94, 3, 'A', '0.33', 'PS3', 'PS5', 6),
-(95, 3, 'B', '0.33', 'PS3', 'PS5', 6),
-(96, 3, 'AA', '0.33', 'PS3', 'PS5', 6),
-(97, 3, 'A', '0.33', 'PS3', 'PS6', 6),
-(98, 3, 'B', '0.33', 'PS3', 'PS6', 6),
-(99, 3, 'AA', '0.33', 'PS3', 'PS6', 6),
-(100, 3, 'A', '0.33', 'PS3', 'PS7', 6),
-(101, 3, 'B', '0.33', 'PS3', 'PS7', 6),
-(102, 3, 'AA', '0.33', 'PS3', 'PS7', 6),
-(103, 3, 'A', '0.33', 'PS3', 'PS8', 6),
-(104, 3, 'B', '0.33', 'PS3', 'PS8', 6),
-(105, 3, 'AA', '0.33', 'PS3', 'PS8', 6),
-(106, 3, 'A', '0.33', 'PS3', 'PS9', 6),
-(107, 3, 'B', '0.33', 'PS3', 'PS9', 6),
-(108, 3, 'AA', '0.33', 'PS3', 'PS9', 6),
-(109, 3, 'A', '0.33', 'PS3', 'PS10', 6),
-(110, 3, 'B', '0.33', 'PS3', 'PS10', 6),
-(111, 3, 'AA', '0.33', 'PS3', 'PS10', 6),
-(112, 3, 'A', '0.33', 'PS3', 'PS11', 6),
-(113, 3, 'B', '0.33', 'PS3', 'PS11', 6),
-(114, 3, 'AA', '0.33', 'PS3', 'PS11', 6),
-(115, 3, 'A', '0.33', 'PS4', 'PS5', 6),
-(116, 3, 'B', '0.33', 'PS4', 'PS5', 6),
-(117, 3, 'AA', '0.33', 'PS4', 'PS5', 6),
-(118, 3, 'A', '0.33', 'PS4', 'PS6', 6),
-(119, 3, 'B', '0.33', 'PS4', 'PS6', 6),
-(120, 3, 'AA', '0.33', 'PS4', 'PS6', 6),
-(121, 3, 'A', '0.33', 'PS4', 'PS7', 6),
-(122, 3, 'B', '0.33', 'PS4', 'PS7', 6),
-(123, 3, 'AA', '0.33', 'PS4', 'PS7', 6),
-(124, 3, 'A', '0.33', 'PS4', 'PS8', 6),
-(125, 3, 'B', '0.33', 'PS4', 'PS8', 6),
-(126, 3, 'AA', '0.33', 'PS4', 'PS8', 6),
-(127, 3, 'A', '0.33', 'PS4', 'PS9', 6),
-(128, 3, 'B', '0.33', 'PS4', 'PS9', 6),
-(129, 3, 'AA', '0.33', 'PS4', 'PS9', 6),
-(130, 3, 'A', '0.33', 'PS4', 'PS10', 6),
-(131, 3, 'B', '0.33', 'PS4', 'PS10', 6),
-(132, 3, 'AA', '0.33', 'PS4', 'PS10', 6),
-(133, 3, 'A', '0.33', 'PS4', 'PS11', 6),
-(134, 3, 'B', '0.33', 'PS4', 'PS11', 6),
-(135, 3, 'AA', '0.33', 'PS4', 'PS11', 6),
-(136, 3, 'A', '0.33', 'PS5', 'PS6', 6),
-(137, 3, 'B', '0.33', 'PS5', 'PS6', 6),
-(138, 3, 'AA', '0.33', 'PS5', 'PS6', 6),
-(139, 3, 'A', '0.33', 'PS5', 'PS7', 6),
-(140, 3, 'B', '0.33', 'PS5', 'PS7', 6),
-(141, 3, 'AA', '0.33', 'PS5', 'PS7', 6),
-(142, 3, 'A', '0.33', 'PS5', 'PS8', 6),
-(143, 3, 'B', '0.33', 'PS5', 'PS8', 6),
-(144, 3, 'AA', '0.33', 'PS5', 'PS8', 6),
-(145, 3, 'A', '0.33', 'PS5', 'PS9', 6),
-(146, 3, 'B', '0.33', 'PS5', 'PS9', 6),
-(147, 3, 'AA', '0.33', 'PS5', 'PS9', 6),
-(148, 3, 'A', '0.33', 'PS5', 'PS10', 6),
-(149, 3, 'B', '0.33', 'PS5', 'PS10', 6),
-(150, 3, 'AA', '0.33', 'PS5', 'PS10', 6),
-(151, 3, 'A', '0.33', 'PS5', 'PS11', 6),
-(152, 3, 'B', '0.33', 'PS5', 'PS11', 6),
-(153, 3, 'AA', '0.33', 'PS5', 'PS11', 6),
-(154, 3, 'A', '0.33', 'PS6', 'PS7', 6),
-(155, 3, 'B', '0.33', 'PS6', 'PS7', 6),
-(156, 3, 'AA', '0.33', 'PS6', 'PS7', 6),
-(157, 3, 'A', '0.33', 'PS6', 'PS8', 6),
-(158, 3, 'B', '0.33', 'PS6', 'PS8', 6),
-(159, 3, 'AA', '0.33', 'PS6', 'PS8', 6),
-(160, 3, 'A', '0.33', 'PS6', 'PS9', 6),
-(161, 3, 'B', '0.33', 'PS6', 'PS9', 6),
-(162, 3, 'AA', '0.33', 'PS6', 'PS9', 6),
-(163, 3, 'A', '0.33', 'PS6', 'PS10', 6),
-(164, 3, 'B', '0.33', 'PS6', 'PS10', 6),
-(165, 3, 'AA', '0.33', 'PS6', 'PS10', 6),
-(166, 3, 'A', '0.33', 'PS6', 'PS11', 6),
-(167, 3, 'B', '0.33', 'PS6', 'PS11', 6),
-(168, 3, 'AA', '0.33', 'PS6', 'PS11', 6),
-(169, 3, 'A', '0.33', 'PS7', 'PS8', 6),
-(170, 3, 'B', '0.33', 'PS7', 'PS8', 6),
-(171, 3, 'AA', '0.33', 'PS7', 'PS8', 6),
-(172, 3, 'A', '0.33', 'PS7', 'PS9', 6),
-(173, 3, 'B', '0.33', 'PS7', 'PS9', 6),
-(174, 3, 'AA', '0.33', 'PS7', 'PS9', 6),
-(175, 3, 'A', '0.33', 'PS7', 'PS10', 6),
-(176, 3, 'B', '0.33', 'PS7', 'PS10', 6),
-(177, 3, 'AA', '0.33', 'PS7', 'PS10', 6),
-(178, 3, 'A', '0.33', 'PS7', 'PS11', 6),
-(179, 3, 'B', '0.33', 'PS7', 'PS11', 6),
-(180, 3, 'AA', '0.33', 'PS7', 'PS11', 6),
-(181, 3, 'A', '0.33', 'PS8', 'PS9', 6),
-(182, 3, 'B', '0.33', 'PS8', 'PS9', 6),
-(183, 3, 'AA', '0.33', 'PS8', 'PS9', 6),
-(184, 3, 'A', '0.33', 'PS8', 'PS10', 6),
-(185, 3, 'B', '0.33', 'PS8', 'PS10', 6),
-(186, 3, 'AA', '0.33', 'PS8', 'PS10', 6),
-(187, 3, 'A', '0.33', 'PS8', 'PS11', 6),
-(188, 3, 'B', '0.33', 'PS8', 'PS11', 6),
-(189, 3, 'AA', '0.33', 'PS8', 'PS11', 6),
-(190, 3, 'A', '0.33', 'PS9', 'PS10', 6),
-(191, 3, 'B', '0.33', 'PS9', 'PS10', 6),
-(192, 3, 'AA', '0.33', 'PS9', 'PS10', 6),
-(193, 3, 'A', '0.33', 'PS9', 'PS11', 6),
-(194, 3, 'B', '0.33', 'PS9', 'PS11', 6),
-(195, 3, 'AA', '0.33', 'PS9', 'PS11', 6),
-(196, 3, 'A', '0.33', 'PS10', 'PS11', 6),
-(197, 3, 'B', '0.33', 'PS10', 'PS11', 6),
-(198, 3, 'AA', '0.33', 'PS10', 'PS11', 6),
-(199, 3, 'A', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(200, 3, 'B', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(201, 3, 'AA', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(202, 3, 'A', '0.33', 'Ekonomi', 'Sosial', 7),
-(203, 3, 'B', '0.33', 'Ekonomi', 'Sosial', 7),
-(204, 3, 'AA', '0.33', 'Ekonomi', 'Sosial', 7),
-(205, 3, 'A', '0.33', 'Lingkungan', 'Sosial', 7),
-(206, 3, 'B', '0.33', 'Lingkungan', 'Sosial', 7),
-(207, 3, 'AA', '0.33', 'Lingkungan', 'Sosial', 7),
-(208, 3, 'A', '0.33', 'RE1', 'RE2', 8),
-(209, 3, 'B', '0.33', 'RE1', 'RE2', 8),
-(210, 3, 'AA', '0.33', 'RE1', 'RE2', 8),
-(211, 3, 'A', '0.33', 'RE1', 'RE3', 8),
-(212, 3, 'B', '0.33', 'RE1', 'RE3', 8),
-(213, 3, 'AA', '0.33', 'RE1', 'RE3', 8),
-(214, 3, 'A', '0.33', 'RE1', 'RE4', 8),
-(215, 3, 'B', '0.33', 'RE1', 'RE4', 8),
-(216, 3, 'AA', '0.33', 'RE1', 'RE4', 8),
-(217, 3, 'A', '0.33', 'RE2', 'RE3', 8),
-(218, 3, 'B', '0.33', 'RE2', 'RE3', 8),
-(219, 3, 'AA', '0.33', 'RE2', 'RE3', 8),
-(220, 3, 'A', '0.33', 'RE2', 'RE4', 8),
-(221, 3, 'B', '0.33', 'RE2', 'RE4', 8),
-(222, 3, 'AA', '0.33', 'RE2', 'RE4', 8),
-(223, 3, 'A', '0.33', 'RE3', 'RE4', 8),
-(224, 3, 'B', '0.33', 'RE3', 'RE4', 8),
-(225, 3, 'AA', '0.33', 'RE3', 'RE4', 8),
-(226, 3, 'A', '0.33', 'RL1', 'RL2', 9),
-(227, 3, 'B', '0.33', 'RL1', 'RL2', 9),
-(228, 3, 'AA', '0.33', 'RL1', 'RL2', 9),
-(229, 3, 'A', '0.33', 'RL1', 'RL3', 9),
-(230, 3, 'B', '0.33', 'RL1', 'RL3', 9),
-(231, 3, 'AA', '0.33', 'RL1', 'RL3', 9),
-(232, 3, 'A', '0.33', 'RL2', 'RL3', 9),
-(233, 3, 'B', '0.33', 'RL2', 'RL3', 9),
-(234, 3, 'AA', '0.33', 'RL2', 'RL3', 9),
-(235, 3, 'A', '0.33', 'RS1', 'RS2', 10),
-(236, 3, 'B', '0.33', 'RS1', 'RS2', 10),
-(237, 3, 'AA', '0.33', 'RS1', 'RS2', 10),
-(238, 3, 'BB', '0.25', 'RPA', 'Peternak', 2),
-(239, 3, 'BB', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(240, 3, 'BB', '3', 'Ekonomi', 'Sosial', 3),
-(241, 3, 'BB', '0.33', 'Lingkungan', 'Sosial', 3),
-(242, 3, 'BB', '0.33', 'PE1', 'PE2', 4),
-(243, 3, 'BB', '0.33', 'PE1', 'PE3', 4),
-(244, 3, 'BB', '0.33', 'PE1', 'PE4', 4),
-(245, 3, 'BB', '0.33', 'PE2', 'PE3', 4),
-(246, 3, 'BB', '0.33', 'PE2', 'PE4', 4),
-(247, 3, 'BB', '0.33', 'PE3', 'PE4', 4),
-(248, 3, 'BB', '0.33', 'PL1', 'PL2', 5),
-(249, 3, 'BB', '0.33', 'PS1', 'PS2', 6),
-(250, 3, 'BB', '0.33', 'PS1', 'PS3', 6),
-(251, 3, 'BB', '0.33', 'PS1', 'PS4', 6),
-(252, 3, 'BB', '0.33', 'PS1', 'PS5', 6),
-(253, 3, 'BB', '0.33', 'PS1', 'PS6', 6),
-(254, 3, 'BB', '0.33', 'PS1', 'PS7', 6),
-(255, 3, 'BB', '0.33', 'PS1', 'PS8', 6),
-(256, 3, 'BB', '0.33', 'PS1', 'PS9', 6),
-(257, 3, 'BB', '0.33', 'PS1', 'PS10', 6),
-(258, 3, 'BB', '0.33', 'PS1', 'PS11', 6),
-(259, 3, 'BB', '0.33', 'PS2', 'PS3', 6),
-(260, 3, 'BB', '0.33', 'PS2', 'PS4', 6),
-(261, 3, 'BB', '0.33', 'PS2', 'PS5', 6),
-(262, 3, 'BB', '0.33', 'PS2', 'PS6', 6),
-(263, 3, 'BB', '0.33', 'PS2', 'PS7', 6),
-(264, 3, 'BB', '0.33', 'PS2', 'PS8', 6),
-(265, 3, 'BB', '0.33', 'PS2', 'PS9', 6),
-(266, 3, 'BB', '0.33', 'PS2', 'PS10', 6),
-(267, 3, 'BB', '0.33', 'PS2', 'PS11', 6),
-(268, 3, 'BB', '0.33', 'PS3', 'PS4', 6),
-(269, 3, 'BB', '0.33', 'PS3', 'PS5', 6),
-(270, 3, 'BB', '0.33', 'PS3', 'PS6', 6),
-(271, 3, 'BB', '0.33', 'PS3', 'PS7', 6),
-(272, 3, 'BB', '0.33', 'PS3', 'PS8', 6),
-(273, 3, 'BB', '0.33', 'PS3', 'PS9', 6),
-(274, 3, 'BB', '0.33', 'PS3', 'PS10', 6),
-(275, 3, 'BB', '0.33', 'PS3', 'PS11', 6),
-(276, 3, 'BB', '0.33', 'PS4', 'PS5', 6),
-(277, 3, 'BB', '0.33', 'PS4', 'PS6', 6),
-(278, 3, 'BB', '0.33', 'PS4', 'PS7', 6),
-(279, 3, 'BB', '0.33', 'PS4', 'PS8', 6),
-(280, 3, 'BB', '0.33', 'PS4', 'PS9', 6),
-(281, 3, 'BB', '0.33', 'PS4', 'PS10', 6),
-(282, 3, 'BB', '0.33', 'PS4', 'PS11', 6),
-(283, 3, 'BB', '0.33', 'PS5', 'PS6', 6),
-(284, 3, 'BB', '0.33', 'PS5', 'PS7', 6),
-(285, 3, 'BB', '0.33', 'PS5', 'PS8', 6),
-(286, 3, 'BB', '0.33', 'PS5', 'PS9', 6),
-(287, 3, 'BB', '0.33', 'PS5', 'PS10', 6),
-(288, 3, 'BB', '0.33', 'PS5', 'PS11', 6),
-(289, 3, 'BB', '0.33', 'PS6', 'PS7', 6),
-(290, 3, 'BB', '0.33', 'PS6', 'PS8', 6),
-(291, 3, 'BB', '0.33', 'PS6', 'PS9', 6),
-(292, 3, 'BB', '0.33', 'PS6', 'PS10', 6),
-(293, 3, 'BB', '0.33', 'PS6', 'PS11', 6),
-(294, 3, 'BB', '0.33', 'PS7', 'PS8', 6),
-(295, 3, 'BB', '0.33', 'PS7', 'PS9', 6),
-(296, 3, 'BB', '0.33', 'PS7', 'PS10', 6),
-(297, 3, 'BB', '0.33', 'PS7', 'PS11', 6),
-(298, 3, 'BB', '0.33', 'PS8', 'PS9', 6),
-(299, 3, 'BB', '0.33', 'PS8', 'PS10', 6),
-(300, 3, 'BB', '0.33', 'PS8', 'PS11', 6),
-(301, 3, 'BB', '0.33', 'PS9', 'PS10', 6),
-(302, 3, 'BB', '0.33', 'PS9', 'PS11', 6),
-(303, 3, 'BB', '0.33', 'PS10', 'PS11', 6),
-(304, 3, 'BB', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(305, 3, 'BB', '0.33', 'Ekonomi', 'Sosial', 7),
-(306, 3, 'BB', '0.33', 'Lingkungan', 'Sosial', 7),
-(307, 3, 'BB', '0.33', 'RE1', 'RE2', 8),
-(308, 3, 'BB', '0.33', 'RE1', 'RE3', 8),
-(309, 3, 'BB', '0.33', 'RE1', 'RE4', 8),
-(310, 3, 'BB', '0.33', 'RE2', 'RE3', 8),
-(311, 3, 'BB', '0.33', 'RE2', 'RE4', 8),
-(312, 3, 'BB', '0.33', 'RE3', 'RE4', 8),
-(313, 3, 'BB', '0.33', 'RL1', 'RL2', 9),
-(314, 3, 'BB', '0.33', 'RL1', 'RL3', 9),
-(315, 3, 'BB', '0.33', 'RL2', 'RL3', 9),
-(316, 3, 'BB', '0.33', 'RS1', 'RS2', 10),
-(317, 3, 'tess', '0.33', 'RPA', 'Peternak', 2),
-(318, 3, 'tess', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(319, 3, 'tess', '0.33', 'Ekonomi', 'Sosial', 3),
-(320, 3, 'tess', '0.33', 'Lingkungan', 'Sosial', 3),
-(321, 3, 'tess', '0.33', 'PE1', 'PE2', 4),
-(322, 3, 'tess', '0.33', 'PE1', 'PE3', 4),
-(323, 3, 'tess', '0.33', 'PE1', 'PE4', 4),
-(324, 3, 'tess', '0.33', 'PE2', 'PE3', 4),
-(325, 3, 'tess', '0.33', 'PE2', 'PE4', 4),
-(326, 3, 'tess', '0.33', 'PL1', 'PL2', 5);
->>>>>>> 63bc0fb... Major update
 
 -- --------------------------------------------------------
 
@@ -1059,175 +525,6 @@ CREATE TABLE `responden_sapi` (
   `id_section` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
-<<<<<<< HEAD
---
--- Dumping data for table `responden_sapi`
---
-
-INSERT INTO `responden_sapi` (`id`, `id_pengisi`, `nama_responden`, `nilai_responden`, `kriteria_1`, `kriteria_2`, `id_section`) VALUES
-(1, 1, 'Dayyan', '0.33', 'Peternak', 'RPH', 2),
-(2, 1, 'Dis', '0.33', 'Peternak', 'RPH', 2),
-(3, 1, 'Dayyan', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(4, 1, 'Dis', '0.33', 'Ekonomi', 'Lingkungan', 3),
-(5, 1, 'Dayyan', '0.33', 'Ekonomi', 'Sosial', 3),
-(6, 1, 'Dis', '0.33', 'Ekonomi', 'Sosial', 3),
-(7, 1, 'Dayyan', '0.33', 'Lingkungan', 'Sosial', 3),
-(8, 1, 'Dis', '0.33', 'Lingkungan', 'Sosial', 3),
-(9, 1, 'Dayyan', '0.33', 'PE1', 'PE2', 4),
-(10, 1, 'Dis', '0.33', 'PE1', 'PE2', 4),
-(11, 1, 'Dayyan', '0.33', 'PE1', 'PE3', 4),
-(12, 1, 'Dis', '0.33', 'PE1', 'PE3', 4),
-(13, 1, 'Dayyan', '0.33', 'PE1', 'PE4', 4),
-(14, 1, 'Dis', '0.33', 'PE1', 'PE4', 4),
-(15, 1, 'Dayyan', '0.33', 'PE2', 'PE3', 4),
-(16, 1, 'Dis', '0.33', 'PE2', 'PE3', 4),
-(17, 1, 'Dayyan', '0.33', 'PE2', 'PE4', 4),
-(18, 1, 'Dis', '0.33', 'PE2', 'PE4', 4),
-(19, 1, 'Dayyan', '0.33', 'PE3', 'PE4', 4),
-(20, 1, 'Dis', '0.33', 'PE3', 'PE4', 4),
-(21, 1, 'Dayyan', '0.33', 'PL1', 'PL2', 5),
-(22, 1, 'Dis', '0.33', 'PL1', 'PL2', 5),
-(23, 1, 'Dayyan', '0.33', 'PL1', 'PL3', 5),
-(24, 1, 'Dis', '0.33', 'PL1', 'PL3', 5),
-(25, 1, 'Dayyan', '0.33', 'PL2', 'PL3', 5),
-(26, 1, 'Dis', '0.33', 'PL2', 'PL3', 5),
-(27, 1, 'Dayyan', '0.33', 'PS1', 'PS2', 6),
-(28, 1, 'Dis', '0.33', 'PS1', 'PS2', 6),
-(29, 1, 'Dayyan', '0.33', 'PS1', 'PS3', 6),
-(30, 1, 'Dis', '0.33', 'PS1', 'PS3', 6),
-(31, 1, 'Dayyan', '0.33', 'PS1', 'PS4', 6),
-(32, 1, 'Dis', '0.33', 'PS1', 'PS4', 6),
-(33, 1, 'Dayyan', '0.33', 'PS2', 'PS3', 6),
-(34, 1, 'Dis', '0.33', 'PS2', 'PS3', 6),
-(35, 1, 'Dayyan', '0.33', 'PS2', 'PS4', 6),
-(36, 1, 'Dis', '0.33', 'PS2', 'PS4', 6),
-(37, 1, 'Dayyan', '0.33', 'PS3', 'PS4', 6),
-(38, 1, 'Dis', '0.33', 'PS3', 'PS4', 6),
-(39, 1, 'Dayyan', '0.33', 'RE1', 'RE2', 8),
-(40, 1, 'Dis', '0.33', 'RE1', 'RE2', 8),
-(41, 1, 'Dayyan', '0.33', 'RL1', 'RL2', 9),
-(42, 1, 'Dis', '0.33', 'RL1', 'RL2', 9),
-(43, 1, 'Dayyan', '0.33', 'RL1', 'RL3', 9),
-(44, 1, 'Dis', '0.33', 'RL1', 'RL3', 9),
-(45, 1, 'Dayyan', '0.33', 'RL2', 'RL3', 9),
-(46, 1, 'Dis', '0.33', 'RL2', 'RL3', 9),
-(47, 1, 'Dayyan', '0.33', 'RS1', 'RS2', 10),
-(48, 1, 'Dis', '0.33', 'RS1', 'RS2', 10),
-(49, 1, 'Dayyan', '0.33', 'RS1', 'RS3', 10),
-(50, 1, 'Dis', '0.33', 'RS1', 'RS3', 10),
-(51, 1, 'Dayyan', '0.33', 'RS1', 'RS4', 10),
-(52, 1, 'Dis', '0.33', 'RS1', 'RS4', 10),
-(53, 1, 'Dayyan', '0.33', 'RS2', 'RS3', 10),
-(54, 1, 'Dis', '0.33', 'RS2', 'RS3', 10),
-(55, 1, 'Dayyan', '0.33', 'RS2', 'RS4', 10),
-(56, 1, 'Dis', '0.33', 'RS2', 'RS4', 10),
-(57, 1, 'Dayyan', '0.33', 'RS3', 'RS4', 10),
-(58, 1, 'Dis', '0.33', 'RS3', 'RS4', 10),
-(59, 1, 'Dayyan', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(60, 1, 'Dis', '0.33', 'Ekonomi', 'Lingkungan', 7),
-(61, 1, 'Dayyan', '0.33', 'Ekonomi', 'Sosial', 7),
-(62, 1, 'Dis', '0.33', 'Ekonomi', 'Sosial', 7),
-(63, 1, 'Dayyan', '0.33', 'Lingkungan', 'Sosial', 7),
-(64, 1, 'Dis', '0.33', 'Lingkungan', 'Sosial', 7),
-(65, 1, 'Kukuh', '1', 'Peternak', 'RPH', 2),
-(66, 1, 'Dayyan', '1', 'Peternak', 'RPH', 2),
-(67, 1, 'Fauzan', '1', 'Peternak', 'RPH', 2),
-(68, 1, 'Kukuh', '1', 'Ekonomi', 'Lingkungan', 3),
-(69, 1, 'Dayyan', '1', 'Ekonomi', 'Lingkungan', 3),
-(70, 1, 'Fauzan', '1', 'Ekonomi', 'Lingkungan', 3),
-(71, 1, 'Kukuh', '1', 'Ekonomi', 'Sosial', 3),
-(72, 1, 'Dayyan', '1', 'Ekonomi', 'Sosial', 3),
-(73, 1, 'Fauzan', '1', 'Ekonomi', 'Sosial', 3),
-(74, 1, 'Kukuh', '1', 'Lingkungan', 'Sosial', 3),
-(75, 1, 'Dayyan', '1', 'Lingkungan', 'Sosial', 3),
-(76, 1, 'Fauzan', '1', 'Lingkungan', 'Sosial', 3),
-(77, 1, 'Kukuh', '1', 'PE1', 'PE2', 4),
-(78, 1, 'Dayyan', '1', 'PE1', 'PE2', 4),
-(79, 1, 'Fauzan', '1', 'PE1', 'PE2', 4),
-(80, 1, 'Kukuh', '1', 'PE1', 'PE3', 4),
-(81, 1, 'Dayyan', '1', 'PE1', 'PE3', 4),
-(82, 1, 'Fauzan', '1', 'PE1', 'PE3', 4),
-(83, 1, 'Kukuh', '1', 'PE1', 'PE4', 4),
-(84, 1, 'Dayyan', '1', 'PE1', 'PE4', 4),
-(85, 1, 'Fauzan', '1', 'PE1', 'PE4', 4),
-(86, 1, 'Kukuh', '1', 'PE2', 'PE3', 4),
-(87, 1, 'Dayyan', '1', 'PE2', 'PE3', 4),
-(88, 1, 'Fauzan', '1', 'PE2', 'PE3', 4),
-(89, 1, 'Kukuh', '1', 'PE2', 'PE4', 4),
-(90, 1, 'Dayyan', '1', 'PE2', 'PE4', 4),
-(91, 1, 'Fauzan', '1', 'PE2', 'PE4', 4),
-(92, 1, 'Kukuh', '1', 'PE3', 'PE4', 4),
-(93, 1, 'Dayyan', '1', 'PE3', 'PE4', 4),
-(94, 1, 'Fauzan', '1', 'PE3', 'PE4', 4),
-(95, 1, 'Kukuh', '1', 'PL1', 'PL2', 5),
-(96, 1, 'Dayyan', '1', 'PL1', 'PL2', 5),
-(97, 1, 'Fauzan', '1', 'PL1', 'PL2', 5),
-(98, 1, 'Kukuh', '1', 'PL1', 'PL3', 5),
-(99, 1, 'Dayyan', '1', 'PL1', 'PL3', 5),
-(100, 1, 'Fauzan', '1', 'PL1', 'PL3', 5),
-(101, 1, 'Kukuh', '1', 'PL2', 'PL3', 5),
-(102, 1, 'Dayyan', '1', 'PL2', 'PL3', 5),
-(103, 1, 'Fauzan', '1', 'PL2', 'PL3', 5),
-(104, 1, 'Kukuh', '1', 'PS1', 'PS2', 6),
-(105, 1, 'Dayyan', '1', 'PS1', 'PS2', 6),
-(106, 1, 'Fauzan', '1', 'PS1', 'PS2', 6),
-(107, 1, 'Kukuh', '1', 'PS1', 'PS3', 6),
-(108, 1, 'Dayyan', '1', 'PS1', 'PS3', 6),
-(109, 1, 'Fauzan', '1', 'PS1', 'PS3', 6),
-(110, 1, 'Kukuh', '1', 'PS1', 'PS4', 6),
-(111, 1, 'Dayyan', '1', 'PS1', 'PS4', 6),
-(112, 1, 'Fauzan', '1', 'PS1', 'PS4', 6),
-(113, 1, 'Kukuh', '1', 'PS2', 'PS3', 6),
-(114, 1, 'Dayyan', '1', 'PS2', 'PS3', 6),
-(115, 1, 'Fauzan', '1', 'PS2', 'PS3', 6),
-(116, 1, 'Kukuh', '1', 'PS2', 'PS4', 6),
-(117, 1, 'Dayyan', '1', 'PS2', 'PS4', 6),
-(118, 1, 'Fauzan', '1', 'PS2', 'PS4', 6),
-(119, 1, 'Kukuh', '1', 'PS3', 'PS4', 6),
-(120, 1, 'Dayyan', '1', 'PS3', 'PS4', 6),
-(121, 1, 'Fauzan', '1', 'PS3', 'PS4', 6),
-(122, 1, 'Kukuh', '1', 'Ekonomi', 'Lingkungan', 7),
-(123, 1, 'Dayyan', '1', 'Ekonomi', 'Lingkungan', 7),
-(124, 1, 'Fauzan', '1', 'Ekonomi', 'Lingkungan', 7),
-(125, 1, 'Kukuh', '1', 'Ekonomi', 'Sosial', 7),
-(126, 1, 'Dayyan', '1', 'Ekonomi', 'Sosial', 7),
-(127, 1, 'Fauzan', '1', 'Ekonomi', 'Sosial', 7),
-(128, 1, 'Kukuh', '1', 'Lingkungan', 'Sosial', 7),
-(129, 1, 'Dayyan', '1', 'Lingkungan', 'Sosial', 7),
-(130, 1, 'Fauzan', '1', 'Lingkungan', 'Sosial', 7),
-(131, 1, 'Kukuh', '1', 'RE1', 'RE2', 8),
-(132, 1, 'Dayyan', '1', 'RE1', 'RE2', 8),
-(133, 1, 'Fauzan', '1', 'RE1', 'RE2', 8),
-(134, 1, 'Kukuh', '1', 'RL1', 'RL2', 9),
-(135, 1, 'Dayyan', '1', 'RL1', 'RL2', 9),
-(136, 1, 'Fauzan', '1', 'RL1', 'RL2', 9),
-(137, 1, 'Kukuh', '1', 'RL1', 'RL3', 9),
-(138, 1, 'Dayyan', '1', 'RL1', 'RL3', 9),
-(139, 1, 'Fauzan', '1', 'RL1', 'RL3', 9),
-(140, 1, 'Kukuh', '1', 'RL2', 'RL3', 9),
-(141, 1, 'Dayyan', '1', 'RL2', 'RL3', 9),
-(142, 1, 'Fauzan', '1', 'RL2', 'RL3', 9),
-(143, 1, 'Kukuh', '1', 'RS1', 'RS2', 10),
-(144, 1, 'Dayyan', '1', 'RS1', 'RS2', 10),
-(145, 1, 'Fauzan', '1', 'RS1', 'RS2', 10),
-(146, 1, 'Kukuh', '1', 'RS1', 'RS3', 10),
-(147, 1, 'Dayyan', '1', 'RS1', 'RS3', 10),
-(148, 1, 'Fauzan', '1', 'RS1', 'RS3', 10),
-(149, 1, 'Kukuh', '1', 'RS1', 'RS4', 10),
-(150, 1, 'Dayyan', '1', 'RS1', 'RS4', 10),
-(151, 1, 'Fauzan', '1', 'RS1', 'RS4', 10),
-(152, 1, 'Kukuh', '1', 'RS2', 'RS3', 10),
-(153, 1, 'Dayyan', '1', 'RS2', 'RS3', 10),
-(154, 1, 'Fauzan', '1', 'RS2', 'RS3', 10),
-(155, 1, 'Kukuh', '1', 'RS2', 'RS4', 10),
-(156, 1, 'Dayyan', '1', 'RS2', 'RS4', 10),
-(157, 1, 'Fauzan', '1', 'RS2', 'RS4', 10),
-(158, 1, 'Kukuh', '1', 'RS3', 'RS4', 10),
-(159, 1, 'Dayyan', '1', 'RS3', 'RS4', 10),
-(160, 1, 'Fauzan', '1', 'RS3', 'RS4', 10);
-
-=======
->>>>>>> 63bc0fb... Major update
 -- --------------------------------------------------------
 
 --
@@ -1612,96 +909,115 @@ ALTER TABLE `user_role`
 --
 ALTER TABLE `bobot_indikator`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
 --
 -- AUTO_INCREMENT for table `entitas_ayam`
 --
 ALTER TABLE `entitas_ayam`
   MODIFY `id_a_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `entitas_sapi`
 --
 ALTER TABLE `entitas_sapi`
   MODIFY `id_s_e` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `hasil_skala_ayam`
 --
 ALTER TABLE `hasil_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
 --
 -- AUTO_INCREMENT for table `indikator_ayam`
 --
 ALTER TABLE `indikator_ayam`
   MODIFY `id_a_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
 --
 -- AUTO_INCREMENT for table `indikator_sapi`
 --
 ALTER TABLE `indikator_sapi`
   MODIFY `id_s_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
 --
 -- AUTO_INCREMENT for table `opsi_ahp`
 --
 ALTER TABLE `opsi_ahp`
   MODIFY `id_opsi_ahp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT for table `opsi_skala_ayam`
 --
 ALTER TABLE `opsi_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `opsi_skala_sapi`
 --
 ALTER TABLE `opsi_skala_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
 --
 -- AUTO_INCREMENT for table `rasio`
 --
 ALTER TABLE `rasio`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT for table `rasio_sapi`
 --
 ALTER TABLE `rasio_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT for table `rekap_skala_sapi`
 --
 ALTER TABLE `rekap_skala_sapi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `responden`
 --
 ALTER TABLE `responden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=327;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+
 --
 -- AUTO_INCREMENT for table `responden_sapi`
 --
 ALTER TABLE `responden_sapi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=929;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+
 --
 -- AUTO_INCREMENT for table `responden_skala_ayam`
 --
 ALTER TABLE `responden_skala_ayam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `section_sapi`
 --
 ALTER TABLE `section_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- Constraints for dumped tables
 --
@@ -1759,6 +1075,7 @@ ALTER TABLE `responden_sapi`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
