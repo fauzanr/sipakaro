@@ -18,6 +18,7 @@
                     <?php endfor ?>
                 </div>
             </div>
+            <input type="hidden" name="bagian" value="<?= $bagian != NULL ? $bagian : 'isi_ahp' ?>">
             <button type="submit" class="btn btn-primary btn-lg col-md-2 mt-5" style="float: right;">Next</button>
         </form>
 

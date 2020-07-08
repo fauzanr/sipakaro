@@ -22,6 +22,10 @@ class Test extends CI_Controller {
     $this->session->unset_userdata('indikator_sapi');
     $this->session->unset_userdata('nilai_skala_sapi');
     $this->session->unset_userdata('output_skala_sapi');
+
+    $this->session->unset_userdata('bobot_lokal_dimensi');
+    $this->session->unset_userdata('bobot_lokal_entitas');
+
     print("<pre>".print_r($_SESSION,true)."</pre>");
   }
 
@@ -31,9 +35,9 @@ class Test extends CI_Controller {
 
   public function bobot($id){
 
-    $_SESSION['indikator'][$id][0]['section_id'] = '1'; // RPA
+    // $_SESSION['indikator'][$id][0]['section_id'] = '1'; // RPA
     // $_SESSION['indikator'][$id][0]['section_id'] = '2'; // Peternak
-    $test = $this->Ahp_model->normalisasi_rpa_peternak($id);
+    $test = $this->Ahp_model->normalisasi_rpa_peternak($_SESSION['id_user'], $id);
 
     die('berhasil');
     // section 5 gabisa hitung eigen maksimal karena kurang dari 3 indikator

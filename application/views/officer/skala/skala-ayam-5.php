@@ -5,6 +5,16 @@
 
 <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
 
+<script>
+    function konfirmasi() {
+        let result = confirm('hapus data skala ayam?');
+        if (result) {
+            window.location = '<?= base_url('officer/hapus_skala_ayam/'.$_SESSION['id_user']) ?>'
+        }
+    }
+</script>
+<a onclick="konfirmasi()"><button class="btn btn-danger">Hapus data skala</button></a>
+
 <br>
 
 <h2 class="h4 mb-4 text-gray-800 d-flex justify-content-center">Peternak</h2>

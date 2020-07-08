@@ -6,7 +6,7 @@
 
     <script>
     function konfirmasi() {
-        let result = confirm('hapus data AHP?');
+        let result = confirm('hapus data AHP sapi?');
         if (result) {
             window.location = '<?= base_url('officer/hapus_ahp_sapi/'.$_SESSION['id_user']) ?>'
         }
