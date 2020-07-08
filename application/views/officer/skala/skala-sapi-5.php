@@ -8,7 +8,7 @@
 
     <script>
     function konfirmasi() {
-        let result = confirm('hapus data skala?');
+        let result = confirm('hapus data skala sapi?');
         if (result) {
             window.location = '<?= base_url('officer/hapus_skala_sapi/'.$_SESSION['id_user']) ?>'
         }
