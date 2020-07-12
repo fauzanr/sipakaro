@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2020 at 08:39 AM
+-- Generation Time: Jul 12, 2020 at 07:03 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -128,40 +128,41 @@ CREATE TABLE `hasil_skala_ayam` (
   `entitas` varchar(10) NOT NULL,
   `indikator` varchar(10) NOT NULL,
   `rata_rata` varchar(5) NOT NULL,
-  `nilai_konversi` varchar(5) NOT NULL
+  `nilai_konversi` varchar(5) NOT NULL,
+  `id_pengisi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `hasil_skala_ayam`
 --
 
-INSERT INTO `hasil_skala_ayam` (`id`, `entitas`, `indikator`, `rata_rata`, `nilai_konversi`) VALUES
-(1, 'RPA', 'RL1', '1.5', '30'),
-(2, 'RPA', 'RL2', '1.5', '30'),
-(3, 'RPA', 'RL3', '1.5', '30'),
-(4, 'RPA', 'RS1', '3', '60'),
-(5, 'RPA', 'RS2', '2.5', '50'),
-(6, 'RPA', 'RE1', '2.5', '50'),
-(7, 'RPA', 'RE2', '2.5', '50'),
-(8, 'RPA', 'RE3', '2.5', '50'),
-(9, 'RPA', 'RE4', '2.5', '50'),
-(10, 'Peternak', 'PL1', '4', '80'),
-(11, 'Peternak', 'PL2', '5', '100'),
-(12, 'Peternak', 'PS1', '3', '60'),
-(13, 'Peternak', 'PS2', '2', '40'),
-(14, 'Peternak', 'PS3', '1', '20'),
-(15, 'Peternak', 'PS4', '3', '60'),
-(16, 'Peternak', 'PS5', '4', '80'),
-(17, 'Peternak', 'PS6', '4', '80'),
-(18, 'Peternak', 'PS7', '4', '80'),
-(19, 'Peternak', 'PS8', '4', '80'),
-(20, 'Peternak', 'PS9', '3', '60'),
-(21, 'Peternak', 'PS10', '4', '80'),
-(22, 'Peternak', 'PS11', '4', '80'),
-(23, 'Peternak', 'PE1', '4', '80'),
-(24, 'Peternak', 'PE2', '4', '80'),
-(25, 'Peternak', 'PE3', '4', '80'),
-(26, 'Peternak', 'PE4', '4', '80');
+INSERT INTO `hasil_skala_ayam` (`id`, `entitas`, `indikator`, `rata_rata`, `nilai_konversi`, `id_pengisi`) VALUES
+(1, 'RPA', 'RL1', '1.5', '30', 1),
+(2, 'RPA', 'RL2', '1.5', '30', 1),
+(3, 'RPA', 'RL3', '1.5', '30', 1),
+(4, 'RPA', 'RS1', '3', '60', 1),
+(5, 'RPA', 'RS2', '2.5', '50', 1),
+(6, 'RPA', 'RE1', '2.5', '50', 1),
+(7, 'RPA', 'RE2', '2.5', '50', 1),
+(8, 'RPA', 'RE3', '2.5', '50', 1),
+(9, 'RPA', 'RE4', '2.5', '50', 1),
+(10, 'Peternak', 'PL1', '4', '80', 1),
+(11, 'Peternak', 'PL2', '5', '100', 1),
+(12, 'Peternak', 'PS1', '3', '60', 1),
+(13, 'Peternak', 'PS2', '2', '40', 1),
+(14, 'Peternak', 'PS3', '1', '20', 1),
+(15, 'Peternak', 'PS4', '3', '60', 1),
+(16, 'Peternak', 'PS5', '4', '80', 1),
+(17, 'Peternak', 'PS6', '4', '80', 1),
+(18, 'Peternak', 'PS7', '4', '80', 1),
+(19, 'Peternak', 'PS8', '4', '80', 1),
+(20, 'Peternak', 'PS9', '3', '60', 1),
+(21, 'Peternak', 'PS10', '4', '80', 1),
+(22, 'Peternak', 'PS11', '4', '80', 1),
+(23, 'Peternak', 'PE1', '4', '80', 1),
+(24, 'Peternak', 'PE2', '4', '80', 1),
+(25, 'Peternak', 'PE3', '4', '80', 1),
+(26, 'Peternak', 'PE4', '4', '80', 0);
 
 -- --------------------------------------------------------
 
@@ -1082,6 +1083,25 @@ INSERT INTO `section_sapi` (`id`, `level0`, `level1`, `nama_section`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ukuran_peternakan_ayam`
+--
+
+CREATE TABLE `ukuran_peternakan_ayam` (
+  `id` int(11) NOT NULL,
+  `ukuran_peternakan` varchar(10) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ukuran_peternakan_ayam`
+--
+
+INSERT INTO `ukuran_peternakan_ayam` (`id`, `ukuran_peternakan`, `id_user`) VALUES
+(1, 'Besar', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -1261,6 +1281,12 @@ ALTER TABLE `section_sapi`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ukuran_peternakan_ayam`
+--
+ALTER TABLE `ukuran_peternakan_ayam`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -1378,6 +1404,12 @@ ALTER TABLE `section`
 --
 ALTER TABLE `section_sapi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `ukuran_peternakan_ayam`
+--
+ALTER TABLE `ukuran_peternakan_ayam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`

@@ -14,6 +14,9 @@
     <?php endif ?>
 
     <h2 class="h3 mbcol-sm-2 text-gray-800"><?= $title; ?></h2>
+    <div class="row mt-2">
+        <a class="h5" href="<?= base_url().'officer/page_ukuran_peternakan' ?>">Ukuran Peternakan</a>
+    </div>
     <?php for ($i=0; $i < sizeof($pagination); $i++) : ?>
         <div class="row">
             <a href="<?= base_url().'officer/halaman_input_skala_ayam/'.$entitas['ket_a_e'].'/'.$pagination[$i]['kode_a_i'] ?>"><?= $pagination[$i]['nama_kriteria'].' ('.$pagination[$i]['kode_a_i'].')' ?></a><br>
