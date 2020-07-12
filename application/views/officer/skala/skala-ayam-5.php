@@ -17,6 +17,8 @@
 
 <br>
 
+<h2 class="h4 my-4 text-gray-800 d-flex">Ukuran Peternakan : <?= $ukuran['ukuran_peternakan'] ?></h2>
+
 <h2 class="h4 mb-4 text-gray-800 d-flex justify-content-center">Peternak</h2>
 
 <div class="table-responsive">

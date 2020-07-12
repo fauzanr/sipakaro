@@ -26,6 +26,8 @@ class Test extends CI_Controller {
     $this->session->unset_userdata('bobot_lokal_dimensi');
     $this->session->unset_userdata('bobot_lokal_entitas');
 
+    $this->session->unset_userdata('ukuran_peternakan');
+
     print("<pre>".print_r($_SESSION,true)."</pre>");
   }
 
@@ -60,6 +62,24 @@ class Test extends CI_Controller {
     $this->session->unset_userdata('nilai_pengisian_skala');
     $this->session->unset_userdata('hitung_skala');
     print("<pre>".print_r($_SESSION,true)."</pre>");
+  }
+
+  public function ukuran_peternakan(){
+    $_SESSION['ukuran_peternakan'] = 'Besar';
+    
+    // Input nilai ukuran peternakan ke db
+    $ukuran_peternakan = $this->db->get('ukuran_peternakan_ayam')->result_array();
+    if(count($ukuran_peternakan) < 1){
+      // Tambah (Karena masih kosong di DB)
+      $this->Ahp_model->add_ukuran_peternakan_ayam($_SESSION['ukuran_peternakan'], $_SESSION['id_user']);
+      $this->session->unset_userdata('ukuran_peternakan');
+      die('DONE ADD');
+    }else{
+      // Update (Karena sudah ada di DB)
+      $this->Ahp_model->update_ukuran_peternakan_ayam($_SESSION['ukuran_peternakan'], $_SESSION['id_user']);
+      $this->session->unset_userdata('ukuran_peternakan');
+      die('DONE UPDATE');
+    }
   }
 
 }

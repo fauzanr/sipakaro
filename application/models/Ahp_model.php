@@ -351,7 +351,7 @@
 
         public function update_hasil_skala($data){
             for ($i=0 ; $i<sizeof($data) ; $i++) { 
-                $this->db->where(['entitas' => $data[$i]['entitas'], 'indikator' => $data[$i]['indikator']] );
+                $this->db->where(['entitas' => $data[$i]['entitas'], 'indikator' => $data[$i]['indikator'], 'id_pengisi' => $_SESSION['id_user']] );
                 $this->db->update('hasil_skala_ayam', $data[$i]);
             };
             return;
@@ -378,7 +378,7 @@
                 for ($j=0; $j < sizeof($data['indikator']); $j++) { 
                     
                     $this->db->join('indikator_ayam', 'responden_skala_ayam.indikator = indikator_ayam.id_a_i');
-                    $fetch = $this->db->get_where('responden_skala_ayam', ['responden_skala_ayam.entitas' => $data['entitas'][$i]['id_a_e'], 'responden_skala_ayam.indikator' => $data['indikator'][$j]['id_a_i'] ])->result_array();
+                    $fetch = $this->db->get_where('responden_skala_ayam', ['responden_skala_ayam.entitas' => $data['entitas'][$i]['id_a_e'], 'responden_skala_ayam.indikator' => $data['indikator'][$j]['id_a_i'], 'responden_skala_ayam.id_pengisi' => $_SESSION['id_user'] ])->result_array();
                     if($fetch == NULL){
                         continue;
                     }elseif($fetch != NULL){
@@ -409,6 +409,7 @@
                         'indikator' => $responden['kode_a_i'],
                         'rata_rata' => $avg,
                         'nilai_konversi' => $konversi,
+                        'id_pengisi' => $_SESSION['id_user']
                     ];
                     
                     // Input ke session
@@ -419,7 +420,7 @@
 
             // die(print('<pre>'.print_r($data,true).'</pre>'));
 
-            $skala_ayam = $this->db->get('hasil_skala_ayam')->result_array();
+            $skala_ayam = $this->db->get_where('hasil_skala_ayam', ['id_pengisi' => $_SESSION['id_user']])->result_array();
             if (count($skala_ayam) > 0) {
                 $this->Ahp_model->update_hasil_skala($data['input']);
                 return;
@@ -429,5 +430,29 @@
             }
 
         }
+
+        // Deskripsi : Tambah nilai pada tabel ukuran peternakan ayam
+        public function add_ukuran_peternakan_ayam($data, $id_user){
+            $input = [
+                'ukuran_peternakan' => $data,
+                'id_user' => $id_user
+            ];
+            $this->db->insert('ukuran_peternakan_ayam', $input);
+              
+            return;
+          }
+  
+          // Deskripsi : Update nilai pada tabel ukuran peternakan ayam
+          public function update_ukuran_peternakan_ayam($data, $id_user){
+            
+            $input = [
+                'ukuran_peternakan' => $data,
+                'id_user' => $id_user
+            ];
+            $this->db->where(['id_user' => $id_user]);
+            $this->db->update('ukuran_peternakan_ayam', $input);
+            
+            return;
+          }
     }
 ?>

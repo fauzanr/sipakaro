@@ -507,6 +507,10 @@
 				// redirect(base_url().'officer/input_ahp_responden');
 				$this->input_ahp_satu('isi_skala');
 			}
+			if(!isset($_SESSION['ukuran_peternakan'])) {
+				// redirect ke pengisian ukuran peternakan
+				$this->page_ukuran_peternakan();
+			}
 			
 			$data['title'] = 'Perhitungan Skala Ayam - '.$entitas;
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -540,7 +544,6 @@
 			}
 			
 			// die(print("<pre>".print_r($data,true)."</pre>"));
-			// $data['opsi'] = $this->db->get('opsi_ahp')->result_array();
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -577,6 +580,7 @@
 			
 		}
 
+		// Insert data ke dalam DB
 		public function insert_pengisian_skala_ayam() {
 			if(!isset($_SESSION['nilai_pengisian_skala']) || !isset($_SESSION['pengisian_ahp'])) {
 				echo 'error: empty session';
@@ -612,6 +616,16 @@
 						
 						$data_counter += count($v);
 					}
+
+					// Input nilai ukuran peternakan ke db
+					$ukuran_peternakan = $this->db->get('ukuran_peternakan_ayam')->result_array();
+					if(count($ukuran_peternakan) < 1){
+						// Tambah (Karena masih kosong di DB)
+						$this->Ahp_model->add_ukuran_peternakan_ayam($_SESSION['ukuran_peternakan'], $_SESSION['id_user']);
+					}else{
+						// Update (Karena sudah ada di DB)
+						$this->Ahp_model->update_ukuran_peternakan_ayam($_SESSION['ukuran_peternakan'], $_SESSION['id_user']);
+					}
 	
 					// Masuk ke fungsi Hitung Skala
 					$this->Ahp_model->hitung_nilai_skala();
@@ -619,12 +633,38 @@
 					$this->session->unset_userdata('pengisian_ahp');
 					$this->session->unset_userdata('nilai_pengisian_skala');
 					$this->session->unset_userdata('progress_pengisian_skala');
+					$this->session->unset_userdata('ukuran_peternakan');
 	
 					// echo 'berhasil input '.$data_counter.' data 😛<br>';
 					redirect(base_url('officer'));
 				}
 			}
 
+		}
+
+		// Halaman ukuran peternakan
+		public function page_ukuran_peternakan(){
+			$data['title'] = 'Pengisian Skala - Ukuran Peternakan';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/skala/ukuran-peternakan-ayam', $data);
+			$this->load->view('templates/footer');
+		}
+
+		// Input ukuran peternakan ke dalam session
+		public function input_ukuran_peternakan(){
+			if(!isset($_SESSION['nilai_pengisian_skala']) || !isset($_SESSION['pengisian_ahp'])) {
+				echo 'error: empty session';
+				return;
+			}
+			// Set Session
+			$_SESSION['ukuran_peternakan'] = $this->input->post('ukuran_peternakan');
+
+			// Redirect Halaman Pengisian Skala
+			$this->halaman_input_skala_ayam();
 		}
 
 		// Rekap Skala ayam
@@ -634,6 +674,8 @@
 
 			$data['rekap_peternak'] = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'Peternak'])->result_array();
 			$data['rekap_rpa'] = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'RPA'])->result_array();
+
+			$data['ukuran'] = $this->db->get_where('ukuran_peternakan_ayam', ['id_user' => $_SESSION['id_user']])->row_array();
 
 			// die(print('<pre>'.print_r($data,true).'</pre>'));
 
@@ -650,6 +692,9 @@
 
 			$this->db->where('id_pengisi', $id_user);
 			$this->db->delete('hasil_skala_ayam');
+
+			$this->db->where('id_user', $id_user);
+			$this->db->delete('ukuran_peternakan_ayam');
 
 			redirect(base_url('officer/rekap_skala_ayam'));
 		}
