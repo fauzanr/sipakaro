@@ -37,6 +37,7 @@ $route['officer/index'] = 'officer';
 
 $route['officer/input-ahp'] = 'officer/input_ahp_satu';
 $route['officer/rekap_ahp'] = 'officer/page_rekap_ahp';
+$route['officer/skala_ayam'] = 'officer/halaman_input_skala_ayam';
 $route['officer/rekap_skala_ayam'] = 'officer/page_rekap_skala_ayam';
 $route['officer/skala_keberlanjutan_ayam'] = 'officer/skala_keberlanjutan';
 

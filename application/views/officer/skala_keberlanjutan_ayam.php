@@ -25,6 +25,7 @@
                 <?php foreach($skala_ayam as $s) : ?>
                     <?php if($s['id_section'] == 2) : ?>
                         <?php $level0 = $s['kriteria'] ?>
+                        <?php $bobot_lokal_entitas = $s['bobot'] ?>
                         <tr>
                             <td><?= $s['kriteria'] ?></td>
                             <td></td>
@@ -37,6 +38,7 @@
                         <?php foreach($skala_ayam as $s) : ?>
                             <?php if($s['level1'] == $level0) : ?>
                                 <?php $level1 = $s['kriteria'] ?>
+                                <?php $bobot_lokal_dimensi = $s['bobot'] ?>
                                 <tr>
                                     <td></td>
                                     <td><?= $s['kriteria'] ?></td>
@@ -48,16 +50,17 @@
                                 <?php $counter++ ?>
                                 <?php foreach($skala_ayam as $s) : ?>
                                     <?php if($s['level0'] == $level0 && $s['level1'] == $level1) : ?>
+                                        <?php $bobot_global = $s['bobot'] * $bobot_lokal_dimensi * $bobot_lokal_entitas ?>
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td><?= $s['kriteria'] ?></td>
-                                            <td><?= $s['bobot_global_indikator_dimensi_entitas'] ?></td>
+                                            <td><?= $bobot_global ?></td>
                                             <td><?= $s['nilai_konversi'] ?></td>
-                                            <td><?= $s['nilai_konversi'] * $s['bobot_global_indikator_dimensi_entitas'] ?></td>
+                                            <td><?= $s['nilai_konversi'] * $bobot_global ?></td>
                                         </tr>
                                         <?php $counter++ ?>
-                                        <?php $hitung = $hitung + $s['nilai_konversi'] * $s['bobot_global_indikator_dimensi_entitas']; ?>
+                                        <?php $hitung = $hitung + $s['nilai_konversi'] * $bobot_global; ?>
                                     <?php endif ?>
                                 <?php endforeach ?>
                             <?php endif ?>

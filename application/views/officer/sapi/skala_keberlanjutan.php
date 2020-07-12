@@ -25,6 +25,7 @@
                 <?php foreach($bobot_indikator as $b) : ?>
                     <?php if($b['id_section'] == 2) : ?>
                         <?php $level0 = $b['kriteria'] ?>
+                        <?php $bobot_lokal_entitas = $b['bobot'] ?>
                         <tr>
                             <td><?= $b['kriteria'] ?></td>
                             <td></td>
@@ -37,6 +38,7 @@
                         <?php foreach($bobot_indikator as $b) : ?>
                             <?php if($b['level1'] == $level0) : ?>
                                 <?php $level1 = $b['kriteria'] ?>
+                                <?php $bobot_lokal_dimensi = $b['bobot'] ?>
                                 <tr>
                                     <td></td>
                                     <td><?= $b['kriteria'] ?></td>
@@ -48,16 +50,17 @@
                                 <?php $counter++ ?>
                                 <?php foreach($bobot_indikator as $b) : ?>
                                     <?php if($b['level0'] == $level0 && $b['level1'] == $level1) : ?>
+                                        <?php $bobot_global = $b['bobot'] * $bobot_lokal_dimensi * $bobot_lokal_entitas ?>
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td><?= $b['kriteria'] ?></td>
-                                            <td><?= $b['bobot'] ?></td>
+                                            <td><?= $bobot_global  ?></td>
                                             <td><?= $b['nilai_skala'] ?></td>
-                                            <td><?= $b['nilai_skala'] * $b['bobot'] ?></td>
+                                            <td><?= $b['nilai_skala'] * $bobot_global ?></td>
                                         </tr>
                                         <?php $counter++ ?>
-                                        <?php $total_nilai = $total_nilai + ($b['nilai_skala'] * $b['bobot']) ?>
+                                        <?php $total_nilai = $total_nilai + ($b['nilai_skala'] * $bobot_global) ?>
                                     <?php endif ?>
                                 <?php endforeach ?>
                             <?php endif ?>
