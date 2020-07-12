@@ -82,9 +82,13 @@
                   <a class="ml-4" href="<?= base_url('officer/insert_pengisian_ahp_sapi') ?>"><button class="btn btn-warning">Selesai "!"</button></a>
                 <?php endif; ?>
                 <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/skala_sapi') || isset($_SESSION['nilai_skala_sapi']) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/skala_sapi">Hitung Skala</a>
+                
             </div>
+            
           </div>
+          
         </li>
+        
 
         <!-- Divider -->
         <hr class="sidebar-divider">
