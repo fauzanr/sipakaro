@@ -128,6 +128,7 @@
                   <?php foreach ($section_pagination as $s) : ?>
                       <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp_sapi/'.$s['id']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_data_ahp_sapi/'.$s['id'] ?>"><?= $s['nama_section'] ?></a>
                   <?php endforeach ?>
+                  <a href="<?= base_url('officer/reset_session_ahp/sapi') ?>"><button class="btn btn-danger m-4">Reset pengisian</button></a>
                   <a class="ml-4" href="<?= base_url('officer/insert_pengisian_ahp_sapi') ?>"><button class="btn btn-warning">Selesai "!"</button></a>
                 <?php endif; ?>
             </div>
