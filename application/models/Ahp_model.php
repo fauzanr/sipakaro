@@ -18,7 +18,7 @@
             };
             // Update Nilai Normalisasi
             // $this->Ahp_model->normalisasi_rpa_peternak();
-            // return true;
+            return true;
         }
 
         // Deskripsi    : Tampil semua data tabel bobot indikator berdasarkan id section
@@ -94,7 +94,8 @@
                     // Set counter (Jumlah Responden)
                     $counter = count($data[$data['kriteria'][$i][$kriteria].'-'.$data['kriteria'][$j][$kriteria]]);
                 }
-                
+                // Jika Counter (Responden) = 0,
+                // set data input untuk indikator tsb = 0 semua       
             }
 
             // MENGHITUNG GEOMEAN ------------------------------------------------------------------------------//
@@ -164,16 +165,17 @@
                     }else{
                         $total = $total + ( ($data['matriks_penilaian'][ $data['kriteria'][$j][$kriteria].'-'.$data['kriteria'][$i][$kriteria] ]) / ( $data['matriks_penilaian']['bobot'][$data['kriteria'][$j][$kriteria]] ) );
                     }
-                    // die('haha<br>'.$data['kriteria'][$j][$kriteria].'-'.$data['kriteria'][$i][$kriteria].'<br>masok ['.$j.']['.$i.']<br>operasi = '.$data['matriks_penilaian'][ $data['kriteria'][$j][$kriteria].'-'.$data['kriteria'][$i][$kriteria] ].'<br>hasil = '.$total);
                     
                 }
                 $total = $total / $counter ;
                 $data['bobot_normalisasi'][$data['kriteria'][$i][$kriteria]] = $total;
+                
                 // Masukan nilai bobot normalisasi ke array
                 $data['input'][$i]['kriteria'] = $data['kriteria'][$i][$kriteria];
                 $data['input'][$i]['bobot'] = $total;
                 // Masukan nilai section_id
                 $data['input'][$i]['id_section'] = $section_id;
+                $data['input'][$i]['id_pengisi'] = $id_pengisi;
                 $total = 0; // Reset Variabel
                 
             }
@@ -271,19 +273,21 @@
             
             // Cek apakah sudah ada nilai Bobot sebelumnya di DB
             // die(print("Perhitungan Bobot Normalisasi<br><pre>".print_r($data,true)."</pre>"));
-            // $hitung = $this->db->get_where('bobot_indikator', array('id_section' => $section_id))->result_array();
-            // // die('hitung = '.count($hitung));
-            // if(count($hitung) < 1){
-            //     // Input
-            //     $this->Ahp_model->input_bobot_normalisasi($data['input']);
-            //     return;
-            // }else{
-            //     //Update
-            //     $this->Ahp_model->update_bobot_normalisasi($data['input']);
-            //     return;
-            // }
             
-            return $data['input'];
+            // Update data Lama, Insert Data jika belum Ada
+            $hitung = $this->db->get_where('bobot_indikator', array('id_section' => $section_id, 'id_pengisi' => $id_pengisi))->result_array();
+            // die('hitung = '.count($hitung));
+            if(count($hitung) < 1){
+                // Insert, jika data bobot belum ada di db
+                $this->Ahp_model->input_bobot_normalisasi($data['input']);
+                return;
+            }else{
+                //Update data bobot di db
+                $this->Ahp_model->update_bobot_normalisasi($data['input'], $id_pengisi);
+                return;
+            }
+            
+            // return $data['input'];
         }
 
         // Untuk rekap AHP
@@ -324,12 +328,27 @@
         }
 
         // Deskripsi : Update nilai pada tabel bobot
-        public function update_bobot_normalisasi($data){
+        public function update_bobot_normalisasi($data, $id_pengisi){
             // die(print("Update<br><pre>".print_r($data,true)."</pre>"));
-            for ($i=0 ; $i<sizeof($data) ; $i++) { 
-                $this->db->where(['kriteria' => $data[$i]['kriteria'], 'id_section' => $data[$i]['id_section']] );
-                $this->db->update('bobot_indikator', $data[$i]);
-            };
+
+            // for ($i=0 ; $i<sizeof($data) ; $i++) { 
+            //     $this->db->where(['kriteria' => $data[$i]['kriteria'], 'id_section' => $data[$i]['id_section'], 'id_pengisi' => $id_pengisi]);
+            //     $this->db->update('bobot_indikator', $data[$i]);
+            // };
+
+            foreach ($data as $dt) {
+                $check = count($this->db->get_where('bobot_indikator', ['kriteria' => $dt['kriteria'], 'id_section' => $dt['id_section'], 'id_pengisi' => $id_pengisi])->result_array());
+
+                if($check != 0){
+                    // Jika indikator ditemukan di db, update 
+                    $this->db->where(['kriteria' => $dt['kriteria'], 'id_section' => $dt['id_section'], 'id_pengisi' => $id_pengisi]);
+                    $this->db->update('bobot_indikator', $dt);
+                }else{
+                    // Jika indikator tidak ditemukan di db, insert
+                    $this->db->insert('bobot_indikator', $dt);
+                }
+            }
+
             return;
         }
 

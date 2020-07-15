@@ -15,7 +15,6 @@
         <?php endif ?>
     <?php endif ?>
 
-    <h2 class="h3 mbcol-sm-2 text-gray-800"><?= $title; ?></h2>
     <div class="row mt-2">
         <a class="h5" href="<?= base_url().'officer/page_ukuran_peternakan' ?>">Ukuran Peternakan</a>
     </div>

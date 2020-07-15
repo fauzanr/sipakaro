@@ -41,10 +41,12 @@
 			$data['title'] = 'Dashboard Officer';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 			
-			$this->db->distinct();
-			$this->db->select('nama_responden');
-			$data['jumlah_responden'] = $this->db->get_where('responden', ['id_pengisi' => $_SESSION['id_user']])->num_rows();
-			$data1 = $this->Ahp_model->get_bobot_by_id_pengisi($_SESSION['id_user']);
+			// $this->db->distinct();
+			// $this->db->select('nama_responden');
+			// $data1 = $this->Ahp_model->get_bobot_by_id_pengisi($_SESSION['id_user']);
+
+			$data['jumlah_responden'] = $this->db->get_where('responden', ['id_pengisi' => $_SESSION['id_user'], 'id_section' => '2'])->num_rows();
+			$data1 = $this->db->get_where('bobot_indikator', ['id_pengisi' => $_SESSION['id_user']])->result_array();
 			$data2 = $this->db->get('section')->result_array();
 
 			// gabung array
@@ -56,7 +58,6 @@
 					}
 				}
 			}
-
 			// die(print("<pre>".print_r($data['bobot'],true)."</pre>"));
 			
 			$this->load->view('templates/header', $data);
@@ -246,6 +247,12 @@
 					$data_counter += count($v);
 				}
 
+				foreach($data as $k => $v) {
+					// Hitung Bobot Normalisasi, Insert ke DB
+					$this->Ahp_model->normalisasi_rpa_peternak($_SESSION['id_user'], $k);
+				}
+
+
 				$this->session->unset_userdata('pengisian_ahp');
 				$this->session->unset_userdata('nilai_pengisian_ahp');
 				$this->session->unset_userdata('indikator');
@@ -265,6 +272,9 @@
 
 			$this->db->where('id_pengisi', $id_user);
 			$this->db->delete('responden');
+
+			$this->db->where('id_pengisi', $id_user);
+			$this->db->delete('bobot_indikator');
 
 			redirect(base_url('officer/rekap_ahp'));
 		}
@@ -522,12 +532,15 @@
 			$this->db->select('kode_a_i, nama_kriteria, id_a_i');
 			$data['pagination'] = $this->db->get_where('indikator_ayam', ['entitas' => $data['entitas']['id_a_e']])->result_array();
 
+			// die(print("<pre>".print_r($data['pagination'],true)."</pre>"));
+
 			// Indikator
 			if($indikator != NULL){
 				$data['indikator'] = $this->db->get_where('indikator_ayam', ['entitas' => $data['entitas']['id_a_e'], 'kode_a_i' => $indikator])->row_array();
 			}else {
 				$data['indikator'] = $this->db->get_where('indikator_ayam', ['entitas' => $data['entitas']['id_a_e'], 'kode_a_i' => $data['pagination'][0]['kode_a_i']] )->row_array();
 			}
+			
 
 			// Opsi skala
 			$data['opsi'] = $this->db->get_where('opsi_skala_ayam', ['id_indikator' => $data['indikator']['id_a_i'] ])->result_array();
@@ -543,7 +556,6 @@
 				$data['jumlah_entitas_peternak'] = count($jumlah_entitas);
 			}
 			
-			// die(print("<pre>".print_r($data,true)."</pre>"));
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -634,6 +646,7 @@
 					$this->session->unset_userdata('nilai_pengisian_skala');
 					$this->session->unset_userdata('progress_pengisian_skala');
 					$this->session->unset_userdata('ukuran_peternakan');
+					$this->session->unset_userdata('hitung_skala');
 	
 					// echo 'berhasil input '.$data_counter.' data 😛<br>';
 					redirect(base_url('officer'));
@@ -672,8 +685,13 @@
 			$data['title'] = 'Hasil Rekapan Skala Ayam';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-			$data['rekap_peternak'] = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'Peternak'])->result_array();
-			$data['rekap_rpa'] = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'RPA'])->result_array();
+			$this->db->join('indikator_ayam', 'kode_a_i = indikator');
+			$this->db->order_by('nama_kriteria', 'ASC');
+			$data['rekap_peternak'] = $this->db->get_where('hasil_skala_ayam', ['hasil_skala_ayam.entitas' => 'Peternak'])->result_array();
+			
+			$this->db->join('indikator_ayam', 'kode_a_i = indikator');
+			$this->db->order_by('nama_kriteria', 'ASC');
+			$data['rekap_rpa'] = $this->db->get_where('hasil_skala_ayam', ['hasil_skala_ayam.entitas' => 'RPA'])->result_array();
 
 			$data['ukuran'] = $this->db->get_where('ukuran_peternakan_ayam', ['id_user' => $_SESSION['id_user']])->row_array();
 
@@ -689,6 +707,9 @@
 		// HAPUS DATA SKALA AYAM PER USER DINAS
 		public function hapus_skala_ayam($id_user) {
 			if(!isset($id_user)) die(400);
+
+			$this->db->where('id_pengisi', $id_user);
+			$this->db->delete('responden_skala_ayam');
 
 			$this->db->where('id_pengisi', $id_user);
 			$this->db->delete('hasil_skala_ayam');
@@ -944,15 +965,14 @@
 			$data['title'] = 'Output skala keberlanjutan Ayam';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-			$data['input'] = [];
-
 			// JOIN
+			$this->db->where('bobot_indikator.id_pengisi', $_SESSION['id_user']);
 			$this->db->join('bobot_indikator', 'section.id = bobot_indikator.id_section');
 			$this->db->join('hasil_skala_ayam', 'bobot_indikator.kriteria = hasil_skala_ayam.indikator', 'left');
-			// Get skala ayam
 			$data['skala_ayam'] = $this->db->get('section')->result_array();
 
-			// die(print('<pre>'.print_r($data['skala_ayam'],true).'</pre>'));
+			// die(print('<pre>'.print_r($data2,true).'</pre>'));
+			// die(print('Skala Ayam<pre>'.print_r($data['skala_ayam'],true).'</pre>'));
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);

@@ -370,10 +370,23 @@ class Admin extends CI_Controller {
 	}
 	
 	public function delete_indikator_ayam($id) {
+		$data = $this->db->get_where('indikator_ayam', ['id_a_i' => $id])->row_array();
 		try {
 			$this->db->where('id_a_i', $id);
 			$this->db->delete('indikator_ayam');
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Hapus Indikator!</div>');
+
+			// Delete nilai di responden, bobot_indikator, hasil_skala_ayam
+			$this->db->where('kriteria_1', $data['kode_a_i']);
+			$this->db->or_where('kriteria_2', $data['kode_a_i']);
+			$this->db->delete('responden');
+
+			$this->db->where('kriteria', $data['kode_a_i']);
+			$this->db->delete('bobot_indikator');
+
+			$this->db->where('indikator', $data['kode_a_i']);
+			$this->db->delete('hasil_skala_ayam');
+
 		} catch (\Throwable $th) {
 			$this->session->set_flashdata('message', 'Terjadi kesalahan: '.$th);
 		}
@@ -416,9 +429,11 @@ class Admin extends CI_Controller {
 				'kode_a_i' => $_POST['kode_a_i'],
 				'ket_a_i' => $_POST['ket_a_i'],
 			];
-	
 			try {
 				$this->db->insert('indikator_ayam', $data);
+
+				// Tambah nilai di hasil_skala_ayam, bobot normalisasi dengan nilai 0 semua (kalo memungkinkan)
+
 				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Tambah Indikator!</div>');
 			} catch (\Throwable $th) {
 				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);

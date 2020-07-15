@@ -25,6 +25,7 @@
     <table class="table table-hover">
         <thead class="thead-dark ">
             <tr>
+                <th scope="col">Kriteria</th>
                 <th scope="col">Indikator</th>
                 <th scope="col">Rata-Rata</th>
                 <th scope="col">Nilai Konversi</th>
@@ -32,8 +33,11 @@
             </tr>
         </thead>
         <tbody>
+        <?php $kriteria = ''; ?>
         <?php foreach($rekap_peternak as $r) : ?>
             <tr>
+                <td><?= $kriteria == $r['nama_kriteria'] ? '' : $r['nama_kriteria'] ?></td>
+                <?php $kriteria = $r['nama_kriteria']; ?>
                 <td><label for=""></label><?= $r['indikator'] ?></td>
                 <td><?= $r['rata_rata'] ?></td>
                 <td><?= $r['nilai_konversi'] ?></td>
@@ -63,6 +67,7 @@
     <table class="table table-hover">
         <thead class="thead-dark ">
             <tr>
+                <th scope="col">Kriteria</th>
                 <th scope="col">Indikator</th>
                 <th scope="col">Rata-Rata</th>
                 <th scope="col">Nilai Konversi</th>
@@ -70,8 +75,11 @@
             </tr>
         </thead>
         <tbody>
+        <?php $kriteria = ''; ?>
         <?php foreach($rekap_rpa as $r) : ?>
             <tr>
+                <td><?= $kriteria == $r['nama_kriteria'] ? '' : $r['nama_kriteria'] ?></td>
+                <?php $kriteria = $r['nama_kriteria']; ?>
                 <td><label for=""></label><?= $r['indikator'] ?></td>
                 <td><?= $r['rata_rata'] ?></td>
                 <td><?= $r['nilai_konversi'] ?></td>
