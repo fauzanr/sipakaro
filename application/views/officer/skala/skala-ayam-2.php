@@ -9,6 +9,7 @@
     <div class="row">
             <a href="<?= base_url().'officer/page_ukuran_peternakan' ?>"><button class="btn btn-info m-4">Edit Ukuran Peternakan</button></a>
     </div>
+    <?php echo $this->session->flashdata('edit_ukuran_peternakan'); ?>
 
     <?php if (isset($_SESSION['nilai_pengisian_skala'])) : ?>
         <?php if ($entitas['ket_a_e'] == 'RPA') : ?>

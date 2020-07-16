@@ -426,8 +426,13 @@
 
 		// -------- SKALA AYAM ----------------------------------------------------------------------//
 		public function halaman_input_skala_ayam($entitas = 'Peternak', $indikator = NULL){
-			if(!isset($_SESSION['pengisian_ahp']['nama1'])) {// jika belum ada responden
-				redirect(base_url().'officer/input_ahp_responden');
+			if(!isset($_SESSION['pengisian_ahp']['nama1'])) {	// jika belum ada responden
+				// redirect(base_url().'officer/input_ahp_responden');
+				return $this->input_ahp_satu('isi_skala');
+			}
+			if(!isset($_SESSION['ukuran_peternakan'])) {
+				// redirect ke pengisian ukuran peternakan
+				return $this->page_ukuran_peternakan();
 			}
 			
 			$data['title'] = 'Perhitungan Skala Ayam - '.$entitas;
@@ -547,6 +552,37 @@
 				}
 			}
 
+		}
+
+		// Halaman ukuran peternakan
+		public function page_ukuran_peternakan(){
+			$data['title'] = 'Pengisian Skala - Ukuran Peternakan';
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('officer/skala/ukuran-peternakan-ayam', $data);
+			$this->load->view('templates/footer');
+		}
+
+		// Input ukuran peternakan ke dalam session
+		public function input_ukuran_peternakan(){
+			if(!isset($_SESSION['nilai_pengisian_skala']) || !isset($_SESSION['pengisian_ahp'])) {
+				echo 'error: empty session';
+				return;
+			}
+			// Set Session
+			$_SESSION['ukuran_peternakan'] = $this->input->post('ukuran_peternakan');
+
+			// Redirect Halaman Pengisian Skala
+			if(isset($_SESSION['progress_pengisian_skala']['entitas'])){
+				$this->session->set_flashdata('edit_ukuran_peternakan', '<div class="alert alert-success" role="alert">Berhasil Simpan Data Ukuran Peternakan!</div>');
+				return $this->halaman_input_skala_ayam($_SESSION['progress_pengisian_skala']['entitas']);
+			}else{
+				$this->session->set_flashdata('edit_ukuran_peternakan', '<div class="alert alert-success" role="alert">Berhasil Simpan Data Ukuran Peternakan!</div>');
+				return $this->halaman_input_skala_ayam();
+			}
 		}
 
 		// Rekap Skala ayam
