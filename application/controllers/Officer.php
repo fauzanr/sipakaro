@@ -678,7 +678,11 @@
 			$_SESSION['ukuran_peternakan'] = $this->input->post('ukuran_peternakan');
 
 			// Redirect Halaman Pengisian Skala
-			$this->halaman_input_skala_ayam($_SESSION['progress_pengisian_skala']['entitas']);
+			if(isset($_SESSION['progress_pengisian_skala']['entitas'])){
+				$this->halaman_input_skala_ayam($_SESSION['progress_pengisian_skala']['entitas']);
+			}else{
+				$this->halaman_input_skala_ayam();
+			}
 		}
 
 		// Rekap Skala ayam

@@ -19,13 +19,13 @@
         <a class="h5" href="<?= base_url().'officer/page_ukuran_peternakan' ?>">Ukuran Peternakan</a>
     </div>
     <?php for ($i=0; $i < sizeof($pagination); $i++) : ?>
-            <div class="btn-group" style="color: white;">
-            <a class="<?= base_url(uri_string()) == (base_url().'officer/halaman_input_skala_ayam/'.$entitas['ket_a_e'].'/'.$pagination[$i]['kode_a_i']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_skala_ayam/'.$entitas['ket_a_e'].'/'.$pagination[$i]['kode_a_i'] ?>">
-            <button class="btn active">
-                <?= $pagination[$i]['nama_kriteria'].' ('.$pagination[$i]['kode_a_i'].')' ?><?= isset($_SESSION['nilai_pengisian_skala'][$pagination[$i]['id_a_i']]) ? '<i class="fa fa-check"></i>' : '' ?>
-            </button>
+        <div class="btn-group" style="color: white;">
+            <a href="<?= base_url().'officer/halaman_input_skala_ayam/'.$entitas['ket_a_e'].'/'.$pagination[$i]['kode_a_i'] ?>">
+                <button class="btn <?= base_url(uri_string()) == (base_url().'officer/halaman_input_skala_ayam/'.$entitas['ket_a_e'].'/'.$pagination[$i]['kode_a_i']) ? 'text-primary' : '' ?>">
+                    <?= $pagination[$i]['nama_kriteria'].' ('.$pagination[$i]['kode_a_i'].')' ?><?= isset($_SESSION['nilai_pengisian_skala'][$pagination[$i]['id_a_i']]) ? '<i class="fa fa-check"></i>' : '' ?>
+                </button>
             </a>
-            </div>
+        </div>
     <?php endfor ?>
     <br>
 

@@ -60,7 +60,9 @@
                 <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_skala_ayam') || isset($_SESSION['nilai_pengisian_skala']) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/skala_ayam">Hitung Skala</a>
 
                   <?php if ( (isset($section_pagination) && isset($_SESSION['pengisian_ahp']) && isset($_SESSION['nilai_pengisian_ahp'])) && (base_url(uri_string()) !== base_url().'officer/rekap_ahp') && (base_url(uri_string()) !== base_url().'officer/rekap_ahp_sapi') && (base_url(uri_string()) !== base_url().'officer/input-ahp-sapi') && (base_url(uri_string()) !== base_url().'officer/input_ahp_sapi_responden') && (base_url(uri_string()) !== base_url().'officer') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_sapi') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_sapi') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_ayam') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_ayam') ) : ?>
+                    
                     <a class="collapse-item">Progress: (<?= count($_SESSION['nilai_pengisian_ahp']) ?>/<?= count($section_pagination) ?>)</a>
+                    
                     <?php foreach ($section_pagination as $s) : ?>
                       <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp/'.$s['id']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_data_ahp/'.$s['id'] ?>"><?= $s['nama_section'] ?> <?= isset($_SESSION['nilai_pengisian_ahp'][$s['id']]) ? '<i class="fa fa-check"></i>' : '' ?></a>
                     <?php endforeach ?>
