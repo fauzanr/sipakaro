@@ -17,7 +17,7 @@
 
 <br>
 
-<h2 class="h4 my-4 text-gray-800 d-flex">Ukuran Peternakan : <?= $ukuran['ukuran_peternakan'] ?></h2>
+<h2 class="h4 my-4 text-gray-800 d-flex">Ukuran Peternakan : <?= $ukuran['ukuran_peternakan'] != NULL ? $ukuran['ukuran_peternakan'] : 'Belum Terisi' ?></h2>
 
 <h2 class="h4 mb-4 text-gray-800 d-flex justify-content-center">Peternak</h2>
 
@@ -33,30 +33,36 @@
             </tr>
         </thead>
         <tbody>
-        <?php $kriteria = ''; ?>
-        <?php foreach($rekap_peternak as $r) : ?>
+        <?php if(count($rekap_peternak) > 0) : ?>
+            <?php $kriteria = ''; ?>
+            <?php foreach($rekap_peternak as $r) : ?>
+                <tr>
+                    <td><?= $kriteria == $r['nama_kriteria'] ? '' : $r['nama_kriteria'] ?></td>
+                    <?php $kriteria = $r['nama_kriteria']; ?>
+                    <td><label for=""></label><?= $r['indikator'] ?></td>
+                    <td><?= $r['rata_rata'] ?></td>
+                    <td><?= $r['nilai_konversi'] ?></td>
+                    <td><?php
+                        if ($r['nilai_konversi'] < 25) {
+                            echo 'Buruk';
+                        }
+                        if ($r['nilai_konversi'] >= 25 && $r['nilai_konversi'] < 49.99) {
+                            echo 'Kurang';
+                        }
+                        if ($r['nilai_konversi'] >= 50 && $r['nilai_konversi'] < 74.99) {
+                            echo 'Baik';
+                        }
+                        if ($r['nilai_konversi'] >= 75) {
+                            echo 'Sangat Baik';
+                        }                  
+                    ?></td>
+                </tr>
+            <?php endforeach ?>
+        <?php else : ?>
             <tr>
-                <td><?= $kriteria == $r['nama_kriteria'] ? '' : $r['nama_kriteria'] ?></td>
-                <?php $kriteria = $r['nama_kriteria']; ?>
-                <td><label for=""></label><?= $r['indikator'] ?></td>
-                <td><?= $r['rata_rata'] ?></td>
-                <td><?= $r['nilai_konversi'] ?></td>
-                <td><?php
-                    if ($r['nilai_konversi'] < 25) {
-                        echo 'Buruk';
-                    }
-                    if ($r['nilai_konversi'] >= 25 && $r['nilai_konversi'] < 49.99) {
-                        echo 'Kurang';
-                    }
-                    if ($r['nilai_konversi'] >= 50 && $r['nilai_konversi'] < 74.99) {
-                        echo 'Baik';
-                    }
-                    if ($r['nilai_konversi'] >= 75) {
-                        echo 'Sangat Baik';
-                    }                  
-                 ?></td>
+                <td colspan="5">Data Belum Terisi</td>
             </tr>
-        <?php endforeach ?>
+        <?php endif; ?>
         </tbody>
     </table>
 </div>
@@ -75,30 +81,36 @@
             </tr>
         </thead>
         <tbody>
-        <?php $kriteria = ''; ?>
-        <?php foreach($rekap_rpa as $r) : ?>
+        <?php if(count($rekap_rpa) > 0) : ?>
+            <?php $kriteria = ''; ?>
+            <?php foreach($rekap_rpa as $r) : ?>
+                <tr>
+                    <td><?= $kriteria == $r['nama_kriteria'] ? '' : $r['nama_kriteria'] ?></td>
+                    <?php $kriteria = $r['nama_kriteria']; ?>
+                    <td><label for=""></label><?= $r['indikator'] ?></td>
+                    <td><?= $r['rata_rata'] ?></td>
+                    <td><?= $r['nilai_konversi'] ?></td>
+                    <td><?php
+                    if ($r['nilai_konversi'] < 25) {
+                        echo 'Buruk';
+                    }
+                    if ($r['nilai_konversi'] >= 25 && $r['nilai_konversi'] < 49.99) {
+                        echo 'Kurang';
+                    }
+                    if ($r['nilai_konversi'] >= 50 && $r['nilai_konversi'] < 74.99) {
+                        echo 'Baik';
+                    }
+                    if ($r['nilai_konversi'] >= 75) {
+                        echo 'Sangat Baik';
+                    }                  
+                    ?></td>
+                </tr>
+            <?php endforeach ?>
+        <?php else : ?>
             <tr>
-                <td><?= $kriteria == $r['nama_kriteria'] ? '' : $r['nama_kriteria'] ?></td>
-                <?php $kriteria = $r['nama_kriteria']; ?>
-                <td><label for=""></label><?= $r['indikator'] ?></td>
-                <td><?= $r['rata_rata'] ?></td>
-                <td><?= $r['nilai_konversi'] ?></td>
-                <td><?php
-                if ($r['nilai_konversi'] < 25) {
-                    echo 'Buruk';
-                }
-                if ($r['nilai_konversi'] >= 25 && $r['nilai_konversi'] < 49.99) {
-                    echo 'Kurang';
-                }
-                if ($r['nilai_konversi'] >= 50 && $r['nilai_konversi'] < 74.99) {
-                    echo 'Baik';
-                }
-                if ($r['nilai_konversi'] >= 75) {
-                    echo 'Sangat Baik';
-                }                  
-                 ?></td>
+                <td colspan="5">Data Belum Terisi</td>
             </tr>
-        <?php endforeach ?>
+        <?php endif; ?>
         </tbody>
     </table>
 </div>

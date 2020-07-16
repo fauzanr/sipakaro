@@ -34,6 +34,11 @@
                 </tr>
             </thead>
             <tbody>
+            <?php if (count($bobot) < 1) : ?>
+                <tr>
+                    <td colspan="10">Data Belum Terisi</td>
+                </tr>
+            <?php else : ?>
                 <?php $counter = 1 ?>
                 <?php foreach($bobot as $b) : ?>
                     <?php if($b['id_section'] == 2) : ?>
@@ -93,6 +98,7 @@
                         <?php endforeach ?>
                     <?php endif ?>
                 <?php endforeach ?>
+            <?php endif; ?>
             </tbody>
         </table>
     </div>
@@ -116,15 +122,19 @@
                     </thead>
                     <tbody>
                     <?php if(isset($c1cr)) : ?>
-                            <?php foreach($c1cr as $k) :?>
-                                <tr>
-                                    <th scope="row"><?= $k['level0'] ?></th>
-                                    <td><?= $k['level1'] ?></td>
-                                    <td><?= $k['C1'] ?></td>
-                                    <td><?= $k['CR'] ?></td>
-                                </tr>
-                            <?php endforeach ?>
-                        <?php endif ?>
+                        <?php foreach($c1cr as $k) :?>
+                            <tr>
+                                <th scope="row"><?= $k['level0'] ?></th>
+                                <td><?= $k['level1'] ?></td>
+                                <td><?= $k['C1'] ?></td>
+                                <td><?= $k['CR'] ?></td>
+                            </tr>
+                        <?php endforeach ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="4">Data Belum Terisi</td>
+                        </tr>
+                    <?php endif ?>
                     </tbody>
                 </table>
             </div>

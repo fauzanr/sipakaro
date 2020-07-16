@@ -617,6 +617,7 @@
 
 				if($_SESSION['progress_pengisian_skala']['entitas'] == 'Peternak'){
 					
+					$_SESSION['progress_pengisian_skala'] = ['entitas' => 'RPA'];
 					redirect(base_url('officer/halaman_input_skala_ayam/RPA'));
 
 				}elseif ($_SESSION['progress_pengisian_skala']['entitas'] == 'RPA') {
@@ -649,7 +650,7 @@
 					$this->session->unset_userdata('hitung_skala');
 	
 					// echo 'berhasil input '.$data_counter.' data 😛<br>';
-					redirect(base_url('officer'));
+					redirect(base_url('officer/rekap_skala_ayam'));
 				}
 			}
 
@@ -677,7 +678,7 @@
 			$_SESSION['ukuran_peternakan'] = $this->input->post('ukuran_peternakan');
 
 			// Redirect Halaman Pengisian Skala
-			$this->halaman_input_skala_ayam();
+			$this->halaman_input_skala_ayam($_SESSION['progress_pengisian_skala']['entitas']);
 		}
 
 		// Rekap Skala ayam
@@ -687,11 +688,11 @@
 
 			$this->db->join('indikator_ayam', 'kode_a_i = indikator');
 			$this->db->order_by('nama_kriteria', 'ASC');
-			$data['rekap_peternak'] = $this->db->get_where('hasil_skala_ayam', ['hasil_skala_ayam.entitas' => 'Peternak'])->result_array();
+			$data['rekap_peternak'] = $this->db->get_where('hasil_skala_ayam', ['hasil_skala_ayam.entitas' => 'Peternak', 'hasil_skala_ayam.id_pengisi' => $_SESSION['id_user']])->result_array();
 			
 			$this->db->join('indikator_ayam', 'kode_a_i = indikator');
 			$this->db->order_by('nama_kriteria', 'ASC');
-			$data['rekap_rpa'] = $this->db->get_where('hasil_skala_ayam', ['hasil_skala_ayam.entitas' => 'RPA'])->result_array();
+			$data['rekap_rpa'] = $this->db->get_where('hasil_skala_ayam', ['hasil_skala_ayam.entitas' => 'RPA', 'hasil_skala_ayam.id_pengisi' => $_SESSION['id_user']])->result_array();
 
 			$data['ukuran'] = $this->db->get_where('ukuran_peternakan_ayam', ['id_user' => $_SESSION['id_user']])->row_array();
 
@@ -985,33 +986,33 @@
 		// AJAX REQ UNTUK GRAFIK
 		// SKALA AYAM
 		public function ajax_ayam_peternak(){
-			$peternak = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'Peternak'])->result_array();
+			$peternak = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'Peternak', 'id_pengisi' => $_SESSION['id_user']])->result_array();
     		echo json_encode($peternak);
 		}
 
 		public function ajax_ayam_rpa(){
-			$rpa = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'RPA'])->result_array();
+			$rpa = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'RPA', 'id_pengisi' => $_SESSION['id_user']])->result_array();
     		echo json_encode($rpa);
 		}
 
 		public function ajax_ayam_total(){
-			$rpa = $this->db->get('hasil_skala_ayam')->result_array();
+			$rpa = $this->db->get_where('hasil_skala_ayam', ['id_pengisi' => $_SESSION['id_user']])->result_array();
     		echo json_encode($rpa);
 		}
 
 		// SKALA SAPI
 		public function ajax_sapi_peternak(){
-			$peternak = $this->db->get_where('rekap_skala_sapi', ['entitas' => 1])->result_array();
+			$peternak = $this->db->get_where('rekap_skala_sapi', ['entitas' => 1, 'id_pengisi' => $_SESSION['id_user']])->result_array();
     		echo json_encode($peternak);
 		}
 
 		public function ajax_sapi_rph(){
-			$rph = $this->db->get_where('rekap_skala_sapi', ['entitas' => 2])->result_array();
+			$rph = $this->db->get_where('rekap_skala_sapi', ['entitas' => 2, 'id_pengisi' => $_SESSION['id_user']])->result_array();
     		echo json_encode($rph);
 		}
 
 		public function ajax_sapi_total(){
-			$rph = $this->db->get('rekap_skala_sapi')->result_array();
+			$rph = $this->db->get_where('rekap_skala_sapi', ['id_pengisi' => $_SESSION['id_user']])->result_array();
     		echo json_encode($rph);
 		}
 	}

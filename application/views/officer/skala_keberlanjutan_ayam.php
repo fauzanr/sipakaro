@@ -20,6 +20,11 @@
                 </tr>
             </thead>
             <tbody>
+            <?php if(count($skala_ayam) < 1) : ?>
+                <tr>
+                    <td colspan="6">Data Belum Terisi</td>
+                </tr>
+            <?php else : ?>
                 <?php $hitung = 0; ?>
                 <?php $counter = 1 ?>
                 <?php foreach($skala_ayam as $s) : ?>
@@ -71,6 +76,7 @@
                     <td colspan="5">Total Nilai Keberlanjutan Akhir</td>
                     <td><?= $hitung ?></td>
                 </tr>
+            <?php  endif; ?>
             </tbody>
         </table>
     </div>
