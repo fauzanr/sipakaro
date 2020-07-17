@@ -114,7 +114,11 @@
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Ayam:</h6>
                 <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp') ? 'active' : '' || (isset($_SESSION['pengisian_ahp']) && isset($_SESSION['nilai_pengisian_ahp'])) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/input-ahp">Hitung Bobot Indikator</a>
-                  <?php if ( (isset($_SESSION['pengisian_ahp']) && isset($_SESSION['nilai_pengisian_ahp'])) && (base_url(uri_string()) !== base_url().'officer/rekap_ahp') && (base_url(uri_string()) !== base_url().'officer/rekap_ahp_sapi') && (base_url(uri_string()) !== base_url().'officer/input-ahp-sapi') && (base_url(uri_string()) !== base_url().'officer/input_ahp_sapi_responden') && (base_url(uri_string()) !== base_url().'officer') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_sapi') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_sapi') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_ayam') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_ayam') ) : ?>
+
+                
+
+                  <?php if ( (isset($section_pagination) && isset($_SESSION['pengisian_ahp']) && isset($_SESSION['nilai_pengisian_ahp'])) && (base_url(uri_string()) !== base_url().'officer/rekap_ahp') && (base_url(uri_string()) !== base_url().'officer/rekap_ahp_sapi') && (base_url(uri_string()) !== base_url().'officer/input-ahp-sapi') && (base_url(uri_string()) !== base_url().'officer/input_ahp_sapi_responden') && (base_url(uri_string()) !== base_url().'officer') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_sapi') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_sapi') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_ayam') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_ayam') ) : ?>
+                    
                     <a class="collapse-item">Progress: (<?= count($_SESSION['nilai_pengisian_ahp']) ?>/<?= count($section_pagination) ?>)</a>
                     <?php foreach ($section_pagination as $s) : ?>
                       <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp/'.$s['id']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_data_ahp/'.$s['id'] ?>"><?= $s['nama_section'] ?></a>
@@ -122,6 +126,13 @@
 
                     <a href="<?= base_url('officer/reset_session_ahp/ayam') ?>"><button class="btn btn-danger m-4">Reset pengisian</button></a>
                   <?php endif; ?>
+
+                  <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_skala_ayam') || isset($_SESSION['nilai_pengisian_skala']) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/skala_ayam">Hitung Skala</a>
+
+                  <?php if (isset($_SESSION['nilai_pengisian_skala'])) : ?>
+                    <a href="<?= base_url('officer/reset_session_ahp/ayam') ?>"><button class="btn btn-danger m-4">Reset pengisian</button></a>
+                  <?php endif ?>
+
               <h6 class="collapse-header">Sapi:</h6>
                 <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp_sapi') ? 'active' : '' || (isset($_SESSION['pengisian_ahp_sapi']) && isset($_SESSION['nilai_pengisian_ahp_sapi'])) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/input-ahp-sapi">Hitung Bobot Indikator</a>
                 <?php if ( (isset($_SESSION['pengisian_ahp_sapi']) && isset($_SESSION['nilai_pengisian_ahp_sapi'])) && (base_url(uri_string()) !== base_url().'officer/rekap_ahp') && (base_url(uri_string()) !== base_url().'officer/rekap_ahp_sapi') && (base_url(uri_string()) !== base_url().'officer/input-ahp') && (base_url(uri_string()) !== base_url().'officer/input_ahp_responden') && (base_url(uri_string()) !== base_url().'officer') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_sapi') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_sapi') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_ayam') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_ayam') ) : ?>
@@ -130,7 +141,6 @@
                       <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp_sapi/'.$s['id']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_data_ahp_sapi/'.$s['id'] ?>"><?= $s['nama_section'] ?></a>
                   <?php endforeach ?>
                   <a href="<?= base_url('officer/reset_session_ahp/sapi') ?>"><button class="btn btn-danger m-4">Reset pengisian</button></a>
-                  <a class="ml-4" href="<?= base_url('officer/insert_pengisian_ahp_sapi') ?>"><button class="btn btn-warning">Selesai "!"</button></a>
                 <?php endif; ?>
             </div>
           </div>
