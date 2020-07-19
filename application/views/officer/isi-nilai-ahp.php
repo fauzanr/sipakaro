@@ -50,7 +50,7 @@
 
                                     <select class="mr-2 form-control" name="nilai-ahp<?= $i ?>" required>
                                         <option value="" disabled selected>Pilih Nilai</option>
-                                        <option value="1" selected>test</option>
+                                        <!-- <option value="1" selected>test</option> -->
                                         <?php foreach($opsi as $o) : ?>
                                             <option value="<?= $o['opsi'] ?>"
                                                 <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
@@ -104,7 +104,7 @@
 
                                             <select class="mr-2 form-control" name="nilai-ahp<?= $counter ?>" required>
                                                 <option value="" disabled selected>Pilih Nilai</option>
-                                                <option value="1" selected>test</option>
+                                                <!-- <option value="1" selected>test</option> -->
                                                 <?php foreach($opsi as $o) : ?>
                                                     <option value="<?= $o['opsi'] ?>"
                                                         <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
@@ -172,7 +172,7 @@
                                                         <?= isset($_SESSION['nilai_pengisian_ahp'][$section_id]) && $_SESSION['nilai_pengisian_ahp'][$section_id][$counter-1]['nilai_responden'] == $o['opsi'] ? 'selected' : '' ?>
                                                     ><?= $o['opsi'] ?></option>
                                                 <?php endforeach ?>
-                                                <option value="1" selected>test</option>
+                                                <!-- <option value="1" selected>test</option> -->
                                             </select>
                                         </div>
 

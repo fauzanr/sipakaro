@@ -20,9 +20,23 @@
                 </tr>
             </thead>
             <tbody>
+            
+            <?php 
+                $c = 0;
+                foreach($skala_ayam as $a){
+                    if($a['id_pengisi'] == $_SESSION['id_user']){
+                        $c++;
+                    }
+                } 
+            ?>
+
             <?php if(count($skala_ayam) < 1) : ?>
                 <tr>
                     <td colspan="6">Data Belum Terisi</td>
+                </tr>
+            <?php elseif($c < 1) : ?>
+                <tr>
+                    <td colspan="6">Data Skala / AHP masih ada yang belum terisi</td>
                 </tr>
             <?php else : ?>
                 <?php $hitung = 0; ?>
@@ -54,15 +68,15 @@
                                 </tr>
                                 <?php $counter++ ?>
                                 <?php foreach($skala_ayam as $s) : ?>
-                                    <?php if($s['level0'] == $level0 && $s['level1'] == $level1) : ?>
+                                    <?php if($s['level0'] == $level0 && $s['level1'] == $level1 && $s['id_pengisi'] == $_SESSION['id_user']) : ?>
                                         <?php $bobot_global = $s['bobot'] * $bobot_lokal_dimensi * $bobot_lokal_entitas ?>
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td><?= $s['kriteria'] ?></td>
-                                            <td><?= $bobot_global ?></td>
+                                            <td><?= number_format($bobot_global, 3) ?></td>
                                             <td><?= $s['nilai_konversi'] ?></td>
-                                            <td><?= $s['nilai_konversi'] * $bobot_global ?></td>
+                                            <td><?= number_format($s['nilai_konversi'] * $bobot_global, 3) ?></td>
                                         </tr>
                                         <?php $counter++ ?>
                                         <?php $hitung = $hitung + $s['nilai_konversi'] * $bobot_global; ?>
@@ -74,7 +88,7 @@
                 <?php endforeach ?>
                 <tr>
                     <td colspan="5">Total Nilai Keberlanjutan Akhir</td>
-                    <td><?= $hitung ?></td>
+                    <td><?= number_format($hitung, 3) ?></td>
                 </tr>
             <?php  endif; ?>
             </tbody>

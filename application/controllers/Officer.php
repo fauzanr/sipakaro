@@ -252,7 +252,8 @@
 					$this->Ahp_model->normalisasi_rpa_peternak($_SESSION['id_user'], $k);
 				}
 
-
+				$this->session->unset_userdata('bobot_lokal_dimensi');
+				$this->session->unset_userdata('bobot_lokal_entitas');
 				$this->session->unset_userdata('pengisian_ahp');
 				$this->session->unset_userdata('nilai_pengisian_ahp');
 				$this->session->unset_userdata('indikator');
@@ -487,7 +488,8 @@
 				$this->session->unset_userdata('pengisian_ahp');
 				$this->session->unset_userdata('nilai_pengisian_ahp');
 				$this->session->unset_userdata('indikator');
-
+				
+				$this->session->unset_userdata('ukuran_peternakan');
 				$this->session->unset_userdata('nilai_pengisian_skala');
 				$this->session->unset_userdata('progress_pengisian_skala');
 
@@ -975,8 +977,7 @@
 			$this->db->join('bobot_indikator', 'section.id = bobot_indikator.id_section');
 			$this->db->join('hasil_skala_ayam', 'bobot_indikator.kriteria = hasil_skala_ayam.indikator', 'left');
 			$data['skala_ayam'] = $this->db->get('section')->result_array();
-
-			// die(print('<pre>'.print_r($data2,true).'</pre>'));
+			// die('Hitung: '.count($data['skala_ayam']));
 			// die(print('Skala Ayam<pre>'.print_r($data['skala_ayam'],true).'</pre>'));
 
 			$this->load->view('templates/header', $data);

@@ -42,7 +42,7 @@
                         <tr>
                             <th scope="row"><?= $counter ?></th>
                             <td><?= $b['kriteria'] ?></td>
-                            <td><?= $b['bobot'] ?></td>
+                            <td><?= number_format($b['bobot'], 3) ?></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -60,7 +60,7 @@
                                     <td></td>
                                     <td>-></td>
                                     <td><?= $b['kriteria'] ?></td>
-                                    <td><?= $b['bobot'] ?></td>
+                                    <td><?= number_format($b['bobot'], 3) ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -82,9 +82,9 @@
                                             <td></td>
                                             <td>-></td>
                                             <td><?= $b['kriteria'] ?></td>
-                                            <td><?= $b['bobot'] ?></td>
-                                            <td><?= $bobot_lokal_dimensi * $b['bobot'] ?></td>
-                                            <td><?= $bobot_lokal_entitas * $bobot_lokal_dimensi * $b['bobot'] ?></td>
+                                            <td><?= number_format($b['bobot'], 3) ?></td>
+                                            <td><?= number_format($bobot_lokal_dimensi * $b['bobot'], 3) ?></td>
+                                            <td><?= number_format($bobot_lokal_entitas * $bobot_lokal_dimensi * $b['bobot'], 3) ?></td>
                                         </tr>
                                         <?php $counter++ ?>
                                     <?php endif ?>
@@ -119,8 +119,8 @@
                                 <tr>
                                     <th scope="row"><?= $k['level0'] ?></th>
                                     <td><?= $k['level1'] ?></td>
-                                    <td><?= $k['C1'] ?></td>
-                                    <td><?= $k['CR'] ?></td>
+                                    <td><?= number_format($k['C1']) ?></td>
+                                    <td><?= number_format($k['CR']) ?></td>
                                 </tr>
                             <?php endforeach ?>
                         <?php endif ?>
