@@ -6,10 +6,12 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sql210.epizy.com',
-	'username' => 'epiz_25423654',
-	'password' => 's9V0Ulk1X4g4Ia',
-	'database' => 'epiz_25423654_sipakaro',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	// 'password' => '123', /* Desktop Kukuh */
+	'password' => '',
+	// 'database' => 'sipakaro',
+	'database' => 'sipakaro_testing', /* Test DB baru */
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

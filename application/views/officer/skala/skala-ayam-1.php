@@ -54,7 +54,7 @@
       <br>
       <br>
     </div>
-    <button type="button" class="btn btn-primary btn-lg col-md-2" style="float: right;">Simpan</button>
+    <button type="button" class="btn btn-primary btn-lg col-md-2" style="float: right;">Next</button>
   </div>
   <!-- /.container-fluid -->
 

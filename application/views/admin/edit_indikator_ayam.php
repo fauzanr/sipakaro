@@ -5,6 +5,7 @@
           <h1 class="h3 mb-4 text-gray-800">Edit Indikator Ayam</h1>
 
           <form action="<?=base_url('admin/edit_indikator_ayam')?>" method="POST">
+            <input type="hidden" name="id_a_i" value="<?= $indikator['id_a_i'] ?>">
 
           <div class="form-group">
           <input class="form-control" type="hidden" name="id_a_i" value="<?= $indikator['id_a_i'] ?>">

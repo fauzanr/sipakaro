@@ -10,72 +10,13 @@
         <div class="sidebar-brand-text mx-3">SIPAKARO</div>
       </a>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Side menu Admin -->
-      <?php if ($_SESSION['role_id'] === '1') : ?>
-        <!-- Heading -->
-          <div class="sidebar-heading">
-            Admin
-          </div>
-
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-          <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-        </li>
-        
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-      <?php endif ?>
-
-
-      <!-- Side menu Admin -->
-      <?php if ($_SESSION['role_id'] === '2') : ?>
-        <!-- Heading -->
-        <div class="sidebar-heading">
-          User
-        </div>
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Components</span>
-          </a>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Custom Components:</h6>
-              <a class="collapse-item" href="buttons.html">Buttons</a>
-              <a class="collapse-item" href="cards.html">Cards</a>
-            </div>
-          </div>
-        </li>
-
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Utilities</span>
-          </a>
-          <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Custom Utilities:</h6>
-              <a class="collapse-item" href="utilities-color.html">Colors</a>
-              <a class="collapse-item" href="utilities-border.html">Borders</a>
-              <a class="collapse-item" href="utilities-animation.html">Animations</a>
-              <a class="collapse-item" href="utilities-other.html">Other</a>
-            </div>
-          </div>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-      <?php endif ?>
-
       <?php if($_SESSION['role_id'] === '3') : ?>
+        <!-- Heading -->
+
+       
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
         <!-- Heading -->
 
         <div class="sidebar-heading">
@@ -83,7 +24,7 @@
         </div>
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/index') ? 'active' : '' ?>">
+        <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/index') || base_url(uri_string()) == (base_url().'officer') ? 'active' : '' ?>">
           <a class="nav-link" href="<?= base_url('officer/index') ?>">
           <i class="fa fa-fw fa-archive"></i>
             <span>Deskripsi</span></a>
@@ -105,7 +46,7 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/input_ahp_responden') ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/input-ahp') ? 'active' : '' || isset($_SESSION['pengisian_ahp']) ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/input-ahp-sapi') ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/input_ahp_sapi_responden') ? 'active' : '' || isset($_SESSION['pengisian_ahp_sapi']) ? 'active' : '' ?>">
+        <li class="nav-item <?= base_url(uri_string()) == (base_url().'officer/input_ahp_responden') ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/input-ahp') ? 'active' : '' || isset($_SESSION['pengisian_ahp']) ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/input-ahp-sapi') ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/input_ahp_sapi_responden') ? 'active' : '' || isset($_SESSION['pengisian_ahp_sapi']) ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/skala_ayam') ? 'active' : '' || base_url(uri_string()) == (base_url().'officer/skala_sapi') ? 'active' : '' ?>">
           <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-calculator"></i>
             <span>Hitung AHP & Skala</span>
@@ -113,39 +54,44 @@
           <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Ayam:</h6>
+
+                <!-- Tombol Hitung AHP AYAM -->
                 <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp') ? 'active' : '' || (isset($_SESSION['pengisian_ahp']) && isset($_SESSION['nilai_pengisian_ahp'])) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/input-ahp">Hitung Bobot Indikator</a>
-
-                
-
                   <?php if ( (isset($section_pagination) && isset($_SESSION['pengisian_ahp']) && isset($_SESSION['nilai_pengisian_ahp'])) && (base_url(uri_string()) !== base_url().'officer/rekap_ahp') && (base_url(uri_string()) !== base_url().'officer/rekap_ahp_sapi') && (base_url(uri_string()) !== base_url().'officer/input-ahp-sapi') && (base_url(uri_string()) !== base_url().'officer/input_ahp_sapi_responden') && (base_url(uri_string()) !== base_url().'officer') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_sapi') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_sapi') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_ayam') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_ayam') ) : ?>
                     
                     <a class="collapse-item">Progress: (<?= count($_SESSION['nilai_pengisian_ahp']) ?>/<?= count($section_pagination) ?>)</a>
+                    
                     <?php foreach ($section_pagination as $s) : ?>
-                      <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp/'.$s['id']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_data_ahp/'.$s['id'] ?>"><?= $s['nama_section'] ?></a>
+                      <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp/'.$s['id']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_data_ahp/'.$s['id'] ?>"><?= $s['nama_section'] ?> <?= isset($_SESSION['nilai_pengisian_ahp'][$s['id']]) ? '<i class="fa fa-check"></i>' : '' ?></a>
                     <?php endforeach ?>
-
                     <a href="<?= base_url('officer/reset_session_ahp/ayam') ?>"><button class="btn btn-danger m-4">Reset pengisian</button></a>
                   <?php endif; ?>
-
-                  <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_skala_ayam') || isset($_SESSION['nilai_pengisian_skala']) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/skala_ayam">Hitung Skala</a>
 
                   <?php if (isset($_SESSION['nilai_pengisian_skala'])) : ?>
                     <a href="<?= base_url('officer/reset_session_ahp/ayam') ?>"><button class="btn btn-danger m-4">Reset pengisian</button></a>
                   <?php endif ?>
+                <!-- End Tombol Hitung AHP AYAM -->
+
+                <!-- Tombol Hitung SKALA AYAM -->
+                <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_skala_ayam') || isset($_SESSION['nilai_pengisian_skala']) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/skala_ayam">Hitung Skala</a>
+                <!-- End Tombol Hitung SKALA AYAM -->
 
               <h6 class="collapse-header">Sapi:</h6>
                 <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp_sapi') ? 'active' : '' || (isset($_SESSION['pengisian_ahp_sapi']) && isset($_SESSION['nilai_pengisian_ahp_sapi'])) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/input-ahp-sapi">Hitung Bobot Indikator</a>
-                <?php if ( (isset($_SESSION['pengisian_ahp_sapi']) && isset($_SESSION['nilai_pengisian_ahp_sapi'])) && (base_url(uri_string()) !== base_url().'officer/rekap_ahp') && (base_url(uri_string()) !== base_url().'officer/rekap_ahp_sapi') && (base_url(uri_string()) !== base_url().'officer/input-ahp') && (base_url(uri_string()) !== base_url().'officer/input_ahp_responden') && (base_url(uri_string()) !== base_url().'officer') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_sapi') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_sapi') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_ayam') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_ayam') ) : ?>
+                <?php if ( (isset($section_pagination) && isset($_SESSION['pengisian_ahp_sapi']) && isset($_SESSION['nilai_pengisian_ahp_sapi'])) && (base_url(uri_string()) !== base_url().'officer/rekap_ahp') && (base_url(uri_string()) !== base_url().'officer/rekap_ahp_sapi') && (base_url(uri_string()) !== base_url().'officer/input-ahp') && (base_url(uri_string()) !== base_url().'officer/input_ahp_responden') && (base_url(uri_string()) !== base_url().'officer') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_sapi') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_sapi') && (base_url(uri_string()) !== base_url().'officer/rekap_skala_ayam') && (base_url(uri_string()) !== base_url().'officer/skala_keberlanjutan_ayam') ) : ?>
                   <a class="collapse-item">Progress: (<?= count($_SESSION['nilai_pengisian_ahp_sapi']) ?>/<?= count($section_pagination) ?>)</a>
                   <?php foreach ($section_pagination as $s) : ?>
-                      <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp_sapi/'.$s['id']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_data_ahp_sapi/'.$s['id'] ?>"><?= $s['nama_section'] ?></a>
+                      <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp_sapi/'.$s['id']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_data_ahp_sapi/'.$s['id'] ?>"><?= $s['nama_section'] ?> <?= isset($_SESSION['nilai_pengisian_ahp_sapi'][$s['id']]) ? '<i class="fa fa-check"></i>' : '' ?></a>
                   <?php endforeach ?>
                   <a href="<?= base_url('officer/reset_session_ahp/sapi') ?>"><button class="btn btn-danger m-4">Reset pengisian</button></a>
                 <?php endif; ?>
+                <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/skala_sapi') || isset($_SESSION['nilai_skala_sapi']) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/skala_sapi">Hitung Skala</a>
+                
             </div>
+            
           </div>
+          
         </li>
-
         <!-- Divider -->
         <hr class="sidebar-divider">
 

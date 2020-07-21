@@ -6,6 +6,7 @@
 			if(!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
 				redirect(base_url('login'));
 			}
+			$this->load->model('Ahp_sapi_model');
 		}
 
 		// Halaman utama untuk Dinas setelah Login
@@ -40,9 +41,23 @@
 			$data['title'] = 'Dashboard Officer';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 			
-			$this->db->join('bobot_indikator', 'section.id = bobot_indikator.id_section');
-			$data['bobot'] = $this->db->get('section')->result_array();
+			// $this->db->distinct();
+			// $this->db->select('nama_responden');
+			// $data1 = $this->Ahp_model->get_bobot_by_id_pengisi($_SESSION['id_user']);
 
+			$data['jumlah_responden'] = $this->db->get_where('responden', ['id_pengisi' => $_SESSION['id_user'], 'id_section' => '2'])->num_rows();
+			$data1 = $this->db->get_where('bobot_indikator', ['id_pengisi' => $_SESSION['id_user']])->result_array();
+			$data2 = $this->db->get('section')->result_array();
+
+			// gabung array
+			$data['bobot'] = [];
+			foreach ($data1 as $d1 => $v1) {
+				foreach ($data2 as $d2 => $v2) {
+					if($v1['id_section'] == $v2['id']) {
+						array_push($data['bobot'], array_merge($v1, $v2));
+					}
+				}
+			}
 			// die(print("<pre>".print_r($data['bobot'],true)."</pre>"));
 			
 			$this->load->view('templates/header', $data);
@@ -54,13 +69,15 @@
 
 		// Menuju Halaman AHP
 		// Berisi Input banyak responden
-		public function input_ahp_satu(){
-			if(isset($_SESSION['pengisian_ahp']['responden'])) { // jika sudah ada sesi input AHP
-				redirect(base_url().'officer/input_ahp_responden');
+		public function input_ahp_satu($bagian = 'isi_ahp'){
+			
+			if(isset($_SESSION['pengisian_ahp']['responden'])) { // jika sudah ada sesi input AHP redirect ke halaman AHP
+				return $this->input_ahp_responden($bagian);
 			}
 
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+			$data['bagian'] = $bagian;
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -73,30 +90,39 @@
 		// Berisi Input nama responden
 		public function input_ahp_dua(){
 			if(isset($_SESSION['pengisian_ahp']['responden'])) { //jika sudah input jumlah responden
-				redirect(base_url().'officer/input_ahp_responden');
+				// redirect(base_url().'officer/input_ahp_responden');
+				return $this->input_ahp_responden($bagian);
 			}
 			
 			if (!isset($_POST['options'])) { //jika masuk dari url tanpa input
-				redirect(base_url().'officer/input-ahp');
+				$this->input_ahp_satu($this->input->post('bagian'));
 			}
 
 			$_SESSION['pengisian_ahp']['responden'] = $this->input->post('options');
 
-			redirect(base_url().'officer/input_ahp_responden');
+			// redirect(base_url().'officer/input_ahp_responden');
+			$this->input_ahp_responden($this->input->post('bagian'));
 		}
 
-		public function input_ahp_responden()
+		public function input_ahp_responden($bagian)
 		{
 			if(isset($_SESSION['pengisian_ahp']['nama1'])) {// jika sudah input nama2 responden
-				redirect(base_url().'officer/halaman_input_data_ahp');
+				if($bagian == 'isi_ahp'){
+					redirect(base_url().'officer/halaman_input_data_ahp');
+				}
+				if($bagian == 'isi_skala'){
+					redirect(base_url().'officer/halaman_input_skala_ayam');
+				}
 			}
 
 			if(!isset($_SESSION['pengisian_ahp']['responden'])) {//jika masuk dari url tanpa jumlah responden
-				redirect(base_url().'officer/input-ahp');
+				// redirect(base_url().'officer/input-ahp');
+				return $this->input_ahp_satu($bagian);
 			}
 
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+			$data['bagian'] = $bagian;
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -107,8 +133,9 @@
 
 		// Berisi Input nilai AHP
 		public function input_ahp_tiga(){
+			$bagian = $this->input->post('bagian');
 			if (!isset($_POST['nama1'])) { //jika masuk dari url tanpa input
-				redirect(base_url().'officer/input_ahp_responden');
+				return $this->input_ahp_responden($bagian);
 			}
 
 			// Validasi
@@ -125,14 +152,21 @@
 					$_SESSION['pengisian_ahp'] += ['nama'.$i =>  $this->input->post('nama'.$i)];
 				}
 
-				$_SESSION['nilai_pengisian_ahp'] = [];
-				redirect(base_url().'officer/halaman_input_data_ahp');
+				if($bagian == 'isi_ahp'){
+					$_SESSION['nilai_pengisian_ahp'] = [];
+					redirect(base_url().'officer/halaman_input_data_ahp');
+				}
+				if($bagian == 'isi_skala'){
+					$_SESSION['nilai_pengisian_skala'] = [];
+					redirect(base_url().'officer/halaman_input_skala_ayam');
+				}
 			}
 		}
 
 		public function halaman_input_data_ahp($section_id = 2){
 			if(!isset($_SESSION['pengisian_ahp']['nama1'])) {// jika belum ada responden
-				redirect(base_url().'officer/input_ahp_responden');
+				// redirect(base_url().'officer/input_ahp_responden');
+				return $this->input_ahp_responden('isi_ahp');
 			}
 
 			$data['title'] = 'Perhitungan Bobot Indikator - AHP';
@@ -176,7 +210,7 @@
 					'nilai_responden' => $this->input->post('nilai-ahp'.$i),
 					'kriteria_1' => $this->input->post('kriteria1_'.$i),
 					'kriteria_2' => $this->input->post('kriteria2_'.$i),
-					'id_pengisi' => $_SESSION['role_id'],
+					'id_pengisi' => $_SESSION['id_user'],
 					'id_section' => $this->input->post('section_id'),
 				];
 				array_push($_SESSION['nilai_pengisian_ahp'][$this->input->post('section_id')], $nilai);
@@ -214,18 +248,36 @@
 				}
 
 				foreach($data as $k => $v) {
-					$this->Ahp_model->normalisasi_rpa_peternak($k);
+					// Hitung Bobot Normalisasi, Insert ke DB
+					$this->Ahp_model->normalisasi_rpa_peternak($_SESSION['id_user'], $k);
 				}
 
+				$this->session->unset_userdata('bobot_lokal_dimensi');
+				$this->session->unset_userdata('bobot_lokal_entitas');
+				$this->session->unset_userdata('pengisian_ahp');
 				$this->session->unset_userdata('nilai_pengisian_ahp');
 				$this->session->unset_userdata('indikator');
 
 				// die('berhasil input '.$data_counter.' data 😛<br>');
 
 				// Ke halaman Skala Ayam
-				redirect(base_url('officer/halaman_input_skala_ayam'));
+				redirect(base_url('officer/rekap_ahp'));
+
 			}
 
+		}
+
+		// RESET AHP AYAM PER USER DINAS
+		public function hapus_ahp_ayam($id_user) {
+			if(!isset($id_user)) die(400);
+
+			$this->db->where('id_pengisi', $id_user);
+			$this->db->delete('responden');
+
+			$this->db->where('id_pengisi', $id_user);
+			$this->db->delete('bobot_indikator');
+
+			redirect(base_url('officer/rekap_ahp'));
 		}
 
 		// --------------------------------- AHP - SAPI ---------------------------------
@@ -235,10 +287,24 @@
 			$data['title'] = 'Dashboard Officer';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 			
-			$this->db->join('bobot_indikator_sapi', 'section_sapi.id = bobot_indikator_sapi.id_section');
-			$data['bobot'] = $this->db->get('section_sapi')->result_array();
+			$this->db->distinct();
+			$this->db->select('nama_responden');
+			$data['jumlah_responden'] = $this->db->get_where('responden_sapi', ['id_pengisi' => $_SESSION['id_user']])->num_rows();
+			// $this->db->join('bobot_indikator_sapi', 'section_sapi.id = bobot_indikator_sapi.id_section');
+			$data1 = $this->Ahp_sapi_model->get_bobot_by_id_pengisi($_SESSION['id_user']);
+			$data2 = $this->db->get('section_sapi')->result_array();
 
-			// die(print("<pre>".print_r($data['bobot'],true)."</pre>"));
+			// gabung array
+			$data['bobot'] = [];
+			foreach ($data1 as $d1 => $v1) {
+				foreach ($data2 as $d2 => $v2) {
+					if($v1['id_section'] == $v2['id']) {
+						array_push($data['bobot'], array_merge($v1, $v2));
+					}
+				}
+			}
+
+			// die(print("<pre>".print_r($data['bobot'], true)."</pre>"));
 			
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -365,7 +431,6 @@
 		public function input_data_ahp_sapi(){
 
 			$_SESSION['nilai_pengisian_ahp_sapi'][$this->input->post('section_id')] = [];
-			$_SESSION['indikator_sapi'][$this->input->post('section_id')] = [];
 
 			for($i=1 ; $i <= $_POST['counter'] ; $i++){
 				$nilai = [
@@ -373,12 +438,11 @@
 					'nilai_responden' => $this->input->post('nilai-ahp'.$i),
 					'kriteria_1' => $this->input->post('kriteria1_'.$i),
 					'kriteria_2' => $this->input->post('kriteria2_'.$i),
-					'id_pengisi' => $_SESSION['role_id'],
+					'id_pengisi' => $_SESSION['id_user'],
 					'id_section' => $this->input->post('section_id'),
 				];
 				array_push($_SESSION['nilai_pengisian_ahp_sapi'][$this->input->post('section_id')], $nilai);
 			}
-			array_push($_SESSION['indikator_sapi'][$this->input->post('section_id')], array('section_id' => $this->input->post('entitas_id')) );
 
 			$this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Berhasil Simpan Data!</div>');
 			redirect(base_url('officer/halaman_input_data_ahp_sapi/'.$this->input->post('section_id')));
@@ -411,18 +475,43 @@
 					$data_counter += count($v);
 				}
 
-				foreach($data as $k => $v) {
-					$this->Ahp_sapi_model->normalisasi_rpa_peternak($k);
-				}
-
-				// $this->session->unset_userdata('pengisian_ahp_sapi');
+				$this->session->unset_userdata('pengisian_ahp_sapi');
 				$this->session->unset_userdata('nilai_pengisian_ahp_sapi');
-				$this->session->unset_userdata('indikator_sapi');
 
-				redirect(base_url('officer/skala_sapi'));
+				redirect(base_url('officer/rekap_ahp_sapi'));
 			}
 
 		}
+
+		public function reset_session_ahp($entitas){
+			if($entitas === 'ayam') {
+				$this->session->unset_userdata('pengisian_ahp');
+				$this->session->unset_userdata('nilai_pengisian_ahp');
+				$this->session->unset_userdata('indikator');
+				
+				$this->session->unset_userdata('ukuran_peternakan');
+				$this->session->unset_userdata('nilai_pengisian_skala');
+				$this->session->unset_userdata('progress_pengisian_skala');
+
+			}
+			
+			if($entitas === 'sapi') {
+				$this->session->unset_userdata('pengisian_ahp_sapi');
+				$this->session->unset_userdata('nilai_pengisian_ahp_sapi');
+			}
+
+			redirect(base_url('officer'));
+		}
+
+		public function hapus_ahp_sapi($id_user) {
+			if(!isset($id_user)) die(400);
+
+			$this->db->where('id_pengisi', $id_user);
+			$this->db->delete('responden_sapi');
+
+			redirect(base_url('officer/rekap_ahp_sapi'));
+		}
+
 
 		// -------- SKALA AYAM ----------------------------------------------------------------------//
 		public function halaman_input_skala_ayam($entitas = 'Peternak', $indikator = NULL){
@@ -445,12 +534,15 @@
 			$this->db->select('kode_a_i, nama_kriteria, id_a_i');
 			$data['pagination'] = $this->db->get_where('indikator_ayam', ['entitas' => $data['entitas']['id_a_e']])->result_array();
 
+			// die(print("<pre>".print_r($data['pagination'],true)."</pre>"));
+
 			// Indikator
 			if($indikator != NULL){
 				$data['indikator'] = $this->db->get_where('indikator_ayam', ['entitas' => $data['entitas']['id_a_e'], 'kode_a_i' => $indikator])->row_array();
 			}else {
 				$data['indikator'] = $this->db->get_where('indikator_ayam', ['entitas' => $data['entitas']['id_a_e'], 'kode_a_i' => $data['pagination'][0]['kode_a_i']] )->row_array();
 			}
+			
 
 			// Opsi skala
 			$data['opsi'] = $this->db->get_where('opsi_skala_ayam', ['id_indikator' => $data['indikator']['id_a_i'] ])->result_array();
@@ -466,8 +558,6 @@
 				$data['jumlah_entitas_peternak'] = count($jumlah_entitas);
 			}
 			
-			// die(print("<pre>".print_r($data,true)."</pre>"));
-			// $data['opsi'] = $this->db->get('opsi_ahp')->result_array();
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -504,6 +594,7 @@
 			
 		}
 
+		// Insert data ke dalam DB
 		public function insert_pengisian_skala_ayam() {
 			if(!isset($_SESSION['nilai_pengisian_skala']) || !isset($_SESSION['pengisian_ahp'])) {
 				echo 'error: empty session';
@@ -528,6 +619,7 @@
 
 				if($_SESSION['progress_pengisian_skala']['entitas'] == 'Peternak'){
 					
+					$_SESSION['progress_pengisian_skala'] = ['entitas' => 'RPA'];
 					redirect(base_url('officer/halaman_input_skala_ayam/RPA'));
 
 				}elseif ($_SESSION['progress_pengisian_skala']['entitas'] == 'RPA') {
@@ -539,6 +631,16 @@
 						
 						$data_counter += count($v);
 					}
+
+					// Input nilai ukuran peternakan ke db
+					$ukuran_peternakan = $this->db->get('ukuran_peternakan_ayam')->result_array();
+					if(count($ukuran_peternakan) < 1){
+						// Tambah (Karena masih kosong di DB)
+						$this->Ahp_model->add_ukuran_peternakan_ayam($_SESSION['ukuran_peternakan'], $_SESSION['id_user']);
+					}else{
+						// Update (Karena sudah ada di DB)
+						$this->Ahp_model->update_ukuran_peternakan_ayam($_SESSION['ukuran_peternakan'], $_SESSION['id_user']);
+					}
 	
 					// Masuk ke fungsi Hitung Skala
 					$this->Ahp_model->hitung_nilai_skala();
@@ -546,9 +648,11 @@
 					$this->session->unset_userdata('pengisian_ahp');
 					$this->session->unset_userdata('nilai_pengisian_skala');
 					$this->session->unset_userdata('progress_pengisian_skala');
+					$this->session->unset_userdata('ukuran_peternakan');
+					$this->session->unset_userdata('hitung_skala');
 	
-					echo 'berhasil input '.$data_counter.' data 😛<br>';
-					// redirect(base_url('officer'));
+					// echo 'berhasil input '.$data_counter.' data 😛<br>';
+					redirect(base_url('officer/rekap_skala_ayam'));
 				}
 			}
 
@@ -590,8 +694,15 @@
 			$data['title'] = 'Hasil Rekapan Skala Ayam';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-			$data['rekap_peternak'] = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'Peternak'])->result_array();
-			$data['rekap_rpa'] = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'RPA'])->result_array();
+			$this->db->join('indikator_ayam', 'kode_a_i = indikator');
+			$this->db->order_by('nama_kriteria', 'ASC');
+			$data['rekap_peternak'] = $this->db->get_where('hasil_skala_ayam', ['hasil_skala_ayam.entitas' => 'Peternak', 'hasil_skala_ayam.id_pengisi' => $_SESSION['id_user']])->result_array();
+			
+			$this->db->join('indikator_ayam', 'kode_a_i = indikator');
+			$this->db->order_by('nama_kriteria', 'ASC');
+			$data['rekap_rpa'] = $this->db->get_where('hasil_skala_ayam', ['hasil_skala_ayam.entitas' => 'RPA', 'hasil_skala_ayam.id_pengisi' => $_SESSION['id_user']])->result_array();
+
+			$data['ukuran'] = $this->db->get_where('ukuran_peternakan_ayam', ['id_user' => $_SESSION['id_user']])->row_array();
 
 			// die(print('<pre>'.print_r($data,true).'</pre>'));
 
@@ -601,19 +712,30 @@
 			$this->load->view('officer/skala/skala-ayam-5', $data);
 			$this->load->view('templates/footer');
 		}
+
+		// HAPUS DATA SKALA AYAM PER USER DINAS
+		public function hapus_skala_ayam($id_user) {
+			if(!isset($id_user)) die(400);
+
+			$this->db->where('id_pengisi', $id_user);
+			$this->db->delete('responden_skala_ayam');
+
+			$this->db->where('id_pengisi', $id_user);
+			$this->db->delete('hasil_skala_ayam');
+
+			$this->db->where('id_user', $id_user);
+			$this->db->delete('ukuran_peternakan_ayam');
+
+			redirect(base_url('officer/rekap_skala_ayam'));
+		}
 		
 		// ===================================== SKALA 🐄🐮 =========================================
 
 		// halaman input skala nominal
 		public function skala_sapi($entitas = 1){
-			// $this->start_sess();
 
 			if ($entitas != 1 && $entitas != 2) {
 				echo '404';return;
-			}
-
-			if(!isset($_SESSION['pengisian_ahp_sapi']['nama1'])) {
-				redirect(base_url('officer/input-ahp-sapi'));
 			}
 
 			$data['title'] = 'Perhitungan Skala Sapi';
@@ -641,14 +763,9 @@
 
 		// halaman input skala 2
 		public function skala_sapi_2($entitas = 1) {
-			// $this->start_sess();
 
 			if ($entitas != 1 && $entitas != 2) {
 				echo '404';return;
-			}
-
-			if(!isset($_SESSION['pengisian_ahp_sapi']['nama1'])) {
-				// redirect(base_url('officer/input-ahp-sapi'));
 			}
 
 			$data['title'] = 'Perhitungan Skala Sapi';
@@ -748,6 +865,7 @@
 				$_SESSION['output_skala_sapi'][$p]['skor_indikator'] = $v;
 				$_SESSION['output_skala_sapi'][$p]['nilai_skala'] = 100 / 6 * $v;
 				$_SESSION['output_skala_sapi'][$p]['entitas'] = $entitas;
+				$_SESSION['output_skala_sapi'][$p]['id_pengisi'] = $_SESSION['id_user'];
 			}
 
 			if($entitas == 1) { // kalau peternak lanjut ke rph
@@ -755,8 +873,8 @@
 				redirect('officer/skala_sapi/2');
 
 			} else if ($entitas == 2) { // Masukin DB
-
-				if(!isset($_SESSION['pengisian_ahp_sapi']) || !isset($_SESSION['output_skala_sapi'])) {
+				
+				if(!isset($_SESSION['output_skala_sapi'])) {
 					echo 'error: empty session';
 					return;
 				}
@@ -764,24 +882,31 @@
 				$counter = 0;
 				$data = $_SESSION['output_skala_sapi'];
 
-				$this->load->model('Ahp_sapi_model');
-				$this->db->empty_table('rekap_skala_sapi');
+				$this->db->where('id_pengisi', $_SESSION['id_user']);
+				$this->db->delete('rekap_skala_sapi');
 
 				foreach ($data as $k => $v) {
 					$this->Ahp_sapi_model->insert_skala_sapi($v);
 					$counter++;
 				}
 
-				$this->session->unset_userdata('pengisian_ahp_sapi');
 				$this->session->unset_userdata('nilai_skala_sapi');
 				$this->session->unset_userdata('output_skala_sapi');
 
-				echo 'berhasil insert '.$counter.' data';
-				redirect(base_url('officer'));
+				redirect(base_url('officer/rekap_skala_sapi'));
 	
 			}
 
 			echo '🐔 🐮';
+		}
+
+		public function hapus_skala_sapi($id_user) {
+			if(!isset($id_user)) die(400);
+
+			$this->db->where('id_pengisi', $id_user);
+			$this->db->delete('rekap_skala_sapi');
+
+			redirect(base_url('officer/rekap_skala_sapi'));
 		}
 		
 		public function page_rekap_skala_sapi(){
@@ -803,9 +928,36 @@
 			$data['title'] = 'Skala Keberlanjutan Sapi';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 			
-			$this->db->join('bobot_indikator_sapi', 'section_sapi.id = bobot_indikator_sapi.id_section');
-			$this->db->join('rekap_skala_sapi', 'rekap_skala_sapi.kode_indikator = bobot_indikator_sapi.kriteria', 'left');
-			$data['bobot_indikator'] = $this->db->get('section_sapi')->result_array();
+			$this->db->distinct();
+			$this->db->select('nama_responden');
+			$data['jumlah_responden'] = $this->db->get_where('responden_sapi', ['id_pengisi' => $_SESSION['id_user']])->num_rows();
+			// $this->db->join('bobot_indikator_sapi', 'section_sapi.id = bobot_indikator_sapi.id_section');
+			$data1 = $this->Ahp_sapi_model->get_bobot_by_id_pengisi($_SESSION['id_user']);
+			$data2 = $this->db->get('section_sapi')->result_array();
+			$data3 = $this->db->get('rekap_skala_sapi')->result_array();
+
+			// gabung array
+			$data['bobot_indikator'] = [];
+			foreach ($data1 as $d1 => $v1) {
+
+				foreach ($data2 as $d2 => $v2) {
+					if($v1['id_section'] == $v2['id']) {
+						$data['bobot_indikator'][$d1] = array_merge($v1, $v2);
+					}
+				}
+
+				$data['bobot_indikator'][$d1]['nilai_skala'] = 0;
+				foreach ($data3 as $d3 => $v3) {
+					if($v1['kriteria'] == $v3['kode_indikator']) {
+						$data['bobot_indikator'][$d1]['nilai_skala'] = $v3['nilai_skala'];
+					}
+				}
+				
+			}
+			
+			// $this->db->join('bobot_indikator', 'section_sapi.id = bobot_indikator.id_section');
+			// $this->db->join('rekap_skala_sapi', 'rekap_skala_sapi.kode_indikator = bobot_indikator.kriteria', 'left');
+			// $data['bobot_indikator'] = $this->db->get('section_sapi')->result_array();
 
 			// die(print("<pre>".print_r($data['bobot_indikator'],true)."</pre>"));
 			
@@ -816,27 +968,19 @@
 			$this->load->view('templates/footer');
 		}
 
-		private function start_sess() {
-			$_SESSION['pengisian_ahp_sapi']['responden'] = 3;
-			$_SESSION['pengisian_ahp_sapi']['nama1'] = 'A';
-			$_SESSION['pengisian_ahp_sapi']['nama2'] = 'B';
-			$_SESSION['pengisian_ahp_sapi']['nama3'] = 'C';
-		}
 
 		// HITUNG OUTPUT SKALA KEBERLANJUTAN ------------------------------------------------------//
 		public function skala_keberlanjutan(){
 			$data['title'] = 'Output skala keberlanjutan Ayam';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-			$data['input'] = [];
-
 			// JOIN
+			$this->db->where('bobot_indikator.id_pengisi', $_SESSION['id_user']);
 			$this->db->join('bobot_indikator', 'section.id = bobot_indikator.id_section');
 			$this->db->join('hasil_skala_ayam', 'bobot_indikator.kriteria = hasil_skala_ayam.indikator', 'left');
-			// Get skala ayam
 			$data['skala_ayam'] = $this->db->get('section')->result_array();
-
-			// die(print('<pre>'.print_r($data['skala_ayam'],true).'</pre>'));
+			// die('Hitung: '.count($data['skala_ayam']));
+			// die(print('Skala Ayam<pre>'.print_r($data['skala_ayam'],true).'</pre>'));
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -844,6 +988,39 @@
 			$this->load->view('officer/skala_keberlanjutan_ayam', $data);
 			$this->load->view('templates/footer');
 
+		}
+
+		// AJAX REQ UNTUK GRAFIK
+		// SKALA AYAM
+		public function ajax_ayam_peternak(){
+			$peternak = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'Peternak', 'id_pengisi' => $_SESSION['id_user']])->result_array();
+    		echo json_encode($peternak);
+		}
+
+		public function ajax_ayam_rpa(){
+			$rpa = $this->db->get_where('hasil_skala_ayam', ['entitas' => 'RPA', 'id_pengisi' => $_SESSION['id_user']])->result_array();
+    		echo json_encode($rpa);
+		}
+
+		public function ajax_ayam_total(){
+			$rpa = $this->db->get_where('hasil_skala_ayam', ['id_pengisi' => $_SESSION['id_user']])->result_array();
+    		echo json_encode($rpa);
+		}
+
+		// SKALA SAPI
+		public function ajax_sapi_peternak(){
+			$peternak = $this->db->get_where('rekap_skala_sapi', ['entitas' => 1, 'id_pengisi' => $_SESSION['id_user']])->result_array();
+    		echo json_encode($peternak);
+		}
+
+		public function ajax_sapi_rph(){
+			$rph = $this->db->get_where('rekap_skala_sapi', ['entitas' => 2, 'id_pengisi' => $_SESSION['id_user']])->result_array();
+    		echo json_encode($rph);
+		}
+
+		public function ajax_sapi_total(){
+			$rph = $this->db->get_where('rekap_skala_sapi', ['id_pengisi' => $_SESSION['id_user']])->result_array();
+    		echo json_encode($rph);
 		}
 	}
 ?>
