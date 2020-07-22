@@ -217,7 +217,7 @@
 			}
 			array_push($_SESSION['indikator'][$this->input->post('section_id')], array('section_id' => $this->input->post('entitas_id')) );
 
-			$this->session->set_flashdata('success', 'berhasil simpan data');
+			$this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Berhasil Simpan Data!</div>');
 			redirect(base_url('officer/halaman_input_data_ahp/'.$this->input->post('section_id')));
 			
 		}
@@ -517,11 +517,11 @@
 		public function halaman_input_skala_ayam($entitas = 'Peternak', $indikator = NULL){
 			if(!isset($_SESSION['pengisian_ahp']['nama1'])) {	// jika belum ada responden
 				// redirect(base_url().'officer/input_ahp_responden');
-				$this->input_ahp_satu('isi_skala');
+				return $this->input_ahp_satu('isi_skala');
 			}
 			if(!isset($_SESSION['ukuran_peternakan'])) {
 				// redirect ke pengisian ukuran peternakan
-				$this->page_ukuran_peternakan();
+				return $this->page_ukuran_peternakan();
 			}
 			
 			$data['title'] = 'Perhitungan Skala Ayam - '.$entitas;
@@ -681,9 +681,11 @@
 
 			// Redirect Halaman Pengisian Skala
 			if(isset($_SESSION['progress_pengisian_skala']['entitas'])){
-				$this->halaman_input_skala_ayam($_SESSION['progress_pengisian_skala']['entitas']);
+				$this->session->set_flashdata('edit_ukuran_peternakan', '<div class="alert alert-success" role="alert">Berhasil Simpan Data Ukuran Peternakan!</div>');
+				return $this->halaman_input_skala_ayam($_SESSION['progress_pengisian_skala']['entitas']);
 			}else{
-				$this->halaman_input_skala_ayam();
+				$this->session->set_flashdata('edit_ukuran_peternakan', '<div class="alert alert-success" role="alert">Berhasil Simpan Data Ukuran Peternakan!</div>');
+				return $this->halaman_input_skala_ayam();
 			}
 		}
 

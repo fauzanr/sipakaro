@@ -192,20 +192,46 @@
 
                 <?php endfor ?>
 
+                <!-- looping -->
+                <br>
+                <h2 class="h5 mb-4 text-gray-800">Keterangan Indikator</h2>
+
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Indikator</th>
+                        <th scope="col">Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $counter2 = 1 ?>
+                        <?php foreach($indikator as $j) :?>
+                        <tr>
+                        <th scope="row"><?= $counter2 ?></th>
+                        <td><?= $j['kode_s_i'] ?></td>
+                        <td><?= $j['ket_s_i'] ?></td>
+                        </tr>
+                        <?php $counter2++ ?>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
 
             <?php endif ?>
             
 
         </div>
-        
+
     </div>
+        <input type="hidden" name="counter" value="<?= $counter ?>">
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary btn-lg col-md-2" style="float: right;">Simpan</button>
 
-    <input type="hidden" name="counter" value="<?= $counter ?>">
-    <br><br>
-    <button type="submit" class="btn btn-primary btn-lg col-md-2" style="float: right;">Simpan</button>
-
-    </form>
+        </form>
     
-    <a href="<?= base_url('officer/insert_pengisian_ahp_sapi') ?>"><button class="btn btn-warning">Selesai "!"</button></a>
+        <a href="<?= base_url('officer/insert_pengisian_ahp_sapi') ?>"><button class="btn btn-warning">Selesai "!"</button></a>
+
+</div>
     
 </div>

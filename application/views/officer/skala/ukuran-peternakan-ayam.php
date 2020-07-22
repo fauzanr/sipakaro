@@ -6,6 +6,12 @@
 <!-- <h1 class="h3 mb-4 text-gray-800" style="float: right;">Pengisian Kuesioner Skala</h1> -->
 <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
 
+<br>
+
+<h2 class="h4 mb-4 text-gray-800 d-flex justify-content-center">Silahkan pilih ukuran peternakan yang ingin dihitung</h2>
+
+<h2 class="h6 mb-4">Ukuran Peternakan</h2>
+
 <form action="<?php echo base_url().'officer/input_ukuran_peternakan' ?>" method="post">
 
     <div class="table-responsive">
@@ -33,8 +39,8 @@
         </table>
     </div>
     
-    <br>
-    <br>
+<br>
+<br>
 
 <button type="submit" class="btn btn-primary btn-lg col-md-2" style="float: right;">Submit</button>
 </form>

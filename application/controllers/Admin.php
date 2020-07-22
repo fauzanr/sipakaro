@@ -388,7 +388,7 @@ class Admin extends CI_Controller {
 			$this->db->delete('hasil_skala_ayam');
 
 		} catch (\Throwable $th) {
-			$this->session->set_flashdata('message', 'Terjadi kesalahan: '.$th);
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 		}
 
 		redirect(base_url('admin/indikator_ayam'));
@@ -436,7 +436,7 @@ class Admin extends CI_Controller {
 
 				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Tambah Indikator!</div>');
 			} catch (\Throwable $th) {
-				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 			}
 	
 			redirect(base_url('admin/indikator_ayam'));
@@ -486,9 +486,9 @@ class Admin extends CI_Controller {
 			try {
 				$this->db->where('id_a_i', $_POST['id_a_i']);
 				$this->db->update('indikator_ayam', $data);
-				$this->session->set_flashdata('message', 'Berhasil edit indikator');
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Edit Indikator!</div>');
 			} catch (\Throwable $th) {
-				$this->session->set_flashdata('message', 'Terjadi kesalahan '.$th);
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi Kesalahan: </div>'.$th);
 			}
 		}
 

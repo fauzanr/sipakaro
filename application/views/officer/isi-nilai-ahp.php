@@ -174,12 +174,11 @@
                                                 <?php endforeach ?>
                                                 <!-- <option value="1" selected>test</option> -->
                                             </select>
-                                        </div>
 
+                                        </div>
 
                                     <?php endfor ?>
 
-                        
                                 </div>
 
                             </div>
@@ -188,8 +187,6 @@
                                 <h3><?= $indikator[$j]['kode_a_i'] ?></h3>
                             </div>
 
-                            
-
                         </div> 
 
                     <?php endfor ?>
@@ -197,6 +194,9 @@
                 <?php endfor ?>
 
             <!-- looping -->
+            <br>
+            <h2 class="h5 mb-4 text-gray-800">Keterangan Indikator</h2>
+            
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
@@ -216,9 +216,11 @@
                         <?php $counter2++ ?>
                         <?php endforeach ?>
                     </tbody>
-                </table>                                        
+                </table>
+
             <?php endif ?>
             
+
         </div>
         
     </div>
@@ -231,8 +233,6 @@
     </form>
     
     <a href="<?= base_url('officer/insert_pengisian_ahp') ?>"><button class="btn btn-warning" style="float: left;">Selesai "!"</button></a>
-
+    
 </div>
-        
 </div>
-

@@ -5,7 +5,12 @@
     <h2 class="h5 mb-4 text-gray-800">Ayam</h2>
 
     <h2 class="h3 mbcol-sm-2 text-gray-800"><?= $title; ?></h2>
-    <br>
+    
+    <div class="row">
+            <a href="<?= base_url().'officer/page_ukuran_peternakan' ?>"><button class="btn btn-info m-4">Edit Ukuran Peternakan</button></a>
+    </div>
+    <?php echo $this->session->flashdata('edit_ukuran_peternakan'); ?>
+
     <?php if (isset($_SESSION['nilai_pengisian_skala'])) : ?>
         <?php if ($entitas['ket_a_e'] == 'RPA') : ?>
             <p>Progress: (<?= count($_SESSION['nilai_pengisian_skala'])-$jumlah_entitas_peternak ?>/<?= count($pagination) ?>)</p>
@@ -15,9 +20,6 @@
         <?php endif ?>
     <?php endif ?>
 
-    <div class="row mt-2">
-        <a class="h5" href="<?= base_url().'officer/page_ukuran_peternakan' ?>">Ukuran Peternakan</a>
-    </div>
     <?php for ($i=0; $i < sizeof($pagination); $i++) : ?>
         <div class="btn-group" style="color: white;">
             <a href="<?= base_url().'officer/halaman_input_skala_ayam/'.$entitas['ket_a_e'].'/'.$pagination[$i]['kode_a_i'] ?>">
@@ -107,7 +109,7 @@
     </div>
     <br>
     <input type="hidden" name="counter" value="<?= $counter ?>">
-    <button type="submit" class="btn btn-primary btn-lg col-md-2" style="float: right;">Next</button>
+    <button type="submit" class="btn btn-primary btn-lg col-md-2" style="float: right;">Simpan</button>
     </form>
 
     <a href="<?= base_url('officer/insert_pengisian_skala_ayam') ?>"><button class="btn btn-warning">Selesai "!"</button></a>

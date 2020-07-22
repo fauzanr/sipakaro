@@ -84,7 +84,6 @@
                       <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/halaman_input_data_ahp_sapi/'.$s['id']) ? 'active' : '' ?>" href="<?= base_url().'officer/halaman_input_data_ahp_sapi/'.$s['id'] ?>"><?= $s['nama_section'] ?> <?= isset($_SESSION['nilai_pengisian_ahp_sapi'][$s['id']]) ? '<i class="fa fa-check"></i>' : '' ?></a>
                   <?php endforeach ?>
                   <a href="<?= base_url('officer/reset_session_ahp/sapi') ?>"><button class="btn btn-danger m-4">Reset pengisian</button></a>
-                  <a class="ml-4" href="<?= base_url('officer/insert_pengisian_ahp_sapi') ?>"><button class="btn btn-warning">Selesai "!"</button></a>
                 <?php endif; ?>
                 <a class="collapse-item <?= base_url(uri_string()) == (base_url().'officer/skala_sapi') || isset($_SESSION['nilai_skala_sapi']) ? 'active' : '' ?>" href="<?php echo base_url(); ?>officer/skala_sapi">Hitung Skala</a>
                 
@@ -93,8 +92,6 @@
           </div>
           
         </li>
-        
-
         <!-- Divider -->
         <hr class="sidebar-divider">
 
@@ -161,3 +158,4 @@
       </div>
 
     </ul>
+    <!-- End of Sidebar -->
