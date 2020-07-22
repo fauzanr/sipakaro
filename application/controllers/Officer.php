@@ -913,8 +913,8 @@
 			$data['title'] = 'Perhitungan Skala Sapi';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-			$data['rekap_peternak'] = $this->db->get_where('rekap_skala_sapi', ['entitas' => 1])->result_array();
-			$data['rekap_rph'] = $this->db->get_where('rekap_skala_sapi', ['entitas' => 2])->result_array();
+			$data['rekap_peternak'] = $this->db->get_where('rekap_skala_sapi', ['entitas' => 1, 'id_pengisi' => $_SESSION['id_user']])->result_array();
+			$data['rekap_rph'] = $this->db->get_where('rekap_skala_sapi', ['entitas' => 2, 'id_pengisi' => $_SESSION['id_user']])->result_array();
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -947,9 +947,11 @@
 				}
 
 				$data['bobot_indikator'][$d1]['nilai_skala'] = 0;
+				$data['bobot_indikator'][$d1]['id_pengisi'] = NULL;
 				foreach ($data3 as $d3 => $v3) {
 					if($v1['kriteria'] == $v3['kode_indikator']) {
 						$data['bobot_indikator'][$d1]['nilai_skala'] = $v3['nilai_skala'];
+						$data['bobot_indikator'][$d1]['id_pengisi'] = $v3['id_pengisi'];
 					}
 				}
 				
