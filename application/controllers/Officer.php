@@ -287,9 +287,8 @@
 			$data['title'] = 'Dashboard Officer';
 			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 			
-			$this->db->distinct();
 			$this->db->select('nama_responden');
-			$data['jumlah_responden'] = $this->db->get_where('responden_sapi', ['id_pengisi' => $_SESSION['id_user']])->num_rows();
+			$data['jumlah_responden'] = $this->db->get_where('responden_sapi', ['id_pengisi' => $_SESSION['id_user'], 'id_section' => '2'])->num_rows();
 			// $this->db->join('bobot_indikator_sapi', 'section_sapi.id = bobot_indikator_sapi.id_section');
 			$data1 = $this->Ahp_sapi_model->get_bobot_by_id_pengisi($_SESSION['id_user']);
 			$data2 = $this->db->get('section_sapi')->result_array();
