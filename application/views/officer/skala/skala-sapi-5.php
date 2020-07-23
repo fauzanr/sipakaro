@@ -77,15 +77,15 @@
                 <td><label for=""></label><?= $r['kode_indikator'] ?></td>
                 <td><?= $r['performansi_lapangan'] ?></td>
                 <td><?= $r['skor_indikator'] ?></td>
-                <td><?= $r['nilai_skala'] ?></td>
+                <td><?= number_format($r['nilai_skala'], 3) ?></td>
                 <td><?php
                     if ($r['nilai_skala'] < 25) {
                         echo 'Buruk';
                     }
-                    if ($r['nilai_skala'] >= 25 && $r['nilai_skala'] < 49.99) {
+                    if ($r['nilai_skala'] >= 25 && $r['nilai_skala'] < 49.999) {
                         echo 'Kurang';
                     }
-                    if ($r['nilai_skala'] >= 50 && $r['nilai_skala'] < 74.99) {
+                    if ($r['nilai_skala'] >= 50 && $r['nilai_skala'] < 74.999) {
                         echo 'Baik';
                     }
                     if ($r['nilai_skala'] >= 75) {

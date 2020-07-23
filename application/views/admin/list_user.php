@@ -20,6 +20,9 @@
                       if(data == 1) {
                         return 'Admin';
                       }
+                      if(data == 2) {
+                        return 'User';
+                      }
                       if(data == 3) {
                         return 'Dinas';
                       }
@@ -46,6 +49,9 @@
                                 '<div class="links">'+
                                   '<a class="btn btn-primary btn-sm" href="<?=base_url()?>admin/set_user_role/1/'+data+'">'+
                                   'Admin</a>'+
+                                  '&nbsp;'+
+                                  '<a class="btn btn-primary btn-sm" href="<?=base_url()?>admin/set_user_role/2/'+data+'">'+
+                                  'User</a>'+
                                   '&nbsp;'+
                                   '<a class="btn btn-success btn-sm" href="<?=base_url()?>admin/set_user_role/3/'+data+'">'+
                                   'Dinas</a>'+

@@ -41,15 +41,15 @@
                     <?php $kriteria = $r['nama_kriteria']; ?>
                     <td><label for=""></label><?= $r['indikator'] ?></td>
                     <td><?= $r['rata_rata'] ?></td>
-                    <td><?= $r['nilai_konversi'] ?></td>
+                    <td><?= number_format($r['nilai_konversi'], 3) ?></td>
                     <td><?php
                         if ($r['nilai_konversi'] < 25) {
                             echo 'Buruk';
                         }
-                        if ($r['nilai_konversi'] >= 25 && $r['nilai_konversi'] < 49.99) {
+                        if ($r['nilai_konversi'] >= 25 && $r['nilai_konversi'] < 49.999) {
                             echo 'Kurang';
                         }
-                        if ($r['nilai_konversi'] >= 50 && $r['nilai_konversi'] < 74.99) {
+                        if ($r['nilai_konversi'] >= 50 && $r['nilai_konversi'] < 74.999) {
                             echo 'Baik';
                         }
                         if ($r['nilai_konversi'] >= 75) {

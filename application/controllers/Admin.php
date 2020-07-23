@@ -229,6 +229,10 @@ class Admin extends CI_Controller {
 			$data['role_id'] = 1;
 			$this->db->where('id', $id);
 			$this->db->update('user', $data);
+		} else if ($val == 2) {
+			$data['role_id'] = 2;
+			$this->db->where('id', $id);
+			$this->db->update('user', $data);
 		}
 
 		redirect(base_url('admin/page_users'));
