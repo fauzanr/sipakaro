@@ -633,7 +633,7 @@
 					}
 
 					// Input nilai ukuran peternakan ke db
-					$ukuran_peternakan = $this->db->get('ukuran_peternakan_ayam')->result_array();
+					$ukuran_peternakan = $this->db->get_where('ukuran_peternakan_ayam', ['id_user' => $_SESSION['id_user']])->result_array();
 					if(count($ukuran_peternakan) < 1){
 						// Tambah (Karena masih kosong di DB)
 						$this->Ahp_model->add_ukuran_peternakan_ayam($_SESSION['ukuran_peternakan'], $_SESSION['id_user']);
